@@ -6,6 +6,5 @@
 	<classpathentry kind="lib" path="lib/aspectjtools.jar"/>
 	<classpathentry kind="lib" path="lib/junit-4.7.jar"/>
 	<classpathentry kind="lib" path="lib/swingx-0.9.3.jar"/>
-	<classpathentry kind="lib" path="lib/swt-linux/swt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

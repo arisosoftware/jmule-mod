@@ -2,31 +2,58 @@
     About
   ========================= 
   JMule - is a free, open source, multi-platform p2p client for eDonkey2000 networks
-  Please leave your feedback on our forums located at http://forum.jmule.org
-  if you experienced any issue submit a bug request on http://jmule.org/bugtracker
-  The latest version can be found on http://jmule.org/?page=download
+  forked from ftarlao/jmule-mod
+ 
+ 
+   这是一个免费的，开源的java做的电驴p2p下载，分享软件。
+  脱胎于 ftarlao/jmule-mod， 但是做了大量的改动
+  
+  首先取消了swt支持，然后只支持swing,然后取消用aspectj
+  考虑用vertx做主要框架。若有人想改为spring框架也是欢迎。
+  
+  主要技术栈：
+  	* Java 1.8 以上这不必多说
+  	* vertx 2.3
+  	* SwingX 0.9.3
+ 相关项目
+ 
+This is a free, open source java  for ed2k/ p2p file downloading or sharing software.
+    forked from ftarlao/jmule-mod, with a lots changes
+  
+   First remove swt feature, then only support swing, 
+   and then remove aspectj
+
+   Consider using vertx as the main framework. If anyone wants to change to the spring framework, it is welcome.
+  
+   The main technology stack:
+   * It doesn't have to say more than Java 1.8
+   * vertx 2.3
+   * SwingX 0.9.3
+  Related items   	
+  	    
   This product includes software developed by :
-   - Aelitis, The GNU General Public License, http://www.aelitis.com
-   - The AspectJ Project, Common Public License, http://www.eclipse.org/aspectj
-   - Sun Microsystems, Inc., Lesser General Public License, http://www.sun.com
+ 
    - The Phex Project, The GNU General Public License, http://www.phex.org
    - MaxMind, Inc., The GNU General Public License, http://www.maxmind.com
    - The SwingX project, Lesser General Public License, https://swingx.dev.java.net/
    - The SWT project, Eclipse Public License Version, http://www.eclipse.org/swt/
-   - Zeus Java Swing Components Library, GNU Library or Lesser General Public License, http://sourceforge.net/projects/zeus-jscl/
    
-  =========================
-    System requirements
-  =========================
-  JMule 0.5.8 requires Sun Java 1.6.x or newer to run, if you don't have the required Java
-  download it from http://java.sun.com
-  
-  Operating system : Windows NT, GNU/Linux
-  
-  ==========================
-   Dependencies
-  ==========================
-   * SWT 3.4 or higher
+ 
+
+ 
    * SwingX 0.9.3 or higher
    
-  
+    - Zeus Java Swing Components Library, GNU Library or Lesser General Public License, http://sourceforge.net/projects/zeus-jscl/
+    -- Zeus is a Java Swing component library. It provides useful swing components for easier GUI development. Some of the components are: JConsole, JMessage, JSplash, SingleAppInstance, WindowManager, AutoResizeTableColumns, TableSorter, TypeSafe API, and much more.
+   
+   =========================
+     References
+   =========================
+   
+   
+   - The Phex Project, The GNU General Public License, http://www.phex.org
+   	--https://github.com/deepstupid/phex
+   	
+   	
+   	 IP地址转地点的程序
+ https://github.com/shopping24/geoip-api

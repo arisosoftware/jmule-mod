@@ -36,7 +36,7 @@ import javax.swing.SwingConstants;
 import org.jmule.core.downloadmanager.DownloadSession;
 import org.jmule.core.peermanager.Peer;
 import org.jmule.core.utils.GeneralComparator;
-import org.jmule.countrylocator.CountryLocator;
+ 
 import org.jmule.ui.FlagPack;
 import org.jmule.ui.UIConstants;
 import org.jmule.ui.swing.models.DownloadPeersModel;
@@ -53,8 +53,7 @@ import org.jmule.ui.utils.SpeedFormatter;
  */
 public class DownloadPeersTable extends JMTable {
 
-	CountryLocator country_locator = CountryLocator.getInstance();
-
+ 
 	class NickNameTableCellRenderer extends DownloadPeersTableCellRenderer {
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 				int row, int column) {
@@ -70,9 +69,9 @@ public class DownloadPeersTable extends JMTable {
 				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			this.setHorizontalAlignment(SwingConstants.CENTER);
-			this.setText(!country_locator.isServiceDown() ? country_locator.getCountryCode(peer.getIP()) : "Unknown");
-			if (!country_locator.isServiceDown())
-				this.setToolTipText(country_locator.getCountryName(peer.getIP()));
+
+			this.setText("N/A");
+			this.setToolTipText("N/A");
 			return this;
 		}
 	}
@@ -85,8 +84,7 @@ public class DownloadPeersTable extends JMTable {
 			this.setHorizontalAlignment(SwingConstants.CENTER);
 			if (flag_icon != null)
 				this.setIcon(flag_icon);
-			if (!country_locator.isServiceDown())
-				this.setToolTipText(country_locator.getCountryName(peer.getIP()));
+			this.setToolTipText("N/A");
 			return this;
 		}
 	}

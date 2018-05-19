@@ -162,7 +162,7 @@ public class ConfigurationManagerTest {
 	}
 
 	@Test
-	public void testGetTCP() {
+	public void testGeTCP() {
 		try {
 			manager.setTCP(0);
 			assertEquals(0, manager.getTCP());

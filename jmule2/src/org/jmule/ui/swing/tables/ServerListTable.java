@@ -69,7 +69,7 @@ import org.jmule.core.servermanager.Server;
 import org.jmule.core.servermanager.ServerManager;
 import org.jmule.core.servermanager.ServerManagerSingleton;
 import org.jmule.core.utils.GeneralComparator;
-import org.jmule.countrylocator.CountryLocator;
+
 import org.jmule.ui.FlagPack;
 import org.jmule.ui.IDialog;
 import org.jmule.ui.UIConstants;
@@ -90,8 +90,6 @@ import org.jmule.ui.utils.NumberFormatter;
  *          2009/09/27 14:20:00 $$
  */
 public class ServerListTable extends JMTable {
-
-	CountryLocator country_locator = CountryLocator.getInstance();
 
 	// =============== Column cell renderers ==============================
 	class ServerNameTableCellRenderer extends ServerListTableCellRenderer {
@@ -160,10 +158,9 @@ public class ServerListTable extends JMTable {
 				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			this.setHorizontalAlignment(SwingConstants.CENTER);
-			this.setText(
-					!country_locator.isServiceDown() ? country_locator.getCountryCode(server.getAddress()) : "Unknown");
-			if (!country_locator.isServiceDown())
-				this.setToolTipText(country_locator.getCountryName(server.getAddress()));
+			this.setText("CHN");
+
+			this.setToolTipText(server.getAddress());
 			return this;
 		}
 	}
@@ -177,8 +174,8 @@ public class ServerListTable extends JMTable {
 			Icon flag_icon = FlagPack.getFlagAsIconByIP(server.getAddress(), FlagPack.FlagSize.S25x15);
 			if (flag_icon != null)
 				this.setIcon(flag_icon);
-			if (!country_locator.isServiceDown())
-				this.setToolTipText(country_locator.getCountryName(server.getAddress()));
+			this.setText("CHN");
+			this.setToolTipText(server.getAddress());
 			return this;
 		}
 	}
