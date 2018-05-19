@@ -28,13 +28,13 @@ import org.jmule.core.edonkey.FileHash;
 
 /**
  * Created on Oct 26, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2009/11/01 20:15:04 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/11/01 20:15:04 $
  */
 public interface NeedMorePeersListener {
 
-	
 	public void needMorePeersForFiles(List<FileHash> fileHashes);
-	
+
 }

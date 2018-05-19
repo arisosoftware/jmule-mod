@@ -21,12 +21,14 @@ import org.aspectj.lang.reflect.PerClauseKind;
 public class PerClauseImpl implements PerClause {
 
 	private final PerClauseKind kind;
-	
+
 	protected PerClauseImpl(PerClauseKind kind) {
 		this.kind = kind;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.PerClause#getKind()
 	 */
 	public PerClauseKind getKind() {

@@ -36,8 +36,8 @@ import org.jmule.core.utils.Misc;
  * 
  * @author javajox
  * @author binary256
- * @version $$Revision: 1.10 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/08/22 12:44:58 $$
+ * @version $$Revision: 1.10 $$ Last changed by $$Author: binary255 $$ on
+ *          $$Date: 2010/08/22 12:44:58 $$
  */
 public class UDPPacket {
 	protected ByteBuffer packet_data = null;
@@ -47,7 +47,7 @@ public class UDPPacket {
 		this.packet_data = packetContent;
 		this.sender = sender;
 	}
-	
+
 	public UDPPacket(int packetLength, byte packetProtocol) {
 		if (packetProtocol == PROTO_EDONKEY_SERVER_UDP) {
 			packet_data = Misc.getByteBuffer(packetLength + 2);
@@ -84,8 +84,7 @@ public class UDPPacket {
 	}
 
 	public void setCommand(byte packetCommand) {
-		if ((getProtocol() == PROTO_EDONKEY_SERVER_UDP)
-				|| (getProtocol() == PROTO_KAD_UDP)) {
+		if ((getProtocol() == PROTO_EDONKEY_SERVER_UDP) || (getProtocol() == PROTO_KAD_UDP)) {
 			packet_data.position(1);
 			packet_data.put(packetCommand);
 		} else {
@@ -159,14 +158,13 @@ public class UDPPacket {
 
 	public String toString() {
 		String result = "";
-		if (sender!=null)
-			result += "From : " + sender.getAddress().getHostAddress() + " : "
-					+ sender.getPort();
-					else 
-					result += "From : null : null ";
-		result += "\n" + Convert.byteToHexString(packet_data.array(), " 0x"); 
-		return  result;
-				
+		if (sender != null)
+			result += "From : " + sender.getAddress().getHostAddress() + " : " + sender.getPort();
+		else
+			result += "From : null : null ";
+		result += "\n" + Convert.byteToHexString(packet_data.array(), " 0x");
+		return result;
+
 	}
 
 }

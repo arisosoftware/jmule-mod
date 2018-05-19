@@ -23,23 +23,25 @@
 package org.jmule.core.jkad;
 
 import static org.jmule.core.utils.Convert.byteToHexString;
+
 /**
  * Created on Jan 1, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/07/06 14:13:25 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/07/06 14:13:25 $
  */
 public class Hash {
 	private byte[] hash;
-	
+
 	public Hash(byte[] hash) {
 		this.hash = hash;
 	}
-	
+
 	public byte[] getHash() {
 		return hash;
 	}
-	
+
 	public void setHash(byte[] hash) {
 		this.hash = hash;
 	}
@@ -47,5 +49,5 @@ public class Hash {
 	public String toString() {
 		return byteToHexString(hash, " 0x");
 	}
-	
+
 }

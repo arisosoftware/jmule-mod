@@ -24,22 +24,23 @@ package org.jmule.core;
 
 /**
  * Created on 06-03-2008
+ * 
  * @author javajox
- * @version $$Revision: 1.2 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/08/02 14:09:27 $$
+ * @version $$Revision: 1.2 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/08/02 14:09:27 $$
  */
 public class JMException extends Exception {
-    
-	 public JMException(String str) {
-		 super( str );
-	 }
-	 
-	 public JMException(Throwable cause) {
-		 super(cause);
-	 }
-	 
-	 public JMException() {
-		 
-	 }
-	
+
+	public JMException(String str) {
+		super(str);
+	}
+
+	public JMException(Throwable cause) {
+		super(cause);
+	}
+
+	public JMException() {
+
+	}
+
 }

@@ -31,19 +31,19 @@ import org.jmule.ui.swing.UISwingImageRepository;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.2 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/10/16 16:10:38 $$
+ * @version $$Revision: 1.2 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/10/16 16:10:38 $$
  */
 public class LeftLogo extends JPanel {
-	
+
 	public LeftLogo() {
 		this.setLayout(new BorderLayout());
 		this.setBackground(new java.awt.Color(255, 140, 5));
 		left_logo_image = new javax.swing.JLabel();
 		left_logo_image.setIcon(UISwingImageRepository.getIcon("jmule_wizard_left_logo.png"));
-		this.add(left_logo_image,BorderLayout.SOUTH);
+		this.add(left_logo_image, BorderLayout.SOUTH);
 	}
 
-    private javax.swing.JLabel left_logo_image;
+	private javax.swing.JLabel left_logo_image;
 
 }

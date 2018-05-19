@@ -35,47 +35,40 @@ import org.jmule.core.peermanager.Peer;
 /**
  *
  * Created on Oct 6, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.2 $
- * Last changed by $Author: javajox $ on $Date: 2009/09/22 19:08:43 $
+ * @version $Revision: 1.2 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/09/22 19:08:43 $
  */
 public class DownloadPeersModel extends AbstractTableModel {
 
 	private JMuleCore _core = JMuleCoreFactory.getSingleton();
 	private DownloadManager _download_manager = _core.getDownloadManager();
 	private DownloadSession session;
-		
-	public final static int NICK_NAME       =   0;
-	public final static int CC              =   1;
-	public final static int FLAG            =   2;
-	public final static int ADDRESS         =   3;
-	public final static int DOWN_SPEED      =   4;
-	public final static int UP_SPEED        =   5;
-	public final static int CLIENT_NAME     =   6;
-	public final static int STATUS          =   7;
-	
-	private static String[] column_names = {
-		                   "Nick name",
-		                   "CC",
-		                   "Flag",
-		                   "Address",
-		                   "Down speed",
-		                   "Up speed",
-		                   "Client",
-		                   "Status"
-	};
-	
+
+	public final static int NICK_NAME = 0;
+	public final static int CC = 1;
+	public final static int FLAG = 2;
+	public final static int ADDRESS = 3;
+	public final static int DOWN_SPEED = 4;
+	public final static int UP_SPEED = 5;
+	public final static int CLIENT_NAME = 6;
+	public final static int STATUS = 7;
+
+	private static String[] column_names = { "Nick name", "CC", "Flag", "Address", "Down speed", "Up speed", "Client",
+			"Status" };
+
 	public DownloadPeersModel(DownloadSession session) {
 		super();
 		this.session = session;
-		//session.getPeers().
+		// session.getPeers().
 	}
-	
+
 	public Class getColumnClass() {
-		
+
 		return Peer.class;
 	}
-	
+
 	public int getColumnCount() {
 
 		return column_names.length;
@@ -87,18 +80,18 @@ public class DownloadPeersModel extends AbstractTableModel {
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-        List<Peer> peer_list = session.getPeers();
-        Peer peer = peer_list.get(rowIndex);
-        //ugly hack
-        if(columnIndex == STATUS)
-        	return new Object[] {peer, session};
-        
+		List<Peer> peer_list = session.getPeers();
+		Peer peer = peer_list.get(rowIndex);
+		// ugly hack
+		if (columnIndex == STATUS)
+			return new Object[] { peer, session };
+
 		return peer;
 	}
-	
+
 	public String getColumnName(int col) {
-		  
-	    return column_names[col];
+
+		return column_names[col];
 	}
 
 }

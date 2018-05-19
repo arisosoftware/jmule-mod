@@ -35,11 +35,11 @@ import org.jmule.core.peermanager.Peer;
 import org.jmule.core.uploadmanager.FileChunkRequest;
 
 /**
- * Store peer status in download process
- * Created on 07-19-2008
+ * Store peer status in download process Created on 07-19-2008
+ * 
  * @author binary256
- * @version $$Revision: 1.13 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/08/25 12:32:56 $$
+ * @version $$Revision: 1.13 $$ Last changed by $$Author: binary255 $$ on
+ *          $$Date: 2010/08/25 12:32:56 $$
  */
 public class DownloadStatusList {
 
@@ -47,11 +47,11 @@ public class DownloadStatusList {
 
 	DownloadStatusList() {
 	}
-	
+
 	public Collection<PeerDownloadInfo> getStatusList() {
 		return peer_status_list;
 	}
-	
+
 	List<Peer> getPeersWithInactiveTime(long inactiveTime) {
 		List<Peer> peer_list = new LinkedList<Peer>();
 		for (PeerDownloadInfo peer_download_status : peer_status_list) {
@@ -61,7 +61,7 @@ public class DownloadStatusList {
 		}
 		return peer_list;
 	}
-	
+
 	List<Peer> getPeersWithInactiveTime(long inactiveTime, PeerDownloadStatus... downloadStatus) {
 		List<Peer> peer_list = new LinkedList<Peer>();
 		for (PeerDownloadInfo peer_download_status : peer_status_list) {
@@ -74,7 +74,7 @@ public class DownloadStatusList {
 		}
 		return peer_list;
 	}
-	
+
 	List<Peer> getPeersWithLastSeenTime(long lastSeenTime, PeerDownloadStatus... downloadStatus) {
 		List<Peer> peer_list = new LinkedList<Peer>();
 		for (PeerDownloadInfo peer_download_status : peer_status_list) {
@@ -87,30 +87,31 @@ public class DownloadStatusList {
 		}
 		return peer_list;
 	}
-	
+
 	public List<Peer> getPeersByStatus(PeerDownloadStatus... status) {
 		List<Peer> peer_list = new LinkedList<Peer>();
-		
-		for(PeerDownloadInfo peer_download_status : peer_status_list) {
-			for(PeerDownloadStatus peer_status : status) {
-				if (peer_download_status.peerStatus==peer_status) {
+
+		for (PeerDownloadInfo peer_download_status : peer_status_list) {
+			for (PeerDownloadStatus peer_status : status) {
+				if (peer_download_status.peerStatus == peer_status) {
 					peer_list.add(peer_download_status.peer);
 				}
 			}
 		}
 		return peer_list;
 	}
-	
+
 	void addPeer(Peer peer) {
-		if (hasPeer(peer)) return ;
-		PeerDownloadInfo peerStatus = new PeerDownloadInfo(
-				peer);
+		if (hasPeer(peer))
+			return;
+		PeerDownloadInfo peerStatus = new PeerDownloadInfo(peer);
 		peer_status_list.add(peerStatus);
 
 	}
-	
+
 	/**
 	 * Used for debug
+	 * 
 	 * @param peer
 	 * @param record
 	 */
@@ -120,7 +121,7 @@ public class DownloadStatusList {
 			download_status.updateHistoryRecord(record);
 		}
 	}
-	
+
 	public void setPeerStatus(Peer peer, PeerDownloadStatus downloadStatus) {
 		PeerDownloadInfo download_status = getPeerDownloadInfo(peer);
 		if (download_status != null) { // peer may be removed, don't register
@@ -131,7 +132,7 @@ public class DownloadStatusList {
 			download_status.queue_rank = -1;
 		}
 	}
-	
+
 	void setPeerQueuePosition(Peer peer, int queuePosition) {
 		PeerDownloadInfo download_status = getPeerDownloadInfo(peer);
 		if (download_status != null) {
@@ -141,68 +142,69 @@ public class DownloadStatusList {
 			download_status.queue_rank = queuePosition;
 		}
 	}
-	
+
 	void updatePeerTime(Peer peer) {
 		PeerDownloadInfo download_info = getPeerDownloadInfo(peer);
 		if (download_info != null) {
 			download_info.lastUpdateTime = System.currentTimeMillis();
 		}
 	}
-	
+
 	void setPeerChunkRequests(Peer peer, FileChunkRequest[] chunkRequests) {
 		PeerDownloadInfo download_status = getPeerDownloadInfo(peer);
 		if (download_status != null) {
 			download_status.chunkRequests = chunkRequests;
 		}
 	}
-	
+
 	void setPeerResendCount(Peer peer, int resendCount) {
 		PeerDownloadInfo download_status = getPeerDownloadInfo(peer);
 		if (download_status != null) {
 			download_status.resendCount = resendCount;
 		}
 	}
-	
+
 	PeerDownloadStatus getPeerDownloadStatus(Peer peer) {
 		PeerDownloadInfo download_status = getPeerDownloadInfo(peer);
-		if (download_status != null) 
+		if (download_status != null)
 			return download_status.peerStatus;
 		return null;
 	}
-	
+
 	int getPeerQueuePosition(Peer peer) {
 		PeerDownloadInfo download_status = getPeerDownloadInfo(peer);
-		if (download_status != null) 
+		if (download_status != null)
 			return download_status.queue_rank;
 		return -1;
 	}
-	
+
 	FileChunkRequest[] getPeerFileChunksRequest(Peer peer) {
 		PeerDownloadInfo download_status = getPeerDownloadInfo(peer);
-		if (download_status != null) 
+		if (download_status != null)
 			return download_status.chunkRequests;
 		return null;
 	}
-	
+
 	int getPeerResendCount(Peer peer) {
 		PeerDownloadInfo download_status = getPeerDownloadInfo(peer);
-		if (download_status != null) 
+		if (download_status != null)
 			return download_status.resendCount;
 		return -1;
 	}
-	
+
 	boolean hasPeer(Peer peer) {
-		for(PeerDownloadInfo container : peer_status_list)
+		for (PeerDownloadInfo container : peer_status_list)
 			if (peer.equals(container.peer))
 				return true;
 		return false;
 	}
-	
+
 	void removePeer(Peer peer) {
-		if (!hasPeer(peer)) return ;
+		if (!hasPeer(peer))
+			return;
 		peer_status_list.remove(getPeerDownloadInfo(peer));
 	}
-	
+
 	PeerDownloadInfo getPeerDownloadInfo(Peer peer) {
 		for (PeerDownloadInfo status : peer_status_list) {
 			if (status.peer.equals(peer))
@@ -210,11 +212,11 @@ public class DownloadStatusList {
 		}
 		return null;
 	}
-	
+
 	void clear() {
 		peer_status_list.clear();
 	}
-	
+
 	public String toString() {
 		String result = "";
 		for (PeerDownloadInfo download_status : peer_status_list) {
@@ -222,26 +224,26 @@ public class DownloadStatusList {
 		}
 		return result;
 	}
-	
+
 	public class PeerDownloadInfo {
 		Peer peer;
 		List<String> statusList = new ArrayList<String>();
 		long lastUpdateTime = 0;
 		PeerDownloadStatus peerStatus;
-		
+
 		FileChunkRequest[] chunkRequests;
-		
+
 		int queue_rank = -1;
 		int resendCount = 0;
-		
+
 		public Peer getPeer() {
 			return peer;
 		}
-		
+
 		public int getResendCount() {
 			return resendCount;
 		}
-		
+
 		public long getLastUpdateTime() {
 			return lastUpdateTime;
 		}
@@ -253,23 +255,23 @@ public class DownloadStatusList {
 				peerStatus = CONNECTED;
 			else
 				peerStatus = DISCONNECTED;
-			
+
 		}
-		
+
 		public int getQueueRank() {
 			return queue_rank;
 		}
-		
+
 		public PeerDownloadStatus getStatus() {
 			return peerStatus;
 		}
-		
-		public String toString()  {
+
+		public String toString() {
 			String result = "" + peer + " : ";
 			String status = "";
-			status = peerStatus + ""; 
-			result+= " Current status : "+status+" ";
-			
+			status = peerStatus + "";
+			result += " Current status : " + status + " ";
+
 			return result;
 
 		}
@@ -278,14 +280,14 @@ public class DownloadStatusList {
 			String record = peerStatus + "";
 			if (queue_rank != -1)
 				record += " " + queue_rank;
-			
+
 			this.statusList.add(record);
 		}
-		
+
 		void updateHistoryRecord(String message) {
 			this.statusList.add(message);
 		}
 
 	}
-	
+
 }

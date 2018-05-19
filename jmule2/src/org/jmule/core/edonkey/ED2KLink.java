@@ -25,9 +25,10 @@ package org.jmule.core.edonkey;
 /**
  *
  * Created on Sep 17, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/09/17 08:52:39 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/09/17 08:52:39 $
  */
 public abstract class ED2KLink {
 

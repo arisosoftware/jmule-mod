@@ -25,37 +25,45 @@ public class DeclareErrorOrWarningImpl implements DeclareErrorOrWarning {
 	private String msg;
 	private boolean isError;
 	private AjType declaringType;
-	
+
 	public DeclareErrorOrWarningImpl(String pointcut, String message, boolean isError, AjType decType) {
 		this.pc = new PointcutExpressionImpl(pointcut);
 		this.msg = message;
 		this.isError = isError;
 		this.declaringType = decType;
 	}
-	
-	public AjType getDeclaringType() { return this.declaringType; }
-	
-	/* (non-Javadoc)
+
+	public AjType getDeclaringType() {
+		return this.declaringType;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.DeclareErrorOrWarning#getPointcutExpression()
 	 */
 	public PointcutExpression getPointcutExpression() {
 		return pc;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.DeclareErrorOrWarning#getMessage()
 	 */
 	public String getMessage() {
 		return msg;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.DeclareErrorOrWarning#isError()
 	 */
 	public boolean isError() {
 		return isError;
 	}
-	
+
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("declare ");

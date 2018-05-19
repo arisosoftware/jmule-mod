@@ -25,10 +25,10 @@ import java.lang.annotation.RetentionPolicy;
 @Target(ElementType.TYPE)
 public @interface Aspect {
 
-    /**
-     * Per clause expression, defaults to singleton aspect
-     * <p/>
-     * Valid values are "" (singleton), "perthis(...)", etc
-     */
-    public String value() default "";
+	/**
+	 * Per clause expression, defaults to singleton aspect
+	 * <p/>
+	 * Valid values are "" (singleton), "perthis(...)", etc
+	 */
+	public String value() default "";
 }

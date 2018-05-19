@@ -37,61 +37,64 @@ import org.jmule.core.uploadmanager.FileChunkRequest;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.5 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/08/24 17:32:26 $$
+ * @version $$Revision: 1.5 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/08/24 17:32:26 $$
  */
 public interface DownloadStrategy {
-	
+
 	public void downloadStarted();
-	
+
 	public void downloadStopped();
-	
+
 	public void downloadCancelled();
-	
+
 	public void peerAdded(Peer peer);
-	
+
 	public void peerRemoved(Peer peer);
-	
+
 	public void peerConnected(Peer peer);
-	
+
 	public void peerDisconnected(Peer peer);
-	
+
 	public void peerConnectingFailed(Peer peer, Throwable cause);
-	
+
 	public void receivedFileNotFoundFromPeer(Peer peer);
-	
-	public void receivedFileRequestAnswerFromPeer(Peer sender,String fileName);
-	
-	public void receivedFileStatusResponseFromPeer(Peer sender,FileHash fileHash, JMuleBitSet bitSetpartStatus);
-	
-	public void receivedHashSetResponseFromPeer(Peer sender,PartHashSet partHashSet);
-	
+
+	public void receivedFileRequestAnswerFromPeer(Peer sender, String fileName);
+
+	public void receivedFileStatusResponseFromPeer(Peer sender, FileHash fileHash, JMuleBitSet bitSetpartStatus);
+
+	public void receivedHashSetResponseFromPeer(Peer sender, PartHashSet partHashSet);
+
 	public void receivedQueueRankFromPeer(Peer sender, int queueRank);
-	
+
 	public void receivedSlotGivenFromPeer(Peer sender);
-	
+
 	public void receivedSlotTakenFromPeer(Peer sender);
-	
-	public void receivedRequestedFileChunkFromPeer(Peer sender,FileHash fileHash, FileChunk chunk);
-	
+
+	public void receivedRequestedFileChunkFromPeer(Peer sender, FileHash fileHash, FileChunk chunk);
+
 	public void receivedCompressedFileChunk(Peer sender, FileChunk compressedFileChunk);
-	
+
 	void receivedSourcesAnswerFromPeer(Peer peer, List<Peer> peerList);
-	
+
 	/**
-	 * @param partsID : ID's of broken parts
+	 * @param partsID
+	 *            : ID's of broken parts
 	 */
 	public void processPartCheckResult(List<Integer> partsID);
-	
+
 	/**
 	 * 
-	 * @param processResult : ID's of broken parts, -1 - file hash not match, -2 - don't have hash set, -3 - hash set size don't match 
+	 * @param processResult
+	 *            : ID's of broken parts, -1 - file hash not match, -2 - don't have
+	 *            hash set, -3 - hash set size don't match
 	 */
-	public void processFileCheckResult(List<Integer> processResult); 
-	
-	public FileChunkRequest fileChunkRequest(Peer sender, long blockSize,long fileSize,GapList gapList,
-			FilePartStatus filePartStatus,FileRequestList fileRequestList);
-	
-	public FileChunkRequest[] fileChunk3Request(Peer sender, long blockSize,long fileSize,GapList gapList,
-			FilePartStatus filePartStatus,FileRequestList fileRequestList);
+	public void processFileCheckResult(List<Integer> processResult);
+
+	public FileChunkRequest fileChunkRequest(Peer sender, long blockSize, long fileSize, GapList gapList,
+			FilePartStatus filePartStatus, FileRequestList fileRequestList);
+
+	public FileChunkRequest[] fileChunk3Request(Peer sender, long blockSize, long fileSize, GapList gapList,
+			FilePartStatus filePartStatus, FileRequestList fileRequestList);
 }

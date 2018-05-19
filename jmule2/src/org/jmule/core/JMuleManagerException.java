@@ -24,23 +24,24 @@ package org.jmule.core;
 
 /**
  * Created on Aug 13, 2009
+ * 
  * @author binary256
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/08/13 18:24:07 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/08/13 18:24:07 $
  */
 public class JMuleManagerException extends JMException {
 
 	public JMuleManagerException() {
 		super();
 	}
-	
+
 	public JMuleManagerException(String cause) {
-		super( cause );
+		super(cause);
 	}
-	
+
 	public JMuleManagerException(Throwable cause) {
-		super( cause );
+		super(cause);
 	}
-	
+
 }

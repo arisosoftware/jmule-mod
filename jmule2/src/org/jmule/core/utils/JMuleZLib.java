@@ -32,92 +32,92 @@ import java.util.zip.Inflater;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.3 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/09/17 18:32:25 $$
+ * @version $$Revision: 1.3 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/09/17 18:32:25 $$
  */
-public class JMuleZLib{
+public class JMuleZLib {
 
 	private static int BLOCK_SIZE = 1000;
-	
+
 	public static ByteBuffer compressData(ByteBuffer inputData) {
-		
+
 		Deflater compressor = new Deflater();
-		
+
 		compressor.setInput(inputData.array());
 		compressor.finish();
 		long capacity = 0;
-		
+
 		int byte_count = 0;
-		
+
 		List<ByteBuffer> vector = new Vector<ByteBuffer>();
-		
+
 		do {
 			ByteBuffer tmpData = Misc.getByteBuffer(BLOCK_SIZE);
-			
+
 			byte_count = compressor.deflate(tmpData.array());
-		
-			if (byte_count == 0) break;
-			
+
+			if (byte_count == 0)
+				break;
+
 			tmpData.limit(byte_count);
-			
+
 			vector.add(tmpData);
-			
+
 			capacity += byte_count;
-			
+
 		} while (byte_count != 0);
-		
+
 		compressor.end();
-		
+
 		ByteBuffer outputData = Misc.getByteBuffer(capacity);
-		
-		for(ByteBuffer buffer : vector) {
+
+		for (ByteBuffer buffer : vector) {
 			buffer.position(0);
 			outputData.put(buffer.array(), 0, buffer.limit());
 		}
-		
+
 		return outputData;
-		
+
 	}
-	
+
 	public static ByteBuffer decompressData(ByteBuffer inputData) throws DataFormatException {
-		
+
 		Inflater decompressor = new Inflater();
-		
+
 		decompressor.setInput(inputData.array());
-		
+
 		long capacity = 0;
-		
+
 		int byte_count = 0;
-		
+
 		Vector<ByteBuffer> vector = new Vector<ByteBuffer>();
-		
+
 		do {
-			
+
 			ByteBuffer tmpData = Misc.getByteBuffer(BLOCK_SIZE);
-			
+
 			byte_count = decompressor.inflate(tmpData.array());
-		
+
 			tmpData.limit(byte_count);
-			
+
 			vector.add(tmpData);
-			
+
 			capacity += byte_count;
-			
-		} while(byte_count !=0 );
-		
+
+		} while (byte_count != 0);
+
 		decompressor.end();
-		
+
 		ByteBuffer outputBuffer = Misc.getByteBuffer(capacity);
-		
-		for(ByteBuffer buffer : vector) {
-			
+
+		for (ByteBuffer buffer : vector) {
+
 			outputBuffer.put(buffer.array(), 0, buffer.limit());
-			
+
 		}
-		
+
 		return outputBuffer;
-		
-		
+
 	}
-	
+
 }

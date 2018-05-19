@@ -12,18 +12,18 @@
 package org.aspectj.lang.reflect;
 
 /**
- * Thrown when AjType.getDeclaredAdvice is called with an advice name and no matching
- * advice declaration can be found.
+ * Thrown when AjType.getDeclaredAdvice is called with an advice name and no
+ * matching advice declaration can be found.
  */
 public class NoSuchAdviceException extends Exception {
 
 	private static final long serialVersionUID = 3256444698657634352L;
 	private String name;
-	
+
 	public NoSuchAdviceException(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * The advice name that could not be found.
 	 */

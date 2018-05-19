@@ -31,39 +31,44 @@ import org.jmule.core.JMuleManager;
 
 /**
  * Created on Aug 23, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.2 $
- * Last changed by $Author: javajox $ on $Date: 2009/10/25 08:36:11 $
+ * @version $Revision: 1.2 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/10/25 08:36:11 $
  */
 public interface PlatformManager extends JMuleManager {
 
-	public enum PLATFORM_TYPE { WINDOWS, MACOS, UBUNTU, SOLARIS, DEBIAN, FREEBSD };
-	
+	public enum PLATFORM_TYPE {
+		WINDOWS, MACOS, UBUNTU, SOLARIS, DEBIAN, FREEBSD
+	};
+
 	public String getOSName() throws PlatformManagerException;
-	
+
 	public String getOSVersion() throws PlatformManagerException;
-	
+
 	public String getArchitecture() throws PlatformManagerException;
-	
+
 	public List<CPUCapabilities> getCPUCapabilities() throws PlatformManagerException;
-	
+
 	public void copyFile(File source, File destination) throws PlatformManagerException;
-	
+
 	public void moveFile(File source, File destination) throws PlatformManagerException;
-	
-	public PingResult ping(InetAddress source, 
-			               NetworkInterface networkInterface,
-			               int count) throws PlatformManagerException;
-	
+
+	public PingResult ping(InetAddress source, NetworkInterface networkInterface, int count)
+			throws PlatformManagerException;
+
 	/**
-	 * Tests if native code is available for all or some functionality of the given JMule manager
+	 * Tests if native code is available for all or some functionality of the given
+	 * JMule manager
+	 * 
 	 * @param manager
-	 * @param methodName TODO
+	 * @param methodName
+	 *            TODO
 	 * @return true if native code is available, false otherwise
 	 */
 	public boolean isNativeAvailable(JMuleManager manager, String methodName) throws PlatformManagerException;
-	
+
 	public void addToIPFilter(Object ip) throws PlatformManagerException;
-	
+
 	public void removeFromIPFilter(Object ip) throws PlatformManagerException;
 }

@@ -42,12 +42,12 @@ import org.jmule.core.jkad.utils.timer.Timer;
 import org.jmule.core.networkmanager.InternalNetworkManager;
 import org.jmule.core.networkmanager.NetworkManagerSingleton;
 
-
 /**
  * Created on Jan 8, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.10 $
- * Last changed by $Author: binary255 $ on $Date: 2010/06/25 10:14:30 $
+ * @version $Revision: 1.10 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/06/25 10:14:30 $
  */
 public class FirewallChecker {
 
@@ -56,9 +56,9 @@ public class FirewallChecker {
 	private boolean firewalled = true;
 	private long lastStateChange = System.currentTimeMillis();
 
-	private InternalNetworkManager _network_manager ;
-	private InternalJKadManager _jkad_manager ;
-	
+	private InternalNetworkManager _network_manager;
+	private InternalJKadManager _jkad_manager;
+
 	private RoutingTable routing_table = null;
 	private Task firewall_check_task = null;
 
@@ -99,11 +99,12 @@ public class FirewallChecker {
 	}
 
 	public void start() {
-		if (is_started) return ;
+		if (is_started)
+			return;
 		is_started = true;
-		
+
 		_jkad_manager = (InternalJKadManager) JKadManagerSingleton.getInstance();
-		Timer.getSingleton().addTask(FIREWALL_CHECK_INTERVAL,firewall_check_task, true);
+		Timer.getSingleton().addTask(FIREWALL_CHECK_INTERVAL, firewall_check_task, true);
 		firewall_check_task.run();
 	}
 
@@ -154,7 +155,7 @@ public class FirewallChecker {
 		_network_manager.sendKadPacket(packet, new IPAddress(sender), sender.getPort());
 	}
 
-	public void porcessFirewallResponse(InetSocketAddress sender,IPAddress address) {
+	public void porcessFirewallResponse(InetSocketAddress sender, IPAddress address) {
 		KadContact contact = routing_table.getContact(new IPAddress(sender));
 		if (contact != null) {
 			contact.setLastUDPFirewallResponse(System.currentTimeMillis());

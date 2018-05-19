@@ -27,17 +27,17 @@ import java.io.File;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.5 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/08/15 12:05:17 $$
+ * @version $$Revision: 1.5 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/08/15 12:05:17 $$
  */
 public abstract class MetFile {
 
 	protected File file = null;
-	
+
 	public MetFile(String fileName) {
-			this(new File(fileName));
+		this(new File(fileName));
 	}
-	
+
 	public MetFile(File file) {
 		this.file = file;
 	}

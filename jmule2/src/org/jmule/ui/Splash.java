@@ -25,19 +25,19 @@ package org.jmule.ui;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:44:52 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:44:52 $$
  */
 public interface Splash {
 
 	public void splashOn();
-	
+
 	public void splashOff();
-	
+
 	public void increaseProgress(int value);
-	
+
 	public void increaseProgress(int value, String message);
-	
+
 	public void resetProgress();
-	
+
 }

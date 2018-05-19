@@ -26,24 +26,25 @@ import java.util.Iterator;
 
 /**
  * Created on 07-06-2008
+ * 
  * @author javajox
  * @author binary256
- * @version $$Revision: 1.2 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/08/02 14:09:27 $$
+ * @version $$Revision: 1.2 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/08/02 14:09:27 $$
  */
 public class JMIterable<E> implements Iterable<E> {
 
 	private Iterator<E> iter;
-	
+
 	public JMIterable(Iterator<E> iter) {
-		
+
 		this.iter = iter;
-		
+
 	}
-	
+
 	public Iterator<E> iterator() {
-		
+
 		return new JMIterator<E>(iter);
 	}
-	
+
 }

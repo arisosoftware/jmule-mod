@@ -30,20 +30,20 @@ import static org.jmule.core.edonkey.ED2KConstants.*;
 
 /**
  * Created on Jul 18, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 16:00:42 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 16:00:42 $
  */
 public class BlobTag extends StandartTag {
 
-	private byte[]  tagValue;
-	
+	private byte[] tagValue;
+
 	public BlobTag(byte[] tagName, byte[] tagValue) {
 		super(TAGTYPE_BLOB, tagName);
 		this.tagValue = tagValue;
 	}
 
-	
 	ByteBuffer getValueAsByteBuffer() {
 		ByteBuffer result = Misc.getByteBuffer(getValueLength());
 		result.putInt(tagValue.length);
@@ -61,7 +61,7 @@ public class BlobTag extends StandartTag {
 	}
 
 	public void setValue(Object object) {
-		tagValue = (byte[])object;
+		tagValue = (byte[]) object;
 	}
 
 }

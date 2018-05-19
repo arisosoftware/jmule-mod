@@ -25,80 +25,82 @@ package org.jmule.core.sharingmanager;
 /**
  * 
  * @author pola
- * @version $$Revision: 1.3 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/09/19 14:37:35 $$
+ * @version $$Revision: 1.3 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/09/19 14:37:35 $$
  */
 public class Gap implements Cloneable {
 
 	long start;
 	long end;
-  
+
 	public Gap(long start, long end) {
 		this.start = start;
 		this.end = end;
 	}
-     
+
 	public long size() {
 		return end - start;
 	}
-    
+
 	public boolean intersects(Gap gap) {
-		return ((gap.start >= this.start) && (gap.start < this.end) ||
-			(this.start >= gap.start) && (this.start < gap.end));
+		return ((gap.start >= this.start) && (gap.start < this.end)
+				|| (this.start >= gap.start) && (this.start < gap.end));
 	}
-   
+
 	public boolean covers(Gap gap) {
 		return (this.start <= gap.start) && (this.end >= gap.end);
 	}
-       
+
 	public long chop(Gap gap) {
 		long previousSize = this.size();
-		if(this.start < gap.start) this.end = Math.min(this.end, gap.start);
-		else if(gap.start < this.start) this.start = Math.max(this.start, gap.end);
+		if (this.start < gap.start)
+			this.end = Math.min(this.end, gap.start);
+		else if (gap.start < this.start)
+			this.start = Math.max(this.start, gap.end);
 		return this.size() - previousSize;
 	}
-       
+
 	public long merge(Gap gap) {
 		long previousSize = this.size();
 		this.start = Math.min(this.start, gap.start);
 		this.end = Math.max(this.end, gap.end);
 		return this.size() - previousSize;
 	}
-      
+
 	public Gap intersect(Gap gap) {
-		if(! this.intersects(gap))
+		if (!this.intersects(gap))
 			return null;
 		try {
 			Gap result = (Gap) this.clone();
 			result.start = Math.max(result.start, gap.start);
-			result.end = Math.min(result.end, gap.end);			
+			result.end = Math.min(result.end, gap.end);
 			return result;
 		} catch (ClassCastException cce) {
 			// You should never get here :-)
-			return null;	
+			return null;
 		}
 
 	}
- 
+
 	public String toString() {
 		return Long.toString(start) + ":" + Long.toString(end);
 	}
-     
+
 	public Gap clone() {
 		Gap gap = new Gap(getStart(), getEnd());
 		return gap;
 	}
 
-	public boolean contain(long pos){
-		if ((start<pos)&&(pos<=end))
+	public boolean contain(long pos) {
+		if ((start < pos) && (pos <= end))
 			return true;
 		return false;
 	}
-      
+
 	public long getEnd() {
 		return end;
 	}
-        
+
 	public long getStart() {
 		return start;
 	}

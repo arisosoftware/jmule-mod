@@ -11,21 +11,20 @@
  *     Xerox/PARC     initial implementation 
  * ******************************************************************/
 
-
 package org.aspectj.runtime.internal;
 
 //import java.util.WeakHashMap;  // XXX REQUIRES JAVA 2!!!!!!!!!!!!!!!!
 
 public class PerObjectMap {
-//    private WeakHashMap map = new WeakHashMap();
-//
-//    public boolean hasAspect(Object o) { return map.containsKey(o); }
-//    
-//    public Object aspectOf(Object o) {
-//        return map.get(o);
-//    }
-//    
-//    public void bind(Object object, Object _aspect) {
-//        map.put(object, _aspect);
-//    }
+	// private WeakHashMap map = new WeakHashMap();
+	//
+	// public boolean hasAspect(Object o) { return map.containsKey(o); }
+	//
+	// public Object aspectOf(Object o) {
+	// return map.get(o);
+	// }
+	//
+	// public void bind(Object object, Object _aspect) {
+	// map.put(object, _aspect);
+	// }
 }

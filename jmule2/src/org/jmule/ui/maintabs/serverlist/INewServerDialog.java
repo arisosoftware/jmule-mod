@@ -27,17 +27,18 @@ import org.jmule.ui.IDialog;
 /**
  *
  * Created on Sep 14, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
-public interface INewServerDialog<IPType,PortType> extends IDialog {
+public interface INewServerDialog<IPType, PortType> extends IDialog {
 
 	public void setServerIP(IPType serverIP);
-	
+
 	public void setServerPort(PortType serverPort);
-	
+
 	public IPType getServerIP();
-	
-	public PortType getServerPort(); 
+
+	public PortType getServerPort();
 }

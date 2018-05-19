@@ -44,9 +44,10 @@ import org.jmule.ui.IDialog;
 /**
  *
  * Created on Sep 18, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
 public class NewED2KDialog extends JDialog implements IDialog {
 
@@ -61,29 +62,32 @@ public class NewED2KDialog extends JDialog implements IDialog {
 	protected JLabel learn_about_ed2k_links_label = new JLabel("Learn more about ED2K links");
 	protected JButton paste_ed2k_links = new JButton("Paste ED2K link(s)");
 	protected final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-	
+
 	public NewED2KDialog(JFrame parent) {
 		super(parent);
-        init();
+		init();
 	}
-	
+
 	private void init() {
-		//this.setPreferredSize(new java.awt.Dimension(438, 45));
+		// this.setPreferredSize(new java.awt.Dimension(438, 45));
 		central_panel.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
-		grid_bag_layout.rowWeights = new double[] {0.0};
-		grid_bag_layout.rowHeights = new int[] {41};
-		grid_bag_layout.columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.1};
-		grid_bag_layout.columnWidths = new int[] {0, 87, 106, 133, 20};
+		grid_bag_layout.rowWeights = new double[] { 0.0 };
+		grid_bag_layout.rowHeights = new int[] { 41 };
+		grid_bag_layout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.1 };
+		grid_bag_layout.columnWidths = new int[] { 0, 87, 106, 133, 20 };
 		bottom_panel.setLayout(grid_bag_layout);
-        bottom_panel.add(clearButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 5, 0, 5), 0, 0));
+		bottom_panel.add(clearButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.HORIZONTAL, new Insets(0, 5, 0, 5), 0, 0));
 		clearButton.setName("clear_button");
-        bottom_panel.add(okButton, new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 5, 0, 5), 0, 0));
-        bottom_panel.add(cancelButton, new GridBagConstraints(4, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 5, 0, 5), 0, 0));
-        scroll_panel.setViewportView(table);
-        this.add(bottom_panel,BorderLayout.SOUTH);
-        this.add(central_panel,BorderLayout.CENTER);
+		bottom_panel.add(okButton, new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.HORIZONTAL, new Insets(0, 5, 0, 5), 0, 0));
+		bottom_panel.add(cancelButton, new GridBagConstraints(4, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.HORIZONTAL, new Insets(0, 5, 0, 5), 0, 0));
+		scroll_panel.setViewportView(table);
+		this.add(bottom_panel, BorderLayout.SOUTH);
+		this.add(central_panel, BorderLayout.CENTER);
 	}
-	
+
 	public DialogAction getDialogAction() {
 		// TODO Auto-generated method stub
 		return null;

@@ -31,54 +31,55 @@ import org.jmule.core.JMuleManagerException;
 
 /**
  * Created on Aug 30, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.2 $
- * Last changed by $Author: javajox $ on $Date: 2009/10/25 08:36:11 $
+ * @version $Revision: 1.2 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/10/25 08:36:11 $
  */
 public abstract class AbstractPlatformManager extends JMuleAbstractManager implements PlatformManager {
-	
-	protected final static String PROCESS_ERROR = "The OS process terminated abnormally, exit status : "; 
+
+	protected final static String PROCESS_ERROR = "The OS process terminated abnormally, exit status : ";
 	protected List<CPUCapabilities> cpus_capabilities;
-	
+
 	public void initialize() {
-	   try {
-		  super.initialize();
-	   } catch (JMuleManagerException cause) {
-		   cause.printStackTrace();
-		   return;
-	   }  
+		try {
+			super.initialize();
+		} catch (JMuleManagerException cause) {
+			cause.printStackTrace();
+			return;
+		}
 	}
-			  
+
 	public void start() {
 		try {
-		   super.start();
+			super.start();
 		} catch (JMuleManagerException cause) {
-		   cause.printStackTrace();
-			return ;
-		}  
+			cause.printStackTrace();
+			return;
+		}
 	}
-			  
+
 	public void shutdown() {
 		try {
 			super.shutdown();
 		} catch (JMuleManagerException cause) {
 			cause.printStackTrace();
-		    return;
-		}  
+			return;
+		}
 	}
-			
+
 	protected boolean iAmStoppable() {
 
-	  return false;
+		return false;
 	}
 
 	public String getOSName() throws PlatformManagerException {
-		String os_name; 
-        try {
-            os_name = JMConstants.OSName;
-        }catch(Throwable cause) {
-            throw new PlatformManagerException( cause );
-        }
+		String os_name;
+		try {
+			os_name = JMConstants.OSName;
+		} catch (Throwable cause) {
+			throw new PlatformManagerException(cause);
+		}
 		return os_name;
 	}
 
@@ -86,8 +87,8 @@ public abstract class AbstractPlatformManager extends JMuleAbstractManager imple
 		String os_version;
 		try {
 			os_version = JMConstants.OSVersion;
-		}catch( Throwable cause ) {
-			throw new PlatformManagerException( cause );
+		} catch (Throwable cause) {
+			throw new PlatformManagerException(cause);
 		}
 		return os_version;
 	}
@@ -96,12 +97,12 @@ public abstract class AbstractPlatformManager extends JMuleAbstractManager imple
 		String arch;
 		try {
 			arch = System.getProperty("os.arch");
-		}catch( Throwable cause ) {
-			throw new PlatformManagerException( cause );
+		} catch (Throwable cause) {
+			throw new PlatformManagerException(cause);
 		}
 		return arch;
 	}
-	
+
 	public boolean isNativeAvailable(JMuleManager manager, String methodName) throws PlatformManagerException {
 
 		return false;

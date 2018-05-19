@@ -26,25 +26,26 @@ import org.jmule.core.JMException;
 
 /**
  * Created on Aug 23, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2009/08/31 17:26:28 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/08/31 17:26:28 $
  */
 public class PlatformManagerException extends JMException {
 
 	public PlatformManagerException() {
 		super();
-		
+
 	}
-	
+
 	public PlatformManagerException(Throwable cause) {
-		super( cause );
-		
+		super(cause);
+
 	}
-	
+
 	public PlatformManagerException(String cause) {
-		super( cause );
-		
+		super(cause);
+
 	}
-	
+
 }

@@ -59,7 +59,8 @@ public final class Factory {
 			return ret;
 		try {
 			/*
-			 * The documentation of Class.forName explains why this is the right thing better than I could here.
+			 * The documentation of Class.forName explains why this is the right thing
+			 * better than I could here.
 			 */
 			if (loader == null) {
 				return Class.forName(s);
@@ -112,9 +113,9 @@ public final class Factory {
 		String kind = null;
 		if (member instanceof Method) {
 			Method method = (Method) member;
-			sig = new MethodSignatureImpl(method.getModifiers(), method.getName(), method.getDeclaringClass(), method
-					.getParameterTypes(), new String[method.getParameterTypes().length], method.getExceptionTypes(), method
-					.getReturnType());
+			sig = new MethodSignatureImpl(method.getModifiers(), method.getName(), method.getDeclaringClass(),
+					method.getParameterTypes(), new String[method.getParameterTypes().length],
+					method.getExceptionTypes(), method.getReturnType());
 			kind = JoinPoint.METHOD_EXECUTION;
 		} else if (member instanceof Constructor) {
 			Constructor cons = (Constructor) member;
@@ -137,7 +138,8 @@ public final class Factory {
 		return new JoinPointImpl(staticPart, _this, target, new Object[] { arg0 });
 	}
 
-	public static JoinPoint makeJP(JoinPoint.StaticPart staticPart, Object _this, Object target, Object arg0, Object arg1) {
+	public static JoinPoint makeJP(JoinPoint.StaticPart staticPart, Object _this, Object target, Object arg0,
+			Object arg1) {
 		return new JoinPointImpl(staticPart, _this, target, new Object[] { arg0, arg1 });
 	}
 
@@ -177,16 +179,16 @@ public final class Factory {
 
 		Class returnTypeClass = makeClass(returnType, lookupClassLoader);
 
-		MethodSignatureImpl ret = new MethodSignatureImpl(modifiersAsInt, methodName, declaringTypeClass, paramTypeClasses,
-				paramNamesArray, exceptionTypeClasses, returnTypeClass);
+		MethodSignatureImpl ret = new MethodSignatureImpl(modifiersAsInt, methodName, declaringTypeClass,
+				paramTypeClasses, paramNamesArray, exceptionTypeClasses, returnTypeClass);
 
 		return ret;
 	}
 
 	public MethodSignature makeMethodSig(int modifiers, String name, Class declaringType, Class[] parameterTypes,
 			String[] parameterNames, Class[] exceptionTypes, Class returnType) {
-		MethodSignatureImpl ret = new MethodSignatureImpl(modifiers, name, declaringType, parameterTypes, parameterNames,
-				exceptionTypes, returnType);
+		MethodSignatureImpl ret = new MethodSignatureImpl(modifiers, name, declaringType, parameterTypes,
+				parameterNames, exceptionTypes, returnType);
 		ret.setLookupClassLoader(lookupClassLoader);
 		return ret;
 	}
@@ -197,8 +199,8 @@ public final class Factory {
 		return ret;
 	}
 
-	public ConstructorSignature makeConstructorSig(String modifiers, String declaringType, String paramTypes, String paramNames,
-			String exceptionTypes) {
+	public ConstructorSignature makeConstructorSig(String modifiers, String declaringType, String paramTypes,
+			String paramNames, String exceptionTypes) {
 		int modifiersAsInt = Integer.parseInt(modifiers, 16);
 
 		Class declaringTypeClass = makeClass(declaringType, lookupClassLoader);
@@ -221,16 +223,16 @@ public final class Factory {
 		for (int i = 0; i < numParams; i++)
 			exceptionTypeClasses[i] = makeClass(st.nextToken(), lookupClassLoader);
 
-		ConstructorSignatureImpl ret = new ConstructorSignatureImpl(modifiersAsInt, declaringTypeClass, paramTypeClasses,
-				paramNamesArray, exceptionTypeClasses);
+		ConstructorSignatureImpl ret = new ConstructorSignatureImpl(modifiersAsInt, declaringTypeClass,
+				paramTypeClasses, paramNamesArray, exceptionTypeClasses);
 		ret.setLookupClassLoader(lookupClassLoader);
 		return ret;
 	}
 
 	public ConstructorSignature makeConstructorSig(int modifiers, Class declaringType, Class[] parameterTypes,
 			String[] parameterNames, Class[] exceptionTypes) {
-		ConstructorSignatureImpl ret = new ConstructorSignatureImpl(modifiers, declaringType, parameterTypes, parameterNames,
-				exceptionTypes);
+		ConstructorSignatureImpl ret = new ConstructorSignatureImpl(modifiers, declaringType, parameterTypes,
+				parameterNames, exceptionTypes);
 		ret.setLookupClassLoader(lookupClassLoader);
 		return ret;
 	}
@@ -263,8 +265,8 @@ public final class Factory {
 		return ret;
 	}
 
-	public AdviceSignature makeAdviceSig(String modifiers, String name, String declaringType, String paramTypes, String paramNames,
-			String exceptionTypes, String returnType) {
+	public AdviceSignature makeAdviceSig(String modifiers, String name, String declaringType, String paramTypes,
+			String paramNames, String exceptionTypes, String returnType) {
 		int modifiersAsInt = Integer.parseInt(modifiers, 16);
 
 		Class declaringTypeClass = makeClass(declaringType, lookupClassLoader);
@@ -298,8 +300,8 @@ public final class Factory {
 
 	public AdviceSignature makeAdviceSig(int modifiers, String name, Class declaringType, Class[] parameterTypes,
 			String[] parameterNames, Class[] exceptionTypes, Class returnType) {
-		AdviceSignatureImpl ret = new AdviceSignatureImpl(modifiers, name, declaringType, parameterTypes, parameterNames,
-				exceptionTypes, returnType);
+		AdviceSignatureImpl ret = new AdviceSignatureImpl(modifiers, name, declaringType, parameterTypes,
+				parameterNames, exceptionTypes, returnType);
 		ret.setLookupClassLoader(lookupClassLoader);
 		return ret;
 	}
@@ -340,7 +342,8 @@ public final class Factory {
 		st = new StringTokenizer(parameterName, ":");
 		String parameterNameForReturn = st.nextToken();
 
-		CatchClauseSignatureImpl ret = new CatchClauseSignatureImpl(declaringTypeClass, parameterTypeClass, parameterNameForReturn);
+		CatchClauseSignatureImpl ret = new CatchClauseSignatureImpl(declaringTypeClass, parameterTypeClass,
+				parameterNameForReturn);
 		ret.setLookupClassLoader(lookupClassLoader);
 		return ret;
 	}

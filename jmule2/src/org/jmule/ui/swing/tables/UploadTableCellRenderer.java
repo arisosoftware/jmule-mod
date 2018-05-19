@@ -31,22 +31,23 @@ import org.jmule.core.uploadmanager.UploadSession;
 /**
  *
  * Created on Sep 28, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
 public class UploadTableCellRenderer extends JMTableCellRenderer {
 
 	protected UploadSession session;
-	
-	public Component getTableCellRendererComponent(JTable table, Object value,
-			boolean isSelected, boolean hasFocus, int row, int column) {
-		
+
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
+
 		super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		
-		session = (UploadSession)value;
-		
+
+		session = (UploadSession) value;
+
 		return this;
 	}
-	
+
 }

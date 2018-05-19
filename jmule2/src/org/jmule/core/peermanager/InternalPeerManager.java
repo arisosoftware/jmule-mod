@@ -33,61 +33,51 @@ import org.jmule.core.peermanager.Peer.PeerSource;
 
 /**
  * Created on Aug 16, 2009
+ * 
  * @author binary256
  * @author javajox
- * @version $Revision: 1.7 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/17 14:39:07 $
+ * @version $Revision: 1.7 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/17 14:39:07 $
  */
 public interface InternalPeerManager extends PeerManager, DisconnectNode {
 
 	public Peer newIncomingPeer(String ip, int port) throws PeerManagerException;
-	
+
 	public void peerDisconnected(String ip, int port);
-	
+
 	public void peerConnectingFailed(String ip, int port, Throwable cause);
-	
-	public void helloFromPeer(String peerIP, 
-							  int peerPort, 
-							  UserHash userHash, 
-							  ClientID clientID,  
-							  int peerPacketPort, 
-							  TagList tagList, 
-							  String serverIP, 
-							  int serverPort);
-	
-	public void helloAnswerFromPeer(String peerIP, 
-			  int peerPort, 
-			  UserHash userHash, 
-			  ClientID clientID,  
-			  int peerPacketPort, 
-			  TagList tagList, 
-			  String serverIP, 
-			  int serverPort);
-		
+
+	public void helloFromPeer(String peerIP, int peerPort, UserHash userHash, ClientID clientID, int peerPacketPort,
+			TagList tagList, String serverIP, int serverPort);
+
+	public void helloAnswerFromPeer(String peerIP, int peerPort, UserHash userHash, ClientID clientID,
+			int peerPacketPort, TagList tagList, String serverIP, int serverPort);
+
 	public void callBackRequestFailed();
-	
+
 	public void receivedCallBackRequest(String ip, int port, PeerSource source);
-	
-	public void receivedEMuleHelloFromPeer(String ip, int port,byte clientVersion, byte protocolVersion,
+
+	public void receivedEMuleHelloFromPeer(String ip, int port, byte clientVersion, byte protocolVersion,
 			TagList tagList);
-	
-	public void receivedEMuleHelloAnswerFromPeer(String ip, int port,byte clientVersion, byte protocolVersion,
+
+	public void receivedEMuleHelloAnswerFromPeer(String ip, int port, byte clientVersion, byte protocolVersion,
 			TagList tagList);
-		
-	public List<Peer> createPeerList(List<String> peerIPList, List<Integer> peerPort, boolean addKnownPeersInList, String serverIP, int serverPort, PeerSource peerSource);
-	
+
+	public List<Peer> createPeerList(List<String> peerIPList, List<Integer> peerPort, boolean addKnownPeersInList,
+			String serverIP, int serverPort, PeerSource peerSource);
+
 	public void receivedMessage(String ip, int port, String message);
-	
+
 	public void receivedCaptchaImage(String ip, int port, ByteBuffer image);
-	
+
 	public void receivedCaptchaStatusAnswer(String ip, int port, byte answer);
-	
+
 	public byte[] getPublicKey(Peer peer);
-	
+
 	public void receivedPublicKey(String peerIP, int peerPort, byte[] key);
-	
+
 	public void receivedSignature(String peerIP, int peerPort, byte[] signature);
-	
+
 	public void receivedSecIdentState(String peerIP, int peerPort, byte state, byte[] challenge);
-	
+
 }

@@ -38,22 +38,22 @@ import org.jmule.ui.swing.tables.DownloadPeersTable;
 /**
  *
  * Created on Oct 5, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.2 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/18 12:30:19 $
+ * @version $Revision: 1.2 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/18 12:30:19 $
  */
 public class DownloadDetailsDialog extends RefreshableDialog {
 
 	private JTabbedPane tabbed_panel = new JTabbedPane();
-	private OpPanel op_panel = new OpPanel(new OpPanel.button_type[] 
-	                                            { OpPanel.button_type.CLOSE } );
+	private OpPanel op_panel = new OpPanel(new OpPanel.button_type[] { OpPanel.button_type.CLOSE });
 	private BorderLayout border_layout = new BorderLayout();
-	private DownloadDetailsPanel download_details_panel; 
+	private DownloadDetailsPanel download_details_panel;
 	private DownloadPeersTable download_peers_table;
 	private JScrollPane peers_scroll_panel = new JScrollPane();
-	
+
 	private DownloadSession session;
-	
+
 	public DownloadDetailsDialog(JFrame parent, DownloadSession session) {
 		super(parent, "Download details", true);
 		this.session = session;
@@ -63,25 +63,25 @@ public class DownloadDetailsDialog extends RefreshableDialog {
 		this.setSize(567, 521);
 		init();
 	}
-	
+
 	private void init() {
 		this.setLayout(border_layout);
 		this.add(tabbed_panel, BorderLayout.CENTER);
 		this.add(op_panel, BorderLayout.SOUTH);
 		op_panel.getCloseButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-			    setVisible(false);  	
-			} 
+				setVisible(false);
+			}
 		});
 		tabbed_panel.addTab("General", download_details_panel);
 		tabbed_panel.addTab("Peers", peers_scroll_panel);
 	}
-	
-    public void refresh() {
-    	if( tabbed_panel.getSelectedComponent() == download_details_panel )
-    	  download_details_panel.updateData();
-    	else 
-    	  download_peers_table.repaint();
-    }
+
+	public void refresh() {
+		if (tabbed_panel.getSelectedComponent() == download_details_panel)
+			download_details_panel.updateData();
+		else
+			download_peers_table.repaint();
+	}
 
 }

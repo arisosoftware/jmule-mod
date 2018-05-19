@@ -25,12 +25,13 @@ package org.jmule.ui.swing.maintabs;
 /**
  *
  * Created on Oct 16, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
 public interface JMLogger {
 
-	 public void addMessage(String str);
-	
+	public void addMessage(String str);
+
 }

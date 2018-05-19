@@ -27,36 +27,36 @@ import org.jmule.core.JMThread;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:41:09 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:41:09 $$
  */
 public abstract class JMFileTask extends JMThread {
 
 	protected boolean stop = false;
-	
+
 	protected boolean isDone = false;
-	
+
 	public JMFileTask() {
-		
+
 	}
-	
+
 	public JMFileTask(String taskName) {
-		
+
 		super(taskName);
-		
+
 	}
-	
+
 	public void JMStop() {
-		
+
 		stop = true;
-		
+
 	}
 
 	public boolean isDone() {
-		
+
 		return isDone;
-		
+
 	}
-	
+
 	public abstract double getPercent();
 }

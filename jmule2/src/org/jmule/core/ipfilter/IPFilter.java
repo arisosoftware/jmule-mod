@@ -28,114 +28,97 @@ import org.jmule.core.JMuleManager;
 
 /**
  * Created on Nov 4, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.3 $
- * Last changed by $Author: javajox $ on $Date: 2010/01/12 11:00:14 $
+ * @version $Revision: 1.3 $ Last changed by $Author: javajox $ on $Date:
+ *          2010/01/12 11:00:14 $
  */
 public interface IPFilter extends JMuleManager {
 
 	public enum BannedReason {
-		DEFAULT,
-		BAD_PACKETS,
-		SPAM
+		DEFAULT, BAD_PACKETS, SPAM
 	}
-	
+
 	public enum TimeUnit {
-		MINUTE,
-		HOUR,
-		DAY,
-		INFINITY
+		MINUTE, HOUR, DAY, INFINITY
 	}
-	
+
 	// -------- ip filter ops for peers with address as string
-	public void addPeer(String address, BannedReason bannedReason, 
-			int howLong, TimeUnit timeUnit);
-	
+	public void addPeer(String address, BannedReason bannedReason, int howLong, TimeUnit timeUnit);
+
 	public void addPeer(String address, BannedReason bannedReason);
-	
+
 	public void addPeer(String address, int howLong, TimeUnit timeUnit);
-	
+
 	public void addPeer(String address);
-	
+
 	public boolean isPeerBanned(String address);
-	
+
 	public void unbanPeer(String address);
-	
+
 	// ----------- ip filter ops for servers with address as string
-	public void addServer(String address, BannedReason bannedReason, 
-			int howLong, TimeUnit timeUnit);
-	
+	public void addServer(String address, BannedReason bannedReason, int howLong, TimeUnit timeUnit);
+
 	public void addServer(String address, BannedReason bannedReason);
-	
+
 	public void addServer(String address, int howLong, TimeUnit timeUnit);
-	
+
 	public void addServer(String address);
-	
+
 	public boolean isServerBanned(String address);
-	
+
 	public void unbanServer(String address);
-	
-	public void addPeer(InetSocketAddress inetSocketAddress, 
-			 BannedReason bannedReason);
-	
-	public void addServer(InetSocketAddress inetSocketAddress, 
-			BannedReason bannedReason);
-	
+
+	public void addPeer(InetSocketAddress inetSocketAddress, BannedReason bannedReason);
+
+	public void addServer(InetSocketAddress inetSocketAddress, BannedReason bannedReason);
+
 	public void addPeer(InetSocketAddress inetSocketAddress);
-	
+
 	public void addServer(InetSocketAddress inetSocketAddress);
-	
+
 	public boolean isPeerBanned(InetSocketAddress inetSocketAddress);
-	
+
 	public boolean isServerBanned(InetSocketAddress inetSocketAddress);
-	
-	public void addPeer(InetSocketAddress inetSocketAddress, 
-			BannedReason bannedReason, int howLong, TimeUnit timeUnit);
-	
-	public void addServer(InetSocketAddress inetSocketAddress, 
-			BannedReason bannedReason, int howLong, TimeUnit timeUnit);
-	
-	public void addPeer(InetSocketAddress inetSocketAddress, 
-			int howLong, TimeUnit timeUnit);
-	
-	public void addServer(InetSocketAddress inetSocketAddress, 
-			int howLong, TimeUnit timeUnit);
-	
+
+	public void addPeer(InetSocketAddress inetSocketAddress, BannedReason bannedReason, int howLong, TimeUnit timeUnit);
+
+	public void addServer(InetSocketAddress inetSocketAddress, BannedReason bannedReason, int howLong,
+			TimeUnit timeUnit);
+
+	public void addPeer(InetSocketAddress inetSocketAddress, int howLong, TimeUnit timeUnit);
+
+	public void addServer(InetSocketAddress inetSocketAddress, int howLong, TimeUnit timeUnit);
+
 	// ------------------- ban the peer and tell who are you
-	public void addPeer(String address, BannedReason bannedReason, 
-			int howLong, TimeUnit timeUnit, String who);
-	
-	public void addPeer(String address, 
-			BannedReason bannedReason, String who);
-	
-	public void addPeer(String address, int howLong, 
-			TimeUnit timeUnit, String who);
-	
+	public void addPeer(String address, BannedReason bannedReason, int howLong, TimeUnit timeUnit, String who);
+
+	public void addPeer(String address, BannedReason bannedReason, String who);
+
+	public void addPeer(String address, int howLong, TimeUnit timeUnit, String who);
+
 	public void addPeer(String address, String who);
-	
+
 	// ------------------ ban the server and tell who are you
-	public void addServer(String address, BannedReason bannedReason, 
-			int howLong, TimeUnit timeUnit, String who);
-	
-	public void addServer(String address, 
-			BannedReason bannedReason, String who);
-	
-	public void addServer(String address, int howLong, 
-			TimeUnit timeUnit, String who);
-	
+	public void addServer(String address, BannedReason bannedReason, int howLong, TimeUnit timeUnit, String who);
+
+	public void addServer(String address, BannedReason bannedReason, String who);
+
+	public void addServer(String address, int howLong, TimeUnit timeUnit, String who);
+
 	public void addServer(String address, String who);
-	
+
 	public void clearBannedPeers();
-	
+
 	public void clearBannedServers();
-	
+
 	public void clear();
-	
+
 	public void addIPFilterPeerListener(IPFilterPeerListener peerListener);
-	
+
 	public void removeIPFilterPeerListener(IPFilterPeerListener peerListener);
-	
+
 	public void addIPFilterServerListener(IPFilterServerListener serverListener);
-	
+
 	public void removeIPFilterServerListener(IPFilterServerListener serverListener);
 }

@@ -26,25 +26,26 @@ import org.jmule.core.JMException;
 
 /**
  * Created on Nov 5, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2010/01/07 20:54:20 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2010/01/07 20:54:20 $
  */
 public class IPFilterException extends JMException {
 
 	IPFilterException() {
-		
+
 		super();
 	}
-	
-	IPFilterException( String cause ) {
-		
-		super( cause );
+
+	IPFilterException(String cause) {
+
+		super(cause);
 	}
-	
-	IPFilterException( Throwable cause ) {
-		
-		super( cause );
+
+	IPFilterException(Throwable cause) {
+
+		super(cause);
 	}
-	
+
 }

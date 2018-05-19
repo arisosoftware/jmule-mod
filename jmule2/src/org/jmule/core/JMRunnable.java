@@ -24,24 +24,25 @@ package org.jmule.core;
 
 /**
  * Created on 07-06-2008
+ * 
  * @author javajox
- * @version $$Revision: 1.3 $$
- * Last changed by $$Author: binary256_ $$ on $$Date: 2008/10/16 18:25:00 $$
+ * @version $$Revision: 1.3 $$ Last changed by $$Author: binary256_ $$ on
+ *          $$Date: 2008/10/16 18:25:00 $$
  */
 public abstract class JMRunnable implements Runnable {
 
 	public void run() {
 
 		try {
-		
+
 			JMRun();
-			
-		} catch(Throwable t) {
+
+		} catch (Throwable t) {
 			t.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public abstract void JMRun();
 
 }

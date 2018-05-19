@@ -30,57 +30,59 @@ import org.jmule.core.utils.Convert;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.3 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/02/27 15:14:13 $$
+ * @version $$Revision: 1.3 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/02/27 15:14:13 $$
  */
 public class UserHash implements Comparable<UserHash> {
-	
+
 	private byte[] userHash = new byte[16];
-	
+
 	private int hashCode = 0;
 	private String stringValue = "";
-	
+
 	public UserHash(byte[] hash) {
 		this.userHash = hash;
 		initUserHash();
 	}
-	
+
 	private void initUserHash() {
 		stringValue = "";
 		for (int i = 0; i < userHash.length; i++)
 			stringValue = stringValue + Convert.byteToHex(userHash[i]);
-		
+
 		hashCode = stringValue.hashCode();
 	}
-	
+
 	public static UserHash genNewUserHash() {
 		byte[] hash = new byte[16];
-		new Random().nextBytes( hash );
+		new Random().nextBytes(hash);
 		hash[5] = 14;
 		hash[14] = 111;
 		return new UserHash(hash);
 	}
-	
+
 	public byte[] getUserHash() {
 		return this.userHash;
 	}
-	
+
 	public String getAsString() {
 		return stringValue;
 	}
-	
+
 	public String toString() {
-		return  stringValue;
+		return stringValue;
 	}
-	
+
 	public int hashCode() {
 		return hashCode;
 	}
-	
+
 	public boolean equals(Object object) {
-		if (object==null) return false;
-		if (!(object instanceof UserHash )) return false;
-		UserHash hash = (UserHash)object;
+		if (object == null)
+			return false;
+		if (!(object instanceof UserHash))
+			return false;
+		UserHash hash = (UserHash) object;
 		return Arrays.equals(userHash, hash.getUserHash());
 	}
 
@@ -93,5 +95,5 @@ public class UserHash implements Comparable<UserHash> {
 			return 0;
 		return 1;
 	}
-	
+
 }

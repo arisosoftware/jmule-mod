@@ -27,82 +27,83 @@ import java.util.LinkedList;
 
 /**
  * Created on 07-19-2008
+ * 
  * @author binary256
- * @version $$Revision: 1.2 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/08/02 14:21:09 $$
+ * @version $$Revision: 1.2 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/08/02 14:21:09 $$
  */
 public class FragmentList extends LinkedList<FileFragment> {
 
 	public FragmentList() {
 	}
 
-	public Collection<FileFragment> getFragmentsFromSegment(long start,long end) {
-		LinkedList <FileFragment> list = new LinkedList<FileFragment>();
-		
-		for(int i = 0;i<this.size();i++) {
+	public Collection<FileFragment> getFragmentsFromSegment(long start, long end) {
+		LinkedList<FileFragment> list = new LinkedList<FileFragment>();
+
+		for (int i = 0; i < this.size(); i++) {
 			FileFragment ff = this.get(i);
 
-			if ((ff.getStart()>=start)&&(ff.getStart()<=end)) {
-				
-				if ((ff.getEnd()>=start)&&(ff.getEnd()<=end)) {
-					list.add(new FileFragment(ff.getStart(),ff.getEnd()));
+			if ((ff.getStart() >= start) && (ff.getStart() <= end)) {
+
+				if ((ff.getEnd() >= start) && (ff.getEnd() <= end)) {
+					list.add(new FileFragment(ff.getStart(), ff.getEnd()));
 					continue;
 				}
-				
-				if (ff.getEnd()>end) {
-					list.addLast(new FileFragment(ff.getStart(),end));
+
+				if (ff.getEnd() > end) {
+					list.addLast(new FileFragment(ff.getStart(), end));
 					continue;
 				}
 			}
 
-			if (ff.getStart()<start) {
-				if ((ff.getEnd()>=start)&&(ff.getEnd()<=end)) {
-					list.add(new FileFragment(start,ff.getEnd()));
+			if (ff.getStart() < start) {
+				if ((ff.getEnd() >= start) && (ff.getEnd() <= end)) {
+					list.add(new FileFragment(start, ff.getEnd()));
 					continue;
 				}
-				
-				if (ff.getEnd()>end) {
-					list.add(new FileFragment(start,end));
+
+				if (ff.getEnd() > end) {
+					list.add(new FileFragment(start, end));
 					continue;
 				}
 			}
-			
+
 		}
-		
+
 		return list;
 	}
-	
-	public boolean hasFragment(long begin,long end) {
-		for(int i = 0;i<this.size();i++) {
+
+	public boolean hasFragment(long begin, long end) {
+		for (int i = 0; i < this.size(); i++) {
 			FileFragment fg = this.get(i);
-			if (fg.containPos(begin)&&fg.containPos(end))
+			if (fg.containPos(begin) && fg.containPos(end))
 				return true;
 		}
 		return false;
 	}
-	
-	public void splitFragment(long begin,long end) {
-		
-		for(int i = 0;i<this.size();i++) {
+
+	public void splitFragment(long begin, long end) {
+
+		for (int i = 0; i < this.size(); i++) {
 			FileFragment ff = this.get(i);
 
-			if (ff.containPos(begin)&&ff.containPos(end)) {
+			if (ff.containPos(begin) && ff.containPos(end)) {
 				Collection<FileFragment> ffc = ff.splitFragment(begin, end);
 				this.remove(i);
 				this.addAll(ffc);
-				return ;
+				return;
 			}
 		}
-		
+
 	}
-	
+
 	public String toString() {
 		int i;
 		String result = " [ ";
-		for(i=0;i<this.size();i++) 
-			result += this.get(i)+"";
-		result +=" ] ";
+		for (i = 0; i < this.size(); i++)
+			result += this.get(i) + "";
+		result += " ] ";
 		return result;
 	}
-	
+
 }

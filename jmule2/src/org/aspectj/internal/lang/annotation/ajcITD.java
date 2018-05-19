@@ -16,16 +16,16 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-
 /**
- * @author colyer
- * Marker annotation for code style ITDs
- * ajc prefix used to indicate that this annotation is *internal*
+ * @author colyer Marker annotation for code style ITDs ajc prefix used to
+ *         indicate that this annotation is *internal*
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface ajcITD {
 	int modifiers();
+
 	String targetType();
+
 	String name();
 }

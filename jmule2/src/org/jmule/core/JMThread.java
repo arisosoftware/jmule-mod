@@ -24,30 +24,31 @@ package org.jmule.core;
 
 /**
  * Created on 07-06-2008
+ * 
  * @author javajox
- * @version $$Revision: 1.4 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/09/20 09:08:27 $$
+ * @version $$Revision: 1.4 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/09/20 09:08:27 $$
  */
 public class JMThread extends Thread {
 
 	public JMThread(String string) {
 		super(string);
 	}
-	
+
 	public JMThread(ThreadGroup group, String name) {
 		super(group, name);
 	}
-	
+
 	public JMThread() {
 		super();
 	}
-	
+
 	public JMThread(JMRunnable runnable) {
 		super(runnable);
 	}
-	
+
 	public void JMStop() {
-		
+
 	}
 
 }

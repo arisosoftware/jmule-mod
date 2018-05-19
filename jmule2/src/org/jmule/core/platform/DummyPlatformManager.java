@@ -31,56 +31,55 @@ import org.jmule.core.JMuleManager;
 
 /**
  * Created on Aug 30, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.2 $
- * Last changed by $Author: javajox $ on $Date: 2009/10/25 08:36:11 $
+ * @version $Revision: 1.2 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/10/25 08:36:11 $
  */
 public class DummyPlatformManager extends AbstractPlatformManager {
 
 	private static final String UC = "Unsupported capability";
 
 	DummyPlatformManager() {
-		
+
 	}
 
 	public String getOSName() throws PlatformManagerException {
-		throw new PlatformManagerException( UC );
-	}
-	
-	public String getOSVersion() throws PlatformManagerException {
-		throw new PlatformManagerException( UC );
-	}
-	
-	public List<CPUCapabilities> getCPUCapabilities() throws PlatformManagerException {
-		throw new PlatformManagerException( UC );
-	}
-	
-	public void copyFile(File source, File destination) throws PlatformManagerException {
-	    throw new PlatformManagerException( UC );	
-	}
-	
-	public void moveFile(File source, File destination) throws PlatformManagerException {
-	    throw new PlatformManagerException( UC );	
-	}
-	
-	public PingResult ping(InetAddress source, 
-                           NetworkInterface networkInterface,
-                           int count) throws PlatformManagerException {
-		throw new PlatformManagerException( UC );
-	}
-	
-	public void addToIPFilter(Object ip) throws PlatformManagerException {
-         throw new PlatformManagerException( UC );
+		throw new PlatformManagerException(UC);
 	}
 
-	public boolean isNativeAvailable(JMuleManager manager, String methodName)
+	public String getOSVersion() throws PlatformManagerException {
+		throw new PlatformManagerException(UC);
+	}
+
+	public List<CPUCapabilities> getCPUCapabilities() throws PlatformManagerException {
+		throw new PlatformManagerException(UC);
+	}
+
+	public void copyFile(File source, File destination) throws PlatformManagerException {
+		throw new PlatformManagerException(UC);
+	}
+
+	public void moveFile(File source, File destination) throws PlatformManagerException {
+		throw new PlatformManagerException(UC);
+	}
+
+	public PingResult ping(InetAddress source, NetworkInterface networkInterface, int count)
 			throws PlatformManagerException {
-		
+		throw new PlatformManagerException(UC);
+	}
+
+	public void addToIPFilter(Object ip) throws PlatformManagerException {
+		throw new PlatformManagerException(UC);
+	}
+
+	public boolean isNativeAvailable(JMuleManager manager, String methodName) throws PlatformManagerException {
+
 		return false;
 	}
 
 	public void removeFromIPFilter(Object ip) throws PlatformManagerException {
-		throw new PlatformManagerException( UC );
+		throw new PlatformManagerException(UC);
 	}
 
 }

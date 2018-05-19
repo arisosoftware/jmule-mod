@@ -26,38 +26,39 @@ import org.jmule.core.impl.JMuleCoreImpl;
 
 /**
  * Created on 04-27-2008
+ * 
  * @author javajox
  * @author binary256
- * @version $$Revision: 1.3 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/08/03 15:13:08 $$
+ * @version $$Revision: 1.3 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/08/03 15:13:08 $$
  */
 public class JMuleCoreFactory {
-	
+
 	public static JMuleCore create() throws JMuleCoreException {
-		 
-		  return ( JMuleCoreImpl.create() );
+
+		return (JMuleCoreImpl.create());
 	}
-	
+
 	public static JMuleCore create(JMRawData coreParams) throws JMuleCoreException {
-		
-		  return ( JMuleCoreImpl.create(coreParams) );
+
+		return (JMuleCoreImpl.create(coreParams));
 	}
-	
-	public static JMuleCore getSingleton()  {
-		
+
+	public static JMuleCore getSingleton() {
+
 		JMuleCore jmule_core = null;
-		
+
 		try {
-			
-		  jmule_core = JMuleCoreImpl.getSingleton();
-			
-		} catch(Throwable t) {
-			
+
+			jmule_core = JMuleCoreImpl.getSingleton();
+
+		} catch (Throwable t) {
+
 			t.printStackTrace();
-			
+
 		}
-		
+
 		return jmule_core;
 	}
-	
+
 }

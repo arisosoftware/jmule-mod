@@ -36,33 +36,34 @@ import org.jmule.core.jkad.packet.PacketFactory;
 import org.jmule.core.jkad.publisher.Publisher.PublishTaskListener;
 import org.jmule.core.jkad.routingtable.KadContact;
 
-
 /**
  * Created on Jan 14, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.12 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/28 13:13:43 $
+ * @version $Revision: 1.12 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/28 13:13:43 $
  */
 public class PublishNoteTask extends PublishTask {
 
 	private LookupTask lookup_task;
 	private PublishItem publishItem;
-	
+
 	public PublishNoteTask(PublishTaskListener listener, Int128 publishID, PublishItem publishItem) {
 		super(publishID, listener);
 		this.publishItem = publishItem;
 	}
-	
+
 	public PublishItem getPublishItem() {
 		return publishItem;
 	}
 
 	public void start() throws JKadException {
-		if (lookup_task!=null)
-			if (lookup_task.isLookupStarted()) return;
+		if (lookup_task != null)
+			if (lookup_task.isLookupStarted())
+				return;
 
 		isStarted = true;
-		
+
 		lookup_task = new LookupTask(RequestType.STORE, publishID, JKadConstants.LOOKUP_STORE_NOTE_TIMEOUT) {
 			public void lookupTimeout() {
 				isStarted = false;
@@ -71,30 +72,30 @@ public class PublishNoteTask extends PublishTask {
 			}
 
 			public void processToleranceContacts(ContactAddress sender, List<KadContact> results) {
-				
-				for(KadContact contact : results) {
+
+				for (KadContact contact : results) {
 					KadPacket packet = null;
 					if (!contact.supportKad2()) {
 						packet = PacketFactory.getPublishNotes1Req(_jkad_manager.getClientID(), publishItem);
-					}
-					else
+					} else
 						packet = PacketFactory.getPublishNotes2Packet(_jkad_manager.getClientID(), publishItem);
 					_network_manager.sendKadPacket(packet, contact.getIPAddress(), contact.getUDPPort());
 				}
 			}
-			
+
 			public void lookupTerminated() {
 				updatePublishTime();
 				task_listener.taskStopped(task_instance);
 			}
-			
+
 		};
 		Lookup.getSingleton().addLookupTask(lookup_task);
 		task_listener.taskStarted(task_instance);
 	}
 
 	public void stop() {
-		if (!isStarted) return;
+		if (!isStarted)
+			return;
 		isStarted = false;
 		Lookup.getSingleton().removeLookupTask(publishID);
 	}

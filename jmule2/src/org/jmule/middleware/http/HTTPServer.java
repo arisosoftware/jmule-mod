@@ -31,53 +31,52 @@ public class HTTPServer extends Thread {
 
 	private Socket s;
 	private BufferedReader dataFromClient;
-	
+
 	public HTTPServer(Socket s) {
 		this.s = s;
 	}
-	
+
 	public void run() {
 		System.out.println("------ Session started ------------");
 		try {
-		 dataFromClient = new BufferedReader(new InputStreamReader(s.getInputStream()));
-		 String theLine;
-		 while( (theLine = dataFromClient.readLine()) != null ) {
-			 System.out.println( theLine );
-		 }
-		 //String a_line = dataFromClient.readLine();
-		 //System.out.println(a_line);
-		 //a_line = dataFromClient.readLine();
-		 //System.out.println( a_line );
-		 
-		}catch( Exception e ) {
+			dataFromClient = new BufferedReader(new InputStreamReader(s.getInputStream()));
+			String theLine;
+			while ((theLine = dataFromClient.readLine()) != null) {
+				System.out.println(theLine);
+			}
+			// String a_line = dataFromClient.readLine();
+			// System.out.println(a_line);
+			// a_line = dataFromClient.readLine();
+			// System.out.println( a_line );
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		//HTTP request message
-		//<method> <request-URL> <version>
-		//<header>
-		//<entity-body>
-		
-		//HTTP response message
-		//<version> <status> <reson-phrase>
-		//<headers>
-		//<entity-body>
+
+		// HTTP request message
+		// <method> <request-URL> <version>
+		// <header>
+		// <entity-body>
+
+		// HTTP response message
+		// <version> <status> <reson-phrase>
+		// <headers>
+		// <entity-body>
 	}
-	
-	
+
 	public static void main(String args[]) {
-		
-	  try {	
-		ServerSocket ss = new ServerSocket( 7042 );
-	    while(true) { //loop forever
-			Socket s = ss.accept(); //Blocks waiting for a new connection
-			HTTPServer http_server = new HTTPServer( s ); 
-			http_server.start(); //Start the child process
+
+		try {
+			ServerSocket ss = new ServerSocket(7042);
+			while (true) { // loop forever
+				Socket s = ss.accept(); // Blocks waiting for a new connection
+				HTTPServer http_server = new HTTPServer(s);
+				http_server.start(); // Start the child process
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-	  }catch(Exception e) {
-		  e.printStackTrace();
-	  }
-		
+
 	}
-	
+
 }

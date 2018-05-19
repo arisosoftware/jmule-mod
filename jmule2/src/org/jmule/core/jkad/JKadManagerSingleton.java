@@ -22,25 +22,25 @@
  */
 package org.jmule.core.jkad;
 
-
 /**
  * Created on Aug 29, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: javajox $ on $Date: 2010/09/09 06:23:29 $
+ * @version $Revision: 1.3 $ Last changed by $Author: javajox $ on $Date:
+ *          2010/09/09 06:23:29 $
  */
 public class JKadManagerSingleton {
 
 	private JKadManagerSingleton() {
-		
+
 	}
-	
+
 	private static class JKadManagerSingletonHolder {
 		private static final JKadManager INSTANCE = new JKadManagerImpl();
 	}
-	
+
 	public static JKadManager getInstance() {
 		return JKadManagerSingletonHolder.INSTANCE;
 	}
-	
+
 }

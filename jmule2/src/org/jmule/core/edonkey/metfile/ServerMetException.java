@@ -27,17 +27,17 @@ import org.jmule.core.JMException;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.2 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/08/15 12:06:33 $$
+ * @version $$Revision: 1.2 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/08/15 12:06:33 $$
  */
 public class ServerMetException extends JMException {
-	
+
 	public ServerMetException(Throwable t) {
 		super(t);
 	}
-	
+
 	public ServerMetException(String name) {
 		super(name);
 	}
-	
+
 }

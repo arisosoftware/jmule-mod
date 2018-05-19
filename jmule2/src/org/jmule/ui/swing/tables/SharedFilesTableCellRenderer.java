@@ -31,19 +31,20 @@ import org.jmule.core.sharingmanager.SharedFile;
 /**
  *
  * Created on Oct 2, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
 public class SharedFilesTableCellRenderer extends JMTableCellRenderer {
 
 	protected SharedFile shared_file;
-	
-	public Component getTableCellRendererComponent(JTable table, Object value,
-			boolean isSelected, boolean hasFocus, int row, int column) {
+
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
 		super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		shared_file = (SharedFile)value;
+		shared_file = (SharedFile) value;
 		return this;
 	}
-	
+
 }

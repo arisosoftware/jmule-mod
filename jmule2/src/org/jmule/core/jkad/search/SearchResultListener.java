@@ -26,16 +26,18 @@ import java.util.List;
 
 import org.jmule.core.jkad.indexer.Source;
 
-
 /**
  * Created on Apr 18, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/07/06 14:13:25 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/07/06 14:13:25 $
  */
 public interface SearchResultListener {
 	public void searchStarted();
+
 	public void processNewResults(List<Source> result);
+
 	public void searchFinished();
 
 }

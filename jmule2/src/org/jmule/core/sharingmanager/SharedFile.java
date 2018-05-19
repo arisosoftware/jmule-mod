@@ -60,127 +60,127 @@ import org.jmule.core.utils.Misc;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.18 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/07/31 13:08:35 $$
+ * @version $$Revision: 1.18 $$ Last changed by $$Author: binary255 $$ on
+ *          $$Date: 2010/07/31 13:08:35 $$
  */
 public abstract class SharedFile {
-	
-	protected FileChannel readChannel  = null;
+
+	protected FileChannel readChannel = null;
 	protected FileChannel writeChannel = null;
 	protected PartHashSet hashSet = null;
 	protected TagList tagList = new TagList();
 	protected File file;
 
 	protected Object lock = new Object();
-	
-	public FileChunk getData(FileChunkRequest chunkData) throws SharedFileException{
+
+	public FileChunk getData(FileChunkRequest chunkData) throws SharedFileException {
 		ByteBuffer data = null;
-		synchronized(lock) {
+		synchronized (lock) {
 			if (readChannel == null) {
-			
+
 				try {
-					readChannel = new RandomAccessFile(file,"rws").getChannel();
+					readChannel = new RandomAccessFile(file, "rws").getChannel();
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 					throw new SharedFileException("Failed to open file : " + file.getName());
 				}
 			}
-			data = Misc.getByteBuffer(chunkData.getChunkEnd()-chunkData.getChunkBegin());
+			data = Misc.getByteBuffer(chunkData.getChunkEnd() - chunkData.getChunkBegin());
 			data.position(0);
 			try {
 				readChannel.position(chunkData.getChunkBegin());
-				
+
 				readChannel.read(data);
 			} catch (IOException e) {
-				throw new SharedFileException("I/O error on reading file "+this+"\n"+Misc.getStackTrace(e));
+				throw new SharedFileException("I/O error on reading file " + this + "\n" + Misc.getStackTrace(e));
 			}
-		/*try {
-			readChannel.close();
-			readChannel = null;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
+			/*
+			 * try { readChannel.close(); readChannel = null; } catch (IOException e) {
+			 * e.printStackTrace(); }
+			 */
 		}
-		return new FileChunk(chunkData.getChunkBegin(),chunkData.getChunkEnd(),data);
+		return new FileChunk(chunkData.getChunkBegin(), chunkData.getChunkEnd(), data);
 	}
-	
+
 	public abstract boolean isCompleted();
-	
+
 	public String getAbsolutePath() {
 		return file.getAbsolutePath();
 	}
-	
+
 	public void delete() {
 		file.delete();
 	}
-	
+
 	public String getSharingName() {
 		return file.getName();
 	}
-	
+
 	public byte[] getMimeType() {
 		String file_name = getSharingName();
-		
+
 		String extension = Misc.getFileExtension(file_name);
 		extension = extension.toLowerCase();
 		if (audio_extensions.contains(extension))
 			return TAG_FILE_TYPE_AUDIO;
-		
+
 		if (video_extensions.contains(extension))
 			return TAG_FILE_TYPE_VIDEO;
-		
+
 		if (image_extensions.contains(extension))
 			return TAG_FILE_TYPE_IMAGE;
-		
+
 		if (doc_extensions.contains(extension))
 			return TAG_FILE_TYPE_DOC;
-		
+
 		if (program_extensions.contains(extension))
 			return TAG_FILE_TYPE_PROGRAM;
-		
+
 		if (archive_extensions.contains(extension))
 			return TAG_FILE_TYPE_ARC;
-		
+
 		if (iso_extensions.contains(extension))
 			return TAG_FILE_TYPE_ISO;
-		
+
 		return TAG_FILE_TYPE_UNKNOWN;
 	}
-	
+
 	public int hashCode() {
 		if (hashSet == null)
 			return getFile().getAbsolutePath().hashCode();
 		return this.getFileHash().hashCode();
 	}
-	
-	public boolean equals(Object object){
-		if (object == null) return false;
-		if (!(object instanceof SharedFile)) return false;
+
+	public boolean equals(Object object) {
+		if (object == null)
+			return false;
+		if (!(object instanceof SharedFile))
+			return false;
 		SharedFile shared_file = (SharedFile) object;
 		return getFile().equals(shared_file.getFile());
-		
+
 	}
-	
+
 	public FileHash getFileHash() {
 		return hashSet.getFileHash();
 	}
-	
+
 	public File getFile() {
 		return file;
 	}
-	
+
 	public long length() {
 		return file.length();
 	}
-	
+
 	public boolean exists() {
 		return file.exists();
 	}
-	
+
 	public void updateHashes() throws SharedFileException {
 		if (readChannel == null)
 			try {
-				readChannel = new RandomAccessFile(file,"rws").getChannel();
+				readChannel = new RandomAccessFile(file, "rws").getChannel();
 			} catch (FileNotFoundException e) {
 				throw new SharedFileException("Shared file not found");
 			}
@@ -201,43 +201,43 @@ public abstract class SharedFile {
 	}
 
 	public void setTagList(TagList newTagList) {
-		this.tagList = newTagList;		
+		this.tagList = newTagList;
 	}
-	
+
 	public void setFileQuality(FileQuality quality) {
 		int tag_value = quality.getAsInt();
 		if (tagList.hasTag(FT_FILERATING))
 			tagList.removeTag(FT_FILERATING);
-		Tag tag = new IntTag(FT_FILERATING, tag_value);		
+		Tag tag = new IntTag(FT_FILERATING, tag_value);
 		tagList.addTag(tag);
 	}
-	
+
 	public FileQuality getFileQuality() {
 		if (tagList.hasTag(FT_FILERATING)) {
 			Tag tag = tagList.getTag(FT_FILERATING);
 			try {
-				return FileQuality.getAsFileQuality((Integer)tag.getValue());
+				return FileQuality.getAsFileQuality((Integer) tag.getValue());
 			} catch (Throwable e) {
 				return FileQuality.NOTRATED;
 			}
 		}
 		return FileQuality.NOTRATED;
 	}
-	
+
 	public ED2KFileLink getED2KLink() {
-		return new ED2KFileLink(getSharingName(),length(),getFileHash());
+		return new ED2KFileLink(getSharingName(), length(), getFileHash());
 	}
-	
+
 	public void closeFile() {
-		
-		if (readChannel!=null)
+
+		if (readChannel != null)
 			try {
 				readChannel.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-		if (writeChannel!=null)
+
+		if (writeChannel != null)
 			try {
 				writeChannel.close();
 			} catch (IOException e) {

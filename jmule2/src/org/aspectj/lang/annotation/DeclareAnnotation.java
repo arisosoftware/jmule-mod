@@ -20,12 +20,12 @@ import java.lang.annotation.ElementType;
  * @author <a href="mailto:alex AT gnilux DOT com">Alexandre Vasseur</a>
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.CONSTRUCTOR})
+@Target({ ElementType.TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.CONSTRUCTOR })
 public @interface DeclareAnnotation {
 
-    /**
-     * pointcut (type pattern for type, or method/ctor/field signature pattern)
-     */
-    public String value();
-    
+	/**
+	 * pointcut (type pattern for type, or method/ctor/field signature pattern)
+	 */
+	public String value();
+
 }

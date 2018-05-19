@@ -33,7 +33,7 @@ public class FileChunkRequest implements Comparable<FileChunkRequest> {
 	private long chunkBegin;
 	private long chunkEnd;
 	private long creationTime;
-	
+
 	public FileChunkRequest(long chunkBegin, long chunkEnd) {
 		super();
 		this.chunkBegin = chunkBegin;
@@ -92,6 +92,5 @@ public class FileChunkRequest implements Comparable<FileChunkRequest> {
 	public void setCreationTime(long creationTime) {
 		this.creationTime = creationTime;
 	}
-
 
 }

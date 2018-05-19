@@ -30,7 +30,7 @@ public class PointcutImpl implements Pointcut {
 	private final Method baseMethod;
 	private final AjType declaringType;
 	private String[] parameterNames = new String[0];
-	
+
 	protected PointcutImpl(String name, String pc, Method method, AjType declaringType, String pNames) {
 		this.name = name;
 		this.pc = new PointcutExpressionImpl(pc);
@@ -38,14 +38,16 @@ public class PointcutImpl implements Pointcut {
 		this.declaringType = declaringType;
 		this.parameterNames = splitOnComma(pNames);
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.Pointcut#getPointcutExpression()
 	 */
 	public PointcutExpression getPointcutExpression() {
 		return pc;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -55,7 +57,7 @@ public class PointcutImpl implements Pointcut {
 	}
 
 	public AjType<?>[] getParameterTypes() {
-		Class<?>[] baseParamTypes =  baseMethod.getParameterTypes();
+		Class<?>[] baseParamTypes = baseMethod.getParameterTypes();
 		AjType<?>[] ajParamTypes = new AjType<?>[baseParamTypes.length];
 		for (int i = 0; i < ajParamTypes.length; i++) {
 			ajParamTypes[i] = AjTypeSystem.getAjType(baseParamTypes[i]);
@@ -66,20 +68,20 @@ public class PointcutImpl implements Pointcut {
 	public AjType getDeclaringType() {
 		return declaringType;
 	}
-	
+
 	public String[] getParameterNames() {
 		return parameterNames;
 	}
 
 	private String[] splitOnComma(String s) {
-		StringTokenizer strTok = new StringTokenizer(s,",");
+		StringTokenizer strTok = new StringTokenizer(s, ",");
 		String[] ret = new String[strTok.countTokens()];
 		for (int i = 0; i < ret.length; i++) {
 			ret[i] = strTok.nextToken().trim();
 		}
 		return ret;
 	}
-	
+
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(getName());
@@ -91,7 +93,8 @@ public class PointcutImpl implements Pointcut {
 				sb.append(" ");
 				sb.append(this.parameterNames[i]);
 			}
-			if (i+1 < ptypes.length) sb.append(",");
+			if (i + 1 < ptypes.length)
+				sb.append(",");
 		}
 		sb.append(") : ");
 		sb.append(getPointcutExpression().asString());

@@ -26,23 +26,24 @@ import org.jmule.core.JMException;
 
 /**
  * Created on Sep 2, 2009
+ * 
  * @author binary256
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/09/02 18:59:48 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/09/02 18:59:48 $
  */
 public class ED2KLinkMalformedException extends JMException {
 
 	public ED2KLinkMalformedException() {
 		super();
 	}
-	
+
 	public ED2KLinkMalformedException(String cause) {
 		super(cause);
 	}
-	
+
 	public ED2KLinkMalformedException(Throwable cause) {
 		super(cause);
 	}
-	
+
 }

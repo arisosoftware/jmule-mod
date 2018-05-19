@@ -32,28 +32,29 @@ import org.jmule.ui.localizer.Lang;
 
 /**
  * Created on Aug 20, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary256_ $ on $Date: 2008/09/28 16:24:16 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary256_ $ on $Date:
+ *          2008/09/28 16:24:16 $
  */
 public class JMUpdater {
 
 	public static final String USER_AGENT = JMConstants.JMULE_FULL_NAME;
-	public static final String ENCODING   = "UTF-8";
+	public static final String ENCODING = "UTF-8";
 
 	private final String UPDATE_URL = "/update.php";
-	
+
 	private final String VERSION_KEY = "Version";
-	
+
 	private final String VERSION_REGEX = "<lastversion>(.*)</lastversion>";
 	private final String CHANGELOG_REGEX = "<changelog>(.*)</changelog>";
-	
+
 	private String version = "";
 	private String changelog = "";
 	private int response_code;
-	
-	private static Map<Integer,String> error_codes = new Hashtable<Integer,String>();
-	
+
+	private static Map<Integer, String> error_codes = new Hashtable<Integer, String>();
+
 	static {
 		error_codes.put(301, Lang.getString("updaterwindow.error301"));
 		error_codes.put(400, Lang.getString("updaterwindow.error400"));
@@ -64,26 +65,26 @@ public class JMUpdater {
 		error_codes.put(500, Lang.getString("updaterwindow.error500"));
 		error_codes.put(503, Lang.getString("updaterwindow.error503"));
 	}
-	
+
 	private static JMUpdater updater = null;
-	
+
 	private long last_update_time = 0;
-	
+
 	public static JMUpdater getInstance() {
-		if (updater==null)
+		if (updater == null)
 			updater = new JMUpdater();
 		return updater;
 	}
-	
+
 	private JMUpdater() {
-		
+
 	}
-	
+
 	/**
-	 * Check if new version of JMule is available 
+	 * Check if new version of JMule is available
 	 */
 	public void checkForUpdates() throws JMUpdaterException {
-		for(String jm_doamin : JMConstants.JMULE_DOMAINS) {
+		for (String jm_doamin : JMConstants.JMULE_DOMAINS) {
 			JMHTTPConnection connection = new JMHTTPConnection("http://" + jm_doamin + UPDATE_URL);
 			connection.addPostValue(VERSION_KEY, JMConstants.CURRENT_JMULE_VERSION);
 			try {
@@ -103,38 +104,38 @@ public class JMUpdater {
 					throw new JMUpdaterException("Changelog tag not found");
 				changelog = matcher.group(1);
 				changelog = changelog.replace("<br>", "\n");
-				return ;
+				return;
 			} catch (Throwable e) {
 				response_code = connection.getHttpResponseCode();
 			}
 		}
 		throw new JMUpdaterException("Unable to connect to update server");
 	}
-	
+
 	public String getVersion() {
 		return version;
 	}
-	
+
 	public String getChangeLog() {
 		return changelog;
 	}
-	
+
 	public long getLastUpdateTime() {
 		return last_update_time;
 	}
-	
+
 	public String getErrorCode() {
 		String result = error_codes.get(response_code);
 		return result == null ? "HTTP Error " + response_code : result;
 	}
-	
+
 	public boolean isNewVersionAvailable() {
-		int result = JMConstants.compareVersions(version,JMConstants.JMULE_VERSION);
-		return result>=1;
+		int result = JMConstants.compareVersions(version, JMConstants.JMULE_VERSION);
+		return result >= 1;
 	}
-	
-	public static void main(String...strings) throws JMUpdaterException {
-		JMUpdater.getInstance().checkForUpdates();	
+
+	public static void main(String... strings) throws JMUpdaterException {
+		JMUpdater.getInstance().checkForUpdates();
 	}
-	
+
 }

@@ -11,11 +11,12 @@
  *     Xerox/PARC     initial implementation 
  * ******************************************************************/
 
-
 package org.aspectj.lang.reflect;
+
 import java.lang.reflect.Method;
 
 public interface MethodSignature extends CodeSignature {
-    Class getReturnType();      /* name is consistent with reflection API */
+	Class getReturnType(); /* name is consistent with reflection API */
+
 	Method getMethod();
 }

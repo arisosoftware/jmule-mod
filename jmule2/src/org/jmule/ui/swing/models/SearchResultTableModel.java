@@ -31,75 +31,70 @@ import org.jmule.ui.utils.FileFormatter;
 /**
  *
  * Created on Sep 10, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
-public class SearchResultTableModel extends AbstractTableModel { //extends JMTableModel
+public class SearchResultTableModel extends AbstractTableModel { // extends JMTableModel
 
 	private SearchResult search_result;
-	private SearchResultItemList search_result_list; //= search_result.getSearchResultItemList();
-	
-	public final static int FILE_NAME        =    0;
-	public final static int FILE_SIZE        =    1;
-	public final static int AVAILABILITY     =    2;
-	public final static int COMPLETE_SOURCES =    3;
-	public final static int TYPE             =    4;
-	public final static int FILE_ID          =    5;
-	
-	private final static String[] column_names = {
-		                    "File name",
-		                    "File size",
-		                    "Availability",
-		                    "Complete sources",
-		                    "Type",
-		                    "File ID"
-	                    };
+	private SearchResultItemList search_result_list; // = search_result.getSearchResultItemList();
 
-	
+	public final static int FILE_NAME = 0;
+	public final static int FILE_SIZE = 1;
+	public final static int AVAILABILITY = 2;
+	public final static int COMPLETE_SOURCES = 3;
+	public final static int TYPE = 4;
+	public final static int FILE_ID = 5;
+
+	private final static String[] column_names = { "File name", "File size", "Availability", "Complete sources", "Type",
+			"File ID" };
+
 	public SearchResultTableModel(SearchResult searchResult) {
-	
 
-		//System.out.println("search_result_list = " + search_result.getSearchResultItemList());
-		
+		// System.out.println("search_result_list = " +
+		// search_result.getSearchResultItemList());
+
 		search_result = searchResult;
-		
+
 		search_result_list = search_result.getSearchResultItemList();
-	
+
 	}
-	
+
 	public Class getColumnClass(int col) {
 
-        return String.class;
-    }
-	
+		return String.class;
+	}
+
 	public int getRowCount() {
-		
-		//if(search_result_list == null) return 0;
-		
+
+		// if(search_result_list == null) return 0;
+
 		return search_result_list.size();
 	}
-	
+
 	public Object getValueAt(int row, int col) {
-		/*switch(col) {
-		   case  FILE_NAME          :  return search_result_list.get(row).getFileName();
-		   case  FILE_SIZE          :  return search_result_list.get(row).getFileSize();
-		   case  AVAILABILITY       :  return search_result_list.get(row).getFileAviability();
-		   case  COMPLETE_SOURCES   :  return search_result_list.get(row).getFileCompleteSrc();
-		   case  TYPE               :  byte[] fileType = search_result_list.get(row).getMimeType();
-			                           return FileFormatter.formatMimeType(fileType);
-		   case FILE_ID             :  return search_result_list.get(row).getFileHash().getAsString();
-		}*/
+		/*
+		 * switch(col) { case FILE_NAME : return
+		 * search_result_list.get(row).getFileName(); case FILE_SIZE : return
+		 * search_result_list.get(row).getFileSize(); case AVAILABILITY : return
+		 * search_result_list.get(row).getFileAviability(); case COMPLETE_SOURCES :
+		 * return search_result_list.get(row).getFileCompleteSrc(); case TYPE : byte[]
+		 * fileType = search_result_list.get(row).getMimeType(); return
+		 * FileFormatter.formatMimeType(fileType); case FILE_ID : return
+		 * search_result_list.get(row).getFileHash().getAsString(); }
+		 */
 		return search_result_list.get(row);
 	}
-	
+
 	public int getColumnCount() {
-		  
-	    return column_names.length;
+
+		return column_names.length;
 	}
-	
+
 	public String getColumnName(int col) {
-		  return column_names[col];
+		return column_names[col];
 	}
 
 }

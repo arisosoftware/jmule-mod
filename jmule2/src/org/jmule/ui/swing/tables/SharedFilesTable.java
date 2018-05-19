@@ -46,17 +46,18 @@ import org.jmule.ui.utils.NumberFormatter;
 /**
  *
  * Created on Oct 2, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.4 $
- * Last changed by $Author: javajox $ on $Date: 2009/09/22 19:08:43 $
+ * @version $Revision: 1.4 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/09/22 19:08:43 $
  */
 public class SharedFilesTable extends JMTable {
-	
+
 	// ---------------- Table cell renderers ----------------------
-	
-	class FileNameTableCellRenderer extends SharedFilesTableCellRenderer  {
-		public Component getTableCellRendererComponent(JTable table, Object value,
-				boolean isSelected, boolean hasFocus, int row, int column) {
+
+	class FileNameTableCellRenderer extends SharedFilesTableCellRenderer {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			this.setHorizontalAlignment(SwingConstants.LEFT);
 			String fn = shared_file.getSharingName();
@@ -65,60 +66,60 @@ public class SharedFilesTable extends JMTable {
 			return this;
 		}
 	}
-	
-	class FileSizeTableCellRenderer extends SharedFilesTableCellRenderer  {
-		public Component getTableCellRendererComponent(JTable table, Object value,
-				boolean isSelected, boolean hasFocus, int row, int column) {
+
+	class FileSizeTableCellRenderer extends SharedFilesTableCellRenderer {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			this.setHorizontalAlignment(SwingConstants.RIGHT);
 			this.setText(FileFormatter.formatFileSize(shared_file.length()) + " ");
 			return this;
 		}
 	}
-	
-	class FileTypeTableCellRenderer extends SharedFilesTableCellRenderer  {
-		public Component getTableCellRendererComponent(JTable table, Object value,
-				boolean isSelected, boolean hasFocus, int row, int column) {
+
+	class FileTypeTableCellRenderer extends SharedFilesTableCellRenderer {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			this.setHorizontalAlignment(SwingConstants.LEFT);
 			this.setText(" " + FileFormatter.formatMimeType(shared_file.getMimeType()));
 			return this;
 		}
 	}
-	
-	class FileHashTableCellRenderer extends SharedFilesTableCellRenderer  {
-		public Component getTableCellRendererComponent(JTable table, Object value,
-				boolean isSelected, boolean hasFocus, int row, int column) {
+
+	class FileHashTableCellRenderer extends SharedFilesTableCellRenderer {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			this.setText(shared_file.getFileHash().getAsString());
 			return this;
 		}
 	}
-	
-	class CompletedTableCellRenderer extends SharedFilesTableCellRenderer  {
-		public Component getTableCellRendererComponent(JTable table, Object value,
-				boolean isSelected, boolean hasFocus, int row, int column) {
+
+	class CompletedTableCellRenderer extends SharedFilesTableCellRenderer {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			this.setHorizontalAlignment(SwingConstants.RIGHT);
-			if(!shared_file.isCompleted()) 
-				this.setText( NumberFormatter.formatProgress(((PartialFile)shared_file).getPercentCompleted()) + " ");
+			if (!shared_file.isCompleted())
+				this.setText(NumberFormatter.formatProgress(((PartialFile) shared_file).getPercentCompleted()) + " ");
 			else
-				this.setText( NumberFormatter.formatProgress(100) + " " );
+				this.setText(NumberFormatter.formatProgress(100) + " ");
 			return this;
 		}
 	}
-	
+
 	private List<SharedFile> sharedFiles;
-	
+
 	public SharedFilesTable(List<SharedFile> sharedFiles) {
-		
+
 		this.sharedFiles = sharedFiles;
-				
+
 		init();
 	}
-	
+
 	private void init() {
-		
+
 		JMTableColumn file_name = new JMTableColumn();
 		file_name.setIdentifier(UIConstants.SHARED_LIST_FILE_NAME_COLUMN_ID);
 		file_name.setModelIndex(SharedFilesTableModel.NAME);
@@ -126,9 +127,9 @@ public class SharedFilesTable extends JMTable {
 		file_name.setHeaderValue("File name");
 		file_name.setCellRenderer(new FileNameTableCellRenderer());
 		file_name.setComparator(new GeneralComparator("getSharingName"));
-		
+
 		table_columns.add(file_name);
-		
+
 		JMTableColumn file_size = new JMTableColumn();
 		file_size.setIdentifier(UIConstants.SHARED_LIST_FILE_SIZE_COLUMN_ID);
 		file_size.setModelIndex(SharedFilesTableModel.SIZE);
@@ -136,9 +137,9 @@ public class SharedFilesTable extends JMTable {
 		file_size.setHeaderValue("Size");
 		file_size.setCellRenderer(new FileSizeTableCellRenderer());
 		file_size.setComparator(new GeneralComparator("length"));
-		
+
 		table_columns.add(file_size);
-		
+
 		JMTableColumn file_type = new JMTableColumn();
 		file_type.setIdentifier(UIConstants.SHARED_LIST_FILE_TYPE_COLUMN_ID);
 		file_type.setModelIndex(SharedFilesTableModel.TYPE);
@@ -147,14 +148,14 @@ public class SharedFilesTable extends JMTable {
 		file_type.setCellRenderer(new FileTypeTableCellRenderer());
 		file_type.setComparator(new Comparator() {
 			public int compare(Object o1, Object o2) {
-				String file_type1 = FileFormatter.formatMimeType(((SharedFile)o1).getMimeType());
-				String file_type2 = FileFormatter.formatMimeType(((SharedFile)o2).getMimeType());
+				String file_type1 = FileFormatter.formatMimeType(((SharedFile) o1).getMimeType());
+				String file_type2 = FileFormatter.formatMimeType(((SharedFile) o2).getMimeType());
 				return Misc.compareAllObjects(file_type1, file_type2, "toString", true);
-			}			
+			}
 		});
-		
+
 		table_columns.add(file_type);
-		
+
 		JMTableColumn file_hash = new JMTableColumn();
 		file_hash.setIdentifier(UIConstants.SHARED_LIST_FILE_ID_COLUMN_ID);
 		file_hash.setModelIndex(SharedFilesTableModel.HASH);
@@ -162,9 +163,9 @@ public class SharedFilesTable extends JMTable {
 		file_hash.setHeaderValue("Hash");
 		file_hash.setCellRenderer(new FileHashTableCellRenderer());
 		file_hash.setComparator(new GeneralComparator("getFileHash"));
-		
+
 		table_columns.add(file_hash);
-		
+
 		JMTableColumn completed = new JMTableColumn();
 		completed.setIdentifier(UIConstants.SHARED_LIST_COMPLETED_COLUMN_ID);
 		completed.setModelIndex(SharedFilesTableModel.COMPLETED);
@@ -176,78 +177,67 @@ public class SharedFilesTable extends JMTable {
 			public int compare(Object o1, Object o2) {
 				double completed1 = 100;
 				double completed2 = 100;
-				SharedFile shared_file1 = (SharedFile)o1;
-				SharedFile shared_file2 = (SharedFile)o2;
-				if(!shared_file1.isCompleted()) 
-					completed1 = ((PartialFile)shared_file1).getPercentCompleted();
-				if(!shared_file2.isCompleted()) 
-					completed2 = ((PartialFile)shared_file2).getPercentCompleted();
-                if(completed1 == completed2) return 0;
-				if(completed1 > completed2) return 1;
+				SharedFile shared_file1 = (SharedFile) o1;
+				SharedFile shared_file2 = (SharedFile) o2;
+				if (!shared_file1.isCompleted())
+					completed1 = ((PartialFile) shared_file1).getPercentCompleted();
+				if (!shared_file2.isCompleted())
+					completed2 = ((PartialFile) shared_file2).getPercentCompleted();
+				if (completed1 == completed2)
+					return 0;
+				if (completed1 > completed2)
+					return 1;
 				return -1;
 			}
 		});
-		
+
 		table_columns.add(completed);
-		
+
 		super.buildColumns(new SharedFilesTableModel(sharedFiles));
-		
-        class PopupListener extends MouseAdapter {
-			
+
+		class PopupListener extends MouseAdapter {
+
 			JMenuItem column_setup;
-			
+
 			public PopupListener() {
-				 
-				 column_setup = new JMenuItem("Column setup");
+
+				column_setup = new JMenuItem("Column setup");
 			}
-			
+
 			public void mousePressed(MouseEvent e) {
 				showPopup(e);
 			}
-			
+
 			public void mouseReleased(MouseEvent e) {
 				showPopup(e);
 			}
-			
+
 			private void showPopup(MouseEvent e) {
-				 
-				 if (e.isPopupTrigger()) {
-					 
-					 JPopupMenu popup_menu = new JPopupMenu();
-					
-					 popup_menu.add(column_setup);
-					 
-					 popup_menu.show(e.getComponent(), e.getX(), e.getY());
-				 }
-			}	
-			
-		}
-		
-		//this.addMouseListener(new PopupListener());
-		
-	}
-	
-	/*private SharedFile[] getFilesByIndexes(int[] indexes) {
-		//for(int index : indexes) {
-		//	System.out.println("Index=>" + index);
-		//}
-		SharedFile[] result = new SharedFile[indexes.length];
-		int k = 0;
-		for(int i : indexes) {
-			int j = 0;
-			for(Server server : _server_manager.getServers()) {
-				if( j == this.convertRowIndexToModel(i) ) {
-					result[k++] = server;
-					break;
+
+				if (e.isPopupTrigger()) {
+
+					JPopupMenu popup_menu = new JPopupMenu();
+
+					popup_menu.add(column_setup);
+
+					popup_menu.show(e.getComponent(), e.getX(), e.getY());
 				}
-				++j;
 			}
+
 		}
-		//for(Server server : result) {
-		//	System.out.println(server);
-		//}
-		return result;
-	}*/
-	
+
+		// this.addMouseListener(new PopupListener());
+
+	}
+
+	/*
+	 * private SharedFile[] getFilesByIndexes(int[] indexes) { //for(int index :
+	 * indexes) { // System.out.println("Index=>" + index); //} SharedFile[] result
+	 * = new SharedFile[indexes.length]; int k = 0; for(int i : indexes) { int j =
+	 * 0; for(Server server : _server_manager.getServers()) { if( j ==
+	 * this.convertRowIndexToModel(i) ) { result[k++] = server; break; } ++j; } }
+	 * //for(Server server : result) { // System.out.println(server); //} return
+	 * result; }
+	 */
 
 }

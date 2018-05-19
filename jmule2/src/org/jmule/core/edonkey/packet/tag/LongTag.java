@@ -27,11 +27,13 @@ import java.nio.ByteBuffer;
 import org.jmule.core.utils.Convert;
 import org.jmule.core.utils.Misc;
 import static org.jmule.core.edonkey.ED2KConstants.*;
+
 /**
  * Created on Jul 15, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 16:00:42 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 16:00:42 $
  */
 public class LongTag extends StandartTag implements NumberTag {
 	private long tagValue;
@@ -40,7 +42,7 @@ public class LongTag extends StandartTag implements NumberTag {
 		super(TAGTYPE_UINT64, tagName);
 		this.tagValue = tagValue;
 	}
-	
+
 	ByteBuffer getValueAsByteBuffer() {
 		ByteBuffer result = Misc.getByteBuffer(8);
 		result.putLong(tagValue);
@@ -57,7 +59,7 @@ public class LongTag extends StandartTag implements NumberTag {
 	}
 
 	public void setValue(Object object) {
-		tagValue = (Long)object;
+		tagValue = (Long) object;
 	}
 
 	public long getNumber() {
@@ -65,7 +67,7 @@ public class LongTag extends StandartTag implements NumberTag {
 	}
 
 	public void setNumber(long value) {
-		this.tagValue = value;		
+		this.tagValue = value;
 	}
-	
+
 }

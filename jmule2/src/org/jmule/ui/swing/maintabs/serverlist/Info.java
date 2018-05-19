@@ -37,44 +37,45 @@ import org.jmule.ui.swing.tables.ServerInfoTable;
 /**
  *
  * Created on Oct 1, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.3 $
- * Last changed by $Author: javajox $ on $Date: 2009/09/27 14:20:00 $
+ * @version $Revision: 1.3 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/09/27 14:20:00 $
  */
 public class Info extends JTabbedPane {
-	
+
 	private MyInfoTable my_info_table = new MyInfoTable();
-	private ServerInfoTable server_info_table = new ServerInfoTable(); 
-	
+	private ServerInfoTable server_info_table = new ServerInfoTable();
+
 	private JMuleCore _core = JMuleCoreFactory.getSingleton();
 	private ServerManager _server_manager = _core.getServerManager();
-	
+
 	public Info() {
 		init();
 		_server_manager.addServerListListener(new ServerManagerListener() {
-			
-			 public void connected(Server server) {
-				 updateTables();
-			 }
-			 
-			 public void disconnected(Server server) {
-				 updateTables();
-			 }
+
+			public void connected(Server server) {
+				updateTables();
+			}
+
+			public void disconnected(Server server) {
+				updateTables();
+			}
 
 			public void autoConnectFailed() {
-				
+
 			}
 
 			public void autoConnectStarted() {
-			
+
 			}
 
 			public void isConnecting(Server server) {
-			
+
 			}
 
 			public void serverAdded(Server server) {
-	
+
 			}
 
 			public void serverConnectingFailed(Server server, Throwable cause) {
@@ -86,28 +87,26 @@ public class Info extends JTabbedPane {
 			}
 
 			public void serverMessage(Server server, String message) {
-	
+
 			}
 
 			public void serverRemoved(Server server) {
-	
+
 			}
 		});
 	}
-	
+
 	private void updateTables() {
-		 TableModel model = my_info_table.getModel();
-		 ((AbstractTableModel)model).fireTableRowsUpdated(
-                    0, model.getRowCount() );
-		 
-		 TableModel model2 = server_info_table.getModel();
-		 ((AbstractTableModel)model2).fireTableRowsUpdated(
-                    0, model2.getRowCount() );
+		TableModel model = my_info_table.getModel();
+		((AbstractTableModel) model).fireTableRowsUpdated(0, model.getRowCount());
+
+		TableModel model2 = server_info_table.getModel();
+		((AbstractTableModel) model2).fireTableRowsUpdated(0, model2.getRowCount());
 	}
-	
+
 	private void init() {
 		this.addTab("My info", my_info_table);
 		this.addTab("Server info", server_info_table);
 	}
-	
+
 }

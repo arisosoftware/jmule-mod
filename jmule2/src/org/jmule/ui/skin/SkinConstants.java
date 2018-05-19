@@ -25,16 +25,16 @@ package org.jmule.ui.skin;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:44:32 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:44:32 $$
  */
 public interface SkinConstants {
 
 	// buttons
-	public static final int     NEXT_BUTTON_IMAGE   	=  10;
-	public static final int     BACK_BUTTON_IMAGE   	=  20;
-	public static final int     OK_BUTTON_IMAGE     	=  30;
-	public static final int     CANCEL_BUTTON_IMAGE 	=  40;
-	public static final int     FINISH_BUTTON_IMAGE 	=  50;
-	
+	public static final int NEXT_BUTTON_IMAGE = 10;
+	public static final int BACK_BUTTON_IMAGE = 20;
+	public static final int OK_BUTTON_IMAGE = 30;
+	public static final int CANCEL_BUTTON_IMAGE = 40;
+	public static final int FINISH_BUTTON_IMAGE = 50;
+
 }

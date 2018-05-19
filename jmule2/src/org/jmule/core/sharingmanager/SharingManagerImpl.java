@@ -75,12 +75,12 @@ import org.jmule.core.utils.timer.JMTimer;
 import org.jmule.core.utils.timer.JMTimerTask;
 
 public class SharingManagerImpl extends JMuleAbstractManager implements InternalSharingManager {
-	
+
 	private InternalNetworkManager _network_manager;
 	private InternalServerManager _server_manager;
 	private InternalDownloadManager _download_manager;
 	private InternalUploadManager _upload_manager;
-	
+
 	private Map<FileHash, SharedFile> sharedFiles;
 	private LoadCompletedFiles load_completed_files;
 	private LoadPartialFiles load_partial_files;
@@ -93,9 +93,9 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 	private JMTimerTask rescan_dirs_task;
 	private JMTimerTask server_sharing_task;
 	private JMTimerTask store_metadata_task;
-	
+
 	SharingManagerImpl() {
-		
+
 	}
 
 	public void initialize() {
@@ -109,7 +109,7 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 		_server_manager = (InternalServerManager) ServerManagerSingleton.getInstance();
 		_download_manager = (InternalDownloadManager) DownloadManagerSingleton.getInstance();
 		_upload_manager = (InternalUploadManager) UploadManagerSingleton.getInstance();
-		
+
 		sharing_manager_timer = new JMTimer();
 		sharedFiles = new ConcurrentHashMap<FileHash, SharedFile>();
 
@@ -122,21 +122,13 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 		types.add(JMuleCoreStats.ST_DISK_SHARED_FILES_COMPLETE_BYTES);
 
 		JMuleCoreStats.registerProvider(types, new JMuleCoreStatsProvider() {
-			public void updateStats(Set<String> types,
-					Map<String, Object> values) {
+			public void updateStats(Set<String> types, Map<String, Object> values) {
 				if (types.contains(JMuleCoreStats.ST_DISK_SHARED_FILES_COUNT))
-					values.put(JMuleCoreStats.ST_DISK_SHARED_FILES_COUNT,
-							sharedFiles.size());
-				if (types
-						.contains(JMuleCoreStats.ST_DISK_SHARED_FILES_PARTIAL_COUNT))
-					values.put(
-							JMuleCoreStats.ST_DISK_SHARED_FILES_PARTIAL_COUNT,
-							getPartialFiles().size());
-				if (types
-						.contains(JMuleCoreStats.ST_DISK_SHARED_FILES_COMPLETE_COUNT))
-					values.put(
-							JMuleCoreStats.ST_DISK_SHARED_FILES_COMPLETE_COUNT,
-							getCompletedFiles().size());
+					values.put(JMuleCoreStats.ST_DISK_SHARED_FILES_COUNT, sharedFiles.size());
+				if (types.contains(JMuleCoreStats.ST_DISK_SHARED_FILES_PARTIAL_COUNT))
+					values.put(JMuleCoreStats.ST_DISK_SHARED_FILES_PARTIAL_COUNT, getPartialFiles().size());
+				if (types.contains(JMuleCoreStats.ST_DISK_SHARED_FILES_COMPLETE_COUNT))
+					values.put(JMuleCoreStats.ST_DISK_SHARED_FILES_COMPLETE_COUNT, getCompletedFiles().size());
 				if (types.contains(JMuleCoreStats.ST_DISK_SHARED_FILES_BYTES)) {
 					long total_bytes = 0;
 					for (PartialFile shared_file : getPartialFiles())
@@ -145,42 +137,34 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 					for (CompletedFile shared_file : getCompletedFiles())
 						total_bytes += shared_file.length();
 
-					values.put(JMuleCoreStats.ST_DISK_SHARED_FILES_BYTES,
-							total_bytes);
+					values.put(JMuleCoreStats.ST_DISK_SHARED_FILES_BYTES, total_bytes);
 				}
-				if (types
-						.contains(JMuleCoreStats.ST_DISK_SHARED_FILES_PARTIAL_BYTES)) {
+				if (types.contains(JMuleCoreStats.ST_DISK_SHARED_FILES_PARTIAL_BYTES)) {
 					long total_bytes = 0;
 					for (PartialFile shared_file : getPartialFiles())
 						total_bytes += shared_file.getDownloadedBytes();
-					values.put(
-							JMuleCoreStats.ST_DISK_SHARED_FILES_PARTIAL_BYTES,
-							total_bytes);
+					values.put(JMuleCoreStats.ST_DISK_SHARED_FILES_PARTIAL_BYTES, total_bytes);
 				}
 
-				if (types
-						.contains(JMuleCoreStats.ST_DISK_SHARED_FILES_COMPLETE_BYTES)) {
+				if (types.contains(JMuleCoreStats.ST_DISK_SHARED_FILES_COMPLETE_BYTES)) {
 					long total_bytes = 0;
 					for (CompletedFile shared_file : getCompletedFiles())
 						total_bytes += shared_file.length();
-					values.put(
-							JMuleCoreStats.ST_DISK_SHARED_FILES_COMPLETE_BYTES,
-							total_bytes);
+					values.put(JMuleCoreStats.ST_DISK_SHARED_FILES_COMPLETE_BYTES, total_bytes);
 				}
 			}
 		});
 
-		JMuleCoreFactory.getSingleton().getConfigurationManager()
-				.addConfigurationListener(new ConfigurationAdapter() {
-					public void sharedDirectoriesChanged(List<File> sharedDirs) {
-						loadCompletedFiles();
-					}
-				});
+		JMuleCoreFactory.getSingleton().getConfigurationManager().addConfigurationListener(new ConfigurationAdapter() {
+			public void sharedDirectoriesChanged(List<File> sharedDirs) {
+				loadCompletedFiles();
+			}
+		});
 	}
 
 	/**
-	 * A set of actions that are applied on the given file This interface is
-	 * meant to be used in conjunction with traverseDir method
+	 * A set of actions that are applied on the given file This interface is meant
+	 * to be used in conjunction with traverseDir method
 	 * 
 	 * @see {@link #traverseDir(File, boolean, WorkOnFiles) traverseDir}
 	 * @author javajox
@@ -195,8 +179,8 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 
 		/**
 		 * Tells if we still need to traverse the directory This method is very
-		 * important, if we need to interrupt the "traverse process" without
-		 * side effects we MUST call this method
+		 * important, if we need to interrupt the "traverse process" without side
+		 * effects we MUST call this method
 		 */
 		public boolean stopTraverseDir();
 	}
@@ -207,13 +191,12 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 	 * @param dir
 	 *            the directory that we have to traverse
 	 * @param with_part_met_extension
-	 *            has a role of filter, if given, only files with part.met at
-	 *            the end of file name are permitted
+	 *            has a role of filter, if given, only files with part.met at the
+	 *            end of file name are permitted
 	 * @param work_on_files
 	 *            the actions that are applied on the found file
 	 */
-	private void traverseDir(File dir, boolean with_part_met_extension,
-			WorkOnFiles work_on_files) {
+	private void traverseDir(File dir, boolean with_part_met_extension, WorkOnFiles work_on_files) {
 		Queue<File> list_of_dirs = new LinkedList<File>();
 		File[] list_of_files;
 		File current_dir;
@@ -266,17 +249,15 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 				writeMetadata();
 			}
 		};
-		sharing_manager_timer.addTask(rescan_dirs_task,
-				ConfigurationManager.DIR_RESCAN_INTERVAL, true);
-		
-		sharing_manager_timer.addTask(store_metadata_task,
-				ConfigurationManager.WRITE_METADATA_INTERVAL, true);
+		sharing_manager_timer.addTask(rescan_dirs_task, ConfigurationManager.DIR_RESCAN_INTERVAL, true);
+
+		sharing_manager_timer.addTask(store_metadata_task, ConfigurationManager.WRITE_METADATA_INTERVAL, true);
 	}
-	
+
 	protected boolean iAmStoppable() {
 		return false;
 	}
-	
+
 	public void startSharingFilesToServer() {
 		server_sharing_task = new JMTimerTask() {
 			public void run() {
@@ -289,11 +270,11 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 					SharedFile shared_file = sharedFiles.get(fileHash);
 					if (shared_file instanceof PartialFile) {
 						PartialFile partial_file = (PartialFile) shared_file;
-						if (partial_file.getAvailablePartCount()==0)
+						if (partial_file.getAvailablePartCount() == 0)
 							continue;
 						try {
 							DownloadSession session = _download_manager.getDownload(partial_file.getFileHash());
-							if (!session.isStarted()) 
+							if (!session.isStarted())
 								continue;
 						} catch (DownloadManagerException e) {
 							e.printStackTrace();
@@ -303,10 +284,11 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 					files_to_share.add(shared_file);
 					server_shared_files.put(fileHash, shared_file);
 				}
-				if (files_to_share.size() == 0) return ;
-								
+				if (files_to_share.size() == 0)
+					return;
+
 				Server server = _server_manager.getConnectedServer();
-				_network_manager.offerFilesToServer(server.getClientID(),files_to_share);
+				_network_manager.offerFilesToServer(server.getClientID(), files_to_share);
 
 			}
 		};
@@ -314,7 +296,7 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 		new JMThread() {
 			public void run() {
 				server_sharing_task.run();
-			}			
+			}
 		}.start();
 	}
 
@@ -351,8 +333,9 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 						PartMet part_met = new PartMet(file);
 						part_met.load();
 						PartialFile partial_shared_file = new PartialFile(part_met);
-						//sharedFiles.put(partial_shared_file.getFileHash(),partial_shared_file);
-						//System.out.println(partial_shared_file + " : " + partial_shared_file.getAvailablePartCount());
+						// sharedFiles.put(partial_shared_file.getFileHash(),partial_shared_file);
+						// System.out.println(partial_shared_file + " : " +
+						// partial_shared_file.getAvailablePartCount());
 						addPartialFile(partial_shared_file);
 						JMuleCoreFactory.getSingleton().getDownloadManager().addDownload(partial_shared_file);
 					} catch (Throwable t) {
@@ -401,8 +384,7 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 
 			files_hash_set.clear();
 			for (FileHash fileHash : sharedFiles.keySet())
-				if (!DownloadManagerSingleton.getInstance().hasDownload(
-						fileHash))
+				if (!DownloadManagerSingleton.getInstance().hasDownload(fileHash))
 					files_hash_set.add(fileHash);
 
 			// load shared completed files
@@ -417,8 +399,7 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 			File incoming_dir = new File(ConfigurationManager.INCOMING_DIR);
 			List<File> shared_dirs = null;
 			try {
-				shared_dirs = ConfigurationManagerSingleton.getInstance()
-						.getSharedFolders();
+				shared_dirs = ConfigurationManagerSingleton.getInstance().getSharedFolders();
 			} catch (ConfigurationManagerException e1) {
 
 				e1.printStackTrace();
@@ -438,8 +419,7 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 					public void doWork(File file) {
 						file_name = file.getName();
 						file_size = file.length();
-						known_met_entity = known_file_list.get(file_name
-								+ file_size);
+						known_met_entity = known_file_list.get(file_name + file_size);
 						if (known_met_entity == null) {
 							files_needed_to_hash.add(new CompletedFile(file));
 						} else {
@@ -448,20 +428,14 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 								files_hash_set.remove(hash);
 							if (sharedFiles.get(hash) != null)
 								return; // file already in list
-							CompletedFile shared_completed_file = new CompletedFile(
-									file);
+							CompletedFile shared_completed_file = new CompletedFile(file);
 							try {
-								shared_completed_file
-										.setHashSet(known_met_entity
-												.getPartHashSet());
+								shared_completed_file.setHashSet(known_met_entity.getPartHashSet());
 							} catch (SharedFileException e) {
 								e.printStackTrace();
 							}
-							shared_completed_file.setTagList(known_met_entity
-									.getTagList());
-							sharedFiles.put(
-									shared_completed_file.getFileHash(),
-									shared_completed_file);
+							shared_completed_file.setTagList(known_met_entity.getTagList());
+							sharedFiles.put(shared_completed_file.getFileHash(), shared_completed_file);
 						}
 						known_met_entity = null;
 					}
@@ -485,8 +459,7 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 					return;
 				try {
 					current_hashing_file = shared_completed_file;
-					FileChannel file_channel = new FileInputStream(
-							shared_completed_file.getFile()).getChannel();
+					FileChannel file_channel = new FileInputStream(shared_completed_file.getFile()).getChannel();
 					file_hashing = new FileHashing(file_channel);
 					file_hashing.start();
 					file_hashing.join();
@@ -494,13 +467,10 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 					files_needed_to_hash.remove(shared_completed_file);
 					if (!file_hashing.isDone())
 						continue;
-					if (sharedFiles.containsKey(file_hashing.getFileHashSet()
-							.getFileHash()))
+					if (sharedFiles.containsKey(file_hashing.getFileHashSet().getFileHash()))
 						continue;
-					shared_completed_file.setHashSet(file_hashing
-							.getFileHashSet());
-					sharedFiles.put(shared_completed_file.getFileHash(),
-							shared_completed_file);
+					shared_completed_file.setHashSet(file_hashing.getFileHashSet());
+					sharedFiles.put(shared_completed_file.getFileHash(), shared_completed_file);
 
 					notifyCompletedFileAdded(shared_completed_file);
 				} catch (Throwable t) {
@@ -614,20 +584,17 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 			return null;
 	}
 
-	public void makeCompletedFile(FileHash fileHash)
-			throws SharingManagerException {
+	public void makeCompletedFile(FileHash fileHash) throws SharingManagerException {
 		File incoming_dir = new File(ConfigurationManager.INCOMING_DIR);
 
 		PartialFile shared_partial_file = getPartialFle(fileHash);
 		if (shared_partial_file == null)
-			throw new SharingManagerException("The file " + fileHash
-					+ "doesn't exists");
+			throw new SharingManagerException("The file " + fileHash + "doesn't exists");
 		shared_partial_file.closeFile();
 		shared_partial_file.deletePartialFile();
-		File completed_file = new File(incoming_dir.getAbsoluteFile()
-				+ File.separator + shared_partial_file.getSharingName());
-		UploadManager upload_manager = JMuleCoreFactory.getSingleton()
-				.getUploadManager();
+		File completed_file = new File(
+				incoming_dir.getAbsoluteFile() + File.separator + shared_partial_file.getSharingName());
+		UploadManager upload_manager = JMuleCoreFactory.getSingleton().getUploadManager();
 		try {
 
 			if (upload_manager.hasUpload(fileHash)) { // JMule is now uploading
@@ -639,10 +606,8 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 					// FileUtils.moveFile(shared_partial_file.getFile(),
 					// completed_file);
 					shared_partial_file.getFile().renameTo(completed_file);
-					CompletedFile shared_completed_file = new CompletedFile(
-							completed_file);
-					shared_completed_file.setHashSet(shared_partial_file
-							.getHashSet());
+					CompletedFile shared_completed_file = new CompletedFile(completed_file);
+					shared_completed_file.setHashSet(shared_partial_file.getHashSet());
 					sharedFiles.put(fileHash, shared_completed_file);
 				}
 			} else {
@@ -650,10 +615,8 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 				// FileUtils.moveFile(shared_partial_file.getFile(),
 				// completed_file);
 				shared_partial_file.getFile().renameTo(completed_file);
-				CompletedFile shared_completed_file = new CompletedFile(
-						completed_file);
-				shared_completed_file.setHashSet(shared_partial_file
-						.getHashSet());
+				CompletedFile shared_completed_file = new CompletedFile(completed_file);
+				shared_completed_file.setHashSet(shared_partial_file.getHashSet());
 				sharedFiles.put(fileHash, shared_completed_file);
 			}
 			writeMetadata();
@@ -742,25 +705,32 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 		writeMetadata();
 
 	}
-	
+
 	public Collection<Peer> getFileSources(Peer sender, FileHash fileHash) {
 		Collection<Peer> result = new ArrayList<Peer>();
-		if (!hasFile(fileHash)) return result;
+		if (!hasFile(fileHash))
+			return result;
 		List<Peer> peer_list = new LinkedList<Peer>();
 		if (_download_manager.hasDownload(fileHash)) {
 			DownloadSession session;
 			try {
 				session = _download_manager.getDownload(fileHash);
-				if (!session.isStarted()) return result; //also don't get uploading peers from upload session (1)
+				if (!session.isStarted())
+					return result; // also don't get uploading peers from upload session (1)
 				PartialFile partialFile = getPartialFle(fileHash);
-				if (partialFile.getAvailablePartCount()==0) return result;  // (1)
+				if (partialFile.getAvailablePartCount() == 0)
+					return result; // (1)
 				List<Peer> download_peer_list = session.getPeers();
-				for(Peer source_peer : download_peer_list) {
-					if (peer_list.size() > ConfigurationManager.MAX_PEX_RESPONSE ) break;
-					if (source_peer.equals(sender)) continue;
-					if (!source_peer.isHighID()) continue;
+				for (Peer source_peer : download_peer_list) {
+					if (peer_list.size() > ConfigurationManager.MAX_PEX_RESPONSE)
+						break;
+					if (source_peer.equals(sender))
+						continue;
+					if (!source_peer.isHighID())
+						continue;
 					JMuleBitSet availability = session.getPartAvailability(source_peer);
-					if (availability == null) continue;
+					if (availability == null)
+						continue;
 					if (availability.hasAtLeastOne(true))
 						peer_list.add(source_peer);
 				}
@@ -768,23 +738,25 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 				e.printStackTrace();
 			}
 		}
-		if (!(peer_list.size() > ConfigurationManager.MAX_PEX_RESPONSE ))
+		if (!(peer_list.size() > ConfigurationManager.MAX_PEX_RESPONSE))
 			if (_upload_manager.hasUpload(fileHash)) {
 				try {
 					UploadSession session = _upload_manager.getUpload(fileHash);
 					List<Peer> upload_peer_list = session.getPeers();
-					for(Peer upeer : upload_peer_list) {
-						if (peer_list.size() > ConfigurationManager.MAX_PEX_RESPONSE ) break;
-						if (!upeer.isHighID()) continue;
+					for (Peer upeer : upload_peer_list) {
+						if (peer_list.size() > ConfigurationManager.MAX_PEX_RESPONSE)
+							break;
+						if (!upeer.isHighID())
+							continue;
 						peer_list.add(upeer);
 					}
 				} catch (UploadManagerException e) {
-					e.printStackTrace();			
+					e.printStackTrace();
 				}
 			}
 		return result;
 	}
-	
+
 	public void receivedSourcesRequestFromPeer(Peer peer, FileHash fileHash) {
 		Collection<Peer> peer_list = getFileSources(peer, fileHash);
 		_network_manager.sendSourcesResponse(peer.getIP(), peer.getPort(), fileHash, peer_list);
@@ -826,7 +798,7 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 			return;
 		sharedFiles.remove(fileHash);
 		shared_file.closeFile();
-		if (shared_file instanceof CompletedFile) 
+		if (shared_file instanceof CompletedFile)
 			return;
 		shared_file.delete();
 	}

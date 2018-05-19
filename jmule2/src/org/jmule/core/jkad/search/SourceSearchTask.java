@@ -36,99 +36,94 @@ import org.jmule.core.jkad.packet.KadPacket;
 import org.jmule.core.jkad.packet.PacketFactory;
 import org.jmule.core.jkad.routingtable.KadContact;
 
-
 /**
  * Created on Jan 16, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.20 $
- * Last changed by $Author: binary255 $ on $Date: 2010/10/23 05:51:49 $
+ * @version $Revision: 1.20 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/10/23 05:51:49 $
  */
 public class SourceSearchTask extends SearchTask {
 	private List<KadContact> used_contacts = new ArrayList<KadContact>();
 	private LookupTask lookup_task = null;
 	private long fileSize = 0;
-	public SourceSearchTask(Int128 searchID,long fileSize) {
+
+	public SourceSearchTask(Int128 searchID, long fileSize) {
 		super(searchID);
 		this.fileSize = fileSize;
 	}
 
 	public void start() throws JKadException {
 		isStarted = true;
-		
+
 		lookup_task = new LookupTask(RequestType.FIND_NODE, searchID, JKadConstants.LOOKUP_SEARCH_SOURCE_TIMEOUT) {
 			public void lookupTimeout() {
 			}
 
 			public void processToleranceContacts(ContactAddress sender, List<KadContact> results) {
-				for(KadContact contact : results) {
+				for (KadContact contact : results) {
 					used_contacts.add(contact);
 					KadPacket responsePacket = null;
 					if (contact.supportKad2())
-						responsePacket = PacketFactory.getSearchSourceReq2Packet(searchID,(short)0,fileSize);
+						responsePacket = PacketFactory.getSearchSourceReq2Packet(searchID, (short) 0, fileSize);
 					else
-						responsePacket = PacketFactory.getSearch1ReqPacket(searchID,true);
-					_network_manager.sendKadPacket(responsePacket, contact.getContactAddress().getAddress(), contact.getUDPPort());
-					
-					/*KadPacket packet = null;
-					if (contact.supportKad2())
-						try {
-							packet = PacketFactory.getHelloReq2Packet(TagList.EMPTY_TAG_LIST);
-						} catch (JMException e) {
-							e.printStackTrace();
-						}
-						else
-						try {
-							packet = PacketFactory.getHello1ReqPacket();
-						} catch (JMException e) {
-							e.printStackTrace();
-						}
-					_network_manager.sendKadPacket(packet, contact.getIPAddress(), contact.getUDPPort());
-					PacketListener listener = null;
-					if (contact.supportKad2())
-						listener = new PacketListener(KADEMLIA2_HELLO_RES, contact.getContactAddress().getAsInetSocketAddress()) {
-							public void packetReceived(KadPacket packet) {
-								KadPacket responsePacket = PacketFactory.getSearchSourceReq2Packet(searchID,(short)0,fileSize);
-								_network_manager.sendKadPacket(responsePacket, new IPAddress(packet.getAddress()), packet.getAddress().getPort());
-								removePacketListener(this);
-							}
-						};
-						else
-						listener = new PacketListener(KADEMLIA_HELLO_RES, contact.getContactAddress().getAsInetSocketAddress()) {
-							public void packetReceived(KadPacket packet) {
-								KadPacket responsePacket = PacketFactory.getSearch1ReqPacket(searchID,true);
-								_network_manager.sendKadPacket(responsePacket, new IPAddress(packet.getAddress()), packet.getAddress().getPort());
-								removePacketListener(this);
-							}
-						};
-					registerPacketListener(listener);
-					_jkad_manager.addPacketListener(listener);*/
+						responsePacket = PacketFactory.getSearch1ReqPacket(searchID, true);
+					_network_manager.sendKadPacket(responsePacket, contact.getContactAddress().getAddress(),
+							contact.getUDPPort());
+
+					/*
+					 * KadPacket packet = null; if (contact.supportKad2()) try { packet =
+					 * PacketFactory.getHelloReq2Packet(TagList.EMPTY_TAG_LIST); } catch
+					 * (JMException e) { e.printStackTrace(); } else try { packet =
+					 * PacketFactory.getHello1ReqPacket(); } catch (JMException e) {
+					 * e.printStackTrace(); } _network_manager.sendKadPacket(packet,
+					 * contact.getIPAddress(), contact.getUDPPort()); PacketListener listener =
+					 * null; if (contact.supportKad2()) listener = new
+					 * PacketListener(KADEMLIA2_HELLO_RES,
+					 * contact.getContactAddress().getAsInetSocketAddress()) { public void
+					 * packetReceived(KadPacket packet) { KadPacket responsePacket =
+					 * PacketFactory.getSearchSourceReq2Packet(searchID,(short)0,fileSize);
+					 * _network_manager.sendKadPacket(responsePacket, new
+					 * IPAddress(packet.getAddress()), packet.getAddress().getPort());
+					 * removePacketListener(this); } }; else listener = new
+					 * PacketListener(KADEMLIA_HELLO_RES,
+					 * contact.getContactAddress().getAsInetSocketAddress()) { public void
+					 * packetReceived(KadPacket packet) { KadPacket responsePacket =
+					 * PacketFactory.getSearch1ReqPacket(searchID,true);
+					 * _network_manager.sendKadPacket(responsePacket, new
+					 * IPAddress(packet.getAddress()), packet.getAddress().getPort());
+					 * removePacketListener(this); } }; registerPacketListener(listener);
+					 * _jkad_manager.addPacketListener(listener);
+					 */
 				}
 			}
-			
+
 			public void lookupTerminated() {
 				stop();
 			}
-			
+
 		};
-	//	lookup_task.setTimeOut(JKadConstants.SEARCH_SOURCES_TIMEOUT);
+		// lookup_task.setTimeOut(JKadConstants.SEARCH_SOURCES_TIMEOUT);
 		Lookup.getSingleton().addLookupTask(lookup_task);
-		if (listener!=null)
+		if (listener != null)
 			listener.searchStarted();
 	}
 
 	public void stop() {
-		if (!isStarted) return;
+		if (!isStarted)
+			return;
 		isStarted = false;
-		
-//		((InternalJKadManager)JKadManagerSingleton.getInstance()).removePacketListener(getPacketListenerList());
-		if (listener!=null)
+
+		// ((InternalJKadManager)JKadManagerSingleton.getInstance()).removePacketListener(getPacketListenerList());
+		if (listener != null)
 			listener.searchFinished();
-		//Lookup.getSingleton().removeLookupTask(searchID);
+		// Lookup.getSingleton().removeLookupTask(searchID);
 		Search.getSingleton().cancelSearch(searchID);
 	}
 
 	public void stopSearchRequest() {
-		if (!isStarted) return;
+		if (!isStarted)
+			return;
 		Lookup.getSingleton().removeLookupTask(searchID);
 	}
 }

@@ -28,32 +28,30 @@ import org.jmule.ui.swing.UISwingImageRepository;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:43:07 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:43:07 $$
  */
 public class FinishPanel extends javax.swing.JPanel {
 
-    public FinishPanel() {
-        initComponents();
-    }
+	public FinishPanel() {
+		initComponents();
+	}
 
-    private void initComponents() {
+	private void initComponents() {
 
-        wizard_finish_logo = new javax.swing.JLabel();
+		wizard_finish_logo = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+		setBackground(new java.awt.Color(255, 255, 255));
 
-        wizard_finish_logo.setFont(new java.awt.Font("Dialog", 0, 12));
-        wizard_finish_logo.setIcon( UISwingImageRepository.getIcon("wizard/wizard_finish_logo.png") );
-        wizard_finish_logo.setText("<html><br><br><br>Congratulations ! You have successfully configured " 
-        		                  + JMConstants.JMULE_NAME 
-        		                  + " ver. " 
-        		                  + JMConstants.CURRENT_JMULE_VERSION 
-        		                  + "<br><br><center>Click <b>Finish</b> to perform the ultimately steps</center></html>");
-        wizard_finish_logo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        wizard_finish_logo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        add(wizard_finish_logo);
-    }
+		wizard_finish_logo.setFont(new java.awt.Font("Dialog", 0, 12));
+		wizard_finish_logo.setIcon(UISwingImageRepository.getIcon("wizard/wizard_finish_logo.png"));
+		wizard_finish_logo.setText("<html><br><br><br>Congratulations ! You have successfully configured "
+				+ JMConstants.JMULE_NAME + " ver. " + JMConstants.CURRENT_JMULE_VERSION
+				+ "<br><br><center>Click <b>Finish</b> to perform the ultimately steps</center></html>");
+		wizard_finish_logo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		wizard_finish_logo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+		add(wizard_finish_logo);
+	}
 
-    private javax.swing.JLabel wizard_finish_logo;
+	private javax.swing.JLabel wizard_finish_logo;
 }

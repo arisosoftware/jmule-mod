@@ -24,14 +24,17 @@ package org.jmule.core.jkad;
 
 /**
  * Created on Jul 9, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/07/11 17:25:18 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/07/11 17:25:18 $
  */
 public interface JKadListener {
 
 	public void JKadIsConnecting();
+
 	public void JKadIsConnected();
+
 	public void JKadIsDisconnected();
-	
+
 }

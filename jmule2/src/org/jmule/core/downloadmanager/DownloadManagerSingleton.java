@@ -22,25 +22,25 @@
  */
 package org.jmule.core.downloadmanager;
 
-
 /**
  * Created on 07-08-2008
+ * 
  * @author javajox
- * @version $$Revision: 1.3 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2010/09/09 06:23:29 $$
+ * @version $$Revision: 1.3 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2010/09/09 06:23:29 $$
  */
 public class DownloadManagerSingleton {
 
 	private DownloadManagerSingleton() {
-		
+
 	}
-	
+
 	private static class DownloadManagerSingletonHolder {
 		private static final DownloadManager INSTANCE = new DownloadManagerImpl();
 	}
 
-	public static DownloadManager getInstance(){
+	public static DownloadManager getInstance() {
 		return DownloadManagerSingletonHolder.INSTANCE;
 	}
-	
+
 }

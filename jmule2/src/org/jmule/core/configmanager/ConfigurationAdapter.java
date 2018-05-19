@@ -29,74 +29,75 @@ import org.jmule.core.jkad.ClientID;
 
 /**
  * Created on Aug 22, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.7 $
- * Last changed by $Author: binary255 $ on $Date: 2010/01/28 12:47:10 $
+ * @version $Revision: 1.7 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/01/28 12:47:10 $
  */
 public abstract class ConfigurationAdapter implements ConfigurationListener {
 
 	public void TCPPortChanged(int tcp) {
-		
+
 	}
 
 	public void UDPPortChanged(int udp) {
-		
+
 	}
 
 	public void downloadBandwidthChanged(long downloadBandwidth) {
-		
+
 	}
 
 	public void downloadLimitChanged(long downloadLimit) {
-		
+
 	}
 
 	public void isUDPEnabledChanged(boolean enabled) {
-		
+
 	}
 
 	public void nickNameChanged(String nickName) {
-		
+
 	}
 
 	public void sharedDirectoriesChanged(List<File> sharedDirs) {
-		
+
 	}
 
 	public void workingDirChanged(File newWorkingDir) {
-		
+
 	}
-	
+
 	public void uploadBandwidthChanged(long uploadBandwidth) {
-		
+
 	}
 
 	public void uploadLimitChanged(long uploadLimit) {
-		
+
 	}
-	
+
 	public void jkadStatusChanged(boolean newStatus) {
-		
+
 	}
 
 	public void updateServerListAtConnectChanged(boolean newStatus) {
-		
+
 	}
-	
+
 	public void jkadIDChanged(ClientID newID) {
-		
+
 	}
-	
+
 	public void nicNameChanged(String newNicName) {
-		
+
 	}
-	
+
 	public void nicIPChanged(String newNicIP) {
-		
+
 	}
-	
+
 	public void securityIdentificationStatusChanged(boolean newStatus) {
-		
+
 	}
-	
+
 }

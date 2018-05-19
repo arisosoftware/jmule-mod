@@ -24,37 +24,40 @@ package org.jmule.core;
 
 /**
  * Created on Aug 13, 2009
+ * 
  * @author binary256
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/08/13 18:24:07 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/08/13 18:24:07 $
  */
 public abstract class JMuleAbstractManager {
 
 	private boolean is_started = false;
 	private boolean is_initialized = false;
 	private boolean is_stopped = true;
-	
+
 	private JMuleCore _core = JMuleCoreFactory.getSingleton();
-	
+
 	public JMuleAbstractManager() {
 	}
-	
+
 	protected abstract boolean iAmStoppable();
-	
+
 	protected void initialize() throws JMuleManagerException {
-		if (!iAmStoppable()) 
+		if (!iAmStoppable())
 			if (!_core.isStarting())
-				throw new JMuleManagerException("The manager can't be initialized because the core is not in starting phase");
+				throw new JMuleManagerException(
+						"The manager can't be initialized because the core is not in starting phase");
 		if (is_initialized)
 			throw new JMuleManagerException("The manager can't be initialized twice");
 		is_initialized = true;
 	}
-	
+
 	protected void start() throws JMuleManagerException {
 		if (!iAmStoppable())
 			if (!_core.isStarting())
-				throw new JMuleManagerException("The manager can't be started because the core is not in starting phase");
+				throw new JMuleManagerException(
+						"The manager can't be started because the core is not in starting phase");
 		if (!is_initialized)
 			throw new JMuleManagerException("The manager can't be started without initialization");
 		if (is_started)
@@ -62,11 +65,12 @@ public abstract class JMuleAbstractManager {
 		is_started = true;
 		is_stopped = false;
 	}
-	
+
 	protected void shutdown() throws JMuleManagerException {
 		if (!iAmStoppable())
 			if (!_core.isSopping())
-				throw new JMuleManagerException("The manager can't be stopped because the core is not in stopping phase");
+				throw new JMuleManagerException(
+						"The manager can't be stopped because the core is not in stopping phase");
 		if (!is_initialized)
 			throw new JMuleManagerException("The manager can't be stopped without initialization");
 		if (!is_started)
@@ -77,5 +81,5 @@ public abstract class JMuleAbstractManager {
 		is_started = false;
 		is_initialized = false;
 	}
-	
+
 }

@@ -20,6 +20,8 @@ import java.lang.annotation.*;
 @Target(ElementType.METHOD)
 public @interface ajcDeclareAnnotation {
 	String pattern();
+
 	String annotation();
+
 	String kind();
 }

@@ -33,56 +33,58 @@ import org.jmule.core.utils.Convert;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.6 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/07/31 12:56:46 $$
+ * @version $$Revision: 1.6 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/07/31 12:56:46 $$
  */
 public class KnownMetEntity {
 	private int date;
 	private PartHashSet partHashSet;
 	private TagList tagList = new TagList();
-	
+
 	public int getDate() {
 		return date;
 	}
+
 	public void setDate(int date) {
 		this.date = date;
 	}
-	
+
 	public FileHash getFileHash() {
 		return partHashSet.getFileHash();
 	}
-	
+
 	public PartHashSet getPartHashSet() {
 		return partHashSet;
 	}
+
 	public void setPartHashSet(PartHashSet partFileHash) {
 		this.partHashSet = partFileHash;
 	}
+
 	public TagList getTagList() {
 		return tagList;
 	}
+
 	public void setTagList(TagList tagList) {
 		this.tagList = tagList;
 	}
 
 	public String toString() {
 		try {
-			String result =  "File Name : "+tagList.getTag(FT_FILENAME)+
-			" Size : "+tagList.getTag(FT_FILESIZE)
-			+" Hash : "+this.partHashSet.getFileHash()+" Part count : "+
-			+this.partHashSet.size()+ " Hash sets :\n";
-			
-			for(int i = 0;i<this.partHashSet.size();i++) {
+			String result = "File Name : " + tagList.getTag(FT_FILENAME) + " Size : " + tagList.getTag(FT_FILESIZE)
+					+ " Hash : " + this.partHashSet.getFileHash() + " Part count : " + +this.partHashSet.size()
+					+ " Hash sets :\n";
+
+			for (int i = 0; i < this.partHashSet.size(); i++) {
 				byte[] hash = this.partHashSet.get(i);
-					result+=Convert.byteToHexString(hash)+"\n";
+				result += Convert.byteToHexString(hash) + "\n";
 			}
-				
+
 			return result;
 		} catch (Throwable e) {
 			return "";
 		}
-		
-		
+
 	}
-	
+
 }

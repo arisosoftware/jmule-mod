@@ -37,101 +37,90 @@ import javax.swing.table.TableCellRenderer;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:45:19 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:45:19 $$
  */
 public class TableColumnChooserDialog extends JDialog {
-    
-	  public TableColumnChooserDialog(JFrame frame) {
-		  super(frame, true);
-		  init();
-	  }
-	  
-	  private void init() {
-		  
-		  JScrollPane scrollPane = new JScrollPane();
-		  BorderLayout borderLayout = new BorderLayout();
-		  TableColumnChooser table = new TableColumnChooser();
-		  
-		  this.setLayout(borderLayout);
-		  scrollPane.setViewportView(table);
-		  this.add(scrollPane, BorderLayout.CENTER);
-	  }
-	  
-	  class TableColumnChooser extends JTable {
-		  
-		  public TableColumnChooser() {
-			  this.setModel(new TableColumnChooserModel());
-			  init();
-		  }
-		  
-		  private void init() {
-			  this.getColumnModel().
-			         getColumn(TableColumnChooserModel.COLUMN_NAME).
-			           setCellRenderer(new TableCellRenderer() {
-			        	  public Component getTableCellRendererComponent(JTable table,
-			        			                                         Object stringValue,
-			        			                                         boolean isSelected,
-			        			                                         boolean hasFocus,
-			        			                                         int row,
-			        			                                         int col) {
-			        		  JCheckBox column_name = new JCheckBox("test test");
-			        		  return column_name;
-			        	  }
-			           });
-			  this.getColumnModel().
-		            getColumn(TableColumnChooserModel.COLUMN_NAME).
-		              setCellEditor(new DefaultCellEditor(new JCheckBox("qqq")) {
-		            	  
-                      });
-		  }
-		  
-	  }
-	  
-	  class TableColumnChooserModel extends AbstractTableModel {
-		  
-		    public final static int COLUMN_NAME = 0;
-		    public final static int COLUMN_DESCRIPTION = 1;
-		    
-		    //TODO get the strings from Localizer
-		    private final String[] column_names = {
-		    		               "Column name",
-		    		               "Description"
-		                           };
-		    
-		    public int getColumnCount() {
-		    	return column_names.length;
-		    }
-		    
-		    public int getRowCount() {
-		    	return 10;
-		    }
-		    
-		    public Object getValueAt(int row, int col) {
-		    	return 2;
-		    }
-		    
-		    public String getColumnName(int col) {
-		    	return column_names[col];
-		    }
-		    
-		    public boolean isCellEditable(int row, int col) {
-		    	return false;
-		    }
-	  }
-	  
-	   //For test only
-	   public static void main(String[] args) {
-		   
-		   JFrame jf = new JFrame();
-		   jf.setSize(400,300);
-		   
-		   jf.setVisible(true);
-		   TableColumnChooserDialog jmd = new TableColumnChooserDialog( jf );
-		   jmd.setSize(200,300);
-		   jmd.setVisible(true);
-		   
-	   }
+
+	public TableColumnChooserDialog(JFrame frame) {
+		super(frame, true);
+		init();
+	}
+
+	private void init() {
+
+		JScrollPane scrollPane = new JScrollPane();
+		BorderLayout borderLayout = new BorderLayout();
+		TableColumnChooser table = new TableColumnChooser();
+
+		this.setLayout(borderLayout);
+		scrollPane.setViewportView(table);
+		this.add(scrollPane, BorderLayout.CENTER);
+	}
+
+	class TableColumnChooser extends JTable {
+
+		public TableColumnChooser() {
+			this.setModel(new TableColumnChooserModel());
+			init();
+		}
+
+		private void init() {
+			this.getColumnModel().getColumn(TableColumnChooserModel.COLUMN_NAME)
+					.setCellRenderer(new TableCellRenderer() {
+						public Component getTableCellRendererComponent(JTable table, Object stringValue,
+								boolean isSelected, boolean hasFocus, int row, int col) {
+							JCheckBox column_name = new JCheckBox("test test");
+							return column_name;
+						}
+					});
+			this.getColumnModel().getColumn(TableColumnChooserModel.COLUMN_NAME)
+					.setCellEditor(new DefaultCellEditor(new JCheckBox("qqq")) {
+
+					});
+		}
+
+	}
+
+	class TableColumnChooserModel extends AbstractTableModel {
+
+		public final static int COLUMN_NAME = 0;
+		public final static int COLUMN_DESCRIPTION = 1;
+
+		// TODO get the strings from Localizer
+		private final String[] column_names = { "Column name", "Description" };
+
+		public int getColumnCount() {
+			return column_names.length;
+		}
+
+		public int getRowCount() {
+			return 10;
+		}
+
+		public Object getValueAt(int row, int col) {
+			return 2;
+		}
+
+		public String getColumnName(int col) {
+			return column_names[col];
+		}
+
+		public boolean isCellEditable(int row, int col) {
+			return false;
+		}
+	}
+
+	// For test only
+	public static void main(String[] args) {
+
+		JFrame jf = new JFrame();
+		jf.setSize(400, 300);
+
+		jf.setVisible(true);
+		TableColumnChooserDialog jmd = new TableColumnChooserDialog(jf);
+		jmd.setSize(200, 300);
+		jmd.setVisible(true);
+
+	}
 }
-
-

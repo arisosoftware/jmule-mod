@@ -49,355 +49,284 @@ import javax.swing.text.SimpleAttributeSet;
 
 import org.jmule.core.utils.AddressUtils;
 
-public class IPTextField extends JPanel
-{
-    private JTextField part1;
-    private JTextField part2;
-    private JTextField part3;
-    private JTextField part4;
+public class IPTextField extends JPanel {
+	private JTextField part1;
+	private JTextField part2;
+	private JTextField part3;
+	private JTextField part4;
 
-    private TextFieldFocusHandler textFieldFocusHandler;
+	private TextFieldFocusHandler textFieldFocusHandler;
 
-    public IPTextField()
-    {
-        super( new GridBagLayout( ) );
-        setBorder( (Border)UIManager.get( "TextField.border" ) );
+	public IPTextField() {
+		super(new GridBagLayout());
+		setBorder((Border) UIManager.get("TextField.border"));
 
-        textFieldFocusHandler = new TextFieldFocusHandler();
+		textFieldFocusHandler = new TextFieldFocusHandler();
 
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.weightx = 1;
-        constraints.weighty = 1;
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.insets = new Insets( 0, 0, 0, 0 );
-        constraints.anchor = GridBagConstraints.WEST;
-        part1 = createTextF( null );
-        add( part1, constraints );
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		constraints.weightx = 1;
+		constraints.weighty = 1;
+		constraints.fill = GridBagConstraints.BOTH;
+		constraints.insets = new Insets(0, 0, 0, 0);
+		constraints.anchor = GridBagConstraints.WEST;
+		part1 = createTextF(null);
+		add(part1, constraints);
 
-        constraints.gridx = 1;
-        constraints.gridy = 0;
-        add( buildLabel(), constraints );
+		constraints.gridx = 1;
+		constraints.gridy = 0;
+		add(buildLabel(), constraints);
 
-        constraints.gridx = 2;
-        constraints.gridy = 0;
-        part2 = createTextF( part1 );
-        add( part2, constraints );
+		constraints.gridx = 2;
+		constraints.gridy = 0;
+		part2 = createTextF(part1);
+		add(part2, constraints);
 
-        constraints.gridx = 3;
-        constraints.gridy = 0;
-        add( buildLabel(), constraints );
+		constraints.gridx = 3;
+		constraints.gridy = 0;
+		add(buildLabel(), constraints);
 
-        constraints.gridx = 4;
-        constraints.gridy = 0;
-        part3 = createTextF( part2 );
-        add( part3, constraints );
+		constraints.gridx = 4;
+		constraints.gridy = 0;
+		part3 = createTextF(part2);
+		add(part3, constraints);
 
-        constraints.gridx = 5;
-        constraints.gridy = 0;
-        add( buildLabel(), constraints );
+		constraints.gridx = 5;
+		constraints.gridy = 0;
+		add(buildLabel(), constraints);
 
-        constraints.gridx = 6;
-        constraints.gridy = 0;
-        constraints.insets = new Insets( 0, 0, 0, 0 );
-        part4 = createTextF( part3 );
-        add( part4, constraints );
+		constraints.gridx = 6;
+		constraints.gridy = 0;
+		constraints.insets = new Insets(0, 0, 0, 0);
+		part4 = createTextF(part3);
+		add(part4, constraints);
 
-        setBackground( part1.getBackground() );
-    }
+		setBackground(part1.getBackground());
+	}
 
-    public void setEnabled( boolean state )
-    {
-        super.setEnabled( state );
-        part1.setEnabled( state );
-        part2.setEnabled( state );
-        part3.setEnabled( state );
-        part4.setEnabled( state );
-    }
+	public void setEnabled(boolean state) {
+		super.setEnabled(state);
+		part1.setEnabled(state);
+		part2.setEnabled(state);
+		part3.setEnabled(state);
+		part4.setEnabled(state);
+	}
 
-    public boolean isInputValid()
-    {
-        if ( !isFieldValid( part1 ) )
-        {
-            //invalidTF = part1;
-            return false;
-        }
-        if ( !isFieldValid( part2 ) )
-        {
-            //invalidTF = part2;
-            return false;
-        }
-        if ( !isFieldValid( part3 ) )
-        {
-            //invalidTF = part3;
-            return false;
-        }
-        if ( !isFieldValid( part4 ) )
-        {
-            //invalidTF = part4;
-            return false;
-        }
-        return true;
-    }
-    
-    public boolean isFieldEmpty()
-    {
-        if ( part1.getText().trim().length() == 0 &&
-             part2.getText().trim().length() == 0 &&
-             part3.getText().trim().length() == 0 &&
-             part4.getText().trim().length() == 0 )
-        {
-            return true;
-        }
-        return false;
-    }
+	public boolean isInputValid() {
+		if (!isFieldValid(part1)) {
+			// invalidTF = part1;
+			return false;
+		}
+		if (!isFieldValid(part2)) {
+			// invalidTF = part2;
+			return false;
+		}
+		if (!isFieldValid(part3)) {
+			// invalidTF = part3;
+			return false;
+		}
+		if (!isFieldValid(part4)) {
+			// invalidTF = part4;
+			return false;
+		}
+		return true;
+	}
 
-    private boolean isFieldValid( JTextField textField )
-    {
-        String str = textField.getText();
-        if ( str.length() == 0 )
-        {
-            return false;
-        }
-        try
-        {
-            int result = Integer.parseInt( str );
-            if ( result > 255 )
-            {
-                textField.setText( "" );
-                return false;
-            }
-            return true;
-        }
-        catch ( NumberFormatException exp )
-        {
-            textField.setText( "" );
-            return false;
-        }
-    }
+	public boolean isFieldEmpty() {
+		if (part1.getText().trim().length() == 0 && part2.getText().trim().length() == 0
+				&& part3.getText().trim().length() == 0 && part4.getText().trim().length() == 0) {
+			return true;
+		}
+		return false;
+	}
 
-    public void setIPString( String ipString )
-    {
-        Document doc = part1.getDocument();
-        try
-        {
-            doc.remove( 0, doc.getLength() );
-            doc.insertString( 0, ipString, new SimpleAttributeSet() );
-        }
-        catch ( BadLocationException exp )
-        {
-        }
-    }
+	private boolean isFieldValid(JTextField textField) {
+		String str = textField.getText();
+		if (str.length() == 0) {
+			return false;
+		}
+		try {
+			int result = Integer.parseInt(str);
+			if (result > 255) {
+				textField.setText("");
+				return false;
+			}
+			return true;
+		} catch (NumberFormatException exp) {
+			textField.setText("");
+			return false;
+		}
+	}
 
-    public String getIPString()
-    {
-        byte[] ip = getIP();
-        return AddressUtils.ip2string( ip );
-    }
+	public void setIPString(String ipString) {
+		Document doc = part1.getDocument();
+		try {
+			doc.remove(0, doc.getLength());
+			doc.insertString(0, ipString, new SimpleAttributeSet());
+		} catch (BadLocationException exp) {
+		}
+	}
 
-    public byte[] getIP()
-    {
-        String p1 = part1.getText();
-        if ( p1.length() == 0 )
-        {
-            p1 = "0";
-        }
-        String p2 = part2.getText();
-        if ( p2.length() == 0 )
-        {
-            p2 = "0";
-        }
-        String p3 = part3.getText();
-        if ( p3.length() == 0 )
-        {
-            p3 = "0";
-        }
-        String p4 = part4.getText();
-        if ( p4.length() == 0 )
-        {
-            p4 = "0";
-        }
+	public String getIPString() {
+		byte[] ip = getIP();
+		return AddressUtils.ip2string(ip);
+	}
 
-        try
-        {
-            byte[] ip = new byte[4];
-            ip[0] = (byte)Integer.parseInt( p1 );
-            ip[1] = (byte)Integer.parseInt( p2 );
-            ip[2] = (byte)Integer.parseInt( p3 );
-            ip[3] = (byte)Integer.parseInt( p4 );
-            return ip;
-        }
-        catch ( NumberFormatException exp )
-        {
-            return null;
-        }
-    }
+	public byte[] getIP() {
+		String p1 = part1.getText();
+		if (p1.length() == 0) {
+			p1 = "0";
+		}
+		String p2 = part2.getText();
+		if (p2.length() == 0) {
+			p2 = "0";
+		}
+		String p3 = part3.getText();
+		if (p3.length() == 0) {
+			p3 = "0";
+		}
+		String p4 = part4.getText();
+		if (p4.length() == 0) {
+			p4 = "0";
+		}
 
-    private JTextField createTextF( JTextField prevTextField )
-    {
-        IPDocument doc = new IPDocument();
-        JTextField field = new JTextField( doc, null, 3 );
-        field.addFocusListener( textFieldFocusHandler );
-        field.setBorder( null );
-        field.setHorizontalAlignment( JTextField.CENTER );
+		try {
+			byte[] ip = new byte[4];
+			ip[0] = (byte) Integer.parseInt(p1);
+			ip[1] = (byte) Integer.parseInt(p2);
+			ip[2] = (byte) Integer.parseInt(p3);
+			ip[3] = (byte) Integer.parseInt(p4);
+			return ip;
+		} catch (NumberFormatException exp) {
+			return null;
+		}
+	}
 
-        if ( prevTextField != null )
-        {
-            ((IPDocument)prevTextField.getDocument()).setNextTextField( field );
-        }
-        return field;
-    }
+	private JTextField createTextF(JTextField prevTextField) {
+		IPDocument doc = new IPDocument();
+		JTextField field = new JTextField(doc, null, 3);
+		field.addFocusListener(textFieldFocusHandler);
+		field.setBorder(null);
+		field.setHorizontalAlignment(JTextField.CENTER);
 
-    private JLabel buildLabel()
-    {
-        JLabel label = new JLabel( "." );
-        label.setBackground( part1.getBackground() );
-        label.setForeground( part1.getForeground() );
-        return label;
-    }
+		if (prevTextField != null) {
+			((IPDocument) prevTextField.getDocument()).setNextTextField(field);
+		}
+		return field;
+	}
 
-    private void addToNextTextField( String nextTextFieldStr, JTextField nextTF )
-    {
-        if ( nextTF == null )
-        {// drop string
-            return;
-        }
-        nextTF.requestFocus();
-        Document doc = nextTF.getDocument();
-        try
-        {
-            doc.remove( 0, doc.getLength() );
-            doc.insertString( 0, nextTextFieldStr, new SimpleAttributeSet() );
-        }
-        catch ( BadLocationException exp )
-        {
-        }
-    }
+	private JLabel buildLabel() {
+		JLabel label = new JLabel(".");
+		label.setBackground(part1.getBackground());
+		label.setForeground(part1.getForeground());
+		return label;
+	}
 
-    private void selectNextTextField()
-    {
-        JTextField nextTF = getNextFocusTextField();
-        if ( nextTF == null )
-        {// drop string
-            return;
-        }
-        nextTF.requestFocus();
-        nextTF.selectAll();
-    }
+	private void addToNextTextField(String nextTextFieldStr, JTextField nextTF) {
+		if (nextTF == null) {// drop string
+			return;
+		}
+		nextTF.requestFocus();
+		Document doc = nextTF.getDocument();
+		try {
+			doc.remove(0, doc.getLength());
+			doc.insertString(0, nextTextFieldStr, new SimpleAttributeSet());
+		} catch (BadLocationException exp) {
+		}
+	}
 
-    private JTextField getNextFocusTextField()
-    {
-        if ( part1.hasFocus() )
-        {
-            return part2;
-        }
-        else if ( part2.hasFocus() )
-        {
-            return part3;
-        }
-        else if ( part3.hasFocus() )
-        {
-            return part4;
-        }
-        return null;
-    }
+	private void selectNextTextField() {
+		JTextField nextTF = getNextFocusTextField();
+		if (nextTF == null) {// drop string
+			return;
+		}
+		nextTF.requestFocus();
+		nextTF.selectAll();
+	}
 
-    public class TextFieldFocusHandler extends FocusAdapter
-    {
-        public void focusLost( FocusEvent e )
-        {
-            if ( e.isTemporary() )
-            {
-                return;
-            }
-            JTextField textField = (JTextField)e.getSource();
-            String text = textField.getText();
-            if ( text.length() == 0 )
-            {
-                return;
-            }
-            try
-            {
-                int result = Integer.parseInt( text );
-                if ( result > 255 )
-                {
-                    textField.setText( "255" );
-                }
-            }
-            catch ( NumberFormatException exp )
-            {
-                textField.setText( "0" );
-            }
-        }
-    }
+	private JTextField getNextFocusTextField() {
+		if (part1.hasFocus()) {
+			return part2;
+		} else if (part2.hasFocus()) {
+			return part3;
+		} else if (part3.hasFocus()) {
+			return part4;
+		}
+		return null;
+	}
 
-    class IPDocument extends PlainDocument
-    {
-        protected JTextField nextTextField;
-        IPDocument( )
-        {
-            super();
-        }
+	public class TextFieldFocusHandler extends FocusAdapter {
+		public void focusLost(FocusEvent e) {
+			if (e.isTemporary()) {
+				return;
+			}
+			JTextField textField = (JTextField) e.getSource();
+			String text = textField.getText();
+			if (text.length() == 0) {
+				return;
+			}
+			try {
+				int result = Integer.parseInt(text);
+				if (result > 255) {
+					textField.setText("255");
+				}
+			} catch (NumberFormatException exp) {
+				textField.setText("0");
+			}
+		}
+	}
 
-        public void setNextTextField( JTextField textField )
-        {
-            nextTextField = textField;
-        }
+	class IPDocument extends PlainDocument {
+		protected JTextField nextTextField;
 
-        public void insertString(int offset, String str, AttributeSet a)
-                throws BadLocationException
-        {
-            if (str == null)
-            {
-                return;
-            }
+		IPDocument() {
+			super();
+		}
 
-            // add max 3 chars....
-            int freeSpace = 3 - getLength();
-            if ( freeSpace == 0 )
-            {
-                return;
-            }
+		public void setNextTextField(JTextField textField) {
+			nextTextField = textField;
+		}
 
-            char[] addCharArr = new char[ freeSpace ];
-            int addCharCount = 0;
-            int strLength = str.length();
-            int i = 0;
-            boolean continueToNextField = false;
-            for ( i = 0; i < strLength; i++ )
-            {
-                char c = str.charAt( i );
-                if ( Character.isDigit( c ) )
-                {
-                    addCharArr[ addCharCount ] = c;
-                    addCharCount++;
-                    if ( addCharCount == freeSpace )
-                    {
-                        break;
-                    }
-                }
-                else if ( c == '.' && addCharCount > 0 )
-                {
-                    continueToNextField = true;
-                    break;
-                }
-            }
+		public void insertString(int offset, String str, AttributeSet a) throws BadLocationException {
+			if (str == null) {
+				return;
+			}
 
-            super.insertString(offset, new String( addCharArr, 0, addCharCount ), a);
+			// add max 3 chars....
+			int freeSpace = 3 - getLength();
+			if (freeSpace == 0) {
+				return;
+			}
 
-            if ( continueToNextField || offset + addCharCount == 3 )
-            {
-                if ( i + 1 < strLength )
-                {
-                    addToNextTextField( str.substring( i + 1 ), nextTextField );
-                }
-                else if ( getLength() == 3 )
-                {
-                    selectNextTextField();
-                }
-            }
-        }
-    }
+			char[] addCharArr = new char[freeSpace];
+			int addCharCount = 0;
+			int strLength = str.length();
+			int i = 0;
+			boolean continueToNextField = false;
+			for (i = 0; i < strLength; i++) {
+				char c = str.charAt(i);
+				if (Character.isDigit(c)) {
+					addCharArr[addCharCount] = c;
+					addCharCount++;
+					if (addCharCount == freeSpace) {
+						break;
+					}
+				} else if (c == '.' && addCharCount > 0) {
+					continueToNextField = true;
+					break;
+				}
+			}
+
+			super.insertString(offset, new String(addCharArr, 0, addCharCount), a);
+
+			if (continueToNextField || offset + addCharCount == 3) {
+				if (i + 1 < strLength) {
+					addToNextTextField(str.substring(i + 1), nextTextField);
+				} else if (getLength() == 3) {
+					selectNextTextField();
+				}
+			}
+		}
+	}
 }
-

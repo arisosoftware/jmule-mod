@@ -11,22 +11,21 @@
  *     Xerox/PARC     initial implementation 
  * ******************************************************************/
 
-
 package org.aspectj.runtime.internal;
 
 public class CFlowPlusState extends org.aspectj.runtime.CFlow {
-    private Object[] state;
+	private Object[] state;
 
-    public CFlowPlusState(Object[] state) {
-        this.state = state;
-    }
+	public CFlowPlusState(Object[] state) {
+		this.state = state;
+	}
 
-    public CFlowPlusState(Object[] state, Object _aspect) {
-        super(_aspect);
-        this.state = state;
-    }
+	public CFlowPlusState(Object[] state, Object _aspect) {
+		super(_aspect);
+		this.state = state;
+	}
 
-    public Object get(int index) {
-        return state[index];
-    }
+	public Object get(int index) {
+		return state[index];
+	}
 }

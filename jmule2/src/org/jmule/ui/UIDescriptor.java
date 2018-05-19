@@ -29,8 +29,8 @@ import java.util.Map;
  * 
  * @author javajox
  * @author binary
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:44:54 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:44:54 $$
  */
 public class UIDescriptor {
 
@@ -39,17 +39,17 @@ public class UIDescriptor {
 	public static final String TEXT_ONLY = "TEXT_ONLY";
 	public static final String ICON_ONLY = "ICON_ONLY";
 	public static final String ICON_AND_TEXT = "ICON_AND_TEXT";
-	
+
 	private Object UIElement;
-	
+
 	private Map map = new HashMap();
-	
+
 	public UIDescriptor(Object UIElement) {
-		
+
 		this.UIElement = UIElement;
-		
+
 	}
-	
+
 	public Object getUIElement() {
 		return UIElement;
 	}
@@ -59,9 +59,9 @@ public class UIDescriptor {
 	}
 
 	public Object getProperty(int property) {
-		
+
 		return map.get(property);
-		
+
 	}
-	
+
 }

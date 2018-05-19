@@ -24,14 +24,17 @@ package org.jmule.core.jkad.lookup;
 
 /**
  * Created on Jul 10, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/07/11 17:35:49 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/07/11 17:35:49 $
  */
 public interface LookupListener {
 
 	public void taskAdded(LookupTask task);
+
 	public void taskStarted(LookupTask task);
+
 	public void taskRemoved(LookupTask task);
-	
+
 }

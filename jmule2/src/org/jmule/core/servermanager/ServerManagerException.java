@@ -26,24 +26,25 @@ import org.jmule.core.JMException;
 
 /**
  * Created on 2008-Jul-06
+ * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/09/17 18:18:59 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/09/17 18:18:59 $$
  */
 public class ServerManagerException extends JMException {
 
-	  public ServerManagerException() {
-		  
-	  }
-	
-	  public ServerManagerException(String str) {
-		  
-		  super(str);
-	  }
-	  
-	  public ServerManagerException(Throwable cause) {
-		  
-		  super(cause);
-	  }
-	
+	public ServerManagerException() {
+
+	}
+
+	public ServerManagerException(String str) {
+
+		super(str);
+	}
+
+	public ServerManagerException(Throwable cause) {
+
+		super(cause);
+	}
+
 }

@@ -34,60 +34,59 @@ import org.jmule.core.sharingmanager.GapList;
 /**
  *
  * Created on Oct 6, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
 public class PiecesPanel extends JPanel {
 
 	private DownloadSession session;
-	
+
 	public PiecesPanel(DownloadSession session) {
 		this.session = session;
-        init();
+		init();
 	}
-	
+
 	public void setSession(DownloadSession session) {
 		this.session = session;
 		init();
 	}
-	
+
 	private void init() {
-		this.setBackground(new Color(0,128,255));
+		this.setBackground(new Color(0, 128, 255));
 		this.setForeground(Color.BLACK);
 	}
-	
+
 	public void paint(Graphics g) {
-		  super.paint(g);
-		 
-         long file_size = session.getFileSize();
-         long transferred_bytes_count = session.getTransferredBytes();
-         GapList gap_list = session.getGapList();
-         
-		 float total_length = this.getWidth();
-		 float pixels_for_byte = total_length / (float)file_size; 
-		 
-		 g.setColor(Color.WHITE);
-		 
-	     g.fillRect(0, 0, this.getWidth(), 4);
-		 
-	     g.setColor(new Color(0,100,199)); // black blue
-	     
-	     g.fillRect(0, 0, Math.round((transferred_bytes_count * this.getWidth())/file_size), 4);
-	     
-		 //g.setColor(Color.GRAY);
-		 //System.out.println(pixels_for_byte);
-		  //g.drawLine(0, 6, this.getWidth(), 6);
-			// g.fillRect(2, 2, this.getWidth(), 7);
-		  g.setColor(Color.WHITE);
-		  //g.fillRect(0, 1, this.getWidth(), 1);
-		  g.drawLine(0, 3, this.getWidth(), 3);
-		  for(Gap gap : gap_list.getGaps()) {
-			  g.fillRect( Math.round(gap.getStart()*pixels_for_byte), 
-					     4, 
-					     Math.round(gap.getEnd()*pixels_for_byte - gap.getStart()*pixels_for_byte), 
-					     this.getHeight());
-		  }
+		super.paint(g);
+
+		long file_size = session.getFileSize();
+		long transferred_bytes_count = session.getTransferredBytes();
+		GapList gap_list = session.getGapList();
+
+		float total_length = this.getWidth();
+		float pixels_for_byte = total_length / (float) file_size;
+
+		g.setColor(Color.WHITE);
+
+		g.fillRect(0, 0, this.getWidth(), 4);
+
+		g.setColor(new Color(0, 100, 199)); // black blue
+
+		g.fillRect(0, 0, Math.round((transferred_bytes_count * this.getWidth()) / file_size), 4);
+
+		// g.setColor(Color.GRAY);
+		// System.out.println(pixels_for_byte);
+		// g.drawLine(0, 6, this.getWidth(), 6);
+		// g.fillRect(2, 2, this.getWidth(), 7);
+		g.setColor(Color.WHITE);
+		// g.fillRect(0, 1, this.getWidth(), 1);
+		g.drawLine(0, 3, this.getWidth(), 3);
+		for (Gap gap : gap_list.getGaps()) {
+			g.fillRect(Math.round(gap.getStart() * pixels_for_byte), 4,
+					Math.round(gap.getEnd() * pixels_for_byte - gap.getStart() * pixels_for_byte), this.getHeight());
+		}
 	}
-	
+
 }

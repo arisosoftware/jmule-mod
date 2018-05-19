@@ -24,32 +24,32 @@ package org.jmule.ui.utils;
 
 import java.text.DecimalFormat;
 
-
 /**
  * Created on Sep 5, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary256_ $ on $Date: 2008/09/28 16:22:48 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary256_ $ on $Date:
+ *          2008/09/28 16:22:48 $
  */
 public class NumberFormatter {
 
 	private static DecimalFormat formatter = new DecimalFormat("0.00");
-	 
-	 public static String formatProgress(double progress) {
-		 return formatter.format(progress)+"%";
-	 }
-	
+
+	public static String formatProgress(double progress) {
+		return formatter.format(progress) + "%";
+	}
+
 	public static String formatSizeHumanReadable(long number) {
 		String result = "";
-		
+
 		DecimalFormat formatter = new DecimalFormat("0");
-		double d = (double)number;
-		if (d>=1000) {
+		double d = (double) number;
+		if (d >= 1000) {
 			result = " K";
 			d = d / 1000d;
 			formatter = new DecimalFormat("0.00");
 		}
-		
+
 		if (d >= 1000) {
 			d = d / 1000d;
 			result = " M";
@@ -57,5 +57,5 @@ public class NumberFormatter {
 		result = formatter.format(d) + result;
 		return result;
 	}
-	
+
 }

@@ -24,10 +24,11 @@ package org.jmule.ui.utils;
 
 /**
  * Created on Oct 24, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/05/09 11:13:26 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/05/09 11:13:26 $
  */
 public class DisplayFormatter {
-	
+
 }

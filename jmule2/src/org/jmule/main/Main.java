@@ -30,99 +30,98 @@ import org.jmule.core.JMConstants;
 import org.jmule.ui.CommonUIPreferences;
 import org.jmule.ui.JMuleUIManager;
 
-
 /**
  * Created on 07-Nov-2007
+ * 
  * @author javajox
- * @version $$Revision: 1.5 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2009/07/11 09:16:02 $$
+ * @version $$Revision: 1.5 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2009/07/11 09:16:02 $$
  */
 public class Main {
 
 	public static void main(String args[]) {
 
 		int choice = 0;
-		
-		if(!JMConstants.isJMuleJavaVersion()) {
+
+		if (!JMConstants.isJMuleJavaVersion()) {
 			// Wrong java version dialog
 			Object[] options = { "OK", "Cancel" };
-			String message = "You are using Java " + JMConstants.JAVA_VERSION +
-			                 " the minimal recommended version of java for " + JMConstants.JMULE_FULL_NAME + "\n" +
-			                 "is " + JMConstants.JMULE_JAVA_VERSION + 
-			                 " a greater Java version is a better choice.\n\n" +
-			                 "You should manually download the latest version of Java from http://java.sun.com\n\n" +
-			                 "Do you want to continue to use Java " + JMConstants.JAVA_VERSION + " ?\n\n";
-			    choice = JOptionPane.showOptionDialog(null, message, "Warning", JOptionPane.DEFAULT_OPTION, 
-			    		                              JOptionPane.WARNING_MESSAGE, 
-			    		                                null, options, options[0]);
+			String message = "You are using Java " + JMConstants.JAVA_VERSION
+					+ " the minimal recommended version of java for " + JMConstants.JMULE_FULL_NAME + "\n" + "is "
+					+ JMConstants.JMULE_JAVA_VERSION + " a greater Java version is a better choice.\n\n"
+					+ "You should manually download the latest version of Java from http://java.sun.com\n\n"
+					+ "Do you want to continue to use Java " + JMConstants.JAVA_VERSION + " ?\n\n";
+			choice = JOptionPane.showOptionDialog(null, message, "Warning", JOptionPane.DEFAULT_OPTION,
+					JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 		}
-		
-		
+
 		parseArgs(args);
-		
-		//execute commandline args
-		if(isHeadLess){
-			//Forces configuration change to Console ONLY interface (Graphical interfaces are disabled)
+
+		// execute commandline args
+		if (isHeadLess) {
+			// Forces configuration change to Console ONLY interface (Graphical interfaces
+			// are disabled)
 			CommonUIPreferences.getSingleton().setUIType(JMuleUIManager.CONSOLE_UI);
 		}
-		
-		
-		if( choice == JOptionPane.YES_OPTION ) {
 
-			  try {
-				   
-				   Class.forName("org.eclipse.swt.widgets.Display");
-				  
-				   Class.forName("org.jdesktop.swingx.JXFrame");
-				   
-				   //TODO Why?Why? Why using refelction?
-		   	       final Class startupClass = Class.forName("org.jmule.main.Launcher");
+		if (choice == JOptionPane.YES_OPTION) {
 
-		           final Constructor constructor = startupClass.getConstructor(null);
-				
-		            //constructor.newInstance(new Object[] {
-		            //			     args
-		            //});
-		           constructor.newInstance(null);
+			try {
 
-		      } catch (Throwable cause) {
-				  
-		    	     if( cause instanceof ClassNotFoundException ) {
-		    	    	 
-		    	    	 cause.printStackTrace();
-		    	    	 
-		    	    	 System.out.println("REMARK: It seems you don't have one of the following .jar files in classpath : swt.jar, swingx.jar\n" +
-		    	    			            "        you can found these jars on http://www.eclipse.org/swt and http://swingx.dev.java.net \n" +
-		    	    			            "        If you need open support don't hesitate to contact us on http://forum.jmule.org");
-		    	    	 
-		    	    	 JOptionPane.showMessageDialog(null, cause, "Class not found", JOptionPane.ERROR_MESSAGE);
+				Class.forName("org.eclipse.swt.widgets.Display");
 
-		    	    	 System.exit( 0 );
-		    	     }
-		    	  
-				     cause.printStackTrace();
-				     
-				     System.out.println("REMARK: If you need open support don't hesitate to contact us on http://forum.jmule.org");
-		      }
-		} else if( choice == JOptionPane.NO_OPTION ) {
-			
-			System.exit( 0 );
-			
+				Class.forName("org.jdesktop.swingx.JXFrame");
+
+				// TODO Why?Why? Why using refelction?
+				final Class startupClass = Class.forName("org.jmule.main.Launcher");
+
+				final Constructor constructor = startupClass.getConstructor(null);
+
+				// constructor.newInstance(new Object[] {
+				// args
+				// });
+				constructor.newInstance(null);
+
+			} catch (Throwable cause) {
+
+				if (cause instanceof ClassNotFoundException) {
+
+					cause.printStackTrace();
+
+					System.out.println(
+							"REMARK: It seems you don't have one of the following .jar files in classpath : swt.jar, swingx.jar\n"
+									+ "        you can found these jars on http://www.eclipse.org/swt and http://swingx.dev.java.net \n"
+									+ "        If you need open support don't hesitate to contact us on http://forum.jmule.org");
+
+					JOptionPane.showMessageDialog(null, cause, "Class not found", JOptionPane.ERROR_MESSAGE);
+
+					System.exit(0);
+				}
+
+				cause.printStackTrace();
+
+				System.out.println(
+						"REMARK: If you need open support don't hesitate to contact us on http://forum.jmule.org");
+			}
+		} else if (choice == JOptionPane.NO_OPTION) {
+
+			System.exit(0);
+
 		}
-   }
-	
-   
-   //TODO disable SWT and SWING startup (disabling splash is the first step)
-   private static boolean isHeadLess = false;
-   
-   public static void parseArgs(String[] args){
-	   if(args.length!=0){
-		   for (String string : args) {
-			   if(string.equals("-H")){
-				   isHeadLess = true;
-			   };
-		   }
-	   }
-   }
+	}
+
+	// TODO disable SWT and SWING startup (disabling splash is the first step)
+	private static boolean isHeadLess = false;
+
+	public static void parseArgs(String[] args) {
+		if (args.length != 0) {
+			for (String string : args) {
+				if (string.equals("-H")) {
+					isHeadLess = true;
+				}
+				;
+			}
+		}
+	}
 
 }

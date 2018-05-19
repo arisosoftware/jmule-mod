@@ -44,8 +44,8 @@ public class UIPreferences extends UIConstants {
 
 	private static UIPreferences instance = null;
 
-	public static final String UI_SETTINGS_FILE = ConfigurationManager.SETTINGS_DIR
-			+ File.separator + "jmule_ui.properties";
+	public static final String UI_SETTINGS_FILE = ConfigurationManager.SETTINGS_DIR + File.separator
+			+ "jmule_ui.properties";
 
 	public static UIPreferences getSingleton() {
 		if (instance == null)
@@ -55,980 +55,1191 @@ public class UIPreferences extends UIConstants {
 
 	public void load() {
 		try {
-			  if( new File(UI_SETTINGS_FILE).exists() ) {
-				 config_store = new Properties();
-				 config_store.load(new FileInputStream(UI_SETTINGS_FILE));
-			  } else {
-				  config_store = new Properties();
-			  }
-		}catch(Throwable cause) {
-				cause.printStackTrace();
+			if (new File(UI_SETTINGS_FILE).exists()) {
+				config_store = new Properties();
+				config_store.load(new FileInputStream(UI_SETTINGS_FILE));
+			} else {
+				config_store = new Properties();
+			}
+		} catch (Throwable cause) {
+			cause.printStackTrace();
 		}
 	}
-	
-	public static void storeDefaultPreferences(String particular_ui_root) {
-		
-		try {
-			 config_store = new Properties();
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_NAME_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SERVER_LIST_NAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_CC_COLUMN_ID ) ).
-			 //putBoolean( VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_CC_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_CC_COLUMN_ID ) + VISIBILITY, 
-					                  getDefaultColumnVisibility( SERVER_LIST_CC_COLUMN_ID ) + "");
-			    
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_FLAG_COLUMN_ID ) ).
-			 //putBoolean( VISIBILITY,  getDefaultColumnVisibility( SERVER_LIST_FLAG_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_FLAG_COLUMN_ID ) + VISIBILITY, 
-					                  getDefaultColumnVisibility( SERVER_LIST_FLAG_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_IP_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_IP_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_IP_COLUMN_ID ) + VISIBILITY, 
-					                  getDefaultColumnVisibility( SERVER_LIST_IP_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_DESCRIPTION_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_DESCRIPTION_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_DESCRIPTION_COLUMN_ID ) + VISIBILITY, 
-					                  getDefaultColumnVisibility( SERVER_LIST_DESCRIPTION_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_PING_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_PING_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_PING_COLUMN_ID ) + VISIBILITY, 
-					                  getDefaultColumnVisibility( SERVER_LIST_PING_COLUMN_ID ) + ""); 
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_USERS_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_USERS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_USERS_COLUMN_ID ) + VISIBILITY, 
-					                  getDefaultColumnVisibility( SERVER_LIST_USERS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_MAX_USERS_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_MAX_USERS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_MAX_USERS_COLUMN_ID ) + VISIBILITY, 
-					                  getDefaultColumnVisibility( SERVER_LIST_MAX_USERS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_FILES_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_FILES_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_FILES_COLUMN_ID ) + VISIBILITY, 
-					                  getDefaultColumnVisibility( SERVER_LIST_FILES_COLUMN_ID ) + ""); 
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) + VISIBILITY, 
-					                  getDefaultColumnVisibility( SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_HARD_LIMIT_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_HARD_LIMIT_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_HARD_LIMIT_COLUMN_ID ) + VISIBILITY,
-					 				  getDefaultColumnVisibility( SERVER_LIST_HARD_LIMIT_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_VERSION_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_VERSION_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_VERSION_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SERVER_LIST_VERSION_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_STATIC_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_STATIC_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_STATIC_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SERVER_LIST_STATIC_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_ORDER_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_LIST_ORDER_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_ORDER_ID ) + VISIBILITY, 
-					                  getDefaultColumnVisibility( DOWNLOAD_LIST_ORDER_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SIZE_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_LIST_SIZE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SIZE_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( DOWNLOAD_LIST_SIZE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) + VISIBILITY, 
-					                  getDefaultColumnVisibility( DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) + VISIBILITY, 
-					                  getDefaultColumnVisibility( DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SOURCES_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_LIST_SOURCES_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SOURCES_COLUMN_ID ) + VISIBILITY, 
-					 				  getDefaultColumnVisibility( DOWNLOAD_LIST_SOURCES_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 ///node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_REMAINING_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_LIST_REMAINING_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_REMAINING_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( DOWNLOAD_LIST_REMAINING_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_STATUS_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_LIST_STATUS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_STATUS_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( DOWNLOAD_LIST_STATUS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) + VISIBILITY, 
-					                  getDefaultColumnVisibility( DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) + "");
-			 
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_NAME_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( UPLOAD_LIST_FILE_NAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_NAME_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( UPLOAD_LIST_FILE_NAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_PEERS_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( UPLOAD_LIST_PEERS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_PEERS_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( UPLOAD_LIST_PEERS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_ETA_COLUMN_ID ) ).
-			// putBoolean(VISIBILITY, getDefaultColumnVisibility( UPLOAD_LIST_ETA_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_ETA_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( UPLOAD_LIST_ETA_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOADED_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( UPLOAD_LIST_UPLOADED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOADED_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( UPLOAD_LIST_UPLOADED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_IP_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( UPLOAD_PEER_LIST_IP_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_IP_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( UPLOAD_PEER_LIST_IP_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILEQUALITY_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SEARCH_FILEQUALITY_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILEQUALITY_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SEARCH_FILEQUALITY_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILENAME_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SEARCH_FILENAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILENAME_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SEARCH_FILENAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILESIZE_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SEARCH_FILESIZE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILESIZE_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SEARCH_FILESIZE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_AVAILABILITY_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SEARCH_AVAILABILITY_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_AVAILABILITY_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SEARCH_AVAILABILITY_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_COMPLETESRC_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SEARCH_COMPLETESRC_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_COMPLETESRC_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SEARCH_COMPLETESRC_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILE_TYPE_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SEARCH_FILE_TYPE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILE_TYPE_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SEARCH_FILE_TYPE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILE_ID_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SEARCH_FILE_ID_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILE_ID_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SEARCH_FILE_ID_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_NAME_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SHARED_LIST_FILE_NAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_NAME_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SHARED_LIST_FILE_NAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_SIZE_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SHARED_LIST_FILE_SIZE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_SIZE_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SHARED_LIST_FILE_SIZE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_TYPE_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SHARED_LIST_FILE_TYPE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_TYPE_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SHARED_LIST_FILE_TYPE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_ID_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SHARED_LIST_FILE_ID_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_ID_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SHARED_LIST_FILE_ID_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_COMPLETED_COLUMN_ID ) ).
-			 //putBoolean(VISIBILITY, getDefaultColumnVisibility( SHARED_LIST_COMPLETED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_COMPLETED_COLUMN_ID ) + VISIBILITY,
-					                  getDefaultColumnVisibility( SHARED_LIST_COMPLETED_COLUMN_ID ) + "");
 
-			 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-			 
-			// sets the default width of the columns
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_NAME_COLUMN_ID ) ).
-			 //putInt(WIDTH,  getDefaultColumnWidth( SERVER_LIST_NAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_NAME_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SERVER_LIST_NAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 ///node( getColumnNodePath( particular_ui_root, SERVER_LIST_CC_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_CC_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_CC_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SERVER_LIST_CC_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_FLAG_COLUMN_ID ) ).
-			 //putInt(WIDTH,  getDefaultColumnWidth( SERVER_LIST_FLAG_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_FLAG_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SERVER_LIST_FLAG_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_IP_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_IP_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_IP_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SERVER_LIST_IP_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_DESCRIPTION_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_DESCRIPTION_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_DESCRIPTION_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SERVER_LIST_DESCRIPTION_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_PING_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_PING_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_PING_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SERVER_LIST_PING_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_USERS_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_USERS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_USERS_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SERVER_LIST_USERS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_MAX_USERS_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_MAX_USERS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_MAX_USERS_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SERVER_LIST_MAX_USERS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_FILES_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_FILES_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_FILES_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SERVER_LIST_FILES_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_HARD_LIMIT_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_HARD_LIMIT_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_HARD_LIMIT_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SERVER_LIST_HARD_LIMIT_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_VERSION_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_VERSION_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_VERSION_COLUMN_ID ) + WIDTH, 
-					                  getDefaultColumnWidth( SERVER_LIST_VERSION_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_STATIC_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_STATIC_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_STATIC_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SERVER_LIST_STATIC_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_ORDER_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_ORDER_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_ORDER_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_LIST_ORDER_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SIZE_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_SIZE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SIZE_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_LIST_SIZE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SOURCES_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_SOURCES_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SOURCES_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_LIST_SOURCES_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_REMAINING_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_REMAINING_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_REMAINING_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_LIST_REMAINING_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_STATUS_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_STATUS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_STATUS_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_LIST_STATUS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_NAME_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( UPLOAD_LIST_FILE_NAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_NAME_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( UPLOAD_LIST_FILE_NAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_PEERS_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( UPLOAD_LIST_PEERS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_PEERS_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( UPLOAD_LIST_PEERS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_ETA_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( UPLOAD_LIST_ETA_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_ETA_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( UPLOAD_LIST_ETA_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOADED_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( UPLOAD_LIST_UPLOADED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOADED_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( UPLOAD_LIST_UPLOADED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_IP_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( UPLOAD_PEER_LIST_IP_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_IP_COLUMN_ID ) + WIDTH, 
-					                  getDefaultColumnWidth( UPLOAD_PEER_LIST_IP_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) + WIDTH,
-					 getDefaultColumnWidth( UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILEQUALITY_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SEARCH_FILEQUALITY_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILEQUALITY_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SEARCH_FILEQUALITY_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILENAME_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SEARCH_FILENAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILENAME_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SEARCH_FILENAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILESIZE_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SEARCH_FILESIZE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILESIZE_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SEARCH_FILESIZE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_AVAILABILITY_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SEARCH_AVAILABILITY_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_AVAILABILITY_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SEARCH_AVAILABILITY_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_COMPLETESRC_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SEARCH_COMPLETESRC_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_COMPLETESRC_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SEARCH_COMPLETESRC_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILE_TYPE_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SEARCH_FILE_TYPE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILE_TYPE_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SEARCH_FILE_TYPE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILE_ID_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SEARCH_FILE_ID_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILE_ID_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SEARCH_FILE_ID_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_NAME_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SHARED_LIST_FILE_NAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_NAME_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SHARED_LIST_FILE_NAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_SIZE_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SHARED_LIST_FILE_SIZE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_SIZE_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SHARED_LIST_FILE_SIZE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_TYPE_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SHARED_LIST_FILE_TYPE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_TYPE_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SHARED_LIST_FILE_TYPE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_ID_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SHARED_LIST_FILE_ID_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_ID_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SHARED_LIST_FILE_ID_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_COMPLETED_COLUMN_ID ) ).
-			 //putInt(WIDTH, getDefaultColumnWidth( SHARED_LIST_COMPLETED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_COMPLETED_COLUMN_ID ) + WIDTH,
-					                  getDefaultColumnWidth( SHARED_LIST_COMPLETED_COLUMN_ID ) + "");
+	public static void storeDefaultPreferences(String particular_ui_root) {
+
+		try {
+			config_store = new Properties();
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_NAME_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SERVER_LIST_NAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_CC_COLUMN_ID ) ).
+			// putBoolean( VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_CC_COLUMN_ID
+			// ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_CC_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SERVER_LIST_CC_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_FLAG_COLUMN_ID ) ).
+			// putBoolean( VISIBILITY, getDefaultColumnVisibility(
+			// SERVER_LIST_FLAG_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_FLAG_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SERVER_LIST_FLAG_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_IP_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_IP_COLUMN_ID )
+			// );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_IP_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SERVER_LIST_IP_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// SERVER_LIST_DESCRIPTION_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SERVER_LIST_DESCRIPTION_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, SERVER_LIST_DESCRIPTION_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SERVER_LIST_DESCRIPTION_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_PING_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility( SERVER_LIST_PING_COLUMN_ID
+			// ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_PING_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SERVER_LIST_PING_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_USERS_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SERVER_LIST_USERS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_USERS_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SERVER_LIST_USERS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_MAX_USERS_COLUMN_ID
+			// ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SERVER_LIST_MAX_USERS_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, SERVER_LIST_MAX_USERS_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SERVER_LIST_MAX_USERS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_FILES_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SERVER_LIST_FILES_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_FILES_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SERVER_LIST_FILES_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_SOFT_LIMIT_COLUMN_ID
+			// ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, SERVER_LIST_SOFT_LIMIT_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SERVER_LIST_SOFT_LIMIT_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_HARD_LIMIT_COLUMN_ID
+			// ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SERVER_LIST_HARD_LIMIT_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, SERVER_LIST_HARD_LIMIT_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SERVER_LIST_HARD_LIMIT_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_VERSION_COLUMN_ID )
+			// ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SERVER_LIST_VERSION_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_VERSION_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SERVER_LIST_VERSION_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_STATIC_COLUMN_ID )
+			// ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SERVER_LIST_STATIC_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_STATIC_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SERVER_LIST_STATIC_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_ORDER_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility( DOWNLOAD_LIST_ORDER_ID )
+			// );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_ORDER_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_LIST_ORDER_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_FILE_NAME_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_LIST_FILE_NAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SIZE_COLUMN_ID )
+			// ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_LIST_SIZE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_SIZE_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_LIST_SIZE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PROGRESS_COLUMN_ID
+			// ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_PROGRESS_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_LIST_PROGRESS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SOURCES_COLUMN_ID
+			// ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_LIST_SOURCES_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_SOURCES_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_LIST_SOURCES_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID) + "");
+
+			// preferences.
+			/// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_REMAINING_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_LIST_REMAINING_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_REMAINING_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_LIST_REMAINING_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_STATUS_COLUMN_ID )
+			// ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_LIST_STATUS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_STATUS_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_LIST_STATUS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_IP_COLUMN_ID
+			// ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_PEER_LIST_IP_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_PEER_LIST_IP_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_NAME_COLUMN_ID
+			// ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// UPLOAD_LIST_FILE_NAME_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, UPLOAD_LIST_FILE_NAME_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(UPLOAD_LIST_FILE_NAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_SIZE_COLUMN_ID
+			// ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, UPLOAD_LIST_FILE_SIZE_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(UPLOAD_LIST_FILE_SIZE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_PEERS_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// UPLOAD_LIST_PEERS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_PEERS_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(UPLOAD_LIST_PEERS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_ETA_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility( UPLOAD_LIST_ETA_COLUMN_ID
+			// ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_ETA_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(UPLOAD_LIST_ETA_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOADED_COLUMN_ID )
+			// ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// UPLOAD_LIST_UPLOADED_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_UPLOADED_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(UPLOAD_LIST_UPLOADED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_IP_COLUMN_ID )
+			// ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// UPLOAD_PEER_LIST_IP_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_PEER_LIST_IP_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(UPLOAD_PEER_LIST_IP_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, UPLOAD_PEER_LIST_STATUS_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(UPLOAD_PEER_LIST_STATUS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILEQUALITY_COLUMN_ID )
+			// ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SEARCH_FILEQUALITY_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILEQUALITY_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SEARCH_FILEQUALITY_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILENAME_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility( SEARCH_FILENAME_COLUMN_ID
+			// ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILENAME_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SEARCH_FILENAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILESIZE_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility( SEARCH_FILESIZE_COLUMN_ID
+			// ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILESIZE_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SEARCH_FILESIZE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_AVAILABILITY_COLUMN_ID )
+			// ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SEARCH_AVAILABILITY_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_AVAILABILITY_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SEARCH_AVAILABILITY_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_COMPLETESRC_COLUMN_ID )
+			// ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SEARCH_COMPLETESRC_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_COMPLETESRC_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SEARCH_COMPLETESRC_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILE_TYPE_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility( SEARCH_FILE_TYPE_COLUMN_ID
+			// ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILE_TYPE_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SEARCH_FILE_TYPE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILE_ID_COLUMN_ID ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility( SEARCH_FILE_ID_COLUMN_ID )
+			// );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILE_ID_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SEARCH_FILE_ID_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_NAME_COLUMN_ID
+			// ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SHARED_LIST_FILE_NAME_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, SHARED_LIST_FILE_NAME_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SHARED_LIST_FILE_NAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_SIZE_COLUMN_ID
+			// ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SHARED_LIST_FILE_SIZE_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, SHARED_LIST_FILE_SIZE_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SHARED_LIST_FILE_SIZE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_TYPE_COLUMN_ID
+			// ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SHARED_LIST_FILE_TYPE_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, SHARED_LIST_FILE_TYPE_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SHARED_LIST_FILE_TYPE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_ID_COLUMN_ID )
+			// ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SHARED_LIST_FILE_ID_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SHARED_LIST_FILE_ID_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SHARED_LIST_FILE_ID_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_COMPLETED_COLUMN_ID
+			// ) ).
+			// putBoolean(VISIBILITY, getDefaultColumnVisibility(
+			// SHARED_LIST_COMPLETED_COLUMN_ID ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, SHARED_LIST_COMPLETED_COLUMN_ID) + VISIBILITY,
+					getDefaultColumnVisibility(SHARED_LIST_COMPLETED_COLUMN_ID) + "");
 
 			// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-			 
-			// sets the default order of the columns
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_NAME_COLUMN_ID ) ).
-			 //putInt(ORDER,  getDefaultColumnOrder( SERVER_LIST_NAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_NAME_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SERVER_LIST_NAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_CC_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_CC_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_CC_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SERVER_LIST_CC_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_FLAG_COLUMN_ID ) ).
-			 //putInt(ORDER,  getDefaultColumnOrder( SERVER_LIST_FLAG_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_FLAG_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SERVER_LIST_FLAG_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_IP_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_IP_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_IP_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SERVER_LIST_IP_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_DESCRIPTION_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_DESCRIPTION_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_DESCRIPTION_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SERVER_LIST_DESCRIPTION_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_PING_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_PING_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_PING_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SERVER_LIST_PING_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_USERS_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_USERS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_USERS_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SERVER_LIST_USERS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_MAX_USERS_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_MAX_USERS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_MAX_USERS_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SERVER_LIST_MAX_USERS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_FILES_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_FILES_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_FILES_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SERVER_LIST_FILES_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_HARD_LIMIT_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_HARD_LIMIT_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_HARD_LIMIT_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SERVER_LIST_HARD_LIMIT_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_VERSION_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_VERSION_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_VERSION_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SERVER_LIST_VERSION_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SERVER_LIST_STATIC_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_STATIC_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SERVER_LIST_STATIC_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SERVER_LIST_STATIC_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_ORDER_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_ORDER_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_ORDER_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_LIST_ORDER_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SIZE_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_SIZE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SIZE_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_LIST_SIZE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SOURCES_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_SOURCES_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SOURCES_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_LIST_SOURCES_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_REMAINING_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_REMAINING_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_REMAINING_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_LIST_REMAINING_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_STATUS_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_STATUS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_STATUS_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_LIST_STATUS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) + ORDER,
-					 getDefaultColumnOrder( DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_NAME_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( UPLOAD_LIST_FILE_NAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_NAME_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( UPLOAD_LIST_FILE_NAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_PEERS_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( UPLOAD_LIST_PEERS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_PEERS_COLUMN_ID ) + ORDER, 
-					                  getDefaultColumnOrder( UPLOAD_LIST_PEERS_COLUMN_ID ) + ""); 
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_ETA_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( UPLOAD_LIST_ETA_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_ETA_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( UPLOAD_LIST_ETA_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOADED_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( UPLOAD_LIST_UPLOADED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOADED_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( UPLOAD_LIST_UPLOADED_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_IP_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( UPLOAD_PEER_LIST_IP_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_IP_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( UPLOAD_PEER_LIST_IP_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILEQUALITY_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SEARCH_FILEQUALITY_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILEQUALITY_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SEARCH_FILEQUALITY_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILENAME_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SEARCH_FILENAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILENAME_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SEARCH_FILENAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILESIZE_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SEARCH_FILESIZE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILESIZE_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SEARCH_FILESIZE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_AVAILABILITY_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SEARCH_AVAILABILITY_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_AVAILABILITY_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SEARCH_AVAILABILITY_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_COMPLETESRC_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SEARCH_COMPLETESRC_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_COMPLETESRC_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SEARCH_COMPLETESRC_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILE_TYPE_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SEARCH_FILE_TYPE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILE_TYPE_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SEARCH_FILE_TYPE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SEARCH_FILE_ID_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SEARCH_FILE_ID_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SEARCH_FILE_ID_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SEARCH_FILE_ID_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_NAME_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SHARED_LIST_FILE_NAME_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_NAME_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SHARED_LIST_FILE_NAME_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_SIZE_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SHARED_LIST_FILE_SIZE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_SIZE_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SHARED_LIST_FILE_SIZE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_TYPE_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SHARED_LIST_FILE_TYPE_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_TYPE_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SHARED_LIST_FILE_TYPE_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_ID_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SHARED_LIST_FILE_ID_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_ID_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SHARED_LIST_FILE_ID_COLUMN_ID ) + "");
-			 
-			 //preferences.
-			 //node( getColumnNodePath( particular_ui_root, SHARED_LIST_COMPLETED_COLUMN_ID ) ).
-			 //putInt(ORDER, getDefaultColumnOrder( SHARED_LIST_COMPLETED_COLUMN_ID ) );
-			 config_store.setProperty(getColumnNodePath( particular_ui_root, SHARED_LIST_COMPLETED_COLUMN_ID ) + ORDER,
-					                  getDefaultColumnOrder( SHARED_LIST_COMPLETED_COLUMN_ID ) + "");
-			 
-			 // other elements
-			 
-			 //preferences.
-			 //node( getPromptOnExitNodePath( particular_ui_root ) ).
-			 //putBoolean(ENABLED, getDefaultPromptOnExit());
-			 config_store.setProperty(getPromptOnExitNodePath( particular_ui_root ) + ENABLED,
-					                  getDefaultPromptOnExit() + "");
-			
-			 //preferences.
-			 //node( getStartupCheckUpdateNodePath( particular_ui_root ) ).
-			 //putBoolean(ENABLED, getDefaultStartupCheckUpdate());
-			 config_store.setProperty(getStartupCheckUpdateNodePath( particular_ui_root ) + ENABLED,
-					                  getDefaultStartupCheckUpdate() + "");
-			 
-			 //preferences.
-			 //node( getToolBarNodePath( particular_ui_root ) ).
-			 //putBoolean(VISIBILITY, getToolBarDefaultVisibility());
-			 config_store.setProperty(getToolBarNodePath( particular_ui_root ) + VISIBILITY, 
-					                  getToolBarDefaultVisibility() + ""); 
-			 
-			 //preferences.
-			 //node( getStatusBarNodePath( particular_ui_root ) ).
-			 //putBoolean(VISIBILITY, getStatusBarDefaultVisibility());
-			 config_store.setProperty(getStatusBarNodePath( particular_ui_root ) + VISIBILITY,
-					                  getStatusBarDefaultVisibility() + "");
-			 
-			 //preferences.
-			 //node( getConnectAtStartupNodePath( particular_ui_root ) ).
-			 //putBoolean(ENABLED, getDefaultConnectAtStartup());
-			 config_store.setProperty(getConnectAtStartupNodePath( particular_ui_root ) + ENABLED,
-					                  getDefaultConnectAtStartup() + "");
 
-			 config_store.store(new FileOutputStream(UI_SETTINGS_FILE), "");
-		}catch(Throwable t) {
+			// sets the default width of the columns
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_NAME_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_NAME_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_NAME_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SERVER_LIST_NAME_COLUMN_ID) + "");
+
+			// preferences.
+			/// node( getColumnNodePath( particular_ui_root, SERVER_LIST_CC_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_CC_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_CC_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SERVER_LIST_CC_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_FLAG_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_FLAG_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_FLAG_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SERVER_LIST_FLAG_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_IP_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_IP_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_IP_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SERVER_LIST_IP_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// SERVER_LIST_DESCRIPTION_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_DESCRIPTION_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_DESCRIPTION_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SERVER_LIST_DESCRIPTION_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_PING_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_PING_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_PING_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SERVER_LIST_PING_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_USERS_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_USERS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_USERS_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SERVER_LIST_USERS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_MAX_USERS_COLUMN_ID
+			// ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_MAX_USERS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_MAX_USERS_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SERVER_LIST_MAX_USERS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_FILES_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_FILES_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_FILES_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SERVER_LIST_FILES_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_SOFT_LIMIT_COLUMN_ID
+			// ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_SOFT_LIMIT_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SERVER_LIST_SOFT_LIMIT_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_HARD_LIMIT_COLUMN_ID
+			// ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_HARD_LIMIT_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_HARD_LIMIT_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SERVER_LIST_HARD_LIMIT_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_VERSION_COLUMN_ID )
+			// ).
+			// putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_VERSION_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_VERSION_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SERVER_LIST_VERSION_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_STATIC_COLUMN_ID )
+			// ).
+			// putInt(WIDTH, getDefaultColumnWidth( SERVER_LIST_STATIC_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_STATIC_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SERVER_LIST_STATIC_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_ORDER_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_ORDER_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_ORDER_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_LIST_ORDER_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_FILE_NAME_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_LIST_FILE_NAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SIZE_COLUMN_ID )
+			// ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_SIZE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_SIZE_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_LIST_SIZE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID )
+			// );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID )
+			// );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PROGRESS_COLUMN_ID
+			// ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_PROGRESS_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_LIST_PROGRESS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SOURCES_COLUMN_ID
+			// ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_SOURCES_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_SOURCES_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_LIST_SOURCES_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID
+			// ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID
+			// ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_REMAINING_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_REMAINING_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_REMAINING_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_LIST_REMAINING_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_STATUS_COLUMN_ID )
+			// ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_LIST_STATUS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_STATUS_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_LIST_STATUS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_IP_COLUMN_ID
+			// ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_PEER_LIST_IP_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_PEER_LIST_IP_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID )
+			// );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID )
+			// );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_NAME_COLUMN_ID
+			// ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( UPLOAD_LIST_FILE_NAME_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_FILE_NAME_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(UPLOAD_LIST_FILE_NAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_SIZE_COLUMN_ID
+			// ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_FILE_SIZE_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(UPLOAD_LIST_FILE_SIZE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_PEERS_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( UPLOAD_LIST_PEERS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_PEERS_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(UPLOAD_LIST_PEERS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_ETA_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( UPLOAD_LIST_ETA_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_ETA_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(UPLOAD_LIST_ETA_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOADED_COLUMN_ID )
+			// ).
+			// putInt(WIDTH, getDefaultColumnWidth( UPLOAD_LIST_UPLOADED_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_UPLOADED_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(UPLOAD_LIST_UPLOADED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_IP_COLUMN_ID )
+			// ).
+			// putInt(WIDTH, getDefaultColumnWidth( UPLOAD_PEER_LIST_IP_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_PEER_LIST_IP_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(UPLOAD_PEER_LIST_IP_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_PEER_LIST_STATUS_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(UPLOAD_PEER_LIST_STATUS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILEQUALITY_COLUMN_ID )
+			// ).
+			// putInt(WIDTH, getDefaultColumnWidth( SEARCH_FILEQUALITY_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILEQUALITY_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SEARCH_FILEQUALITY_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILENAME_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SEARCH_FILENAME_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILENAME_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SEARCH_FILENAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILESIZE_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SEARCH_FILESIZE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILESIZE_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SEARCH_FILESIZE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_AVAILABILITY_COLUMN_ID )
+			// ).
+			// putInt(WIDTH, getDefaultColumnWidth( SEARCH_AVAILABILITY_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_AVAILABILITY_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SEARCH_AVAILABILITY_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_COMPLETESRC_COLUMN_ID )
+			// ).
+			// putInt(WIDTH, getDefaultColumnWidth( SEARCH_COMPLETESRC_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_COMPLETESRC_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SEARCH_COMPLETESRC_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILE_TYPE_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SEARCH_FILE_TYPE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILE_TYPE_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SEARCH_FILE_TYPE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILE_ID_COLUMN_ID ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SEARCH_FILE_ID_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILE_ID_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SEARCH_FILE_ID_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_NAME_COLUMN_ID
+			// ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SHARED_LIST_FILE_NAME_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SHARED_LIST_FILE_NAME_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SHARED_LIST_FILE_NAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_SIZE_COLUMN_ID
+			// ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SHARED_LIST_FILE_SIZE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SHARED_LIST_FILE_SIZE_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SHARED_LIST_FILE_SIZE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_TYPE_COLUMN_ID
+			// ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SHARED_LIST_FILE_TYPE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SHARED_LIST_FILE_TYPE_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SHARED_LIST_FILE_TYPE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_ID_COLUMN_ID )
+			// ).
+			// putInt(WIDTH, getDefaultColumnWidth( SHARED_LIST_FILE_ID_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SHARED_LIST_FILE_ID_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SHARED_LIST_FILE_ID_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_COMPLETED_COLUMN_ID
+			// ) ).
+			// putInt(WIDTH, getDefaultColumnWidth( SHARED_LIST_COMPLETED_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SHARED_LIST_COMPLETED_COLUMN_ID) + WIDTH,
+					getDefaultColumnWidth(SHARED_LIST_COMPLETED_COLUMN_ID) + "");
+
+			// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+			// sets the default order of the columns
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_NAME_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_NAME_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_NAME_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SERVER_LIST_NAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_CC_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_CC_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_CC_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SERVER_LIST_CC_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_FLAG_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_FLAG_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_FLAG_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SERVER_LIST_FLAG_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_IP_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_IP_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_IP_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SERVER_LIST_IP_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// SERVER_LIST_DESCRIPTION_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_DESCRIPTION_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_DESCRIPTION_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SERVER_LIST_DESCRIPTION_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_PING_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_PING_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_PING_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SERVER_LIST_PING_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_USERS_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_USERS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_USERS_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SERVER_LIST_USERS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_MAX_USERS_COLUMN_ID
+			// ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_MAX_USERS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_MAX_USERS_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SERVER_LIST_MAX_USERS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_FILES_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_FILES_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_FILES_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SERVER_LIST_FILES_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_SOFT_LIMIT_COLUMN_ID
+			// ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_SOFT_LIMIT_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_SOFT_LIMIT_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SERVER_LIST_SOFT_LIMIT_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_HARD_LIMIT_COLUMN_ID
+			// ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_HARD_LIMIT_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_HARD_LIMIT_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SERVER_LIST_HARD_LIMIT_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_VERSION_COLUMN_ID )
+			// ).
+			// putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_VERSION_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_VERSION_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SERVER_LIST_VERSION_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SERVER_LIST_STATIC_COLUMN_ID )
+			// ).
+			// putInt(ORDER, getDefaultColumnOrder( SERVER_LIST_STATIC_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SERVER_LIST_STATIC_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SERVER_LIST_STATIC_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_ORDER_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_ORDER_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_ORDER_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_LIST_ORDER_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_FILE_NAME_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_FILE_NAME_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_LIST_FILE_NAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SIZE_COLUMN_ID )
+			// ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_SIZE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_SIZE_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_LIST_SIZE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_LIST_TRANSFERRED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID )
+			// );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_LIST_DOWNLOAD_SPEED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID )
+			// );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_LIST_UPLOAD_SPEED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_PROGRESS_COLUMN_ID
+			// ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_PROGRESS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_PROGRESS_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_LIST_PROGRESS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_SOURCES_COLUMN_ID
+			// ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_SOURCES_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_SOURCES_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_LIST_SOURCES_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID
+			// ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_LIST_COMPLETE_SOURCES_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID
+			// ) );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_LIST_PARTIAL_SOURCES_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_LIST_REMAINING_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_REMAINING_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_REMAINING_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_LIST_REMAINING_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_LIST_STATUS_COLUMN_ID )
+			// ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_LIST_STATUS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_LIST_STATUS_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_LIST_STATUS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, DOWNLOAD_PEER_LIST_IP_COLUMN_ID
+			// ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_PEER_LIST_IP_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_PEER_LIST_IP_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_PEER_LIST_IP_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_PEER_LIST_STATUS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID )
+			// );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_PEER_LIST_NICKNAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID )
+			// );
+			config_store.setProperty(
+					getColumnNodePath(particular_ui_root, DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(DOWNLOAD_PEER_LIST_SOFTWARE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_NAME_COLUMN_ID
+			// ) ).
+			// putInt(ORDER, getDefaultColumnOrder( UPLOAD_LIST_FILE_NAME_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_FILE_NAME_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(UPLOAD_LIST_FILE_NAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_FILE_SIZE_COLUMN_ID
+			// ) ).
+			// putInt(ORDER, getDefaultColumnOrder( UPLOAD_LIST_FILE_SIZE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_FILE_SIZE_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(UPLOAD_LIST_FILE_SIZE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_PEERS_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( UPLOAD_LIST_PEERS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_PEERS_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(UPLOAD_LIST_PEERS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_ETA_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( UPLOAD_LIST_ETA_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_ETA_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(UPLOAD_LIST_ETA_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_LIST_UPLOADED_COLUMN_ID )
+			// ).
+			// putInt(ORDER, getDefaultColumnOrder( UPLOAD_LIST_UPLOADED_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_LIST_UPLOADED_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(UPLOAD_LIST_UPLOADED_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, UPLOAD_PEER_LIST_IP_COLUMN_ID )
+			// ).
+			// putInt(ORDER, getDefaultColumnOrder( UPLOAD_PEER_LIST_IP_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_PEER_LIST_IP_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(UPLOAD_PEER_LIST_IP_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( UPLOAD_PEER_LIST_STATUS_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_PEER_LIST_STATUS_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(UPLOAD_PEER_LIST_STATUS_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(UPLOAD_PEER_LIST_NICKNAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root,
+			// UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(UPLOAD_PEER_LIST_SOFTWARE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILEQUALITY_COLUMN_ID )
+			// ).
+			// putInt(ORDER, getDefaultColumnOrder( SEARCH_FILEQUALITY_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILEQUALITY_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SEARCH_FILEQUALITY_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILENAME_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SEARCH_FILENAME_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILENAME_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SEARCH_FILENAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILESIZE_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SEARCH_FILESIZE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILESIZE_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SEARCH_FILESIZE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_AVAILABILITY_COLUMN_ID )
+			// ).
+			// putInt(ORDER, getDefaultColumnOrder( SEARCH_AVAILABILITY_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_AVAILABILITY_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SEARCH_AVAILABILITY_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_COMPLETESRC_COLUMN_ID )
+			// ).
+			// putInt(ORDER, getDefaultColumnOrder( SEARCH_COMPLETESRC_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_COMPLETESRC_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SEARCH_COMPLETESRC_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILE_TYPE_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SEARCH_FILE_TYPE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILE_TYPE_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SEARCH_FILE_TYPE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SEARCH_FILE_ID_COLUMN_ID ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SEARCH_FILE_ID_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SEARCH_FILE_ID_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SEARCH_FILE_ID_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_NAME_COLUMN_ID
+			// ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SHARED_LIST_FILE_NAME_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SHARED_LIST_FILE_NAME_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SHARED_LIST_FILE_NAME_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_SIZE_COLUMN_ID
+			// ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SHARED_LIST_FILE_SIZE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SHARED_LIST_FILE_SIZE_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SHARED_LIST_FILE_SIZE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_TYPE_COLUMN_ID
+			// ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SHARED_LIST_FILE_TYPE_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SHARED_LIST_FILE_TYPE_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SHARED_LIST_FILE_TYPE_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_FILE_ID_COLUMN_ID )
+			// ).
+			// putInt(ORDER, getDefaultColumnOrder( SHARED_LIST_FILE_ID_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SHARED_LIST_FILE_ID_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SHARED_LIST_FILE_ID_COLUMN_ID) + "");
+
+			// preferences.
+			// node( getColumnNodePath( particular_ui_root, SHARED_LIST_COMPLETED_COLUMN_ID
+			// ) ).
+			// putInt(ORDER, getDefaultColumnOrder( SHARED_LIST_COMPLETED_COLUMN_ID ) );
+			config_store.setProperty(getColumnNodePath(particular_ui_root, SHARED_LIST_COMPLETED_COLUMN_ID) + ORDER,
+					getDefaultColumnOrder(SHARED_LIST_COMPLETED_COLUMN_ID) + "");
+
+			// other elements
+
+			// preferences.
+			// node( getPromptOnExitNodePath( particular_ui_root ) ).
+			// putBoolean(ENABLED, getDefaultPromptOnExit());
+			config_store.setProperty(getPromptOnExitNodePath(particular_ui_root) + ENABLED,
+					getDefaultPromptOnExit() + "");
+
+			// preferences.
+			// node( getStartupCheckUpdateNodePath( particular_ui_root ) ).
+			// putBoolean(ENABLED, getDefaultStartupCheckUpdate());
+			config_store.setProperty(getStartupCheckUpdateNodePath(particular_ui_root) + ENABLED,
+					getDefaultStartupCheckUpdate() + "");
+
+			// preferences.
+			// node( getToolBarNodePath( particular_ui_root ) ).
+			// putBoolean(VISIBILITY, getToolBarDefaultVisibility());
+			config_store.setProperty(getToolBarNodePath(particular_ui_root) + VISIBILITY,
+					getToolBarDefaultVisibility() + "");
+
+			// preferences.
+			// node( getStatusBarNodePath( particular_ui_root ) ).
+			// putBoolean(VISIBILITY, getStatusBarDefaultVisibility());
+			config_store.setProperty(getStatusBarNodePath(particular_ui_root) + VISIBILITY,
+					getStatusBarDefaultVisibility() + "");
+
+			// preferences.
+			// node( getConnectAtStartupNodePath( particular_ui_root ) ).
+			// putBoolean(ENABLED, getDefaultConnectAtStartup());
+			config_store.setProperty(getConnectAtStartupNodePath(particular_ui_root) + ENABLED,
+					getDefaultConnectAtStartup() + "");
+
+			config_store.store(new FileOutputStream(UI_SETTINGS_FILE), "");
+		} catch (Throwable t) {
 			t.printStackTrace();
 		}
-		
+
 	}
 
 	protected void save() {
@@ -1051,8 +1262,7 @@ public class UIPreferences extends UIConstants {
 	protected boolean isPromptOnExitEnabled(String uiRoot) {
 		String node = getPromptOnExitNodePath(uiRoot);
 
-		return Boolean.parseBoolean(config_store.getProperty(node + ENABLED,
-				getDefaultPromptOnExit() + ""));
+		return Boolean.parseBoolean(config_store.getProperty(node + ENABLED, getDefaultPromptOnExit() + ""));
 		// return preferences.node(node).getBoolean(ENABLED,
 		// getDefaultPromptOnExit());
 	}
@@ -1064,8 +1274,8 @@ public class UIPreferences extends UIConstants {
 	protected boolean isCheckForUpdatesAtStartup(String uiRoot) {
 		String update_check_node = getStartupCheckUpdateNodePath(uiRoot);
 
-		return Boolean.parseBoolean(config_store.getProperty(update_check_node
-				+ ENABLED, getDefaultStartupCheckUpdate() + ""));
+		return Boolean.parseBoolean(
+				config_store.getProperty(update_check_node + ENABLED, getDefaultStartupCheckUpdate() + ""));
 		// return preferences.node(update_check_node).getBoolean(ENABLED,
 		// getDefaultStartupCheckUpdate());
 	}
@@ -1085,8 +1295,8 @@ public class UIPreferences extends UIConstants {
 		String toolbar_node = getToolBarNodePath(uiRoot);
 		// return preferences.node(toolbar_node).getBoolean(VISIBILITY,
 		// getToolBarDefaultVisibility());
-		return Boolean.parseBoolean(config_store.getProperty(toolbar_node
-				+ VISIBILITY, getToolBarDefaultVisibility() + ""));
+		return Boolean
+				.parseBoolean(config_store.getProperty(toolbar_node + VISIBILITY, getToolBarDefaultVisibility() + ""));
 	}
 
 	protected void setToolBarVisible(String uiRoot, boolean visibility) {
@@ -1104,8 +1314,8 @@ public class UIPreferences extends UIConstants {
 		String toolbar_node = getStatusBarNodePath(uiRoot);
 		// return preferences.node(toolbar_node).getBoolean(VISIBILITY,
 		// getStatusBarDefaultVisibility());
-		return Boolean.parseBoolean(config_store.getProperty(toolbar_node
-				+ VISIBILITY, getStatusBarDefaultVisibility() + ""));
+		return Boolean.parseBoolean(
+				config_store.getProperty(toolbar_node + VISIBILITY, getStatusBarDefaultVisibility() + ""));
 	}
 
 	protected void setStatusBarVisible(String uiRoot, boolean visibility) {
@@ -1123,8 +1333,8 @@ public class UIPreferences extends UIConstants {
 		String node = getNightlyBuildWarningNodePath(uiRoot);
 		// boolean value = preferences.node(node).getBoolean(ENABLED,
 		// getDefaultNightlyBuildWarningEnabled());
-		boolean value = Boolean.parseBoolean(config_store.getProperty(node
-				+ ENABLED, getDefaultNightlyBuildWarningEnabled() + ""));
+		boolean value = Boolean
+				.parseBoolean(config_store.getProperty(node + ENABLED, getDefaultNightlyBuildWarningEnabled() + ""));
 		if (value) {
 			setNightlyBuildWarningJMVer(uiRoot, JMConstants.DEV_VERSION);
 			return true;
@@ -1156,8 +1366,7 @@ public class UIPreferences extends UIConstants {
 		String node_path = getNightlyBuildWarningJMVerNodePath(uiRoot);
 		// return preferences.node(node_path).get(VERSION,
 		// getDefaultNightlyBuildWarningJMVer());
-		return config_store.getProperty(node_path + VERSION,
-				getDefaultNightlyBuildWarningJMVer());
+		return config_store.getProperty(node_path + VERSION, getDefaultNightlyBuildWarningJMVer());
 	}
 
 	// end NightlyBuildWarning methods
@@ -1168,8 +1377,7 @@ public class UIPreferences extends UIConstants {
 		String node = getConnectAtStartupNodePath(uiRoot);
 		// return preferences.node(node).getBoolean(ENABLED,
 		// getDefaultConnectAtStartup());
-		return Boolean.parseBoolean(config_store.getProperty(node + ENABLED,
-				getDefaultConnectAtStartup() + ""));
+		return Boolean.parseBoolean(config_store.getProperty(node + ENABLED, getDefaultConnectAtStartup() + ""));
 	}
 
 	protected void setConnectAtStartup(String uiRoot, boolean value) {
@@ -1192,8 +1400,7 @@ public class UIPreferences extends UIConstants {
 		String node = getColumnNodePath(uiRoot, columnID);
 		// return preferences.node(node).getInt(WIDTH,
 		// getDefaultColumnWidth(columnID));
-		return Integer.parseInt(config_store.getProperty(node + WIDTH,
-				getDefaultColumnWidth(columnID) + ""));
+		return Integer.parseInt(config_store.getProperty(node + WIDTH, getDefaultColumnWidth(columnID) + ""));
 	}
 
 	protected void setColumnOrder(String uiRoot, int columnID, int order) {
@@ -1207,12 +1414,10 @@ public class UIPreferences extends UIConstants {
 		String node = getColumnNodePath(uiRoot, columnID);
 		// return preferences.node(node).getInt(ORDER,
 		// getDefaultColumnOrder(columnID));
-		return Integer.parseInt(config_store.getProperty(node + ORDER,
-				getDefaultColumnOrder(columnID) + ""));
+		return Integer.parseInt(config_store.getProperty(node + ORDER, getDefaultColumnOrder(columnID) + ""));
 	}
 
-	protected void setColumnVisibility(String uiRoot, int columnID,
-			boolean visibility) {
+	protected void setColumnVisibility(String uiRoot, int columnID, boolean visibility) {
 		String node = getColumnNodePath(uiRoot, columnID);
 		// preferences.node(node).putBoolean(VISIBILITY, visibility);
 		config_store.setProperty(node + VISIBILITY, visibility + "");
@@ -1223,8 +1428,8 @@ public class UIPreferences extends UIConstants {
 		String node = getColumnNodePath(uiRoot, columnID);
 		// return preferences.node(node).getBoolean(VISIBILITY,
 		// getDefaultColumnVisibility(columnID));
-		return Boolean.parseBoolean(config_store.getProperty(node + VISIBILITY,
-				getDefaultColumnVisibility(columnID) + ""));
+		return Boolean
+				.parseBoolean(config_store.getProperty(node + VISIBILITY, getDefaultColumnVisibility(columnID) + ""));
 	}
 
 }

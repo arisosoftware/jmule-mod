@@ -17,17 +17,17 @@ import java.lang.reflect.Type;
  * Represents an inter-type field declaration declared in an aspect.
  */
 public interface InterTypeFieldDeclaration extends InterTypeDeclaration {
-	
+
 	/**
 	 * The field name
 	 */
 	String getName();
-	
+
 	/**
 	 * The field type
 	 */
 	AjType<?> getType();
-	
+
 	/**
 	 * The generic field type
 	 */

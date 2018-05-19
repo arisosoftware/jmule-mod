@@ -51,34 +51,34 @@ import org.jmule.core.utils.Misc;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.28 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/08/15 12:26:15 $$
+ * @version $$Revision: 1.28 $$ Last changed by $$Author: binary255 $$ on
+ *          $$Date: 2010/08/15 12:26:15 $$
  */
 public class UploadSession implements JMTransferSession {
-	private SharedFile sharedFile;	
-	
+	private SharedFile sharedFile;
+
 	private Collection<Peer> session_peers = new ConcurrentLinkedQueue<Peer>();
 	Map<Peer, Set<FileChunkRequest>> requested_chunks = new ConcurrentHashMap<Peer, Set<FileChunkRequest>>();
-	//private Map<Peer, Set<FileChunkRequest>> sended_chunks;
-		
+	// private Map<Peer, Set<FileChunkRequest>> sended_chunks;
+
 	private InternalNetworkManager _network_manager = (InternalNetworkManager) NetworkManagerSingleton.getInstance();
 	private UploadQueue _upload_queue;
 	private long totalUploaded = 0;
-	
+
 	UploadSession(SharedFile sFile) {
 		sharedFile = sFile;
-		
+
 		_upload_queue = UploadQueue.getInstance();
 	}
-	
+
 	void stopSession() {
-		for(Peer peer : session_peers) {
+		for (Peer peer : session_peers) {
 			removePeer(peer);
 			_upload_queue.removePeer(peer);
 		}
-		
+
 	}
-	
+
 	public boolean sharingCompleteFile() {
 		boolean result = sharedFile instanceof CompletedFile;
 		if (!result) {
@@ -89,30 +89,30 @@ public class UploadSession implements JMTransferSession {
 
 		return result;
 	}
-		
+
 	public int getPeerCount() {
 		return session_peers.size();
 	}
-	
+
 	public List<Peer> getPeers() {
 		return Arrays.asList(session_peers.toArray(new Peer[0]));
 	}
-	
+
 	public boolean hasPeer(Peer peer) {
 		return session_peers.contains(peer);
 	}
-	
+
 	public String getSharingName() {
 		return sharedFile.getSharingName();
 	}
-	
+
 	public float getSpeed() {
 		float upload_speed = 0.0f;
-		for(Peer peer : session_peers)
+		for (Peer peer : session_peers)
 			upload_speed += peer.getUploadSpeed();
 		return upload_speed;
 	}
-		
+
 	public long getETA() {
 		float upload_speed = getSpeed();
 		if (upload_speed != 0)
@@ -120,24 +120,24 @@ public class UploadSession implements JMTransferSession {
 		else
 			return Misc.INFINITY_AS_INT;
 	}
-	
+
 	void removePeer(Peer sender) {
 		if (sender.isConnected())
 			if (_upload_queue.hasSlotPeer(sender))
 				_network_manager.sendSlotRelease(sender.getIP(), sender.getPort());
-		
+
 		session_peers.remove(sender);
 		if (requested_chunks.containsKey(sender))
 			requested_chunks.remove(sender);
 
 	}
-	
+
 	void receivedFileChunkRequestFromPeer(Peer sender, FileHash fileHash, List<FileChunkRequest> chunkList) {
 		if (sharedFile instanceof PartialFile) {
 			PartialFile partial_file = (PartialFile) sharedFile;
 			GapList gapList = partial_file.getGapList();
-			for(FileChunkRequest request : chunkList) {
-				if (gapList.getIntersectedGaps(request.getChunkBegin(), request.getChunkEnd()).size()!=0) {
+			for (FileChunkRequest request : chunkList) {
+				if (gapList.getIntersectedGaps(request.getChunkBegin(), request.getChunkEnd()).size() != 0) {
 					try {
 						PeerManagerSingleton.getInstance().disconnect(sender);
 					} catch (PeerManagerException e) {
@@ -147,26 +147,25 @@ public class UploadSession implements JMTransferSession {
 				}
 			}
 		}
-		
+
 		if (!requested_chunks.containsKey(sender)) {
 			requested_chunks.put(sender, new ConcurrentSkipListSet<FileChunkRequest>());
 		}
-		
+
 		Set<FileChunkRequest> chunks = requested_chunks.get(sender);
-		
+
 		List<FileChunkRequest> duplicate_chunks = new ArrayList<FileChunkRequest>();
-		
-		for(FileChunkRequest chunk_request : chunkList) {
+
+		for (FileChunkRequest chunk_request : chunkList) {
 			if (chunks.contains(chunk_request)) {
 				duplicate_chunks.add(chunk_request);
-			}
-			else {
+			} else {
 				chunks.add(chunk_request);
 			}
 		}
 		chunkList.removeAll(duplicate_chunks);
-		
-		for(FileChunkRequest chunk_request : chunkList) {
+
+		for (FileChunkRequest chunk_request : chunkList) {
 			FileChunk file_chunk;
 			try {
 				file_chunk = sharedFile.getData(chunk_request);
@@ -177,32 +176,30 @@ public class UploadSession implements JMTransferSession {
 			_network_manager.sendFileChunk(sender.getIP(), sender.getPort(), getFileHash(), file_chunk);
 		}
 	}
-	
-	void receivedSlotRequestFromPeer(Peer sender,FileHash fileHash) {
+
+	void receivedSlotRequestFromPeer(Peer sender, FileHash fileHash) {
 		session_peers.add(sender);
 	}
-	
+
 	void peerConnected(Peer peer) {
-/*		List<Peer> peer_list = uploadQueue.getSlotPeers(PeerQueueStatus.SLOTTAKEN);
-		for (Peer p : peer_list) {
-			if (p.equals(peer)) {
-				network_manager.sendSlotGiven(peer.getIP(), peer.getPort(), getFileHash());
-				break;
-			}
-		}*/
-			
+		/*
+		 * List<Peer> peer_list = uploadQueue.getSlotPeers(PeerQueueStatus.SLOTTAKEN);
+		 * for (Peer p : peer_list) { if (p.equals(peer)) {
+		 * network_manager.sendSlotGiven(peer.getIP(), peer.getPort(), getFileHash());
+		 * break; } }
+		 */
+
 	}
-	
+
 	void peerConnectingFailed(Peer peer, Throwable cause) {
-		
+
 	}
-	
-		
+
 	public String toString() {
 		String str = " [ \n ";
 		str += "Shared file : " + this.sharedFile + "\nPeers : \n";
-		for(Peer peer : session_peers)
-			str += " " +peer + "\n";
+		for (Peer peer : session_peers)
+			str += " " + peer + "\n";
 		str += "\n]";
 		return str;
 	}
@@ -222,7 +219,7 @@ public class UploadSession implements JMTransferSession {
 	public FileHash getFileHash() {
 		return this.sharedFile.getFileHash();
 	}
-	
+
 	void addTransferredBytes(long addBytes) {
 		this.totalUploaded += addBytes;
 	}
@@ -247,4 +244,3 @@ public class UploadSession implements JMTransferSession {
 		sharedFile = newFile;
 	}
 }
-	

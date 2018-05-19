@@ -24,9 +24,10 @@ package org.jmule.core.jkad.publisher;
 
 /**
  * Created on Jul 11, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/28 13:12:32 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/28 13:12:32 $
  */
 public interface PublisherListener {
 
@@ -37,5 +38,5 @@ public interface PublisherListener {
 	public void publishTaskStopped(PublishTask task);
 
 	public void publishTaskRemoved(PublishTask task);
-	
+
 }

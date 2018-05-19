@@ -22,52 +22,60 @@ import org.aspectj.lang.reflect.InterTypeConstructorDeclaration;
  * @author colyer
  *
  */
-public class InterTypeConstructorDeclarationImpl extends
-		InterTypeDeclarationImpl implements InterTypeConstructorDeclaration {
+public class InterTypeConstructorDeclarationImpl extends InterTypeDeclarationImpl
+		implements InterTypeConstructorDeclaration {
 
 	private Method baseMethod;
-	
+
 	/**
 	 * @param decType
 	 * @param target
 	 * @param mods
 	 */
-	public InterTypeConstructorDeclarationImpl(AjType<?> decType,
-			String target, int mods, Method baseMethod) {
+	public InterTypeConstructorDeclarationImpl(AjType<?> decType, String target, int mods, Method baseMethod) {
 		super(decType, target, mods);
 		this.baseMethod = baseMethod;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.InterTypeConstructorDeclaration#getParameters()
 	 */
 	public AjType<?>[] getParameterTypes() {
 		Class<?>[] baseTypes = baseMethod.getParameterTypes();
-		AjType<?>[] ret = new AjType<?>[baseTypes.length-1];
+		AjType<?>[] ret = new AjType<?>[baseTypes.length - 1];
 		for (int i = 1; i < baseTypes.length; i++) {
-			ret[i-1] = AjTypeSystem.getAjType(baseTypes[i]);
+			ret[i - 1] = AjTypeSystem.getAjType(baseTypes[i]);
 		}
 		return ret;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.aspectj.lang.reflect.InterTypeConstructorDeclaration#getGenericParameters()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.aspectj.lang.reflect.InterTypeConstructorDeclaration#getGenericParameters
+	 * ()
 	 */
 	public Type[] getGenericParameterTypes() {
 		Type[] baseTypes = baseMethod.getGenericParameterTypes();
-		Type[] ret = new AjType<?>[baseTypes.length-1];
+		Type[] ret = new AjType<?>[baseTypes.length - 1];
 		for (int i = 1; i < baseTypes.length; i++) {
 			if (baseTypes[i] instanceof Class) {
-				ret[i-1] = AjTypeSystem.getAjType((Class<?>)baseTypes[i]);
+				ret[i - 1] = AjTypeSystem.getAjType((Class<?>) baseTypes[i]);
 			} else {
-				ret[i-1] = baseTypes[i];
+				ret[i - 1] = baseTypes[i];
 			}
 		}
 		return ret;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.aspectj.lang.reflect.InterTypeConstructorDeclaration#getDeclaredExceptionTypes()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.aspectj.lang.reflect.InterTypeConstructorDeclaration#
+	 * getDeclaredExceptionTypes()
 	 */
 	public AjType<?>[] getExceptionTypes() {
 		Class<?>[] baseTypes = baseMethod.getExceptionTypes();
@@ -77,7 +85,7 @@ public class InterTypeConstructorDeclarationImpl extends
 		}
 		return ret;
 	}
-	
+
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(java.lang.reflect.Modifier.toString(getModifiers()));
@@ -86,12 +94,12 @@ public class InterTypeConstructorDeclarationImpl extends
 		sb.append(".new");
 		sb.append("(");
 		AjType<?>[] pTypes = getParameterTypes();
-		for(int i = 0; i < (pTypes.length - 1); i++) {
+		for (int i = 0; i < (pTypes.length - 1); i++) {
 			sb.append(pTypes[i].toString());
 			sb.append(", ");
 		}
 		if (pTypes.length > 0) {
-			sb.append(pTypes[pTypes.length -1].toString());
+			sb.append(pTypes[pTypes.length - 1].toString());
 		}
 		sb.append(")");
 		return sb.toString();

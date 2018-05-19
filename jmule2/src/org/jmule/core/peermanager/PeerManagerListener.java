@@ -26,27 +26,28 @@ import java.nio.ByteBuffer;
 
 /**
  * Created on Aug 30, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary255 $ on $Date: 2009/12/25 20:13:28 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/12/25 20:13:28 $
  */
 public interface PeerManagerListener {
 
 	public void newPeer(Peer peer);
-	
+
 	public void peerRemoved(Peer peer);
-	
+
 	public void peerConnecting(Peer peer);
-	
+
 	public void peerConnected(Peer peer);
-	
+
 	public void peerDisconnected(Peer peer);
-	
+
 	public void peerConnectingFailed(Peer peer, Throwable cause);
-	
+
 	public void peerMessage(Peer peer, String message);
-	
+
 	public void peerCaptchaImage(Peer peer, ByteBuffer image);
-	
+
 	public void peerCaptchaStatusAnswer(Peer peer, byte answer);// 0 - response accepted
 }

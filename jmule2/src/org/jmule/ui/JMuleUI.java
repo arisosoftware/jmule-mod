@@ -27,30 +27,31 @@ import org.jmule.ui.skin.Skin;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:44:53 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:44:53 $$
  */
 public interface JMuleUI<T extends Skin> {
 
-	  /**
-	   * Initializes the JMule UI
-	   */
-	  public void initialize();
-	  
-	  /**
-	   * Starts the JMule UI
-	   */
-	  public void start();
-	  
-	  /**
-	   * Stops the JMule UI
-	   */
-	  public void shutdown();
-	  
-	  /**
-	   * Gets the skin
-	   * @return the current skin
-	   */
-	  public T getSkin();
-	
+	/**
+	 * Initializes the JMule UI
+	 */
+	public void initialize();
+
+	/**
+	 * Starts the JMule UI
+	 */
+	public void start();
+
+	/**
+	 * Stops the JMule UI
+	 */
+	public void shutdown();
+
+	/**
+	 * Gets the skin
+	 * 
+	 * @return the current skin
+	 */
+	public T getSkin();
+
 }

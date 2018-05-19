@@ -16,14 +16,12 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-
 /**
- * @author colyer
- * Marker annotation for code style declare precedence declarations
- * ajc prefix used to indicate that this annotation is *internal*
- * Can't use DeclarePrecedence as that has target = type and we
- * need method to cope with the (rare) case of multiple declare
- * precendence statements in the same aspect.
+ * @author colyer Marker annotation for code style declare precedence
+ *         declarations ajc prefix used to indicate that this annotation is
+ *         *internal* Can't use DeclarePrecedence as that has target = type and
+ *         we need method to cope with the (rare) case of multiple declare
+ *         precendence statements in the same aspect.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

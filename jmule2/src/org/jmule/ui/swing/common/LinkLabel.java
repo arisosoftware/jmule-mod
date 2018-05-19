@@ -36,156 +36,131 @@ import javax.swing.Action;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 
-
 /**
  * 
- * A simple Label that offers rollover effect and a action that is triggered when 
- * clicked on.
+ * A simple Label that offers rollover effect and a action that is triggered
+ * when clicked on.
+ * 
  * @author gregork
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:44:43 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:44:43 $$
  */
 
-public class LinkLabel extends JLabel implements MouseListener
-{
-    private boolean isFontBold;
-    private boolean isRollover;
-    private Action action;
-    
-    /**
-     * Create a new link label.
-     * @param text the text to display.
-     * @param linkAction the action to trigger when clicked on.
-     */
-    public LinkLabel( JMSAction linkAction )
-    {
-        super( (String)linkAction.getValue( JMSAction.NAME ) );
-        action = linkAction;
-        registerActionChangeListener(action);
-        setToolTipText( (String)action.getValue( JMSAction.TOOL_TIP_TEXT ) );
-        setEnabled( action.isEnabled() );
-        isRollover = false;
-        isFontBold = false;
-        addMouseListener( this );
-        setCursor( Cursor.getPredefinedCursor( Cursor.HAND_CURSOR ) );
-    }
-    
-    public void paintComponent( Graphics g )
-    {
-        super.paintComponent(g);
-        if ( isEnabled() )
-        {
-            g.drawLine( 0, getHeight()-2, getWidth(), getHeight()-2);
-            // for disabled line drawing we could use this.. put for now just dont
-            // draw disabled lines
-            //g.setColor( UIManager.getColor("Label.disabledForeground") );
-        }
-    }
-    
-    
-    public void setFontBold( boolean isBold )
-    {
-        isFontBold = isBold;
-        
-        Font currentFont = getFont();
-        if ( currentFont.isBold() != isFontBold )
-        {
-            if ( isFontBold )
-            {
-                setFont( UIManager.getFont("Label.font").deriveFont( Font.BOLD ) );
-            }
-            else
-            {
-                setFont( UIManager.getFont("Label.font") );
-            }
-        }
-    }
-    
-    public void initialize()
-    {
-        setFontBold( isFontBold );
-    }
-    
-    public void updateUI()
-    {
-        super.updateUI();
-        initialize();
-    }
-    
-    public Color getForeground()
-    {
-        if ( isRollover )
-        {
-            //return PhexColors.getLinkLabelRolloverForeground();
-        	return new Color( 0x0000FF );
-        }
-        else
-        {
-            return super.getForeground();
-        }
-    }
-    
-    // TODO3 if btn needs to be removed... unregister!
-    private void registerActionChangeListener( Action a )
-    {
-        PropertyChangeListener actionPropertyChangeListener = new ActionChangedListener();
-        a.addPropertyChangeListener(actionPropertyChangeListener);
-    }
+public class LinkLabel extends JLabel implements MouseListener {
+	private boolean isFontBold;
+	private boolean isRollover;
+	private Action action;
 
-    public void mouseEntered(MouseEvent e)
-    {
-        isRollover = true;
-        repaint();
-    }
+	/**
+	 * Create a new link label.
+	 * 
+	 * @param text
+	 *            the text to display.
+	 * @param linkAction
+	 *            the action to trigger when clicked on.
+	 */
+	public LinkLabel(JMSAction linkAction) {
+		super((String) linkAction.getValue(JMSAction.NAME));
+		action = linkAction;
+		registerActionChangeListener(action);
+		setToolTipText((String) action.getValue(JMSAction.TOOL_TIP_TEXT));
+		setEnabled(action.isEnabled());
+		isRollover = false;
+		isFontBold = false;
+		addMouseListener(this);
+		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	}
 
-    public void mouseExited(MouseEvent e)
-    {
-        isRollover = false;
-        repaint();
-    }
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		if (isEnabled()) {
+			g.drawLine(0, getHeight() - 2, getWidth(), getHeight() - 2);
+			// for disabled line drawing we could use this.. put for now just dont
+			// draw disabled lines
+			// g.setColor( UIManager.getColor("Label.disabledForeground") );
+		}
+	}
 
-    public void mouseClicked(MouseEvent e)
-    {
-        if ( action != null )
-        {
-            action.actionPerformed( new ActionEvent( this, 0, "" ) );
-        }
-    }
-    
-    public void mousePressed(MouseEvent e)
-    {}
-    public void mouseReleased(MouseEvent e)
-    {}
-    
-    private class ActionChangedListener implements PropertyChangeListener
-    {
-        ActionChangedListener( )
-        {
-            super();
-        }
+	public void setFontBold(boolean isBold) {
+		isFontBold = isBold;
 
-        public void propertyChange(PropertyChangeEvent e)
-        {
-            String propertyName = e.getPropertyName();
-            if ( propertyName.equals(Action.NAME))
-            {
-                String text = (String) e.getNewValue();
-                setText( text );
-                repaint();
-            }
-            else if ( propertyName.equals("enabled"))
-            {
-                Boolean enabledState = (Boolean) e.getNewValue();
-                setEnabled(enabledState.booleanValue());
-                repaint();
-            }
-            else if ( propertyName.equals( JMSAction.TOOL_TIP_TEXT ))
-            {
-                String text = (String) e.getNewValue();
-                setToolTipText( text );
-                repaint();
-            }
-        }
-    }
+		Font currentFont = getFont();
+		if (currentFont.isBold() != isFontBold) {
+			if (isFontBold) {
+				setFont(UIManager.getFont("Label.font").deriveFont(Font.BOLD));
+			} else {
+				setFont(UIManager.getFont("Label.font"));
+			}
+		}
+	}
+
+	public void initialize() {
+		setFontBold(isFontBold);
+	}
+
+	public void updateUI() {
+		super.updateUI();
+		initialize();
+	}
+
+	public Color getForeground() {
+		if (isRollover) {
+			// return PhexColors.getLinkLabelRolloverForeground();
+			return new Color(0x0000FF);
+		} else {
+			return super.getForeground();
+		}
+	}
+
+	// TODO3 if btn needs to be removed... unregister!
+	private void registerActionChangeListener(Action a) {
+		PropertyChangeListener actionPropertyChangeListener = new ActionChangedListener();
+		a.addPropertyChangeListener(actionPropertyChangeListener);
+	}
+
+	public void mouseEntered(MouseEvent e) {
+		isRollover = true;
+		repaint();
+	}
+
+	public void mouseExited(MouseEvent e) {
+		isRollover = false;
+		repaint();
+	}
+
+	public void mouseClicked(MouseEvent e) {
+		if (action != null) {
+			action.actionPerformed(new ActionEvent(this, 0, ""));
+		}
+	}
+
+	public void mousePressed(MouseEvent e) {
+	}
+
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	private class ActionChangedListener implements PropertyChangeListener {
+		ActionChangedListener() {
+			super();
+		}
+
+		public void propertyChange(PropertyChangeEvent e) {
+			String propertyName = e.getPropertyName();
+			if (propertyName.equals(Action.NAME)) {
+				String text = (String) e.getNewValue();
+				setText(text);
+				repaint();
+			} else if (propertyName.equals("enabled")) {
+				Boolean enabledState = (Boolean) e.getNewValue();
+				setEnabled(enabledState.booleanValue());
+				repaint();
+			} else if (propertyName.equals(JMSAction.TOOL_TIP_TEXT)) {
+				String text = (String) e.getNewValue();
+				setToolTipText(text);
+				repaint();
+			}
+		}
+	}
 }

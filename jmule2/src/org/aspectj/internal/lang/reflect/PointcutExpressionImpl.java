@@ -19,14 +19,16 @@ import org.aspectj.lang.reflect.PointcutExpression;
  */
 public class PointcutExpressionImpl implements PointcutExpression {
 	private String expression;
-	
+
 	public PointcutExpressionImpl(String aPointcutExpression) {
 		this.expression = aPointcutExpression;
 	}
-	
+
 	public String asString() {
 		return expression;
 	}
-	
-	public String toString() { return asString(); }
+
+	public String toString() {
+		return asString();
+	}
 }

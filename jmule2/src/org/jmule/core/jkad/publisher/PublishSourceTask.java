@@ -38,30 +38,31 @@ import org.jmule.core.jkad.packet.PacketFactory;
 import org.jmule.core.jkad.publisher.Publisher.PublishTaskListener;
 import org.jmule.core.jkad.routingtable.KadContact;
 
-
 /**
  * Created on Jan 14, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.13 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/28 13:13:43 $
+ * @version $Revision: 1.13 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/28 13:13:43 $
  */
 public class PublishSourceTask extends PublishTask {
 
 	private LookupTask lookup_task;
 	private PublishItem publishItem;
-	
+
 	public PublishSourceTask(PublishTaskListener listener, Int128 publishID, PublishItem publishItem) {
-		super(publishID,listener);
+		super(publishID, listener);
 		this.publishItem = publishItem;
 	}
-	
+
 	public PublishItem getPublishItem() {
 		return publishItem;
 	}
 
 	public void start() throws JKadException {
-		if (lookup_task!=null)
-			if (lookup_task.isLookupStarted()) return;
+		if (lookup_task != null)
+			if (lookup_task.isLookupStarted())
+				return;
 
 		isStarted = true;
 		lookup_task = new LookupTask(RequestType.STORE, publishID, JKadConstants.LOOKUP_STORE_FILE_TIMEOUT) {
@@ -71,10 +72,9 @@ public class PublishSourceTask extends PublishTask {
 				task_listener.taskTimeOut(task_instance);
 			}
 
-			public void processToleranceContacts(ContactAddress sender,
-					List<KadContact> results) {
-				
-				for(KadContact contact : results) {
+			public void processToleranceContacts(ContactAddress sender, List<KadContact> results) {
+
+				for (KadContact contact : results) {
 					KadPacket packet = null;
 					if (!contact.supportKad2()) {
 						Collection<PublishItem> list = new ArrayList<PublishItem>();
@@ -85,19 +85,20 @@ public class PublishSourceTask extends PublishTask {
 					_network_manager.sendKadPacket(packet, contact.getIPAddress(), contact.getUDPPort());
 				}
 			}
-			
+
 			public void lookupTerminated() {
 				updatePublishTime();
 				task_listener.taskStopped(task_instance);
 			}
-			
+
 		};
 		Lookup.getSingleton().addLookupTask(lookup_task);
 		task_listener.taskStarted(task_instance);
 	}
 
 	public void stop() {
-		if (!isStarted) return;
+		if (!isStarted)
+			return;
 		isStarted = false;
 		Lookup.getSingleton().removeLookupTask(publishID);
 	}

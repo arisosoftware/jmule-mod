@@ -26,12 +26,12 @@ import org.jmule.core.jkad.Int128;
 import org.jmule.core.jkad.JKadException;
 import org.jmule.core.jkad.publisher.Publisher.PublishTaskListener;
 
-
 /**
  * Created on Jan 14, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.8 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/28 13:13:24 $
+ * @version $Revision: 1.8 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/28 13:13:24 $
  */
 public abstract class PublishTask {
 
@@ -41,8 +41,8 @@ public abstract class PublishTask {
 	protected int publishedSources = 0;
 	protected PublishTaskListener task_listener = null;
 	protected PublishTask task_instance = null;
-		
-	public PublishTask(Int128 publishID,PublishTaskListener listener) {
+
+	public PublishTask(Int128 publishID, PublishTaskListener listener) {
 		super();
 		this.publishID = publishID;
 		lastpublishTime = 0;
@@ -57,12 +57,13 @@ public abstract class PublishTask {
 	public long getLastpublishTime() {
 		return lastpublishTime;
 	}
-	
+
 	protected void updatePublishTime() {
 		lastpublishTime = System.currentTimeMillis();
 	}
-	
+
 	public abstract void start() throws JKadException;
+
 	public abstract void stop();
 
 	public boolean isStarted() {
@@ -70,12 +71,11 @@ public abstract class PublishTask {
 	}
 
 	public void addPublishedSources(int sources) {
-		publishedSources+= sources;
+		publishedSources += sources;
 	}
-	
-	
+
 	public int getPublishedSources() {
 		return publishedSources;
 	}
-		
+
 }

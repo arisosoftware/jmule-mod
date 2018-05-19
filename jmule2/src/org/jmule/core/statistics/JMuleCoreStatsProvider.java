@@ -28,12 +28,13 @@ import java.util.Set;
 /**
  *
  * Created on Aug 17, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/08/18 08:56:22 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/08/18 08:56:22 $
  */
 public interface JMuleCoreStatsProvider {
 
-	public void updateStats(Set<String> types, Map<String,Object> values);
-	
+	public void updateStats(Set<String> types, Map<String, Object> values);
+
 }

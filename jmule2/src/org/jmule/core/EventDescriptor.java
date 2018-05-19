@@ -24,9 +24,10 @@ package org.jmule.core;
 
 /**
  * Created on Jan 7, 2010
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2010/01/07 15:23:55 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2010/01/07 15:23:55 $
  */
 public interface EventDescriptor {
 

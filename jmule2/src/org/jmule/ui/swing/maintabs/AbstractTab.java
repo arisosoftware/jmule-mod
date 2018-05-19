@@ -36,52 +36,52 @@ import org.jmule.ui.swing.SwingGUIUpdater;
 /**
  *
  * Created on Oct 6, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.3 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/19 09:03:32 $
+ * @version $Revision: 1.3 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/19 09:03:32 $
  */
 public abstract class AbstractTab extends JPanel {
 
 	protected JFrame parent;
-	
+
 	protected List<Refreshable> refreshable_components = new LinkedList<Refreshable>();
 	private SwingGUIUpdater _updater = SwingGUIUpdater.getInstance();
-	
+
 	public AbstractTab(JFrame parent) {
-		
-		this.parent = parent;		
-		
-		/*this.addComponentListener(new ComponentAdapter() {
-			
-			 public void componentHidden(ComponentEvent evt) {
-				 System.out.println("Component become hidden " + refreshable_components);
-				 for(Refreshable refreshable : refreshable_components) 
-					 _updater.removeRefreshable(refreshable);
-			 }
-			 
-			 public void componentShown(ComponentEvent evt) {
-				 System.out.println("Component become visible " + refreshable_components);
-				 for(Refreshable refreshable : refreshable_components)
-					 _updater.addRefreshable(refreshable);
-			 }
-		});*/
+
+		this.parent = parent;
+
+		/*
+		 * this.addComponentListener(new ComponentAdapter() {
+		 * 
+		 * public void componentHidden(ComponentEvent evt) {
+		 * System.out.println("Component become hidden " + refreshable_components);
+		 * for(Refreshable refreshable : refreshable_components)
+		 * _updater.removeRefreshable(refreshable); }
+		 * 
+		 * public void componentShown(ComponentEvent evt) {
+		 * System.out.println("Component become visible " + refreshable_components);
+		 * for(Refreshable refreshable : refreshable_components)
+		 * _updater.addRefreshable(refreshable); } });
+		 */
 	}
-	
+
 	protected synchronized void registerRefreshable(Refreshable refreshable) {
-		
+
 		refreshable_components.add(refreshable);
 	}
-	
+
 	public synchronized void registerAllRefreshables() {
-		 for(Refreshable refreshable : refreshable_components) {
-			 _updater.addRefreshable(refreshable);
-		 }
+		for (Refreshable refreshable : refreshable_components) {
+			_updater.addRefreshable(refreshable);
+		}
 	}
-	
+
 	public synchronized void deregisterAllRefreshables() {
-		 for(Refreshable refreshable : refreshable_components) {
-			 _updater.removeRefreshable(refreshable);
-		 }
+		for (Refreshable refreshable : refreshable_components) {
+			_updater.removeRefreshable(refreshable);
+		}
 	}
-	
+
 }

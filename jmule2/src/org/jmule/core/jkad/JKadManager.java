@@ -32,35 +32,49 @@ import org.jmule.core.jkad.search.Search;
 
 /**
  * Created on Aug 29, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.4 $
- * Last changed by $Author: binary255 $ on $Date: 2010/10/23 05:38:10 $
+ * @version $Revision: 1.4 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/10/23 05:38:10 $
  */
-public interface JKadManager extends JMuleStoppableManager  {
+public interface JKadManager extends JMuleStoppableManager {
 
 	public void connect();
+
 	public void connect(ContactAddress address);
+
 	public void disconnect();
-	
+
 	public boolean isFirewalled();
+
 	public JKadStatus getStatus();
-	
+
 	public boolean isConnected();
+
 	public boolean isDisconnected();
+
 	public boolean isConnecting();
-	
+
 	public IPAddress getIPAddress();
+
 	public ClientID getClientID();
-	
+
 	public RoutingTable getRoutingTable();
+
 	public BootStrap getBootStrap();
+
 	public FirewallChecker getFirewallChecker();
+
 	public Indexer getIndexer();
+
 	public Lookup getLookup();
+
 	public Publisher getPublisher();
+
 	public Search getSearch();
 
 	public void addJKadListener(JKadListener listener);
+
 	public void removeJKadListener(JKadListener listener);
-	
+
 }

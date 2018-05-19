@@ -11,11 +11,12 @@
  *     Xerox/PARC     initial implementation 
  * ******************************************************************/
 
-
 package org.aspectj.lang.reflect;
+
 import java.lang.reflect.Field;
 
 public interface FieldSignature extends MemberSignature {
-    public Class getFieldType();
+	public Class getFieldType();
+
 	public Field getField();
 }

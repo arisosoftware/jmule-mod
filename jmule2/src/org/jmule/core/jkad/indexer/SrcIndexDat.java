@@ -43,87 +43,88 @@ import org.jmule.core.utils.Convert;
 
 /**
  * Created on Apr 21, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.9 $
- * Last changed by $Author: binary255 $ on $Date: 2010/08/22 14:29:51 $
+ * @version $Revision: 1.9 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/08/22 14:29:51 $
  */
 public class SrcIndexDat {
 
-	public static  Map<Int128, Index> loadFile(String fileName) throws Throwable {
+	public static Map<Int128, Index> loadFile(String fileName) throws Throwable {
 		Map<Int128, Index> result = new Hashtable<Int128, Index>();
-		
+
 		FileChannel file_channel = new FileInputStream(fileName).getChannel();
 		ByteBuffer file_content = getByteBuffer(file_channel.size());
 		file_channel.read(file_content);
 		file_channel.close();
-		
+
 		file_content.position(4 + 4);
-		
+
 		int count = file_content.getInt();
-		
+
 		ByteBuffer data;
-		
-		for(int i=0;i<count;i++) {
+
+		for (int i = 0; i < count; i++) {
 			data = getByteBuffer(16);
 			file_content.get(data.array());
-			
+
 			Int128 key_id = new Int128(data.array());
 			Index index = new Index(key_id);
-			
+
 			data = getByteBuffer(4);
-			
+
 			int source_count = file_content.getInt();
-			
-			for(int j = 0;j<source_count;j++) {
+
+			for (int j = 0; j < source_count; j++) {
 				data = getByteBuffer(16);
 				file_content.get(data.array());
-				
+
 				ClientID client_id = new ClientID(data.array());
 				long creation_time = file_content.getLong();
-				
+
 				int tagCount = file_content.get();
 				TagList tagList = new TagList();
-				
-				for(int k = 0;k<tagCount;k++) {
+
+				for (int k = 0; k < tagCount; k++) {
 					Tag tag = TagScanner.scanTag(file_content);
-					
-					if (tag!=null)
+
+					if (tag != null)
 						tagList.addTag(tag);
 				}
-				Source source = new Source(client_id, tagList,creation_time);
+				Source source = new Source(client_id, tagList, creation_time);
 				source.setTagList(tagList);
 				index.addSource(source);
 			}
 			result.put(key_id, index);
 		}
-		
+
 		file_content.clear();
 		file_content = null;
-		
+
 		return result;
 	}
-	
+
 	public static void writeFile(String fileName, Map<Int128, Index> sourceData) throws Throwable {
-		
-		long buffer_size = 4 + 4 + 4 ;
+
+		long buffer_size = 4 + 4 + 4;
 		List<ByteBuffer> index_byte_buffer = new ArrayList<ByteBuffer>();
-		
-		for(Int128 key : sourceData.keySet()) {
+
+		for (Int128 key : sourceData.keySet()) {
 			ByteBuffer content = getByteBuffer(16 + 4);
 			content.put(key.toByteArray());
-			
+
 			Index index = sourceData.get(key);
 			content.putInt(index.getSourceList().size());
 			buffer_size += content.capacity();
-			
+
 			content.position(0);
 			index_byte_buffer.add(content);
-			
-			for(Source source : index.getSourceList()) {
+
+			for (Source source : index.getSourceList()) {
 				ByteBuffer tag_list = source.getTagList().getAsByteBuffer();
 				content = getByteBuffer(16 + 8 + 1 + tag_list.capacity());
 				buffer_size += content.capacity();
-				
+
 				content.put(source.getClientID().toByteArray());
 				content.putLong(source.getCreationTime());
 				content.put(Convert.intToByte(source.getTagList().size()));
@@ -134,93 +135,72 @@ public class SrcIndexDat {
 				tag_list = null;
 			}
 		}
-		
+
 		ByteBuffer file_content = getByteBuffer(buffer_size);
 		ByteBuffer data = getByteBuffer(4);
 		data.put(SRC_INDEX_VERSION);
 		data.position(0);
-		
+
 		file_content.put(data);
-		
+
 		data.position(0);
 		data.putInt(Convert.longToInt(System.currentTimeMillis()));
 		data.position(0);
-		
+
 		file_content.put(data);
-		
+
 		data.position(0);
 		data.putInt(sourceData.size());
 		data.position(0);
 		file_content.put(data);
-		
-		for(ByteBuffer buffer : index_byte_buffer) {
+
+		for (ByteBuffer buffer : index_byte_buffer) {
 			buffer.position(0);
 			file_content.put(buffer);
 		}
-		
+
 		FileChannel channel = new FileOutputStream(fileName).getChannel();
 		file_content.position(0);
 		channel.write(file_content);
 		channel.close();
-		
+
 		file_content.clear();
 		file_content = null;
 		index_byte_buffer.clear();
 		index_byte_buffer = null;
-		
-		
-		/*FileChannel channel = new FileOutputStream(fileName).getChannel();
-		ByteBuffer data = getByteBuffer(4);
-		
-		data.put(SRC_INDEX_VERSION);
-		data.position(0);
-		channel.write(data);
-		
-		data.position(0);
-		data.putInt(Convert.longToInt(System.currentTimeMillis()));
-		data.position(0);
-		channel.write(data);
-		
-		data.position(0);
-		data.putInt(sourceData.size());
-		data.position(0);
-		channel.write(data);
-		
-		for(Int128 key : sourceData.keySet()) {
-			data = getByteBuffer(16);
-			data.put(key.toByteArray());
-			data.position(0);
-			channel.write(data);
-			
-			Index index = sourceData.get(key);
-			data = getByteBuffer(4);
-			data.putInt(index.getSourceList().size());
-			data.position(0);
-			channel.write(data);
-			
-			for(Source source : index.getSourceList()) {
-				data = getByteBuffer(16);
-				data.put(source.getClientID().toByteArray());
-				data.position(0);
-				channel.write(data);
-				
-				data = getByteBuffer(8);
-				data.putLong(0, source.getCreationTime());
-				data.position(0);
-				channel.write(data);
-				
-				data = getByteBuffer(1);
-				data.put(Convert.intToByte(source.getTagList().size()));
-				data.position(0);
-				channel.write(data);
-				for(Tag tag : source.getTagList()) {
-					ByteBuffer buffer = tag.getAsByteBuffer();
-					buffer.position(0);
-					channel.write(buffer);
-				}
-			}
-		}
-		channel.close();*/
+
+		/*
+		 * FileChannel channel = new FileOutputStream(fileName).getChannel(); ByteBuffer
+		 * data = getByteBuffer(4);
+		 * 
+		 * data.put(SRC_INDEX_VERSION); data.position(0); channel.write(data);
+		 * 
+		 * data.position(0); data.putInt(Convert.longToInt(System.currentTimeMillis()));
+		 * data.position(0); channel.write(data);
+		 * 
+		 * data.position(0); data.putInt(sourceData.size()); data.position(0);
+		 * channel.write(data);
+		 * 
+		 * for(Int128 key : sourceData.keySet()) { data = getByteBuffer(16);
+		 * data.put(key.toByteArray()); data.position(0); channel.write(data);
+		 * 
+		 * Index index = sourceData.get(key); data = getByteBuffer(4);
+		 * data.putInt(index.getSourceList().size()); data.position(0);
+		 * channel.write(data);
+		 * 
+		 * for(Source source : index.getSourceList()) { data = getByteBuffer(16);
+		 * data.put(source.getClientID().toByteArray()); data.position(0);
+		 * channel.write(data);
+		 * 
+		 * data = getByteBuffer(8); data.putLong(0, source.getCreationTime());
+		 * data.position(0); channel.write(data);
+		 * 
+		 * data = getByteBuffer(1);
+		 * data.put(Convert.intToByte(source.getTagList().size())); data.position(0);
+		 * channel.write(data); for(Tag tag : source.getTagList()) { ByteBuffer buffer =
+		 * tag.getAsByteBuffer(); buffer.position(0); channel.write(buffer); } } }
+		 * channel.close();
+		 */
 	}
-	
+
 }

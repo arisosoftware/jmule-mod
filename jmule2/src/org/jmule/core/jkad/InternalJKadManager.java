@@ -27,15 +27,15 @@ import org.jmule.core.jkad.packet.KadPacket;
 
 /**
  * Created on Aug 29, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary255 $ on $Date: 2010/10/23 05:45:36 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/10/23 05:45:36 $
  */
 public interface InternalJKadManager extends JKadManager {
 
 	public void setStatus(JKadStatus newStatus);
-	
+
 	public void receivePacket(KadPacket packet);
-	
-	
+
 }

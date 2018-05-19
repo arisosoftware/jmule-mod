@@ -32,36 +32,31 @@ import org.jmule.core.uploadmanager.UploadSession;
 /**
  *
  * Created on Sep 28, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.2 $
- * Last changed by $Author: javajox $ on $Date: 2009/09/27 14:20:00 $
+ * @version $Revision: 1.2 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/09/27 14:20:00 $
  */
 public class UploadTableModel extends AbstractTableModel {
 
 	JMuleCore _core = JMuleCoreFactory.getSingleton();
 	UploadManager _upload_manager = _core.getUploadManager();
-	
-	public final static int FILE_NAME    =  0;
-	public final static int FILE_SIZE    =  1;
-	public final static int UPLOAD_SPEED =  2;
-	public final static int PEERS        =  3;
-	public final static int ETA          =  4;
-	public final static int UPLOADED     =  5;
-	
-	private final static String column_names[] = {
-		                   "File name",
-		                   "File size",
-		                   "Upload speed",
-		                   "Peers",
-		                   "ETA",
-		                   "Uploaded"
-	};
-	
+
+	public final static int FILE_NAME = 0;
+	public final static int FILE_SIZE = 1;
+	public final static int UPLOAD_SPEED = 2;
+	public final static int PEERS = 3;
+	public final static int ETA = 4;
+	public final static int UPLOADED = 5;
+
+	private final static String column_names[] = { "File name", "File size", "Upload speed", "Peers", "ETA",
+			"Uploaded" };
+
 	public Class getColumnClass(int col) {
-		
+
 		return UploadSession.class;
 	}
-	
+
 	public int getColumnCount() {
 
 		return column_names.length;
@@ -73,13 +68,13 @@ public class UploadTableModel extends AbstractTableModel {
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		
+
 		return _upload_manager.getUploads().get(rowIndex);
 	}
-	
+
 	public String getColumnName(int col) {
-		  
-	    return column_names[col];
+
+		return column_names[col];
 	}
 
 }

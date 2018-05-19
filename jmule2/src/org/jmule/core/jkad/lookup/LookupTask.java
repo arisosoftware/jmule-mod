@@ -54,68 +54,70 @@ import org.jmule.core.networkmanager.NetworkManagerSingleton;
 
 /**
  * Created on Jan 9, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.12 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/06 08:49:07 $
+ * @version $Revision: 1.12 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/06 08:49:07 $
  */
 public abstract class LookupTask {
-	protected int initialLookupContacts = INITIAL_LOOKUP_CONTACTS; 
+	protected int initialLookupContacts = INITIAL_LOOKUP_CONTACTS;
 	protected long last_response_time;
 	protected Int128 targetID;
 	protected Int128 targetDistance;
 	protected long toleranceZone;
 	protected long timeOut;
 	protected long contactLookupTimeout = LOOKUP_CONTACT_TIMEOUT;
-	
-	protected Collection<KadContact> possibleContacts = new ConcurrentLinkedQueue<KadContact> ();
+
+	protected Collection<KadContact> possibleContacts = new ConcurrentLinkedQueue<KadContact>();
 	protected Collection<KadContact> usedContacts = new ConcurrentLinkedQueue<KadContact>();
 	protected Set<ClientID> usedContactsSet = new HashSet<ClientID>();
 	protected Set<ClientID> usedAlphaContacts = new HashSet<ClientID>();
 	protected Map<ContactAddress, RequestedContact> requestedContacts = new ConcurrentHashMap<ContactAddress, RequestedContact>();
-	
+
 	protected RoutingTable _routing_table;
 	protected RequestType requestType;
-		
+
 	protected boolean lookupStarted = false;
-	
+
 	protected InternalNetworkManager _network_manager;
-	protected InternalJKadManager 	 _jkad_manager;
-	
+	protected InternalJKadManager _jkad_manager;
+
 	protected long startTime = 0;
-	
+
 	public long getStartTime() {
 		return startTime;
 	}
-	
+
 	public LookupTask(RequestType requestType, Int128 targetID, long lookupTimeOut) {
 		_network_manager = (InternalNetworkManager) NetworkManagerSingleton.getInstance();
-		_jkad_manager    = (InternalJKadManager) JKadManagerSingleton.getInstance();
+		_jkad_manager = (InternalJKadManager) JKadManagerSingleton.getInstance();
 		_routing_table = RoutingTable.getSingleton();
-		
+
 		this.startTime = System.currentTimeMillis();
 		this.targetID = targetID;
 		this.targetDistance = Utils.XOR(targetID, _jkad_manager.getClientID());
 		this.toleranceZone = JKadConstants.TOLERANCE_ZONE;
 		this.timeOut = lookupTimeOut;
-	
+
 		this.requestType = requestType;
 		last_response_time = System.currentTimeMillis();
 	}
-		
+
 	public void startLookup() {
 		lookupStarted = true;
 		last_response_time = System.currentTimeMillis();
 		possibleContacts.addAll(_routing_table.getNearestContacts(targetID, initialLookupContacts));
 
 		int count = ALPHA;
-		if (count > possibleContacts.size()) count = possibleContacts.size();
+		if (count > possibleContacts.size())
+			count = possibleContacts.size();
 		for (int i = 0; i < count; i++) {
-			KadContact contact = getNearestContact(targetDistance, possibleContacts,usedContactsSet);
-			
+			KadContact contact = getNearestContact(targetDistance, possibleContacts, usedContactsSet);
+
 			lookupContact(contact);
 		}
 	}
-	
+
 	public void stopLookup() {
 		lookupTerminated();
 		lookupStarted = false;
@@ -124,33 +126,36 @@ public abstract class LookupTask {
 		usedContactsSet.clear();
 		requestedContacts.clear();
 	}
-	
-	public void  processResults(ContactAddress sender, List<KadContact> results) {
+
+	public void processResults(ContactAddress sender, List<KadContact> results) {
 		last_response_time = System.currentTimeMillis();
-		
-		List<KadContact> alpha  = new ArrayList<KadContact>();
-		
-		for(KadContact contact : results) {
-			if (usedContactsSet.contains(contact.getContactID())) continue;
-			if (inToleranceZone(Utils.XOR(contact.getContactID(), _jkad_manager.getClientID()), targetDistance, toleranceZone)) {
+
+		List<KadContact> alpha = new ArrayList<KadContact>();
+
+		for (KadContact contact : results) {
+			if (usedContactsSet.contains(contact.getContactID()))
+				continue;
+			if (inToleranceZone(Utils.XOR(contact.getContactID(), _jkad_manager.getClientID()), targetDistance,
+					toleranceZone)) {
 				if (!usedAlphaContacts.contains(contact.getContactID())) {
 					alpha.add(contact);
 					usedAlphaContacts.add(contact.getContactID());
 				}
 				possibleContacts.add(contact);
-			}
-			else 
+			} else
 				possibleContacts.add(contact);
 		}
-		if (alpha.size()!=0) {
+		if (alpha.size() != 0) {
 			processToleranceContacts(sender, alpha);
 		}
-		
+
 		requestedContacts.remove(sender);
-		KadContact contact = getNearestContact(Utils.XOR(targetID, _jkad_manager.getClientID()), possibleContacts,usedContactsSet);
-		if (contact != null) lookupContact(contact);
+		KadContact contact = getNearestContact(Utils.XOR(targetID, _jkad_manager.getClientID()), possibleContacts,
+				usedContactsSet);
+		if (contact != null)
+			lookupContact(contact);
 	}
-	
+
 	void lookupContact(KadContact contact) {
 		possibleContacts.remove(contact);
 		usedContacts.add(contact);
@@ -159,19 +164,20 @@ public abstract class LookupTask {
 		requestedContacts.put(contact.getContactAddress(), requested_contact);
 		KadPacket packet = null;
 		if (contact.supportKad2())
-			packet = PacketFactory.getRequest2Packet(requestType, targetID, (Int128)contact.getContactID());
+			packet = PacketFactory.getRequest2Packet(requestType, targetID, (Int128) contact.getContactID());
 		else
-			packet = PacketFactory.getRequest1Packet(requestType, targetID, (Int128)contact.getContactID());
+			packet = PacketFactory.getRequest1Packet(requestType, targetID, (Int128) contact.getContactID());
 		_network_manager.sendKadPacket(packet, contact.getIPAddress(), contact.getUDPPort());
 	}
-		
+
 	public long getResponseTime() {
 		return last_response_time;
 	}
-	
+
 	public Int128 getTargetID() {
 		return targetID;
 	}
+
 	public void setTargetID(Int128 targetID) {
 		this.targetID = targetID;
 	}
@@ -183,25 +189,26 @@ public abstract class LookupTask {
 	public long getToleranceZone() {
 		return toleranceZone;
 	}
-	
+
 	public abstract void lookupTerminated();
-	
+
 	/**
 	 * Lookup process timeout
 	 */
 	public abstract void lookupTimeout();
-	
+
 	/**
 	 * Process tolerance contacts
+	 * 
 	 * @param sender
 	 * @param results
 	 */
 	public abstract void processToleranceContacts(ContactAddress sender, List<KadContact> results);
-	
+
 	protected class RequestedContact {
 		private KadContact contact;
 		private long requestTime;
-		
+
 		public RequestedContact(KadContact contact, long requestTime) {
 			super();
 			this.contact = contact;
@@ -219,7 +226,7 @@ public abstract class LookupTask {
 		public long getRequestTime() {
 			return requestTime;
 		}
-		
+
 	}
 
 	public boolean isLookupStarted() {

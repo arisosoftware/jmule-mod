@@ -27,14 +27,13 @@ import org.jmule.core.JMException;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:44:26 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:44:26 $$
  */
 public class KnownMetException extends JMException {
 
 	public KnownMetException(String name) {
 		super(name);
 	}
-	
-	
+
 }

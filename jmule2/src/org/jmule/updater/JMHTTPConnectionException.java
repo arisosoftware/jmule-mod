@@ -26,12 +26,13 @@ import org.jmule.core.JMException;
 
 /**
  * Created on Aug 20, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary256_ $ on $Date: 2008/08/27 17:14:09 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary256_ $ on $Date:
+ *          2008/08/27 17:14:09 $
  */
 public class JMHTTPConnectionException extends JMException {
-	
+
 	public JMHTTPConnectionException(Throwable exception) {
 		super(exception);
 	}

@@ -38,13 +38,12 @@ import org.jmule.ui.Splash;
 import org.jmule.ui.console.ConsoleSplash;
 import org.jmule.ui.swing.JSplash;
 import org.jmule.ui.swing.wizards.SetupWizard;
- 
 
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.3 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/09/17 18:34:31 $$
+ * @version $$Revision: 1.3 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/09/17 18:34:31 $$
  */
 public class Launcher {
 
@@ -59,13 +58,11 @@ public class Launcher {
 			if (_pref.getUIType().equals(JMuleUIManager.SWING_UI)) {
 				splash = new JSplash();
 			}
-			
-			isConsoleUI = _pref.getUIType().equals(JMuleUIManager.CONSOLE_UI); 
+
+			isConsoleUI = _pref.getUIType().equals(JMuleUIManager.CONSOLE_UI);
 			if (isConsoleUI) {
 				splash = new ConsoleSplash();
 			}
-			
-			 
 
 			splash.splashOn();
 
@@ -118,7 +115,8 @@ public class Launcher {
 
 			}
 
-			//TODO for now, wizard is disabled for console.. perhaps later.. I have to add console wizard
+			// TODO for now, wizard is disabled for console.. perhaps later.. I have to add
+			// console wizard
 			if (is_core_first_run && !isConsoleUI) {
 
 				splash.increaseProgress(5, "Running setup wizard");

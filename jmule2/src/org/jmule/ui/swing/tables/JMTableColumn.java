@@ -25,16 +25,16 @@ package org.jmule.ui.swing.tables;
 import org.jdesktop.swingx.table.TableColumnExt;
 
 /**
- * JMSColumn stands for : JMule Swing Table Column
- * Created on Oct 2, 2008
+ * JMSColumn stands for : JMule Swing Table Column Created on Oct 2, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
 public class JMTableColumn extends TableColumnExt {
 
 	public JMTableColumn() {
-		
+
 	}
-	
+
 }

@@ -27,9 +27,10 @@ import java.util.LinkedList;
 /**
  *
  * Created on Aug 9, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/08/12 07:20:14 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/08/12 07:20:14 $
  */
 public class SearchResultItemList extends LinkedList<SearchResultItem> {
 

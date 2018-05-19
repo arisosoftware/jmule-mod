@@ -12,13 +12,13 @@
 package org.aspectj.lang.reflect;
 
 /**
- * Represents an anonymous pointcut expression as used in pointcuts, advice declarations,
- * declares, and per-clauses
+ * Represents an anonymous pointcut expression as used in pointcuts, advice
+ * declarations, declares, and per-clauses
  */
 public interface PointcutExpression {
 
 	/**
-	 * Returns a String representation of the pointcut expression 
+	 * Returns a String representation of the pointcut expression
 	 */
 	String asString();
 }

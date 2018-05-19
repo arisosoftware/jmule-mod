@@ -29,75 +29,76 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.jmule.core.jkad.ClientID;
 import org.jmule.core.jkad.Int128;
 
-
 /**
  * Created on Apr 22, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/06/28 18:01:50 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/06/28 18:01:50 $
  */
 public class Index {
 
 	protected Int128 id;
-	protected Map<ClientID,Source> sources = new ConcurrentHashMap<ClientID, Source>();
-	
+	protected Map<ClientID, Source> sources = new ConcurrentHashMap<ClientID, Source>();
+
 	public Index(Int128 id) {
 		this.id = id;
 	}
-	
+
 	public Int128 getId() {
 		return id;
 	}
+
 	public void setId(Int128 id) {
 		this.id = id;
 	}
+
 	public Collection<Source> getSourceList() {
 		return sources.values();
-	}	
-	
+	}
+
 	public int getSourceCount() {
 		return sources.size();
 	}
-	
+
 	public void addSource(Source source) {
 		if (sources.containsKey(source.getClientID())) {
 			sources.get(source.getClientID()).setCreationTime(System.currentTimeMillis());
 		} else
-			sources.put(source.getClientID(),source);
+			sources.put(source.getClientID(), source);
 	}
-	
+
 	public void removeContactsWithTimeOut(long timeOut) {
-		for(ClientID clientID : sources.keySet()) {
+		for (ClientID clientID : sources.keySet()) {
 			long ctime = System.currentTimeMillis();
 			Source source = sources.get(clientID);
 			if (ctime - source.getCreationTime() >= timeOut)
 				sources.remove(clientID);
 		}
 	}
-	
+
 	public boolean isEmpty() {
 		return sources.isEmpty();
 	}
-	
+
 	public boolean containsClientID(ClientID clientID) {
 		return sources.containsKey(clientID);
 	}
-	
+
 	public void removeOldestSource() {
 		long maxTimeout = 0;
 		ClientID clientID = null;
-		for(ClientID id : sources.keySet()) {
+		for (ClientID id : sources.keySet()) {
 			if (clientID == null) {
 				clientID = id;
 				maxTimeout = System.currentTimeMillis() - sources.get(id).getCreationTime();
-			} else
-				if (System.currentTimeMillis() - sources.get(id).getCreationTime() > maxTimeout) {
-					clientID = id;
-					maxTimeout = System.currentTimeMillis() - sources.get(id).getCreationTime();
-				}
+			} else if (System.currentTimeMillis() - sources.get(id).getCreationTime() > maxTimeout) {
+				clientID = id;
+				maxTimeout = System.currentTimeMillis() - sources.get(id).getCreationTime();
+			}
 		}
-		if (clientID!=null)
+		if (clientID != null)
 			sources.remove(clientID);
 	}
-	
+
 }

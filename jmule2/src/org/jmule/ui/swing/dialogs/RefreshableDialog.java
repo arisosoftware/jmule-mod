@@ -35,48 +35,52 @@ import org.jmule.ui.swing.SwingGUIUpdater;
 /**
  *
  * Created on Oct 6, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
 public abstract class RefreshableDialog extends JDialog implements IDialog, Refreshable, WindowListener {
 
 	private SwingGUIUpdater _updater = SwingGUIUpdater.getInstance();
-	
+
 	public RefreshableDialog() {
 		_updater.addRefreshable(this);
 	}
-	
+
 	public RefreshableDialog(JFrame parent, String name, boolean modal) {
 		super(parent, name, modal);
 		_updater.addRefreshable(this);
 	}
-	
+
 	public DialogAction getDialogAction() {
 
 		return null;
 	}
 
-	public void windowActivated(WindowEvent e) {}
+	public void windowActivated(WindowEvent e) {
+	}
 
 	public void windowClosed(WindowEvent e) {
-        _updater.removeRefreshable(this);
+		_updater.removeRefreshable(this);
 	}
 
-	public void windowClosing(WindowEvent e) {}
+	public void windowClosing(WindowEvent e) {
+	}
 
-	public void windowDeactivated(WindowEvent e) {}
+	public void windowDeactivated(WindowEvent e) {
+	}
 
 	public void windowDeiconified(WindowEvent e) {
-        _updater.addRefreshable(this);
-    }
+		_updater.addRefreshable(this);
+	}
 
 	public void windowIconified(WindowEvent e) {
-        _updater.removeRefreshable(this);
-    }
+		_updater.removeRefreshable(this);
+	}
 
 	public void windowOpened(WindowEvent e) {
-        _updater.addRefreshable(this);
+		_updater.addRefreshable(this);
 	}
-	
+
 }

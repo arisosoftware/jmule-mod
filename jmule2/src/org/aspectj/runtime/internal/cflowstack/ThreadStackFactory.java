@@ -13,8 +13,9 @@
 package org.aspectj.runtime.internal.cflowstack;
 
 public interface ThreadStackFactory {
-	
-  public ThreadStack getNewThreadStack();  
-  public ThreadCounter getNewThreadCounter();
-  
+
+	public ThreadStack getNewThreadStack();
+
+	public ThreadCounter getNewThreadCounter();
+
 }

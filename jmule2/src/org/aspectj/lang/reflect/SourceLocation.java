@@ -11,20 +11,19 @@
  *     Xerox/PARC     initial implementation 
  * ******************************************************************/
 
-
 package org.aspectj.lang.reflect;
 
 /** For defining code, the class defined and location in a source file. */
 public interface SourceLocation {
-    Class getWithinType();
-    
-    String getFileName();
-    int getLine();
-    
-    /**
-     * @deprecated can not be implemented for bytecode weaving, may
-     * be removed in 1.1gold.
-     */
-    int getColumn();
-}
+	Class getWithinType();
 
+	String getFileName();
+
+	int getLine();
+
+	/**
+	 * @deprecated can not be implemented for bytecode weaving, may be removed in
+	 *             1.1gold.
+	 */
+	int getColumn();
+}

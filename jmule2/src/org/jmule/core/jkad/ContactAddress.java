@@ -26,18 +26,18 @@ import static org.jmule.core.utils.Convert.shortToInt;
 
 import java.net.InetSocketAddress;
 
-
 /**
  * Created on Jan 10, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/07/06 14:13:25 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/07/06 14:13:25 $
  */
 public class ContactAddress {
-	
+
 	private IPAddress address;
 	private int udpPort;
-	
+
 	public ContactAddress(IPAddress address, int udpPort) {
 		super();
 		this.address = address;
@@ -49,17 +49,17 @@ public class ContactAddress {
 		this.address = new IPAddress(address);
 		this.udpPort = udpPort;
 	}
-	
+
 	public ContactAddress(InetSocketAddress address, int udpPort) {
 		this.address = new IPAddress(address);
 		this.udpPort = udpPort;
 	}
-	
+
 	public ContactAddress(InetSocketAddress address) {
 		this.address = new IPAddress(address);
 		this.udpPort = address.getPort();
 	}
-	
+
 	public IPAddress getAddress() {
 		return address;
 	}
@@ -75,22 +75,23 @@ public class ContactAddress {
 	public void setUdpPort(int udpPort) {
 		this.udpPort = udpPort;
 	}
-	
+
 	public InetSocketAddress getAsInetSocketAddress() {
-		return new InetSocketAddress(address.toString(), shortToInt((short)getUDPPort()));
+		return new InetSocketAddress(address.toString(), shortToInt((short) getUDPPort()));
 	}
-	
+
 	public int hashCode() {
 		return (address.toString() + udpPort).hashCode();
 	}
 
 	public boolean equals(Object object) {
-		if (object == null) return false;
-		return hashCode()== object.hashCode();
+		if (object == null)
+			return false;
+		return hashCode() == object.hashCode();
 	}
-	
+
 	public String toString() {
-		return address+" : " +shortToInt((short)getUDPPort());
+		return address + " : " + shortToInt((short) getUDPPort());
 	}
-	
+
 }

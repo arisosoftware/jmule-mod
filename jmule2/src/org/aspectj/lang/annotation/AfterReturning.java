@@ -25,28 +25,30 @@ import java.lang.annotation.RetentionPolicy;
 @Target(ElementType.METHOD)
 public @interface AfterReturning {
 
-    /**
-     * The pointcut expression where to bind the advice
-     */
-    String value() default "";
+	/**
+	 * The pointcut expression where to bind the advice
+	 */
+	String value() default "";
 
-    /**
-     * The pointcut expression where to bind the advice, overrides "value" when specified
-     */
-    String pointcut() default "";
+	/**
+	 * The pointcut expression where to bind the advice, overrides "value" when
+	 * specified
+	 */
+	String pointcut() default "";
 
-    /**
-     * The name of the argument in the advice signature to bind the returned value to
-     */
-    String returning() default "";
-    
-    /**
-     * When compiling without debug info, or when interpreting pointcuts at runtime,
-     * the names of any arguments used in the advice declaration are not available.
-     * Under these circumstances only, it is necessary to provide the arg names in 
-     * the annotation - these MUST duplicate the names used in the annotated method.
-     * Format is a simple comma-separated list.
-     */
-    String argNames() default "";
+	/**
+	 * The name of the argument in the advice signature to bind the returned value
+	 * to
+	 */
+	String returning() default "";
+
+	/**
+	 * When compiling without debug info, or when interpreting pointcuts at runtime,
+	 * the names of any arguments used in the advice declaration are not available.
+	 * Under these circumstances only, it is necessary to provide the arg names in
+	 * the annotation - these MUST duplicate the names used in the annotated method.
+	 * Format is a simple comma-separated list.
+	 */
+	String argNames() default "";
 
 }

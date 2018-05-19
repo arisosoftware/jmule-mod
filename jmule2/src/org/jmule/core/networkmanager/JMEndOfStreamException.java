@@ -27,8 +27,8 @@ import org.jmule.core.JMException;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/08/31 17:24:11 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/08/31 17:24:11 $$
  */
 public class JMEndOfStreamException extends JMException {
 }

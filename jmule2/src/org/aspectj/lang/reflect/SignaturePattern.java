@@ -19,5 +19,5 @@ public interface SignaturePattern {
 
 	/** return a String representation of this pattern */
 	String asString();
-	
+
 }

@@ -22,64 +22,77 @@
  */
 package org.jmule.core.servermanager;
 
-
 /**
  * Created on 2008-Jun-03
+ * 
  * @author javajox
- * @version $$Revision: 1.2 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/09/19 14:21:53 $$
+ * @version $$Revision: 1.2 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/09/19 14:21:53 $$
  */
 public interface ServerManagerListener {
-     	
-	 /**
-	  * Tells when the system connects to the server
-	  * @param server the given server
-	  */
-	 public void connected(Server server);
-	 
-	 /**
-	  * Tells when the system has been disconnected from the server
-	  * @param server the given server
-	  */
-	 public void disconnected(Server server);
-	 
-	 /**
-	  * Tells when the system is waiting for a server connection
-	  * @param server the given server
-	  */
-	 public void isConnecting(Server server);
-	 
-	 /**
-	  * Tells when server send a message to client
-	  * @param server the given server
-	  * @param message message 
-	  */
-	 public void serverMessage(Server server,String message);
-	 
-	 public void serverConnectingFailed(Server server, Throwable cause);
-	
-	 /** 
-	  * A new server is added to the list
-	  * @param server the server that is added to the list
-	  */
-	 public void serverAdded(Server server);
-	 
-	 /**
-	  * A server is removed from the list
-	  * @param server the server that is removed from the list
-	  */
-	 public void serverRemoved(Server server);
-	 
-	 /**
-	  * The server list is cleared
-	  */
-	 public void serverListCleared();
-	 
-	 /**
-	  * Auto connect process started.
-	  */
-	 public void autoConnectStarted();
-	 
-	 public void autoConnectFailed();
-	 
+
+	/**
+	 * Tells when the system connects to the server
+	 * 
+	 * @param server
+	 *            the given server
+	 */
+	public void connected(Server server);
+
+	/**
+	 * Tells when the system has been disconnected from the server
+	 * 
+	 * @param server
+	 *            the given server
+	 */
+	public void disconnected(Server server);
+
+	/**
+	 * Tells when the system is waiting for a server connection
+	 * 
+	 * @param server
+	 *            the given server
+	 */
+	public void isConnecting(Server server);
+
+	/**
+	 * Tells when server send a message to client
+	 * 
+	 * @param server
+	 *            the given server
+	 * @param message
+	 *            message
+	 */
+	public void serverMessage(Server server, String message);
+
+	public void serverConnectingFailed(Server server, Throwable cause);
+
+	/**
+	 * A new server is added to the list
+	 * 
+	 * @param server
+	 *            the server that is added to the list
+	 */
+	public void serverAdded(Server server);
+
+	/**
+	 * A server is removed from the list
+	 * 
+	 * @param server
+	 *            the server that is removed from the list
+	 */
+	public void serverRemoved(Server server);
+
+	/**
+	 * The server list is cleared
+	 */
+	public void serverListCleared();
+
+	/**
+	 * Auto connect process started.
+	 */
+	public void autoConnectStarted();
+
+	public void autoConnectFailed();
+
 }

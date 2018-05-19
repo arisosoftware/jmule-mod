@@ -84,27 +84,39 @@ public class PeerInfoFormatter {
 	}
 
 	public static String peerSourceToString(PeerSource source) {
-		switch(source) {
-			case SERVER : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.server");
-			case GLOBAL : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.global");
-			case KAD : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.kad");
-			case PEX : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.pex");
-			case ED2KLINK : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.ed2klink");
-			case EXTERNAL : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.external");
-			case INCOMING : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.incoming");
+		switch (source) {
+		case SERVER:
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.server");
+		case GLOBAL:
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.global");
+		case KAD:
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.kad");
+		case PEX:
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.pex");
+		case ED2KLINK:
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.ed2klink");
+		case EXTERNAL:
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.external");
+		case INCOMING:
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.incoming");
 		}
 		return "";
 	}
-	
+
 	public static String getPeerStatusKadImage(KadContact kad_contact) {
-		if (kad_contact.getContactType() == ContactType.Active2MoreHours) return "contact0.png";
-		if (kad_contact.getContactType() == ContactType.Active1Hour) return "contact1.png";
-		if (kad_contact.getContactType() == ContactType.Active) return "contact2.png";
-		if (kad_contact.getContactType() == ContactType.JustAdded) return "contact3.png";
-		if (kad_contact.getContactType() == ContactType.ScheduledForRemoval) return "contact4.png";
+		if (kad_contact.getContactType() == ContactType.Active2MoreHours)
+			return "contact0.png";
+		if (kad_contact.getContactType() == ContactType.Active1Hour)
+			return "contact1.png";
+		if (kad_contact.getContactType() == ContactType.Active)
+			return "contact2.png";
+		if (kad_contact.getContactType() == ContactType.JustAdded)
+			return "contact3.png";
+		if (kad_contact.getContactType() == ContactType.ScheduledForRemoval)
+			return "contact4.png";
 		return "";
 	}
-	
+
 	public static String formatPeerSoftware(Peer peer) {
 		int software = peer.getClientSoftware();
 		String result = "";
@@ -119,40 +131,30 @@ public class PeerInfoFormatter {
 
 	public static String formatPeerStatus(PeerDownloadInfo downloadInfo) {
 		if (downloadInfo == null)
-			return Lang
-					.getString("downloadinfowindow.tab.peerlist.column.status.connecting");
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.status.connecting");
 		PeerDownloadStatus status = downloadInfo.getStatus();
 		if (status == null)
-			return Lang
-					.getString("downloadinfowindow.tab.peerlist.column.status.connecting");
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.status.connecting");
 		switch (status) {
 		case DISCONNECTED:
-			return Lang
-					.getString("downloadinfowindow.tab.peerlist.column.status.disconnected");
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.status.disconnected");
 		case CONNECTED:
-			return Lang
-					.getString("downloadinfowindow.tab.peerlist.column.status.connected");
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.status.connected");
 		case SLOTREQUEST:
-			return Lang
-					.getString("downloadinfowindow.tab.peerlist.column.status.slot_request");
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.status.slot_request");
 		case ACTIVE:
 			return Lang.getString("downloadinfowindow.tab.peerlist.column.status.active");
 		case ACTIVE_UNUSED:
-			return Lang
-					.getString("downloadinfowindow.tab.peerlist.column.status.active_unued");
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.status.active_unued");
 		case IN_QUEUE:
-			return Localizer.getString(
-					"downloadinfowindow.tab.peerlist.column.status.in_queue",
+			return Localizer.getString("downloadinfowindow.tab.peerlist.column.status.in_queue",
 					downloadInfo.getQueueRank() + "");
 		case INACTIVE:
-			return Lang
-					.getString("downloadinfowindow.tab.peerlist.column.status.inactive");
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.status.inactive");
 		case UPLOAD_REQUEST:
-			return Lang
-					.getString("downloadinfowindow.tab.peerlist.column.status.upload_request");
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.status.upload_request");
 		case HASHSET_REQUEST:
-			return Lang
-					.getString("downloadinfowindow.tab.peerlist.column.status.hashset_request");
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.status.hashset_request");
 		}
 
 		return "";

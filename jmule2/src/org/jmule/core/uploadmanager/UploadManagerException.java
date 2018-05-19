@@ -26,16 +26,17 @@ import org.jmule.core.JMException;
 
 /**
  * Created on Sep 13, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/09/17 18:30:12 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/09/17 18:30:12 $
  */
 public class UploadManagerException extends JMException {
-	
+
 	public UploadManagerException() {
 		super();
 	}
-	
+
 	public UploadManagerException(String cause) {
 		super(cause);
 	}
@@ -43,5 +44,5 @@ public class UploadManagerException extends JMException {
 	public UploadManagerException(Throwable cause) {
 		super(cause);
 	}
-	
+
 }

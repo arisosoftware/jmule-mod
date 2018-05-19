@@ -6,85 +6,67 @@ import java.util.Enumeration;
 import static org.jmule.core.bccrypto.ASN1.*;
 import static org.jmule.core.bccrypto.DER.*;
 
-public class RSAPublicKeyStructure
-    extends ASN1Encodable
-{
-    private BigInteger  modulus;
-    private BigInteger  publicExponent;
+public class RSAPublicKeyStructure extends ASN1Encodable {
+	private BigInteger modulus;
+	private BigInteger publicExponent;
 
-    public static RSAPublicKeyStructure getInstance(
-        ASN1TaggedObject obj,
-        boolean          explicit)
-    {
-        return getInstance(ASN1Sequence.getInstance(obj, explicit));
-    }
+	public static RSAPublicKeyStructure getInstance(ASN1TaggedObject obj, boolean explicit) {
+		return getInstance(ASN1Sequence.getInstance(obj, explicit));
+	}
 
-    public static RSAPublicKeyStructure getInstance(
-        Object obj)
-    {
-        if(obj == null || obj instanceof RSAPublicKeyStructure) 
-        {
-            return (RSAPublicKeyStructure)obj;
-        }
-        
-        if(obj instanceof ASN1Sequence) 
-        {
-            return new RSAPublicKeyStructure((ASN1Sequence)obj);
-        }
-        
-        throw new IllegalArgumentException("Invalid RSAPublicKeyStructure: " + obj.getClass().getName());
-    }
-    
-    public RSAPublicKeyStructure(
-        BigInteger  modulus,
-        BigInteger  publicExponent)
-    {
-        this.modulus = modulus;
-        this.publicExponent = publicExponent;
-    }
+	public static RSAPublicKeyStructure getInstance(Object obj) {
+		if (obj == null || obj instanceof RSAPublicKeyStructure) {
+			return (RSAPublicKeyStructure) obj;
+		}
 
-    public RSAPublicKeyStructure(
-        ASN1Sequence  seq)
-    {
-        if (seq.size() != 2)
-        {
-            throw new IllegalArgumentException("Bad sequence size: "
-                    + seq.size());
-        }
+		if (obj instanceof ASN1Sequence) {
+			return new RSAPublicKeyStructure((ASN1Sequence) obj);
+		}
 
-        Enumeration e = seq.getObjects();
+		throw new IllegalArgumentException("Invalid RSAPublicKeyStructure: " + obj.getClass().getName());
+	}
 
-        modulus = DERInteger.getInstance(e.nextElement()).getPositiveValue();
-        publicExponent = DERInteger.getInstance(e.nextElement()).getPositiveValue();
-    }
+	public RSAPublicKeyStructure(BigInteger modulus, BigInteger publicExponent) {
+		this.modulus = modulus;
+		this.publicExponent = publicExponent;
+	}
 
-    public BigInteger getModulus()
-    {
-        return modulus;
-    }
+	public RSAPublicKeyStructure(ASN1Sequence seq) {
+		if (seq.size() != 2) {
+			throw new IllegalArgumentException("Bad sequence size: " + seq.size());
+		}
 
-    public BigInteger getPublicExponent()
-    {
-        return publicExponent;
-    }
+		Enumeration e = seq.getObjects();
 
-    /**
-     * This outputs the key in PKCS1v2 format.
-     * <pre>
-     *      RSAPublicKey ::= SEQUENCE {
-     *                          modulus INTEGER, -- n
-     *                          publicExponent INTEGER, -- e
-     *                      }
-     * </pre>
-     * <p>
-     */
-    public DERObject toASN1Object()
-    {
-        ASN1EncodableVector  v = new ASN1EncodableVector();
+		modulus = DERInteger.getInstance(e.nextElement()).getPositiveValue();
+		publicExponent = DERInteger.getInstance(e.nextElement()).getPositiveValue();
+	}
 
-        v.add(new DERInteger(getModulus()));
-        v.add(new DERInteger(getPublicExponent()));
+	public BigInteger getModulus() {
+		return modulus;
+	}
 
-        return new DERSequence(v);
-    }
+	public BigInteger getPublicExponent() {
+		return publicExponent;
+	}
+
+	/**
+	 * This outputs the key in PKCS1v2 format.
+	 * 
+	 * <pre>
+	 *      RSAPublicKey ::= SEQUENCE {
+	 *                          modulus INTEGER, -- n
+	 *                          publicExponent INTEGER, -- e
+	 *                      }
+	 * </pre>
+	 * <p>
+	 */
+	public DERObject toASN1Object() {
+		ASN1EncodableVector v = new ASN1EncodableVector();
+
+		v.add(new DERInteger(getModulus()));
+		v.add(new DERInteger(getPublicExponent()));
+
+		return new DERSequence(v);
+	}
 }

@@ -43,9 +43,10 @@ import org.jmule.ui.utils.TimeFormatter;
 /**
  *
  * Created on Oct 11, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.5 $
- * Last changed by $Author: binary255 $ on $Date: 2009/11/17 14:53:43 $
+ * @version $Revision: 1.5 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/11/17 14:53:43 $
  */
 public class UploadDetailsPanel extends JPanel {
 
@@ -65,26 +66,26 @@ public class UploadDetailsPanel extends JPanel {
 	private JLabel upload_speed_label = new JLabel("Upload speed");
 	private JLabel ed2k_link_label = new JLabel("ED2K Link");
 	private JLabel file_size_label = new JLabel("File size");
-	
+
 	private UploadSession session;
-	
-    private final static Font label_value_font = new java.awt.Font("Dialog", 0, 12);
-    private final static Font label_font = new java.awt.Font("Dialog", 1, 12);
-	
+
+	private final static Font label_value_font = new java.awt.Font("Dialog", 0, 12);
+	private final static Font label_font = new java.awt.Font("Dialog", 1, 12);
+
 	public UploadDetailsPanel(UploadSession session) {
-		
+
 		this.session = session;
 		init();
 	}
-	
+
 	private void init() {
 		GridBagLayout grid_bag_layout = new GridBagLayout();
 		this.setPreferredSize(new java.awt.Dimension(439, 254));
-		grid_bag_layout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1};
-		grid_bag_layout.rowHeights = new int[] {19, 20, 20, 21, 21, 19, 20, 20, 20, 7};
-		grid_bag_layout.columnWeights = new double[] {0.0, 0.0, 0.0, 0.1};
-		grid_bag_layout.columnWidths = new int[] {7, 113, 18, 7};
-		
+		grid_bag_layout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1 };
+		grid_bag_layout.rowHeights = new int[] { 19, 20, 20, 21, 21, 19, 20, 20, 20, 7 };
+		grid_bag_layout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.1 };
+		grid_bag_layout.columnWidths = new int[] { 7, 113, 18, 7 };
+
 		file_name_label.setFont(label_font);
 		file_hash_label.setFont(label_font);
 		file_size_label.setFont(label_font);
@@ -93,7 +94,7 @@ public class UploadDetailsPanel extends JPanel {
 		transferred_label.setFont(label_font);
 		eta_label.setFont(label_font);
 		peers_label.setFont(label_font);
-		
+
 		file_name_value.setFont(label_value_font);
 		file_hash_value.setFont(label_value_font);
 		file_size_value.setFont(label_value_font);
@@ -102,28 +103,45 @@ public class UploadDetailsPanel extends JPanel {
 		transferred_value.setFont(label_value_font);
 		eta_value.setFont(label_value_font);
 		peers_value.setFont(label_value_font);
-		
+
 		this.setLayout(grid_bag_layout);
-		this.add(file_name_label, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(file_hash_label, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(file_size_label, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(ed2k_link_label, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(upload_speed_label, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(transferred_label, new GridBagConstraints(1, 6, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(eta_label, new GridBagConstraints(1, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(peers_label, new GridBagConstraints(1, 8, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(file_name_value, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(file_hash_value, new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(file_size_value, new GridBagConstraints(3, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(ed2k_link_value, new GridBagConstraints(3, 4, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(upload_speed_value, new GridBagConstraints(3, 5, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(transferred_value, new GridBagConstraints(3, 6, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		this.add(eta_value, new GridBagConstraints(3, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-        this.add(peers_value, new GridBagConstraints(3, 8, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-        file_name_value.setIcon(new ImageIcon(UIConstants.getMimeURLByExtension(Misc.getFileExtension(session.getSharingName()))));
-        updateData();
+		this.add(file_name_label, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(file_hash_label, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(file_size_label, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(ed2k_link_label, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(upload_speed_label, new GridBagConstraints(1, 5, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(transferred_label, new GridBagConstraints(1, 6, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(eta_label, new GridBagConstraints(1, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(peers_label, new GridBagConstraints(1, 8, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(file_name_value, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(file_hash_value, new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(file_size_value, new GridBagConstraints(3, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(ed2k_link_value, new GridBagConstraints(3, 4, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(upload_speed_value, new GridBagConstraints(3, 5, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(transferred_value, new GridBagConstraints(3, 6, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(eta_value, new GridBagConstraints(3, 7, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(peers_value, new GridBagConstraints(3, 8, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		file_name_value.setIcon(
+				new ImageIcon(UIConstants.getMimeURLByExtension(Misc.getFileExtension(session.getSharingName()))));
+		updateData();
 	}
-	
+
 	public void updateData() {
 		file_name_value.setText(session.getSharingName());
 		file_hash_value.setText(session.getFileHash().getAsString());

@@ -26,9 +26,10 @@ import org.jmule.core.jkad.JKadException;
 
 /**
  * Created on Dec 31, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/09/17 18:07:32 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/09/17 18:07:32 $
  */
 public class CorruptedPacketException extends JKadException {
 

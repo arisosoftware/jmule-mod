@@ -35,24 +35,25 @@ import org.jmule.core.utils.Convert;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.5 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/07/31 13:08:35 $$
+ * @version $$Revision: 1.5 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/07/31 13:08:35 $$
  */
 public class CompletedFile extends SharedFile {
 
-	public CompletedFile(String filePath){
+	public CompletedFile(String filePath) {
 		file = new File(filePath);
 		init();
 	}
-	
+
 	public CompletedFile(File file) {
 		this.file = file;
 		init();
 	}
-	
+
 	private void init() {
 		String fileName = this.getSharingName();
-		if (fileName==null) fileName = file.getName();
+		if (fileName == null)
+			fileName = file.getName();
 		Tag tag = new StringTag(FT_FILENAME, fileName);
 		tagList.addTag(tag);
 
@@ -61,7 +62,7 @@ public class CompletedFile extends SharedFile {
 	}
 
 	public String toString() {
-		return "["+getSharingName()+" ; "+file.length()+" ; "+" ]";
+		return "[" + getSharingName() + " ; " + file.length() + " ; " + " ]";
 	}
 
 	public boolean isCompleted() {

@@ -31,111 +31,111 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.jmule.core.utils.Misc;
 
-
-
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.9 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/08/15 12:07:36 $$
+ * @version $$Revision: 1.9 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/08/15 12:07:36 $$
  */
 public class TagList implements Iterable<Tag> {
 
 	public final static TagList EMPTY_TAG_LIST;
-	
+
 	static {
 		EMPTY_TAG_LIST = new TagList();
 	}
-	
+
 	private Collection<Tag> tagList = new ConcurrentLinkedQueue<Tag>();
 
 	public TagList() {
-		
+
 	}
-	
+
 	public TagList(Collection<Tag> list) {
-		this.addTag(list,true);
+		this.addTag(list, true);
 	}
-	
+
 	public Iterator<Tag> iterator() {
 
 		return tagList.iterator();
 	}
-	
+
 	public boolean hasTag(byte[] tagName) {
-		for(Tag tag : tagList) 
+		for (Tag tag : tagList)
 			if (Arrays.equals(tag.getTagName(), tagName))
 				return true;
 		return false;
 	}
-	
+
 	public void addTag(Tag tag) {
-		if (hasTag(tag.getTagName())) return;
+		if (hasTag(tag.getTagName()))
+			return;
 		tagList.add(tag);
 	}
-	
+
 	public void addTag(Tag tag, boolean removeIfExist) {
-		if (hasTag(tag.getTagName())) 
+		if (hasTag(tag.getTagName()))
 			removeTag(tag.getTagName());
 		tagList.add(tag);
 	}
-	
+
 	public void addTag(Iterable<Tag> tagList, boolean removeIfExist) {
-		for(Tag tag : tagList) {
+		for (Tag tag : tagList) {
 			if (hasTag(tag.getTagName()))
 				removeTag(tag.getTagName());
 			addTag(tag);
 		}
 	}
-	
+
 	public Collection<Tag> getAsCollection() {
 		return tagList;
 	}
-	
+
 	public int size() {
 		return tagList.size();
 	}
-	
+
 	public void removeTag(List<byte[]> tags) {
-		for(byte[] tag : tags)
+		for (byte[] tag : tags)
 			removeTag(tag);
 	}
-	
+
 	public void removeTag(byte[] tagName) {
 		Tag remove = null;
-		
-		for(Tag tag : tagList) 
+
+		for (Tag tag : tagList)
 			if (Arrays.equals(tag.getTagName(), tagName))
 				remove = tag;
-		if (remove == null) return;
+		if (remove == null)
+			return;
 		tagList.remove(remove);
 	}
-	
+
 	public Tag getTag(byte[] tagName) {
-		for(Tag tag : tagList) 
+		for (Tag tag : tagList)
 			if (Arrays.equals(tag.getTagName(), tagName))
 				return tag;
 		return null;
 	}
-	
+
 	public String toString() {
-		String result ="";
-		for(Tag tag : tagList) {
+		String result = "";
+		for (Tag tag : tagList) {
 			result += tag + "\n";
 		}
 		return result;
 	}
-	
+
 	public int getByteSize() {
 		int result = 0;
-		for(Tag tag : tagList)
+		for (Tag tag : tagList)
 			result += tag.getSize();
 		return result;
 	}
-	
+
 	public ByteBuffer getAsByteBuffer() {
 		ByteBuffer result = Misc.getByteBuffer(getByteSize());
-		for(Tag tag : tagList) {
+		for (Tag tag : tagList) {
 			ByteBuffer b = tag.getAsByteBuffer();
 			b.position(0);
 			result.put(b);
@@ -143,6 +143,5 @@ public class TagList implements Iterable<Tag> {
 		result.position(0);
 		return result;
 	}
-	
-	
+
 }

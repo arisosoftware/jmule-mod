@@ -26,109 +26,111 @@ import org.jmule.core.JMuleCore;
 import org.jmule.core.JMuleCoreFactory;
 
 import org.jmule.ui.swing.JMuleSwingUI;
- 
+
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.3 $$
- * changed by $$Author: javajox $$ on $$Date: 2009/07/12 14:44:54 $$
- * changed by ftarlao
+ * @version $$Revision: 1.3 $$ changed by $$Author: javajox $$ on $$Date:
+ *          2009/07/12 14:44:54 $$ changed by ftarlao
  */
 public class JMuleUIManager {
 
-	public static String SWT_UI       =    "SWT";
-	public static String SWING_UI     =    "SWING";
-	public static String CONSOLE_UI   =    "CONSOLE";
-	//TODO changed default to SWING_UI. We have to remove the SWT UI
-	public static String DEFAULT_UI   =     SWING_UI;
-	
+	public static String SWT_UI = "SWT";
+	public static String SWING_UI = "SWING";
+	public static String CONSOLE_UI = "CONSOLE";
+	// TODO changed default to SWING_UI. We have to remove the SWT UI
+	public static String DEFAULT_UI = SWING_UI;
+
 	private static JMuleUIManager singleton = null;
-	
+
 	private static CommonUIPreferences common_ui_preferences = null;
-	
+
 	private static JMuleUI ui_instance = null;
-	
+
 	private JMuleCore _core;
-	
+
 	private JMuleUIManager() {
-		
+
 		common_ui_preferences = CommonUIPreferences.getSingleton();
-		
+
 		try {
-		
-		  _core = JMuleCoreFactory.getSingleton();
-		  
-		}catch(Throwable t) {
-			
+
+			_core = JMuleCoreFactory.getSingleton();
+
+		} catch (Throwable t) {
+
 			t.printStackTrace();
-			
+
 		}
 	}
-	
+
 	public static JMuleUIManager getSingleton() throws JMuleUIManagerException {
-		
-		if( singleton == null ) throw new JMuleUIManagerException("The JMule UI manager is not instantiated");
-		
+
+		if (singleton == null)
+			throw new JMuleUIManagerException("The JMule UI manager is not instantiated");
+
 		return singleton;
 	}
-	
+
 	public static JMuleUI getJMuleUI() throws JMuleUIManagerException {
-		
-		if( ui_instance == null ) throw new JMuleUIManagerException("The JMule UI is not instantiated");
-		
+
+		if (ui_instance == null)
+			throw new JMuleUIManagerException("The JMule UI is not instantiated");
+
 		return ui_instance;
 	}
-	
+
 	public static void create(String ui_type) throws JMuleUIManagerException {
-		
-		if( singleton == null ) singleton = new JMuleUIManager();
-		
-	 if( ui_type.equals( SWING_UI ) ) {
+
+		if (singleton == null)
+			singleton = new JMuleUIManager();
+
+		if (ui_type.equals(SWING_UI)) {
 			ui_instance = new JMuleSwingUI();
-		} else if( ui_type.equals( CONSOLE_UI ) ) {
-            ui_instance = new JMuleConsoleUI();
+		} else if (ui_type.equals(CONSOLE_UI)) {
+			ui_instance = new JMuleConsoleUI();
 		} else {
 			throw new JMuleUIManagerException("Unknown ui type : " + ui_type);
 		}
-		       
+
 		ui_instance.initialize();
-		
+
 		ui_instance.start();
-		
+
 	}
-	
+
 	public static String getCurrentUIType() {
-		
-		 
-		if( ui_instance instanceof JMuleSwingUI ) return SWING_UI;
-		
+
+		if (ui_instance instanceof JMuleSwingUI)
+			return SWING_UI;
+
 		return null;
 	}
-	
+
 	public static void create() throws JMuleUIManagerException {
-		
-		if( singleton == null ) singleton = new JMuleUIManager();
-		
-		create( common_ui_preferences.getUIType() );
-		
+
+		if (singleton == null)
+			singleton = new JMuleUIManager();
+
+		create(common_ui_preferences.getUIType());
+
 	}
-	
+
 	public JMuleCore getJMuleCore() {
 		return _core;
 	}
-	
+
 	public void shutdown() {
-		
-		
+
 		try {
-			
+
 			_core.stop();
-			
-		}catch(Throwable t) {
-			
+
+		} catch (Throwable t) {
+
 			t.printStackTrace();
 		}
-		
+
 	}
-	
+
 }

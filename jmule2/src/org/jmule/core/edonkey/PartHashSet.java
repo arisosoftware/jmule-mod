@@ -26,73 +26,72 @@ import java.util.LinkedList;
 
 import org.jmule.core.utils.Convert;
 
-
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/09/17 17:45:20 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/09/17 17:45:20 $$
  */
 public class PartHashSet extends LinkedList<byte[]> {
-	
+
 	private FileHash fileHash;
-	
 
-	public PartHashSet(FileHash fileHash){
-		
+	public PartHashSet(FileHash fileHash) {
+
 		this.fileHash = fileHash;
-		
+
 	}
 
-	public boolean add(byte[] partHash){
-		
+	public boolean add(byte[] partHash) {
+
 		byte[] pHash = partHash.clone();
-		
+
 		super.addLast(pHash);
-		
+
 		return true;
-		
+
 	}
-	
-	public void setFileHash(FileHash fileHash){
-		
-		this.fileHash=fileHash;
-		
+
+	public void setFileHash(FileHash fileHash) {
+
+		this.fileHash = fileHash;
+
 	}
-	
+
 	public FileHash getFileHash() {
-		
+
 		return this.fileHash;
-		
+
 	}
-	
-	public byte[] get(int partID){
-		
+
+	public byte[] get(int partID) {
+
 		return super.get(partID);
-		
+
 	}
-	
+
 	public boolean isEmpty() {
-		for(byte[] hashSet : this) {
-			for(int i = 0; i<hashSet.length;i++)
-				if (hashSet[i] != 0) return false;
+		for (byte[] hashSet : this) {
+			for (int i = 0; i < hashSet.length; i++)
+				if (hashSet[i] != 0)
+					return false;
 		}
 		return true;
 	}
-	
+
 	public String toString() {
-		
-		String result="["+fileHash+"]\n";
-		
-		for(int i = 0;i<this.toArray().length;i++) {
-			
+
+		String result = "[" + fileHash + "]\n";
+
+		for (int i = 0; i < this.toArray().length; i++) {
+
 			byte[] a = this.get(i);
-			
-			result+=Convert.byteToHexString(a)+" ";
-			
+
+			result += Convert.byteToHexString(a) + " ";
+
 		}
-		
+
 		return result;
-		
+
 	}
 }

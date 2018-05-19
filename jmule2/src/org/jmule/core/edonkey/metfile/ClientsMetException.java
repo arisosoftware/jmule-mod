@@ -27,10 +27,10 @@ import org.jmule.core.JMException;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:44:30 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:44:30 $$
  */
-public class ClientsMetException  extends JMException{
+public class ClientsMetException extends JMException {
 
 	public ClientsMetException(String string) {
 		super(string);

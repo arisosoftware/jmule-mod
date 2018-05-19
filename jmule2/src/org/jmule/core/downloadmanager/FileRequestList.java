@@ -30,20 +30,21 @@ import java.util.LinkedList;
 import org.jmule.core.peermanager.Peer;
 
 /**
- * Map Peer and requested fragments
- * Created on 07-19-2008
+ * Map Peer and requested fragments Created on 07-19-2008
+ * 
  * @author binary256
- * @version $$Revision: 1.4 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/08/15 12:30:40 $$
+ * @version $$Revision: 1.4 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/08/15 12:30:40 $$
  */
-public class FileRequestList extends Hashtable<Peer,FragmentList>{
-	
+public class FileRequestList extends Hashtable<Peer, FragmentList> {
+
 	public boolean hasPeer(Peer p) {
-		if (this.get(p)==null) return false;
+		if (this.get(p) == null)
+			return false;
 		return true;
 	}
 
-	public Collection<FileFragment> getFragmentsFromSegment(long start,long end) {
+	public Collection<FileFragment> getFragmentsFromSegment(long start, long end) {
 		Collection<FileFragment> result = new LinkedList<FileFragment>();
 		for (int i = 0; i < this.size(); i++) {
 			FragmentList fl = (FragmentList) this.values().toArray()[i];
@@ -54,54 +55,57 @@ public class FileRequestList extends Hashtable<Peer,FragmentList>{
 		}
 		return result;
 	}
-	
-	public void addFragment(Peer peer,long begin,long end) {
+
+	public void addFragment(Peer peer, long begin, long end) {
 		FragmentList fList;
 		if (!hasPeer(peer)) {
 			fList = new FragmentList();
 			super.put(peer, fList);
-		}else 
+		} else
 			fList = super.get(peer);
 		if (!fList.hasFragment(begin, end))
-			fList.add(new FileFragment(begin,end));
-			
+			fList.add(new FileFragment(begin, end));
+
 	}
-	
-	public boolean hasFragment(long begin,long end) {
-		for(int i = 0;i<this.values().size();i++) {
+
+	public boolean hasFragment(long begin, long end) {
+		for (int i = 0; i < this.values().size(); i++) {
 			FragmentList fl = (FragmentList) this.values().toArray()[i];
-			if (fl.hasFragment(begin, end)) 
-					return true;
+			if (fl.hasFragment(begin, end))
+				return true;
 		}
 		return false;
 	}
-	
-	private FragmentList getFragmentList(long begin,long end) {
-		if (!hasFragment(begin,end)) return null;
-		for(int i = 0;i<this.values().size();i++) {
+
+	private FragmentList getFragmentList(long begin, long end) {
+		if (!hasFragment(begin, end))
+			return null;
+		for (int i = 0; i < this.values().size(); i++) {
 			FragmentList fl = (FragmentList) this.values().toArray()[i];
 			if (fl.hasFragment(begin, end))
 				return fl;
 		}
 		return null;
 	}
-	
+
 	public FragmentList getFragmentList(Peer peer) {
-		if (!hasPeer(peer)) return null;
+		if (!hasPeer(peer))
+			return null;
 		return super.get(peer);
 	}
-	
-	public void splitFragment(Peer peer,long begin,long end) {
-		if (!hasPeer(peer)) return ;
-		
+
+	public void splitFragment(Peer peer, long begin, long end) {
+		if (!hasPeer(peer))
+			return;
+
 		FragmentList fl = this.get(peer);
-		fl.splitFragment(begin,end);
+		fl.splitFragment(begin, end);
 	}
-	
+
 	public long getUnrequestedPos(long pos) {
-		for(int i = 0;i<this.values().size();i++) {
+		for (int i = 0; i < this.values().size(); i++) {
 			FragmentList fl = (FragmentList) this.values().toArray()[i];
-			for(int j = 0;j<fl.size();j++){
+			for (int j = 0; j < fl.size(); j++) {
 				FileFragment f = fl.get(j);
 				if (f.containPos(pos))
 					pos = f.getEnd();
@@ -109,7 +113,7 @@ public class FileRequestList extends Hashtable<Peer,FragmentList>{
 		}
 		return pos;
 	}
-	
+
 	public String toString() {
 		String result = "{ ";
 		for (int i = 0; i < this.keySet().toArray().length; i++) {

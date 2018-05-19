@@ -25,50 +25,52 @@ package org.jmule.core.edonkey.packet.tag;
 import java.nio.ByteBuffer;
 import static org.jmule.core.utils.Misc.*;
 import static org.jmule.core.utils.Convert.*;
+
 /**
  * 
  * Standard tag structure :
  * 
  * <table width="100%" cellspacing="0" border="1" cellpadding="0">
- *   <tbody>
- *     <tr>
- *       <td>Name</td>
- *       <td>Size in Bytes</td>
- *       <td>Description</td>
- *     </tr>
- *     <tr>
- *       <td>Tag Type</td>
- *       <td>1</td>
- *       <td>Tag Type : String,Dword</td>
- *     </tr>
- *     <tr>
- *       <td>Meta Tag name length</td>
- *       <td>2</td>
- *       <td>Meta Tag name length</td>
- *     </tr>
- *     <tr>
- *       <td>Meta Tag Name</td>
- *       <td>&lt;Meta Tag Name length&gt;</td>
- *       <td>Meta tag name : File Name, File Size, Bit Rate etc</td>
- *     </tr>
- *     <tr>
- *       <td colspan="3"><center>Tag value</center></td>
- *     </tr>
- *   </tbody>
+ * <tbody>
+ * <tr>
+ * <td>Name</td>
+ * <td>Size in Bytes</td>
+ * <td>Description</td>
+ * </tr>
+ * <tr>
+ * <td>Tag Type</td>
+ * <td>1</td>
+ * <td>Tag Type : String,Dword</td>
+ * </tr>
+ * <tr>
+ * <td>Meta Tag name length</td>
+ * <td>2</td>
+ * <td>Meta Tag name length</td>
+ * </tr>
+ * <tr>
+ * <td>Meta Tag Name</td>
+ * <td>&lt;Meta Tag Name length&gt;</td>
+ * <td>Meta tag name : File Name, File Size, Bit Rate etc</td>
+ * </tr>
+ * <tr>
+ * <td colspan="3"><center>Tag value</center></td>
+ * </tr>
+ * </tbody>
  * </table>
  * 
  * Created on Jul 15, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary255 $ on $Date: 2010/06/15 16:47:06 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/06/15 16:47:06 $
  */
-abstract class StandartTag extends AbstractTag{
+abstract class StandartTag extends AbstractTag {
 
 	private ByteBuffer tagHeader;
-	
+
 	public StandartTag(byte tagType, byte[] tagName) {
 		super(tagType, tagName);
-	
+
 		tagHeader = getByteBuffer(1 + 2 + tagName.length);
 		tagHeader.put(tagType);
 		tagHeader.putShort(intToShort(tagName.length));
@@ -79,11 +81,9 @@ abstract class StandartTag extends AbstractTag{
 		tagHeader.position(0);
 		return tagHeader;
 	}
-	
+
 	public int getHeaderSize() {
-		return 1 + 2 + tagName.length ;
+		return 1 + 2 + tagName.length;
 	}
-	
-	
-	
+
 }

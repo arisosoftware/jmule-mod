@@ -26,7 +26,7 @@ import org.aspectj.lang.reflect.PointcutExpression;
  *
  */
 public class AdviceImpl implements Advice {
-	
+
 	private static final String AJC_INTERNAL = "org.aspectj.runtime.internal";
 
 	private final AdviceKind kind;
@@ -36,35 +36,36 @@ public class AdviceImpl implements Advice {
 	private Type[] genericParameterTypes;
 	private AjType[] parameterTypes;
 	private AjType[] exceptionTypes;
-	
+
 	protected AdviceImpl(Method method, String pointcut, AdviceKind type) {
 		this.kind = type;
 		this.adviceMethod = method;
 		this.pointcutExpression = new PointcutExpressionImpl(pointcut);
 	}
-	
+
 	protected AdviceImpl(Method method, String pointcut, AdviceKind type, String extraParamName) {
-		this(method,pointcut,type);
+		this(method, pointcut, type);
 		this.hasExtraParam = true;
 	}
-	
+
 	public AjType getDeclaringType() {
 		return AjTypeSystem.getAjType(adviceMethod.getDeclaringClass());
 	}
-	
+
 	public Type[] getGenericParameterTypes() {
 		if (this.genericParameterTypes == null) {
 			Type[] genTypes = adviceMethod.getGenericParameterTypes();
 			int syntheticCount = 0;
 			for (Type t : genTypes) {
 				if (t instanceof Class) {
-					if (((Class)t).getPackage().getName().equals(AJC_INTERNAL)) syntheticCount++;
+					if (((Class) t).getPackage().getName().equals(AJC_INTERNAL))
+						syntheticCount++;
 				}
 			}
 			this.genericParameterTypes = new Type[genTypes.length - syntheticCount];
 			for (int i = 0; i < genericParameterTypes.length; i++) {
 				if (genTypes[i] instanceof Class) {
-					this.genericParameterTypes[i] = AjTypeSystem.getAjType((Class<?>)genTypes[i]);
+					this.genericParameterTypes[i] = AjTypeSystem.getAjType((Class<?>) genTypes[i]);
 				} else {
 					this.genericParameterTypes[i] = genTypes[i];
 				}
@@ -72,13 +73,14 @@ public class AdviceImpl implements Advice {
 		}
 		return this.genericParameterTypes;
 	}
-	
+
 	public AjType<?>[] getParameterTypes() {
 		if (this.parameterTypes == null) {
 			Class<?>[] ptypes = adviceMethod.getParameterTypes();
 			int syntheticCount = 0;
-			for(Class<?> c : ptypes) {
-				if (c.getPackage().getName().equals(AJC_INTERNAL)) syntheticCount++;
+			for (Class<?> c : ptypes) {
+				if (c.getPackage().getName().equals(AJC_INTERNAL))
+					syntheticCount++;
 			}
 			this.parameterTypes = new AjType<?>[ptypes.length - syntheticCount];
 			for (int i = 0; i < parameterTypes.length; i++) {
@@ -87,7 +89,7 @@ public class AdviceImpl implements Advice {
 		}
 		return this.parameterTypes;
 	}
-	
+
 	public AjType<?>[] getExceptionTypes() {
 		if (this.exceptionTypes == null) {
 			Class<?>[] exTypes = adviceMethod.getExceptionTypes();
@@ -98,25 +100,26 @@ public class AdviceImpl implements Advice {
 		}
 		return this.exceptionTypes;
 	}
-	
+
 	public AdviceKind getKind() {
 		return kind;
 	}
-	
+
 	public String getName() {
 		String adviceName = adviceMethod.getName();
 		if (adviceName.startsWith("ajc$")) {
 			adviceName = "";
 			AdviceName name = adviceMethod.getAnnotation(AdviceName.class);
-			if (name != null) adviceName = name.value();
+			if (name != null)
+				adviceName = name.value();
 		}
 		return adviceName;
 	}
-	
+
 	public PointcutExpression getPointcutExpression() {
 		return pointcutExpression;
 	}
-	
+
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		if (getName().length() > 0) {
@@ -128,7 +131,7 @@ public class AdviceImpl implements Advice {
 			sb.append(adviceMethod.getGenericReturnType().toString());
 			sb.append(" ");
 		}
-		switch(getKind()) {
+		switch (getKind()) {
 		case AFTER:
 			sb.append("after(");
 			break;
@@ -147,25 +150,27 @@ public class AdviceImpl implements Advice {
 		}
 		AjType<?>[] ptypes = getParameterTypes();
 		int len = ptypes.length;
-		if (hasExtraParam) len--;
+		if (hasExtraParam)
+			len--;
 		for (int i = 0; i < len; i++) {
 			sb.append(ptypes[i].getName());
-			if (i+1 < len) sb.append(",");
+			if (i + 1 < len)
+				sb.append(",");
 		}
 		sb.append(") ");
-		switch(getKind()) {
+		switch (getKind()) {
 		case AFTER_RETURNING:
 			sb.append("returning");
 			if (hasExtraParam) {
 				sb.append("(");
-				sb.append(ptypes[len-1].getName());
+				sb.append(ptypes[len - 1].getName());
 				sb.append(") ");
 			}
 		case AFTER_THROWING:
 			sb.append("throwing");
 			if (hasExtraParam) {
 				sb.append("(");
-				sb.append(ptypes[len-1].getName());
+				sb.append(ptypes[len - 1].getName());
 				sb.append(") ");
 			}
 		default: // no-op
@@ -175,7 +180,8 @@ public class AdviceImpl implements Advice {
 			sb.append("throws ");
 			for (int i = 0; i < exTypes.length; i++) {
 				sb.append(exTypes[i].getName());
-				if (i+1 < exTypes.length) sb.append(",");
+				if (i + 1 < exTypes.length)
+					sb.append(",");
 			}
 			sb.append(" ");
 		}
@@ -183,5 +189,5 @@ public class AdviceImpl implements Advice {
 		sb.append(getPointcutExpression().asString());
 		return sb.toString();
 	}
-	
+
 }

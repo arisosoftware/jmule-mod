@@ -106,8 +106,7 @@ public class PacketFactory {
 	}
 
 	public static KadPacket getBootStrap1ResPacket(List<KadContact> contactList) {
-		KadPacket packet = new KadPacket(KADEMLIA_BOOTSTRAP_RES, 2
-				+ contactList.size() * (16 + 4 + 2 + 2 + 1));
+		KadPacket packet = new KadPacket(KADEMLIA_BOOTSTRAP_RES, 2 + contactList.size() * (16 + 4 + 2 + 2 + 1));
 
 		packet.insertData(intToShort(contactList.size()));
 		for (KadContact contact : contactList) {
@@ -147,7 +146,7 @@ public class PacketFactory {
 		return packet;
 	}
 
-	public static KadPacket getRequest1Packet(RequestType type, Int128 target,Int128 receiver) {
+	public static KadPacket getRequest1Packet(RequestType type, Int128 target, Int128 receiver) {
 		KadPacket packet = new KadPacket(KADEMLIA_REQ, 1 + 16 + 16);
 		packet.insertData(type.toByte());
 		packet.insertData(target.toByteArray());
@@ -155,10 +154,8 @@ public class PacketFactory {
 		return packet;
 	}
 
-	public static KadPacket getResponse1Packet(Int128 target,
-			List<KadContact> contactList) {
-		KadPacket packet = new KadPacket(KADEMLIA_RES, 16 + 1
-				+ contactList.size() * (16 + 4 + 2 + 2 + 1));
+	public static KadPacket getResponse1Packet(Int128 target, List<KadContact> contactList) {
+		KadPacket packet = new KadPacket(KADEMLIA_RES, 16 + 1 + contactList.size() * (16 + 4 + 2 + 2 + 1));
 
 		packet.insertData(target.toByteArray());
 		packet.insertData(intToByte(contactList.size()));
@@ -170,12 +167,12 @@ public class PacketFactory {
 		return packet;
 	}
 
-	public static KadPacket getPublish1ReqPacket(Int128 targetID,Collection<PublishItem> publishItems) {
-		
+	public static KadPacket getPublish1ReqPacket(Int128 targetID, Collection<PublishItem> publishItems) {
+
 		List<ByteBuffer> publish_items = new ArrayList<ByteBuffer>();
 		int size = 0;
-		
-		for(PublishItem p : publishItems) {
+
+		for (PublishItem p : publishItems) {
 			ByteBuffer tags = tagsToByteBuffer(p.getTagList());
 			tags.position(0);
 			ByteBuffer buffer = Misc.getByteBuffer(16 + 1 + tags.capacity());
@@ -186,11 +183,11 @@ public class PacketFactory {
 			buffer.position(0);
 			publish_items.add(buffer);
 		}
-		
+
 		KadPacket packet = new KadPacket(KADEMLIA_PUBLISH_REQ, 16 + 2 + size);
 		packet.insertData(targetID.toByteArray());
 		packet.insertData(Convert.intToShort(publishItems.size()));
-		for(ByteBuffer b : publish_items)
+		for (ByteBuffer b : publish_items)
 			packet.insertData(b);
 		return packet;
 	}
@@ -204,9 +201,8 @@ public class PacketFactory {
 		return packet;
 	}
 
-	public static KadPacket getSearch1ReqPacket(Int128 targetID,boolean sourceSearch) {
-		KadPacket packet = new KadPacket(KADEMLIA_SEARCH_REQ,
-				16 + 1 + (sourceSearch ? 0 : 1));
+	public static KadPacket getSearch1ReqPacket(Int128 targetID, boolean sourceSearch) {
+		KadPacket packet = new KadPacket(KADEMLIA_SEARCH_REQ, 16 + 1 + (sourceSearch ? 0 : 1));
 		packet.insertData(targetID.toByteArray());
 		packet.insertData(sourceSearch ? (byte) 0x01 : (byte) 0x00);
 		if (!sourceSearch)
@@ -214,7 +210,7 @@ public class PacketFactory {
 		return packet;
 	}
 
-	public static KadPacket getSearchResPacket(Int128 targetID,Collection<Source> sourceList) {
+	public static KadPacket getSearchResPacket(Int128 targetID, Collection<Source> sourceList) {
 		List<ByteBuffer> tag_list = new ArrayList<ByteBuffer>();
 		int tags_size = 0;
 		if (sourceList != null)
@@ -235,13 +231,13 @@ public class PacketFactory {
 		packet.insertData(intToShort(sourceCount));
 		int i = -1;
 		if (sourceList != null)
-		for(Source source : sourceList) {
-			i++;
-			ByteBuffer tags = tag_list.get(i);
-			packet.insertData(source.getClientID().toByteArray());
-			packet.insertData(intToShort(source.getTagList().size()));
-			packet.insertData(tags);
-		}
+			for (Source source : sourceList) {
+				i++;
+				ByteBuffer tags = tag_list.get(i);
+				packet.insertData(source.getClientID().toByteArray());
+				packet.insertData(intToShort(source.getTagList().size()));
+				packet.insertData(tags);
+			}
 
 		return packet;
 
@@ -269,19 +265,18 @@ public class PacketFactory {
 		if (contactList != null)
 			contactCount = contactList.size();
 
-		KadPacket packet = new KadPacket(KADEMLIA_SEARCH_NOTES_RES, 16 + 2
-				+ contactCount * 16 + tags_size);
+		KadPacket packet = new KadPacket(KADEMLIA_SEARCH_NOTES_RES, 16 + 2 + contactCount * 16 + tags_size);
 
 		packet.insertData(noteID.toByteArray());
 		packet.insertData(intToShort(contactCount));
 		int i = -1;
 		if (contactList != null)
-		for(Source source : contactList) {
-			i++;
-			packet.insertData(source.getClientID().toByteArray());
-			packet.insertData(intToShort(source.getTagList().size()));
-			packet.insertData(tag_list.get(i));
-		}
+			for (Source source : contactList) {
+				i++;
+				packet.insertData(source.getClientID().toByteArray());
+				packet.insertData(intToShort(source.getTagList().size()));
+				packet.insertData(tag_list.get(i));
+			}
 
 		return packet;
 	}
@@ -290,7 +285,7 @@ public class PacketFactory {
 		ByteBuffer tag_list = tagsToByteBuffer(publishItem.getTagList());
 		tag_list.position(0);
 
-		KadPacket packet = new KadPacket(KADEMLIA_PUBLISH_NOTES_REQ,16 + 16 + 2 + tag_list.capacity());
+		KadPacket packet = new KadPacket(KADEMLIA_PUBLISH_NOTES_REQ, 16 + 16 + 2 + tag_list.capacity());
 
 		packet.insertData(new Int128(publishItem.getFileHash()).toByteArray());
 		packet.insertData(publisherID.toByteArray());
@@ -307,7 +302,7 @@ public class PacketFactory {
 		return packet;
 	}
 
-	public static KadPacket getBuddyReqPacket(ClientID receiverID,ClientID senderID, short clientPort) {
+	public static KadPacket getBuddyReqPacket(ClientID receiverID, ClientID senderID, short clientPort) {
 		KadPacket packet = new KadPacket(KADEMLIA_FINDBUDDY_REQ, 16 + 16 + 2);
 		packet.insertData(receiverID.toByteArray());
 		packet.insertData(senderID.toByteArray());
@@ -338,7 +333,8 @@ public class PacketFactory {
 	}
 
 	public static KadPacket getBootStrapRes2Packet(List<KadContact> contactList) throws JMException {
-		KadPacket packet = new KadPacket(KADEMLIA2_BOOTSTRAP_RES, 16 + 2 + 1 + 2 + contactList.size() * (16 + 4 + 2 + 2 + 1));
+		KadPacket packet = new KadPacket(KADEMLIA2_BOOTSTRAP_RES,
+				16 + 2 + 1 + 2 + contactList.size() * (16 + 4 + 2 + 2 + 1));
 
 		packet.insertData(JKadManagerSingleton.getInstance().getClientID().toByteArray());
 		ConfigurationManager configManager = ConfigurationManagerSingleton.getInstance();
@@ -387,7 +383,7 @@ public class PacketFactory {
 		return packet;
 	}
 
-	public static KadPacket getFirewalledReq2Packet(byte connectionOptions)throws JMException {
+	public static KadPacket getFirewalledReq2Packet(byte connectionOptions) throws JMException {
 		KadPacket packet = new KadPacket(KADEMLIA_FIREWALLED2_REQ, 2 + 16 + 1);
 		packet.insertData(Convert.intToShort(ConfigurationManagerSingleton.getInstance().getTCP()));
 		packet.insertData(JKadManagerSingleton.getInstance().getClientID().toByteArray());
@@ -402,7 +398,7 @@ public class PacketFactory {
 		return packet;
 	}
 
-	public static KadPacket getRequest2Packet(RequestType type, Int128 target,Int128 receiver) {
+	public static KadPacket getRequest2Packet(RequestType type, Int128 target, Int128 receiver) {
 		KadPacket packet = new KadPacket(KADEMLIA2_REQ, 1 + 16 + 16);
 		packet.insertData(type.toByte());
 		packet.insertData(target.toByteArray());
@@ -422,13 +418,13 @@ public class PacketFactory {
 	public static KadPacket getSearchKeyReq2Packet(Int128 targetID) {
 		KadPacket packet = new KadPacket(KADEMLIA2_SEARCH_KEY_REQ, 16 + 1 + 1);
 		packet.insertData(targetID.toByteArray());
-		packet.insertData((byte)0);
-		packet.insertData((byte)0);
+		packet.insertData((byte) 0);
+		packet.insertData((byte) 0);
 		return packet;
 	}
 
-	public static KadPacket getSearchSourceReq2Packet(Int128 targetID,short startPosition, long fileSize) {
-		KadPacket packet = new KadPacket(KADEMLIA2_SEARCH_SOURCE_REQ,16 + 2 + 8);
+	public static KadPacket getSearchSourceReq2Packet(Int128 targetID, short startPosition, long fileSize) {
+		KadPacket packet = new KadPacket(KADEMLIA2_SEARCH_SOURCE_REQ, 16 + 2 + 8);
 		packet.insertData(targetID.toByteArray());
 		packet.insertData(startPosition);
 		packet.insertData(fileSize);
@@ -442,7 +438,7 @@ public class PacketFactory {
 		return packet;
 	}
 
-	public static KadPacket getSearchRes2Packet(Int128 targetID,Collection<Source> sourceList) {
+	public static KadPacket getSearchRes2Packet(Int128 targetID, Collection<Source> sourceList) {
 		List<ByteBuffer> tag_list = new ArrayList<ByteBuffer>();
 		int tags_size = 0;
 		if (sourceList != null)
@@ -463,22 +459,22 @@ public class PacketFactory {
 		packet.insertData(intToShort(sourceCount));
 		int i = -1;
 		if (sourceList != null)
-		for(Source source : sourceList) {
-			i++;
-			ByteBuffer tags = tag_list.get(i);
-			packet.insertData(source.getClientID().toByteArray());
-			packet.insertData(Convert.intToByte(source.getTagList().size()));
-			packet.insertData(tags);
-		}
+			for (Source source : sourceList) {
+				i++;
+				ByteBuffer tags = tag_list.get(i);
+				packet.insertData(source.getClientID().toByteArray());
+				packet.insertData(Convert.intToByte(source.getTagList().size()));
+				packet.insertData(tags);
+			}
 
 		return packet;
 
 	}
 
-	public static KadPacket getPublishKeyReq2Packet(Int128 keywordHash,Collection<PublishItem> publishItems) {
+	public static KadPacket getPublishKeyReq2Packet(Int128 keywordHash, Collection<PublishItem> publishItems) {
 		List<ByteBuffer> publish_items = new ArrayList<ByteBuffer>();
 		int size = 0;
-		for(PublishItem p : publishItems) {
+		for (PublishItem p : publishItems) {
 			ByteBuffer tags = tagsToByteBuffer(p.getTagList());
 			tags.position(0);
 			ByteBuffer buffer = Misc.getByteBuffer(16 + 1 + tags.capacity());
@@ -489,11 +485,11 @@ public class PacketFactory {
 			buffer.position(0);
 			publish_items.add(buffer);
 		}
-		
+
 		KadPacket packet = new KadPacket(KADEMLIA2_PUBLISH_KEY_REQ, 16 + 2 + size);
 		packet.insertData(keywordHash.toByteArray());
 		packet.insertData(Convert.intToShort(publishItems.size()));
-		for(ByteBuffer b : publish_items) 
+		for (ByteBuffer b : publish_items)
 			packet.insertData(b);
 		return packet;
 	}
@@ -510,7 +506,7 @@ public class PacketFactory {
 
 	public static KadPacket getPublishNotes2Packet(Int128 sourceID, PublishItem publishItem) {
 		ByteBuffer tag_list = tagsToByteBuffer(publishItem.getTagList());
-		KadPacket packet = new KadPacket(JKadConstants.KADEMLIA2_PUBLISH_NOTES_REQ,16+16 + 1 + tag_list.capacity());
+		KadPacket packet = new KadPacket(JKadConstants.KADEMLIA2_PUBLISH_NOTES_REQ, 16 + 16 + 1 + tag_list.capacity());
 		packet.insertData(new Int128(publishItem.getFileHash()).toByteArray());
 		packet.insertData(sourceID.toByteArray());
 		packet.insertData(Convert.intToByte(publishItem.getTagList().size()));

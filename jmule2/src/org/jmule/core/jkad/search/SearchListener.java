@@ -24,9 +24,10 @@ package org.jmule.core.jkad.search;
 
 /**
  * Created on Jul 28, 2010
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/28 13:06:53 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/28 13:06:53 $
  */
 public interface SearchListener {
 
@@ -35,7 +36,7 @@ public interface SearchListener {
 	public void searchStarted(SearchTask search);
 
 	public void searchStopped(SearchTask search);
-	
+
 	public void searchRemoved(SearchTask search);
-	
+
 }

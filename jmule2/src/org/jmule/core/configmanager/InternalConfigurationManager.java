@@ -25,17 +25,17 @@ package org.jmule.core.configmanager;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
-
 /**
  * Created on Aug 10, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/01/28 12:47:10 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/01/28 12:47:10 $
  */
 public interface InternalConfigurationManager extends ConfigurationManager {
-	
+
 	public RSAPrivateKey getPrivateKey();
-	
+
 	public RSAPublicKey getPublicKey();
-	
+
 }

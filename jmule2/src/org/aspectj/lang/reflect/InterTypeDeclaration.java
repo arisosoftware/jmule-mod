@@ -20,12 +20,12 @@ public interface InterTypeDeclaration {
 	 * The declaring aspect
 	 */
 	AjType<?> getDeclaringType();
-	
+
 	/**
 	 * The target type of this ITD
 	 */
 	AjType<?> getTargetType() throws ClassNotFoundException;
-	
+
 	/**
 	 * Member modifiers, can be interpreted using java.lang.reflect.Modifier
 	 */

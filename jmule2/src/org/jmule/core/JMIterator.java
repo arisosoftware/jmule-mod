@@ -26,37 +26,37 @@ import java.util.Iterator;
 
 /**
  * Created on 07-06-2008
+ * 
  * @author javajox
  * @author binary256
- * @version $$Revision: 1.2 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/08/02 14:09:27 $$
+ * @version $$Revision: 1.2 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/08/02 14:09:27 $$
  */
-public class JMIterator<T> implements Iterator<T>  {
+public class JMIterator<T> implements Iterator<T> {
 
 	private Iterator<T> iter;
-	
+
 	public JMIterator(Iterator<T> iter) {
-		
+
 		this.iter = iter;
-		
+
 	}
-	
+
 	public boolean hasNext() {
-		
+
 		return iter.hasNext();
 	}
 
 	public T next() {
 
 		return iter.next();
-		
+
 	}
 
 	public void remove() {
-		
-		throw new UnsupportedOperationException();
-		
-	}
 
+		throw new UnsupportedOperationException();
+
+	}
 
 }

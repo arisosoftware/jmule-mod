@@ -27,54 +27,52 @@ import org.jmule.core.JMuleManagerException;
 
 /**
  * Created on Aug 13, 2009
+ * 
  * @author binary256
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/09/17 18:38:42 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/09/17 18:38:42 $
  */
 public class ProxyManagerImpl extends JMuleAbstractManager implements ProxyManager {
-	
+
 	private boolean is_started = false;
-	
+
 	public boolean iAmStoppable() {
 		return true;
 	}
 
-	
 	public boolean isStarted() {
-		
+
 		return is_started;
 	}
 
-
-	 public void initialize() {
-		 try {
+	public void initialize() {
+		try {
 			super.initialize();
 		} catch (JMuleManagerException e) {
 			e.printStackTrace();
 			return;
 		}
-	 }
-	  
-	  
-	  public void start() {
-		  try {
+	}
+
+	public void start() {
+		try {
 			super.start();
 		} catch (JMuleManagerException e) {
 			e.printStackTrace();
-			return ;
+			return;
 		}
 		is_started = true;
-	  }
-	
-	  public void shutdown() {
-			try {
-				super.shutdown();
-			} catch (JMuleManagerException e) {
-				e.printStackTrace();
-				return ;
-			}
-			is_started = false;
-	  }
+	}
+
+	public void shutdown() {
+		try {
+			super.shutdown();
+		} catch (JMuleManagerException e) {
+			e.printStackTrace();
+			return;
+		}
+		is_started = false;
+	}
 
 }

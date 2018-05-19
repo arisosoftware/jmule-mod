@@ -28,45 +28,46 @@ import org.jmule.core.peermanager.Peer;
 import org.jmule.core.sharingmanager.JMuleBitSet;
 
 /**
- * Class manage file part(9.28 MB) availability for each peer 
- * and count total availability of the file in the network.
- * Created on 04-27-2008
+ * Class manage file part(9.28 MB) availability for each peer and count total
+ * availability of the file in the network. Created on 04-27-2008
+ * 
  * @author binary256
- * @version $$Revision: 1.6 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/07/09 17:22:12 $$
+ * @version $$Revision: 1.6 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/07/09 17:22:12 $$
  */
-public class FilePartStatus extends Hashtable<Peer,JMuleBitSet> {
+public class FilePartStatus extends Hashtable<Peer, JMuleBitSet> {
 	private int partCount;
 	private int partAvailability[];
-	
+
 	private int complete_sources = 0;
-	private int partial_sources  = 0;
-	
+	private int partial_sources = 0;
+
 	public FilePartStatus(int partCount) {
-		if (partCount==0) partCount++;
+		if (partCount == 0)
+			partCount++;
 		this.partCount = partCount;
 		this.partAvailability = new int[partCount];
 	}
-	
+
 	public boolean hasStatus(Peer peer) {
-		return get(peer)!=null;
+		return get(peer) != null;
 	}
-	
+
 	public String toString() {
-		String result ="";
-		
-		for(int i = 0;i <keySet().size();i++) {
-			Peer p = (Peer)keySet().toArray()[i];
+		String result = "";
+
+		for (int i = 0; i < keySet().size(); i++) {
+			Peer p = (Peer) keySet().toArray()[i];
 			result += "{ ";
-			result+= p.getIP()+" : "+p.getPort()+" ";
-			result+=" BitSet :  " +get(p);
-			result +=" } ";
+			result += p.getIP() + " : " + p.getPort() + " ";
+			result += " BitSet :  " + get(p);
+			result += " } ";
 		}
-		
+
 		return result;
 	}
-	
-	public void addPartStatus(Peer peer,JMuleBitSet partStatus) {
+
+	public void addPartStatus(Peer peer, JMuleBitSet partStatus) {
 		try {
 			if (hasStatus(peer))
 				removePartStatus(peer);
@@ -76,12 +77,12 @@ public class FilePartStatus extends Hashtable<Peer,JMuleBitSet> {
 				partial_sources++;
 			super.put(peer, partStatus);
 			UpdateTotalAvailability(partStatus, true);
-		}catch(Exception e ){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void removePartStatus(Peer peer){
+
+	public void removePartStatus(Peer peer) {
 		if (hasStatus(peer)) {
 			JMuleBitSet bit_set = get(peer);
 			if (bit_set.getBitCount(true) == partCount)
@@ -92,27 +93,27 @@ public class FilePartStatus extends Hashtable<Peer,JMuleBitSet> {
 			UpdateTotalAvailability(bit_set, false);
 		}
 	}
-	
+
 	public void clear() {
 		super.clear();
 		complete_sources = 0;
 		partial_sources = 0;
 	}
-	
-	public int[] getPartAvailibility(){
+
+	public int[] getPartAvailibility() {
 		return partAvailability;
 	}
-	
-	private void UpdateTotalAvailability(JMuleBitSet bitSet,boolean add) {
+
+	private void UpdateTotalAvailability(JMuleBitSet bitSet, boolean add) {
 		if (bitSet.getBitCount() != partCount) {
-			return ;
+			return;
 		}
-		
-		for(int i = 0;i<bitSet.getBitCount();i++) {
-			if (bitSet.get(i)) 
-				if (add) 
+
+		for (int i = 0; i < bitSet.getBitCount(); i++) {
+			if (bitSet.get(i))
+				if (add)
 					partAvailability[i]++;
-				else 
+				else
 					partAvailability[i]--;
 		}
 	}

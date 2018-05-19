@@ -29,42 +29,43 @@ import org.jmule.core.jkad.ClientID;
 
 /**
  * Created on 07-22-2008
+ * 
  * @author javajox
- * @version $$Revision: 1.9 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/01/28 12:47:10 $$
+ * @version $$Revision: 1.9 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/01/28 12:47:10 $$
  */
 public interface ConfigurationListener {
 
 	public void UDPPortChanged(int udp);
-	
+
 	public void TCPPortChanged(int tcp);
-	
+
 	public void isUDPEnabledChanged(boolean enabled);
-	
+
 	public void nickNameChanged(String nickName);
-	
+
 	public void downloadBandwidthChanged(long downloadBandwidth);
-	
+
 	public void uploadBandwidthChanged(long uploadBandwidth);
-	
+
 	public void downloadLimitChanged(long downloadLimit);
-	
+
 	public void uploadLimitChanged(long uploadLimit);
-	
+
 	public void sharedDirectoriesChanged(List<File> sharedDirs);
-	
+
 	public void workingDirChanged(File newWorkingDir);
-	
+
 	public void jkadStatusChanged(boolean newStatus);
-	
+
 	public void updateServerListAtConnectChanged(boolean newStatus);
-	
+
 	public void jkadIDChanged(ClientID newID);
-	
+
 	public void nicNameChanged(String newNicName);
-	
+
 	public void nicIPChanged(String newNicIP);
 
 	public void securityIdentificationStatusChanged(boolean newStatus);
-	
+
 }

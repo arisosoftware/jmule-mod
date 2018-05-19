@@ -27,14 +27,17 @@ import java.nio.ByteBuffer;
 import org.jmule.core.utils.Misc;
 
 import static org.jmule.core.edonkey.ED2KConstants.*;
+
 /**
  * Created on Jul 18, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 16:00:42 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 16:00:42 $
  */
 public class BoolTag extends StandartTag {
 	private boolean tagValue = false;
+
 	public BoolTag(byte[] tagName, boolean tagValue) {
 		super(TAGTYPE_BOOL, tagName);
 		this.tagValue = tagValue;
@@ -42,7 +45,7 @@ public class BoolTag extends StandartTag {
 
 	ByteBuffer getValueAsByteBuffer() {
 		ByteBuffer result = Misc.getByteBuffer(1);
-		result.put((byte) (tagValue ? 1 : 0 ));
+		result.put((byte) (tagValue ? 1 : 0));
 		result.position(0);
 		return result;
 	}

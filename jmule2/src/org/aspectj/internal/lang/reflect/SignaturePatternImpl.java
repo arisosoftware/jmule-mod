@@ -20,18 +20,22 @@ import org.aspectj.lang.reflect.SignaturePattern;
 public class SignaturePatternImpl implements SignaturePattern {
 
 	private String sigPattern;
-	
+
 	public SignaturePatternImpl(String pattern) {
 		this.sigPattern = pattern;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.SignaturePattern#asString()
 	 */
 	public String asString() {
 		return sigPattern;
 	}
-	
-	public String toString() { return asString(); }
+
+	public String toString() {
+		return asString();
+	}
 
 }

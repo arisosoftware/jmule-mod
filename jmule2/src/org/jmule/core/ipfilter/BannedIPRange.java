@@ -24,28 +24,29 @@ package org.jmule.core.ipfilter;
 
 /**
  * Created on Nov 5, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2010/01/07 20:54:20 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2010/01/07 20:54:20 $
  */
 public class BannedIPRange implements BannedObject {
 
 	private int start_ip;
 	private int stop_ip;
-	
+
 	BannedIPRange(int startIP, int stopIP) {
-		
+
 		startIP = start_ip;
 		stopIP = stop_ip;
 	}
-	
+
 	int getStartIP() {
-		
+
 		return start_ip;
 	}
-	
+
 	int getStopIP() {
-		
+
 		return stop_ip;
 	}
 }

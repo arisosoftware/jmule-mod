@@ -24,18 +24,19 @@ package org.jmule.core.jkad;
 
 /**
  * Created on Dec 28, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/07/06 14:13:25 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/07/06 14:13:25 $
  */
 public class JKadException extends Exception {
 
 	public JKadException() {
 		super();
 	}
-	
+
 	public JKadException(String str) {
 		super(str);
 	}
-	
+
 }

@@ -11,11 +11,12 @@
  *     Xerox/PARC     initial implementation 
  * ******************************************************************/
 
-
 package org.aspectj.lang.reflect;
 
 public interface CodeSignature extends MemberSignature {
-    Class[]  getParameterTypes();
-    String[] getParameterNames();
-    Class[]  getExceptionTypes();
+	Class[] getParameterTypes();
+
+	String[] getParameterNames();
+
+	Class[] getExceptionTypes();
 }

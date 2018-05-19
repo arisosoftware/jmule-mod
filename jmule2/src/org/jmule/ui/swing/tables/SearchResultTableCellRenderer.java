@@ -36,9 +36,10 @@ import org.jmule.core.sharingmanager.SharingManager;
 /**
  *
  * Created on Sep 11, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
 public class SearchResultTableCellRenderer extends JMTableCellRenderer {
 
@@ -46,19 +47,20 @@ public class SearchResultTableCellRenderer extends JMTableCellRenderer {
 	private JMuleCore _core = JMuleCoreFactory.getSingleton();
 	private SharingManager _sharing_manager = _core.getSharingManager();
 	private DownloadManager _download_manager = _core.getDownloadManager();
-	
-	public Component getTableCellRendererComponent(JTable table, Object value,
-			boolean isSelected, boolean hasFocus, int row, int column) {
+
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
 		super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        search_result = (SearchResultItem)value;
-        SearchResultItem search_result = (SearchResultItem)value;
-       // if( _download_manager.hasDownload(search_result.getFileHash()) ) 
-		//	this.setForeground(Color.GREEN);
-		// else 
-		if( _sharing_manager.hasFile(search_result.getFileHash()) ) 
-		    this.setForeground(Color.RED);
-		 else this.setForeground(Color.BLACK);
+		search_result = (SearchResultItem) value;
+		SearchResultItem search_result = (SearchResultItem) value;
+		// if( _download_manager.hasDownload(search_result.getFileHash()) )
+		// this.setForeground(Color.GREEN);
+		// else
+		if (_sharing_manager.hasFile(search_result.getFileHash()))
+			this.setForeground(Color.RED);
+		else
+			this.setForeground(Color.BLACK);
 		return this;
 	}
-	
+
 }

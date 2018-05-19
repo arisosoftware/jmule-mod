@@ -26,10 +26,11 @@ import org.jmule.core.JMuleStoppableManager;
 
 /**
  * Created on Aug 13, 2009
+ * 
  * @author binary256
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/09/17 18:38:42 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/09/17 18:38:42 $
  */
 public interface ProxyManager extends JMuleStoppableManager {
 

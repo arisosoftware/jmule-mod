@@ -35,42 +35,42 @@ import org.jmule.ui.swing.skin.WizardSkinFactory;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:43:09 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:43:09 $$
  */
 public class TopPanel extends JPanel {
 
+	private JLabel caption = new JLabel();
+	private JLabel right_logo = new JLabel();
+	private BorderLayout border_layout = new BorderLayout();
+	private WizardSkin skin = WizardSkinFactory.getInstance();
 
-    private JLabel caption = new JLabel();
-    private JLabel right_logo = new JLabel();
-    private BorderLayout border_layout = new BorderLayout();
-    private WizardSkin skin = WizardSkinFactory.getInstance();
-	
-    public TopPanel() {
-    	
-    	initComponents();
-    }
-    
-    private void initComponents() {
-       	this.setBackground(new java.awt.Color(255, 255, 255));
-    	this.setLayout(border_layout);
-    	caption.setText("nothing");
-    	caption.setFont(skin.getLabelCaptionFont());
-    	this.add(caption,BorderLayout.WEST);
-    	
-    	//right_logo.setIcon(new javax.swing.ImageIcon("/home/javajox/work/workspace/jMule_local/src/org/jmule/ui/resources/wizard_emule_logo.png"));
-    	right_logo.setIcon(UISwingImageRepository.getIcon("wizard_emule_logo.png"));
-    	this.add(right_logo,BorderLayout.EAST);
-    }
-    
-    public void setCaption(String caption) {
-    	
-    	this.caption.setText("    " + caption);
-    }
-    
-    public void setCaptionIcon(ImageIcon imageIcon) {
-    	
-    	this.caption.setIcon(imageIcon);
-    }
-	
+	public TopPanel() {
+
+		initComponents();
+	}
+
+	private void initComponents() {
+		this.setBackground(new java.awt.Color(255, 255, 255));
+		this.setLayout(border_layout);
+		caption.setText("nothing");
+		caption.setFont(skin.getLabelCaptionFont());
+		this.add(caption, BorderLayout.WEST);
+
+		// right_logo.setIcon(new
+		// javax.swing.ImageIcon("/home/javajox/work/workspace/jMule_local/src/org/jmule/ui/resources/wizard_emule_logo.png"));
+		right_logo.setIcon(UISwingImageRepository.getIcon("wizard_emule_logo.png"));
+		this.add(right_logo, BorderLayout.EAST);
+	}
+
+	public void setCaption(String caption) {
+
+		this.caption.setText("    " + caption);
+	}
+
+	public void setCaptionIcon(ImageIcon imageIcon) {
+
+		this.caption.setIcon(imageIcon);
+	}
+
 }

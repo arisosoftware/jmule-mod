@@ -31,36 +31,68 @@ import static org.jmule.core.edonkey.ED2KConstants.FILE_QUALITY_POOR;
 
 /**
  * Created on Oct 23, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 13:08:35 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 13:08:35 $
  */
-public enum FileQuality { 
-	NOTRATED { public int getAsInt() { return FILE_QUALITY_NOTRATED; } },
-	FAKE 	 { public int getAsInt() { return FILE_QUALITY_FAKE; } }, 
-	POOR 	 { public int getAsInt() { return FILE_QUALITY_POOR; } }, 
-	FAIR 	 { public int getAsInt() { return FILE_QUALITY_FAIR; } }, 
-	GOOD 	 { public int getAsInt() { return FILE_QUALITY_GOOD; } }, 
-	EXCELLENT { public int getAsInt() { return FILE_QUALITY_EXCELLENT; } };
-	
+public enum FileQuality {
+	NOTRATED {
+		public int getAsInt() {
+			return FILE_QUALITY_NOTRATED;
+		}
+	},
+	FAKE {
+		public int getAsInt() {
+			return FILE_QUALITY_FAKE;
+		}
+	},
+	POOR {
+		public int getAsInt() {
+			return FILE_QUALITY_POOR;
+		}
+	},
+	FAIR {
+		public int getAsInt() {
+			return FILE_QUALITY_FAIR;
+		}
+	},
+	GOOD {
+		public int getAsInt() {
+			return FILE_QUALITY_GOOD;
+		}
+	},
+	EXCELLENT {
+		public int getAsInt() {
+			return FILE_QUALITY_EXCELLENT;
+		}
+	};
+
 	/**
 	 * Convert int value to FileQuality
+	 * 
 	 * @param value
 	 * @return
 	 */
 	public static FileQuality getAsFileQuality(int value) {
-		switch(value) {
-			case FILE_QUALITY_FAKE : 	return FAKE; 
-			case FILE_QUALITY_POOR : 	return POOR;
-			case FILE_QUALITY_FAIR : 	return FAIR;
-			case FILE_QUALITY_GOOD : 	return GOOD;
-			case FILE_QUALITY_EXCELLENT : return EXCELLENT;
+		switch (value) {
+		case FILE_QUALITY_FAKE:
+			return FAKE;
+		case FILE_QUALITY_POOR:
+			return POOR;
+		case FILE_QUALITY_FAIR:
+			return FAIR;
+		case FILE_QUALITY_GOOD:
+			return GOOD;
+		case FILE_QUALITY_EXCELLENT:
+			return EXCELLENT;
 		}
 		return NOTRATED;
 	}
-	
+
 	/**
 	 * Convert enum value into int
+	 * 
 	 * @return int value of enum
 	 */
 	public abstract int getAsInt();

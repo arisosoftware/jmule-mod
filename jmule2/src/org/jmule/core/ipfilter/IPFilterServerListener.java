@@ -24,14 +24,15 @@ package org.jmule.core.ipfilter;
 
 /**
  * Created on Jan 10, 2010
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2010/01/10 14:17:22 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2010/01/10 14:17:22 $
  */
 public interface IPFilterServerListener {
 
 	public void serverBanned(String address);
-	
+
 	public void serverUnbanned(String address);
-	
+
 }

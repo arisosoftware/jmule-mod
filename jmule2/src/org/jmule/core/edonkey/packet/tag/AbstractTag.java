@@ -30,14 +30,15 @@ import org.jmule.core.utils.Convert;
 
 /**
  * Created on Jul 15, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/06/15 16:47:06 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/06/15 16:47:06 $
  */
 abstract class AbstractTag implements Tag {
 	protected byte tagType;
 	protected byte[] tagName;
-	
+
 	public AbstractTag(byte tagType, byte[] tagName) {
 		super();
 		this.tagType = tagType;
@@ -47,18 +48,19 @@ abstract class AbstractTag implements Tag {
 	public byte getType() {
 		return tagType;
 	}
-	
+
 	public byte[] getTagName() {
 		return tagName;
 	}
-	
+
 	abstract ByteBuffer getValueAsByteBuffer();
+
 	abstract int getValueLength();
-	
+
 	public int getSize() {
 		return getHeaderSize() + getValueLength();
 	}
-	
+
 	public ByteBuffer getAsByteBuffer() {
 		ByteBuffer result = getByteBuffer(getSize());
 		result.put(getTagHeader());
@@ -67,9 +69,9 @@ abstract class AbstractTag implements Tag {
 		result.position(0);
 		return result;
 	}
-	
+
 	public String toString() {
-		return "[ "+Convert.byteToHexString(getAsByteBuffer().array(), " 0x") + " ] = [ " + getValue() +" ]";
+		return "[ " + Convert.byteToHexString(getAsByteBuffer().array(), " 0x") + " ] = [ " + getValue() + " ]";
 	}
-	
+
 }

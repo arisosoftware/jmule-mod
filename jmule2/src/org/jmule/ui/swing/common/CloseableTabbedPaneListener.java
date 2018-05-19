@@ -26,18 +26,20 @@ import java.util.EventListener;
 
 /**
  * The listener that's notified when an tab should be closed in the
- * <code>CloseableTabbedPane</code>.
- * Created on Sep 7, 2008
+ * <code>CloseableTabbedPane</code>. Created on Sep 7, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/09/07 16:52:15 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/09/07 16:52:15 $
  */
 public interface CloseableTabbedPaneListener extends EventListener {
-  /**
-   * Informs all <code>CloseableTabbedPaneListener</code>s when a tab should be
-   * closed
-   * @param tabIndexToClose the index of the tab which should be closed
-   * @return true if the tab can be closed, false otherwise
-   */
-  boolean closeTab(int tabIndexToClose);
+	/**
+	 * Informs all <code>CloseableTabbedPaneListener</code>s when a tab should be
+	 * closed
+	 * 
+	 * @param tabIndexToClose
+	 *            the index of the tab which should be closed
+	 * @return true if the tab can be closed, false otherwise
+	 */
+	boolean closeTab(int tabIndexToClose);
 }

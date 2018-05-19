@@ -31,23 +31,23 @@ import org.jmule.core.utils.Misc;
  * 
  * @author binary256
  * @author javajox
- * @version $$Revision: 1.5 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/07/09 17:18:37 $$
+ * @version $$Revision: 1.5 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/07/09 17:18:37 $$
  */
 public class Packet {
-	
+
 	private ByteBuffer packet_data = null;
-	
+
 	public Packet() {
 	}
-	
+
 	public Packet(int packetLength, byte protocol) {
-		packet_data= Misc.getByteBuffer(packetLength + 1 + 4 + 1);
+		packet_data = Misc.getByteBuffer(packetLength + 1 + 4 + 1);
 		packet_data.put(protocol);
-		packet_data.putInt(packetLength+1);//Put length +1 to write command byte
-		packet_data.put((byte)0);//Put default command
+		packet_data.putInt(packetLength + 1);// Put length +1 to write command byte
+		packet_data.put((byte) 0);// Put default command
 	}
-	
+
 	public void setCommand(byte packetCommand) {
 		packet_data.put(5, packetCommand);
 	}
@@ -55,29 +55,29 @@ public class Packet {
 	public byte getCommand() {
 		return packet_data.get(5);
 	}
-	
+
 	public void setProtocol(byte packetType) {
-		packet_data.put(0,packetType);
+		packet_data.put(0, packetType);
 	}
-	
+
 	public byte getProtocol() {
 		return packet_data.get(0);
 	}
-	
+
 	public void insertData(byte[] insertData) {
-		packet_data.put(insertData);	
+		packet_data.put(insertData);
 	}
 
-	public void insertData(int startPos, byte[] insertData) {	
+	public void insertData(int startPos, byte[] insertData) {
 		packet_data.position(startPos);
 		packet_data.put(insertData);
 	}
-	
+
 	public void insertData(ByteBuffer insertData) {
-		packet_data.put(insertData);	
+		packet_data.put(insertData);
 	}
-	
-	public void insertData(int startPos,ByteBuffer insertData) {
+
+	public void insertData(int startPos, ByteBuffer insertData) {
 		packet_data.position(startPos);
 		packet_data.put(insertData.array());
 	}
@@ -85,7 +85,7 @@ public class Packet {
 	public void insertData(long insertData) {
 		packet_data.putLong(insertData);
 	}
-	
+
 	public void insertData(int insertData) {
 		packet_data.putInt(insertData);
 	}
@@ -109,18 +109,19 @@ public class Packet {
 	public int getLength() {
 		return packet_data.capacity();
 	}
-	
-	public void clear() {	
-		if (packet_data==null) return ;
+
+	public void clear() {
+		if (packet_data == null)
+			return;
 		packet_data.clear();
 		packet_data.compact();
 		packet_data.rewind();
 		packet_data.limit(0);
 		packet_data = null;
 	}
-	
+
 	public String toString() {
-		return Convert.byteToHexString(packet_data.array()," 0x");
+		return Convert.byteToHexString(packet_data.array(), " 0x");
 	}
-	
+
 }

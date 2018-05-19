@@ -28,34 +28,32 @@ import java.util.List;
 
 /**
  * Created on Oct 25, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2009/10/25 08:36:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/10/25 08:36:11 $
  */
 public class FreeBSDPlatformManager extends UnixPlatformManager {
 
 	public void addToIPFilter(Object ip) throws PlatformManagerException {
-		
-        throw new PlatformManagerException("Not implemented yet");
-	}
 
-	public List<CPUCapabilities> getCPUCapabilities()
-			throws PlatformManagerException {
-		
 		throw new PlatformManagerException("Not implemented yet");
 	}
 
-	public PingResult ping(InetAddress source,
-			NetworkInterface networkInterface, int count)
+	public List<CPUCapabilities> getCPUCapabilities() throws PlatformManagerException {
+
+		throw new PlatformManagerException("Not implemented yet");
+	}
+
+	public PingResult ping(InetAddress source, NetworkInterface networkInterface, int count)
 			throws PlatformManagerException {
-		
+
 		throw new PlatformManagerException("Not implemented yet");
 	}
 
 	public void removeFromIPFilter(Object ip) throws PlatformManagerException {
 
-		
-        throw new PlatformManagerException("Not implemented yet");
+		throw new PlatformManagerException("Not implemented yet");
 	}
 
 }

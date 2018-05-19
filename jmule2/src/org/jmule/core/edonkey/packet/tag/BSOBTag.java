@@ -31,20 +31,20 @@ import static org.jmule.core.edonkey.ED2KConstants.*;
 
 /**
  * Created on Jul 15, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 16:00:42 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 16:00:42 $
  */
 public class BSOBTag extends StandartTag {
-	
+
 	private ByteBuffer tagValue;
-	
+
 	public BSOBTag(byte[] tagName, ByteBuffer tagValue) {
 		super(TAGTYPE_BSOB, tagName);
 		this.tagValue = tagValue;
 	}
 
-	
 	ByteBuffer getValueAsByteBuffer() {
 		ByteBuffer result = Misc.getByteBuffer(getValueLength());
 		result.put(Convert.intToByte(tagValue.capacity()));
@@ -54,11 +54,9 @@ public class BSOBTag extends StandartTag {
 		return result;
 	}
 
-
 	int getValueLength() {
 		return 1 + tagValue.capacity();
 	}
-
 
 	public Object getValue() {
 		return tagValue;

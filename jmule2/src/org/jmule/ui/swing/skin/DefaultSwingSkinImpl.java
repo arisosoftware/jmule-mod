@@ -29,16 +29,16 @@ import java.awt.Image;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:44:20 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:44:20 $$
  */
 public class DefaultSwingSkinImpl implements SwingSkin {
-	
+
 	private Font buttonFont = new Font("Dialog", 1, 14);
-	private Font defaultFont = new Font("Dialog", 1, 14); 
+	private Font defaultFont = new Font("Dialog", 1, 14);
 
 	public Font getButtonFont() {
-		
+
 		return buttonFont;
 	}
 
@@ -53,8 +53,8 @@ public class DefaultSwingSkinImpl implements SwingSkin {
 	}
 
 	public Font getDefaultFont() {
-		
-        return defaultFont;
+
+		return defaultFont;
 	}
 
 	public Font getLabelFont() {

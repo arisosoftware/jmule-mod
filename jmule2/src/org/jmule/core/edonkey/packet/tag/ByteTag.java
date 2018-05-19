@@ -30,14 +30,15 @@ import org.jmule.core.utils.Misc;
 
 /**
  * Created on Jul 15, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 16:00:42 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 16:00:42 $
  */
 public class ByteTag extends StandartTag implements NumberTag {
 
 	private byte tagValue = 0;
-	
+
 	public ByteTag(byte[] tagName, byte tagValue) {
 		super(TAGTYPE_UINT8, tagName);
 		this.tagValue = tagValue;
@@ -50,11 +51,9 @@ public class ByteTag extends StandartTag implements NumberTag {
 		return result;
 	}
 
-
 	int getValueLength() {
 		return 1;
 	}
-
 
 	public Object getValue() {
 		return Convert.byteToInt(tagValue);
@@ -63,13 +62,13 @@ public class ByteTag extends StandartTag implements NumberTag {
 	public void setValue(Object object) {
 		tagValue = (Byte) object;
 	}
-	
+
 	public void setNumber(long value) {
 		tagValue = Convert.longToByte(value);
 	}
-	
+
 	public long getNumber() {
 		return Convert.byteToLong(tagValue);
 	}
-	
+
 }

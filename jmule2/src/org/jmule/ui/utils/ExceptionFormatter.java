@@ -24,24 +24,25 @@ package org.jmule.ui.utils;
 
 /**
  * Created on Aug 23, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary256_ $ on $Date: 2008/08/26 19:38:33 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary256_ $ on $Date:
+ *          2008/08/26 19:38:33 $
  */
 public class ExceptionFormatter {
 
-	public static String getExceptionMessage(Throwable	e ) {
-		String	message = e.getMessage();
-		if ( message == null || message.length() == 0 ){
+	public static String getExceptionMessage(Throwable e) {
+		String message = e.getMessage();
+		if (message == null || message.length() == 0) {
 			message = e.getClass().getName();
-			int	pos = message.lastIndexOf(".");
-			message = message.substring( pos+1 );
-		}else if ( e instanceof ClassNotFoundException ){
-			if ( message.toLowerCase().indexOf("found") == -1 ){
+			int pos = message.lastIndexOf(".");
+			message = message.substring(pos + 1);
+		} else if (e instanceof ClassNotFoundException) {
+			if (message.toLowerCase().indexOf("found") == -1) {
 				message = "Class " + message + " not found";
 			}
 		}
-		return( message );
+		return (message);
 	}
-	
+
 }

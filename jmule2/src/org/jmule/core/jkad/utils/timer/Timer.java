@@ -27,92 +27,99 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Created on Jan 8, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.5 $
- * Last changed by $Author: binary255 $ on $Date: 2010/09/04 16:15:07 $
+ * @version $Revision: 1.5 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/09/04 16:15:07 $
  */
 public class Timer {
-	
+
 	private Collection<TaskExecutor> taskList = new ConcurrentLinkedQueue<TaskExecutor>();
 
 	private static class TimerSingletonHolder {
 		private static final Timer INSTANCE = new Timer();
 	}
-	
+
 	public static Timer getSingleton() {
 		return TimerSingletonHolder.INSTANCE;
 	}
-	
+
 	private Timer() {
 	}
-	
+
 	public void stop() {
-		for(TaskExecutor task : taskList)
+		for (TaskExecutor task : taskList)
 			task.stopTask();
 		taskList.clear();
 	}
-	
+
 	public void addTask(long waitTime, Task task, boolean repeat) {
 		TaskExecutor executor = new TaskExecutor(waitTime, task, repeat);
 		taskList.add(executor);
-		executor.start();	
+		executor.start();
 	}
-	
+
 	public void addTask(long waitTime, Task task) {
-		addTask(waitTime, task ,false);
+		addTask(waitTime, task, false);
 	}
-	
+
 	private void removeTask(TaskExecutor executor) {
 		taskList.remove(executor);
 	}
-	
+
 	public void removeTask(Task removeTask) {
-		for(TaskExecutor task_executor : taskList) 
+		for (TaskExecutor task_executor : taskList)
 			if (task_executor.getTask().equals(removeTask)) {
 				task_executor.stopTask();
-				return ;
+				return;
 			}
 	}
-	
+
 	private class TaskExecutor extends Thread {
 		private boolean stop = false;
 		private long waitTime;
 		private boolean repeatTask = false;
-		
+
 		private Task task;
-		
+
 		public TaskExecutor(long waitTime, Task task, boolean repeatTask) {
-			super("Task executor " +task);
+			super("Task executor " + task);
 			this.waitTime = waitTime;
 			this.task = task;
 			this.repeatTask = repeatTask;
 		}
-		
+
 		public void run() {
-			while(repeatTask) {
-				if (task.mustStopTask() || stop) break;
+			while (repeatTask) {
+				if (task.mustStopTask() || stop)
+					break;
 				try {
 					synchronized (this) {
 						this.wait(waitTime);
 					}
 				} catch (InterruptedException e) {
-					if (stop) { break;  }
+					if (stop) {
+						break;
+					}
 				}
-				
-				if (task.mustStopTask() || stop) break;
-				
+
+				if (task.mustStopTask() || stop)
+					break;
+
 				try {
 					task.run();
-				}catch(Throwable t) { t.printStackTrace(); }
-				
+				} catch (Throwable t) {
+					t.printStackTrace();
+				}
+
 			}
 			removeTask(this);
 		}
-		
+
 		public Task getTask() {
 			return task;
 		}
-		
+
 		public void stopTask() {
 			stop = true;
 			synchronized (this) {
@@ -120,5 +127,5 @@ public class Timer {
 			}
 		}
 	}
-	
+
 }

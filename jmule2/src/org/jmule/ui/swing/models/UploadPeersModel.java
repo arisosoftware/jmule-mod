@@ -32,51 +32,44 @@ import org.jmule.core.uploadmanager.UploadSession;
 /**
  *
  * Created on Oct 7, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2009/11/17 14:53:43 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/11/17 14:53:43 $
  */
 public class UploadPeersModel extends AbstractTableModel {
 
 	private JMuleCore _core = JMuleCoreFactory.getSingleton();
 	private UploadManager _upload_manager = _core.getUploadManager();
 	private UploadSession session;
-	
-	public final static int NICK_NAME    =  0;
-	public final static int CC           =  1;
-	public final static int FLAG         =  2;
-	public final static int IP           =  3;
-	public final static int UP_SPEED     =  4;
-	public final static int CLIENT       =  5;
-	public final static int STATUS       =  6;
-	
-	private static String[] column_names = {
-		          "Nick name",
-		          "CC",
-		          "Flag",
-		          "IP",
-		          "Up speed",
-		          "Client",
-		          "Status"
-	};  
-	
+
+	public final static int NICK_NAME = 0;
+	public final static int CC = 1;
+	public final static int FLAG = 2;
+	public final static int IP = 3;
+	public final static int UP_SPEED = 4;
+	public final static int CLIENT = 5;
+	public final static int STATUS = 6;
+
+	private static String[] column_names = { "Nick name", "CC", "Flag", "IP", "Up speed", "Client", "Status" };
+
 	public UploadPeersModel(UploadSession session) {
 		this.session = session;
 	}
-	
+
 	public int getColumnCount() {
 
 		return column_names.length;
 	}
 
 	public int getRowCount() {
-	
+
 		return session.getPeerCount();
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-        if(columnIndex==STATUS) 
-        	return new Object[] { session, session.getPeers().get(rowIndex) };
+		if (columnIndex == STATUS)
+			return new Object[] { session, session.getPeers().get(rowIndex) };
 		return session.getPeers().get(rowIndex);
 	}
 

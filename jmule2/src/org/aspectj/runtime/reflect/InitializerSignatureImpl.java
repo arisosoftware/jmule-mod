@@ -11,7 +11,6 @@
  *     Xerox/PARC     initial implementation 
  * ******************************************************************/
 
-
 package org.aspectj.runtime.reflect;
 
 import org.aspectj.lang.reflect.InitializerSignature;
@@ -21,30 +20,32 @@ import java.lang.reflect.Modifier;
 
 class InitializerSignatureImpl extends CodeSignatureImpl implements InitializerSignature {
 	private Constructor constructor;
-	
-    InitializerSignatureImpl(int modifiers, Class declaringType) {
-        super(modifiers, Modifier.isStatic(modifiers) ? "<clinit>" : "<init>", declaringType, EMPTY_CLASS_ARRAY, 
-              EMPTY_STRING_ARRAY, EMPTY_CLASS_ARRAY);
-    }
-    
-    InitializerSignatureImpl(String stringRep) {
-        super(stringRep);
-    }
-    
-    public String getName() {
-    	return Modifier.isStatic(getModifiers()) ? "<clinit>": "<init>";
-    }
 
-    protected String createToString(StringMaker sm) {
-        StringBuffer buf = new StringBuffer();
-        buf.append(sm.makeModifiersString(getModifiers()));    
-        buf.append(sm.makePrimaryTypeName(getDeclaringType(),getDeclaringTypeName()));
-        buf.append(".");
-        buf.append(getName());        
-        return buf.toString();
-    }
-    
-    /* (non-Javadoc)
+	InitializerSignatureImpl(int modifiers, Class declaringType) {
+		super(modifiers, Modifier.isStatic(modifiers) ? "<clinit>" : "<init>", declaringType, EMPTY_CLASS_ARRAY,
+				EMPTY_STRING_ARRAY, EMPTY_CLASS_ARRAY);
+	}
+
+	InitializerSignatureImpl(String stringRep) {
+		super(stringRep);
+	}
+
+	public String getName() {
+		return Modifier.isStatic(getModifiers()) ? "<clinit>" : "<init>";
+	}
+
+	protected String createToString(StringMaker sm) {
+		StringBuffer buf = new StringBuffer();
+		buf.append(sm.makeModifiersString(getModifiers()));
+		buf.append(sm.makePrimaryTypeName(getDeclaringType(), getDeclaringTypeName()));
+		buf.append(".");
+		buf.append(getName());
+		return buf.toString();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.runtime.reflect.MemberSignatureImpl#createAccessibleObject()
 	 */
 	public Constructor getInitializer() {

@@ -32,91 +32,93 @@ import java.util.Map;
 
 /**
  * Created on Aug 20, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary256_ $ on $Date: 2008/08/27 17:13:51 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary256_ $ on $Date:
+ *          2008/08/27 17:13:51 $
  */
 public class JMHTTPConnection {
 
 	private String address;
-	
-	private Map<String,String> post_values = new Hashtable<String,String>();
-	private Map<String,String> get_values = new Hashtable<String,String>();
+
+	private Map<String, String> post_values = new Hashtable<String, String>();
+	private Map<String, String> get_values = new Hashtable<String, String>();
 	private int http_response_code;
-	
+
 	public JMHTTPConnection(String address) {
 		this.address = address;
 	}
-	
-	public void addGetValue(String key,String value) {
+
+	public void addGetValue(String key, String value) {
 		get_values.put(key, value);
 	}
-	
-	public void addPostValue(String key,String value) {
-		post_values.put(key,value);
+
+	public void addPostValue(String key, String value) {
+		post_values.put(key, value);
 	}
-	
+
 	public int getHttpResponseCode() {
 		return http_response_code;
 	}
-	
+
 	public String sendQuery() throws JMHTTPConnectionException {
 		try {
 			String connect_address = address;
 			if (!get_values.isEmpty()) {
 				boolean first = true;
-				for(String key : get_values.keySet()) {
-					String request_value = URLEncoder.encode(key, "UTF-8") + "="+URLEncoder.encode(get_values.get(key), "UTF-8") ;
+				for (String key : get_values.keySet()) {
+					String request_value = URLEncoder.encode(key, "UTF-8") + "="
+							+ URLEncoder.encode(get_values.get(key), "UTF-8");
 					if (first) {
-						connect_address+="?";
-						connect_address+=request_value;
+						connect_address += "?";
+						connect_address += request_value;
 						first = false;
-					}else
-						connect_address+="&"+request_value;
+					} else
+						connect_address += "&" + request_value;
 				}
 			}
-			String post_data="";
+			String post_data = "";
 			boolean first = true;
-			for(String key : post_values.keySet()) {
-				String request_value = URLEncoder.encode(key, "UTF-8") + "="+URLEncoder.encode(post_values.get(key), "UTF-8") ;
+			for (String key : post_values.keySet()) {
+				String request_value = URLEncoder.encode(key, "UTF-8") + "="
+						+ URLEncoder.encode(post_values.get(key), "UTF-8");
 				if (first) {
-					post_data+=request_value;
+					post_data += request_value;
 					first = false;
 				} else {
-					post_data+="&"+request_value;
+					post_data += "&" + request_value;
 				}
-					
+
 			}
-			
+
 			URL url = new URL(connect_address);
-			HttpURLConnection httpConnection =(HttpURLConnection) url.openConnection();
-			
-			httpConnection.setRequestProperty("User-Agent",     JMUpdater.USER_AGENT);
+			HttpURLConnection httpConnection = (HttpURLConnection) url.openConnection();
+
+			httpConnection.setRequestProperty("User-Agent", JMUpdater.USER_AGENT);
 			httpConnection.setRequestProperty("Accept-Charset", JMUpdater.ENCODING);
-			
+
 			httpConnection.setDoInput(true);
 			httpConnection.setDoOutput(true);
-			if (post_data.length()!=0)
+			if (post_data.length() != 0)
 				httpConnection.getOutputStream().write(post_data.getBytes());
-			
+
 			httpConnection.connect();
 			http_response_code = httpConnection.getResponseCode();
 			String result = "";
-			InputStreamReader bufIn = new InputStreamReader(httpConnection.getInputStream(),JMUpdater.ENCODING);
-            int c;
-            while(true) {
-            	c= bufIn.read();
-            	if (c==-1) break;
-            	result+=((char)c);
-            }
-            httpConnection.disconnect();
+			InputStreamReader bufIn = new InputStreamReader(httpConnection.getInputStream(), JMUpdater.ENCODING);
+			int c;
+			while (true) {
+				c = bufIn.read();
+				if (c == -1)
+					break;
+				result += ((char) c);
+			}
+			httpConnection.disconnect();
 			return result;
-		}catch(Throwable t) {
+		} catch (Throwable t) {
 			throw new JMHTTPConnectionException(t);
 		}
-		
-		
+
 	}
-	
-	
+
 }

@@ -46,9 +46,10 @@ import org.jmule.ui.swing.common.PortTextField;
 /**
  *
  * Created on Sep 14, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2009/07/09 10:21:22 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/07/09 10:21:22 $
  */
 public class SNewServerDialog extends JDialog implements INewServerDialog<String, Integer> {
 
@@ -61,64 +62,71 @@ public class SNewServerDialog extends JDialog implements INewServerDialog<String
 	private JButton cancel_button;
 	private JButton ok_button;
 	private DialogAction dialog_action;
-	
+
 	public SNewServerDialog(JFrame frame) {
 		super(frame);
 		this.setTitle("New server");
 		this.setModal(true);
 		init();
 	}
-	
+
 	private void init() {
-        BorderLayout thisLayout = new BorderLayout();
-	    getContentPane().setLayout(thisLayout);
+		BorderLayout thisLayout = new BorderLayout();
+		getContentPane().setLayout(thisLayout);
 		south_panel = new JPanel();
 		GridBagLayout south_panelLayout = new GridBagLayout();
-		south_panelLayout.columnWidths = new int[] {156, 20, 20};
-		south_panelLayout.rowHeights = new int[] {7};
-		south_panelLayout.columnWeights = new double[] {0.0, 0.1, 0.1};
-		south_panelLayout.rowWeights = new double[] {0.1};
+		south_panelLayout.columnWidths = new int[] { 156, 20, 20 };
+		south_panelLayout.rowHeights = new int[] { 7 };
+		south_panelLayout.columnWeights = new double[] { 0.0, 0.1, 0.1 };
+		south_panelLayout.rowWeights = new double[] { 0.1 };
 		getContentPane().add(south_panel, BorderLayout.SOUTH);
 		south_panel.setLayout(south_panelLayout);
 		south_panel.setPreferredSize(new java.awt.Dimension(308, 52));
-		south_panel.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));		
+		south_panel.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
 		ok_button = new JButton();
-		south_panel.add(ok_button, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
-		ok_button.setText("OK");		
+		south_panel.add(ok_button, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+		ok_button.setText("OK");
 		cancel_button = new JButton();
-		south_panel.add(cancel_button, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
+		south_panel.add(cancel_button, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 10), 0, 0));
 		cancel_button.setText("Cancel");
 		center_panel = new JPanel();
 		GridBagLayout center_panelLayout = new GridBagLayout();
-		center_panelLayout.columnWidths = new int[] {73, 18, 158, 7};
-		center_panelLayout.rowHeights = new int[] {45, 48, 7};
-		center_panelLayout.columnWeights = new double[] {0.0, 0.0, 0.0, 0.1};
-		center_panelLayout.rowWeights = new double[] {0.0, 0.0, 0.1};
+		center_panelLayout.columnWidths = new int[] { 73, 18, 158, 7 };
+		center_panelLayout.rowHeights = new int[] { 45, 48, 7 };
+		center_panelLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.1 };
+		center_panelLayout.rowWeights = new double[] { 0.0, 0.0, 0.1 };
 		getContentPane().add(center_panel, BorderLayout.CENTER);
 		center_panel.setLayout(center_panelLayout);
-		center_panel.setPreferredSize(new java.awt.Dimension(308, 115));		
+		center_panel.setPreferredSize(new java.awt.Dimension(308, 115));
 		ip_label = new JLabel();
-		center_panel.add(ip_label, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		ip_label.setText("IP");		
+		center_panel.add(ip_label, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,
+				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		ip_label.setText("IP");
 		port_label = new JLabel();
-		center_panel.add(port_label, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		center_panel.add(port_label, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.EAST,
+				GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		port_label.setText("Port");
 		ip_text_field = new IPTextField();
-		center_panel.add(ip_text_field, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));	
+		center_panel.add(ip_text_field, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
+				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 		port_text_field = new PortTextField();
 		port_text_field.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-		center_panel.add(port_text_field, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+		center_panel.add(port_text_field, new GridBagConstraints(2, 1, 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
+				GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 		final SNewServerDialog _this = this;
 		ok_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				String server_port = port_text_field.getText();
-				if( !AddressUtils.isPortInRange(server_port) ) {
-					JOptionPane.showMessageDialog(null, "The number " + server_port + " is not a valid server port" +
-							                             "\n(the server port is a number between 1 and 65535)", 
-							                             "Wrong server port", JOptionPane.ERROR_MESSAGE); 
-				} else if( !AddressUtils.isValidPort(server_port) ) {
-					JOptionPane.showMessageDialog(null, "The port " + server_port + " is reserved for other services", 
-                                                        "Wrong server port", JOptionPane.ERROR_MESSAGE); 
+				if (!AddressUtils.isPortInRange(server_port)) {
+					JOptionPane.showMessageDialog(null,
+							"The number " + server_port + " is not a valid server port"
+									+ "\n(the server port is a number between 1 and 65535)",
+							"Wrong server port", JOptionPane.ERROR_MESSAGE);
+				} else if (!AddressUtils.isValidPort(server_port)) {
+					JOptionPane.showMessageDialog(null, "The port " + server_port + " is reserved for other services",
+							"Wrong server port", JOptionPane.ERROR_MESSAGE);
 				} else {
 					dialog_action = DialogAction.OK;
 					_this.setVisible(false);
@@ -127,33 +135,33 @@ public class SNewServerDialog extends JDialog implements INewServerDialog<String
 		});
 		cancel_button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-			       dialog_action = DialogAction.CANCEL;	
-			       _this.setVisible(false);
+				dialog_action = DialogAction.CANCEL;
+				_this.setVisible(false);
 			}
 		});
-	    this.setSize(318, 188);
+		this.setSize(318, 188);
 	}
-	
+
 	public String getServerIP() {
-		
+
 		return ip_text_field.getIPString();
 	}
 
 	public Integer getServerPort() {
-		
+
 		return new Integer(port_text_field.getText());
 	}
 
 	public void setServerIP(String serverIP) {
-				
+
 		ip_text_field.setIPString(serverIP);
 	}
 
 	public void setServerPort(Integer serverPort) {
-		
+
 		port_text_field.setText(serverPort.toString());
 	}
-	
+
 	public DialogAction getDialogAction() {
 
 		return dialog_action;

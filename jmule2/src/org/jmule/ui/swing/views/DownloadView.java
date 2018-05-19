@@ -36,95 +36,82 @@ import javax.swing.table.TableCellRenderer;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:45:16 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:45:16 $$
  */
 public class DownloadView extends JPanel {
 
-	  public DownloadView() {
-		   this.setLayout( new GridLayout(1,1) );
-		   JScrollPane jsp = new JScrollPane();
-		   jsp.setViewportView( new DownloadTable() );
-		   this.add( jsp );
-	  }
-	  
-	  class DownloadTableModel extends AbstractTableModel {
-		  public static final int FILE_NAME = 0;
-		  public static final int SIZE = 1;
-		  public static final int COMPLETED = 2;
-		  public static final int SPEED = 3;
-		  public static final int PROGRESS_BAR = 4;
-		  public static final int SOURCES = 5;
-		  public static final int STATUS = 6;
-		  
-		  private final String[] column_names = {
-				                  "File name",
-				                  "Size",
-				                  "Completed",
-				                  "Speed",
-				                  "Progress",
-				                  "Sources",
-				                  "Status"
-		                         };
-		  
-		  public int getColumnCount() {
-			  return column_names.length;
-		  }
-		  
-		  public int getRowCount() {
-			  return 10;
-		  }
-		  
-		  public Object getValueAt(int row, int col) {
-			  return 2;
-		  }
-		  
-		  public String getColumnName(int col) {
-			  return column_names[col];
-		  }
-		  
-	      public boolean isCellEditable(int row, int col) {
-	          return false;
-	      }
-		  
-	  }
-	  
-	  class DownloadTable extends JTable {
-			public DownloadTable() {
-				//super(new DownloadTableModel());
-				this.setModel( new DownloadTableModel() );
-				init();
-			}
-			
-			private void init() {
-			    this.getColumnModel().
-			        getColumn(DownloadTableModel.PROGRESS_BAR).
-			        setCellRenderer( new TableCellRenderer() {
-			        	public Component getTableCellRendererComponent(JTable table,
-			        			                                       Object stringValue,
-			        			                                       boolean isSelected,
-			        			                                       boolean hasFocus,
-			        			                                       int row,
-			        			                                       int column) {
-			        		//for test only put jlabel here
-			        		 JProgressBar progress_bar = new JProgressBar(); 
-					         return progress_bar;
-			        	}
-			        });
-			    
-			}
-	    }
-	  
-		public static void main(String args[]) {
-			
-			JFrame jf = new JFrame();
-			jf.setSize( 500, 400 );
-			
-			DownloadView slv = new DownloadView();
+	public DownloadView() {
+		this.setLayout(new GridLayout(1, 1));
+		JScrollPane jsp = new JScrollPane();
+		jsp.setViewportView(new DownloadTable());
+		this.add(jsp);
+	}
 
-			jf.getContentPane().add( slv );
-			
-			jf.setVisible( true );
+	class DownloadTableModel extends AbstractTableModel {
+		public static final int FILE_NAME = 0;
+		public static final int SIZE = 1;
+		public static final int COMPLETED = 2;
+		public static final int SPEED = 3;
+		public static final int PROGRESS_BAR = 4;
+		public static final int SOURCES = 5;
+		public static final int STATUS = 6;
+
+		private final String[] column_names = { "File name", "Size", "Completed", "Speed", "Progress", "Sources",
+				"Status" };
+
+		public int getColumnCount() {
+			return column_names.length;
 		}
-	
+
+		public int getRowCount() {
+			return 10;
+		}
+
+		public Object getValueAt(int row, int col) {
+			return 2;
+		}
+
+		public String getColumnName(int col) {
+			return column_names[col];
+		}
+
+		public boolean isCellEditable(int row, int col) {
+			return false;
+		}
+
+	}
+
+	class DownloadTable extends JTable {
+		public DownloadTable() {
+			// super(new DownloadTableModel());
+			this.setModel(new DownloadTableModel());
+			init();
+		}
+
+		private void init() {
+			this.getColumnModel().getColumn(DownloadTableModel.PROGRESS_BAR).setCellRenderer(new TableCellRenderer() {
+				public Component getTableCellRendererComponent(JTable table, Object stringValue, boolean isSelected,
+						boolean hasFocus, int row, int column) {
+					// for test only put jlabel here
+					JProgressBar progress_bar = new JProgressBar();
+					return progress_bar;
+				}
+			});
+
+		}
+	}
+
+	public static void main(String args[]) {
+
+		JFrame jf = new JFrame();
+		jf.setSize(500, 400);
+
+		DownloadView slv = new DownloadView();
+
+		jf.getContentPane().add(slv);
+
+		jf.setVisible(true);
+	}
+
 }

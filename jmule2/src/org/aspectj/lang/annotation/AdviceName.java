@@ -16,16 +16,16 @@ import java.lang.annotation.Target;
 import java.lang.annotation.ElementType;
 
 /**
- * Used to annotated code-style advice to name it
- * Name is used by reflection api if present, may in future be used in adviceexecution() pcd.
- * It is an error to use the @AdviceName annotation on an annotation-style advice declaration.
+ * Used to annotated code-style advice to name it Name is used by reflection api
+ * if present, may in future be used in adviceexecution() pcd. It is an error to
+ * use the @AdviceName annotation on an annotation-style advice declaration.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface AdviceName {
 
-    /**
-     * The name of the advice
-     */
-    String value();
+	/**
+	 * The name of the advice
+	 */
+	String value();
 }

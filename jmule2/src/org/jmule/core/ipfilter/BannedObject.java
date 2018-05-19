@@ -24,9 +24,10 @@ package org.jmule.core.ipfilter;
 
 /**
  * Created on Nov 5, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2010/01/07 20:54:20 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2010/01/07 20:54:20 $
  */
 interface BannedObject {
 

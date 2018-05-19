@@ -33,9 +33,10 @@ import javax.swing.JPanel;
 /**
  *
  * Created on Oct 12, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
 public class PeersPanel extends JPanel {
 
@@ -45,28 +46,34 @@ public class PeersPanel extends JPanel {
 	public JLabel downloading_peers_value = new JLabel();
 	private JLabel uploading_peers_label = new JLabel("Uploading peers");
 	private JLabel downloading_peers_label = new JLabel("Downloading peers");
-	
+
 	public PeersPanel() {
-		
+
 		init();
 	}
-	
+
 	private void init() {
 		GridBagLayout thisLayout = new GridBagLayout();
 		this.setBorder(BorderFactory.createTitledBorder("Peers"));
 		this.setPreferredSize(new java.awt.Dimension(335, 111));
-		thisLayout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.1};
-		thisLayout.rowHeights = new int[] {19, 19, 19, 7};
-		thisLayout.columnWeights = new double[] {0.0, 0.0, 0.0, 0.1};
-		thisLayout.columnWidths = new int[] {7, 142, 20, 7};
+		thisLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.1 };
+		thisLayout.rowHeights = new int[] { 19, 19, 19, 7 };
+		thisLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.1 };
+		thisLayout.columnWidths = new int[] { 7, 142, 20, 7 };
 		this.setLayout(thisLayout);
-		this.add(total_peers_label, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-        this.add(downloading_peers_label, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-        this.add(uploading_peers_label, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-        this.add(total_peers_value, new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-        this.add(downloading_peers_value, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-        this.add(uploading_peers_value, new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		
+		this.add(total_peers_label, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(downloading_peers_label, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(uploading_peers_label, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(total_peers_value, new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(downloading_peers_value, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		this.add(uploading_peers_value, new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+
 	}
-	
+
 }

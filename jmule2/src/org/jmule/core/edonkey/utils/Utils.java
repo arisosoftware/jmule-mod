@@ -79,43 +79,44 @@ import org.jmule.core.edonkey.packet.tag.TagList;
 
 /**
  * Created on Dec 24, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.8 $
- * Last changed by $Author: binary255 $ on $Date: 2010/08/22 12:47:38 $
+ * @version $Revision: 1.8 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/08/22 12:47:38 $
  */
 public class Utils {
 
-	public static int peerFeatures1ToInt( Map<PeerFeatures, Integer> clientFeatures) {
+	public static int peerFeatures1ToInt(Map<PeerFeatures, Integer> clientFeatures) {
 		int misc_optins1 = 0;
-		
+
 		if (clientFeatures.containsKey(SupportsAICH))
-			misc_optins1 |= (byte)(clientFeatures.get(SupportsAICH) << 29);
+			misc_optins1 |= (byte) (clientFeatures.get(SupportsAICH) << 29);
 		if (clientFeatures.containsKey(SupportsUnicode))
-			misc_optins1 |= (int)(clientFeatures.get(SupportsUnicode) << 28);
+			misc_optins1 |= (int) (clientFeatures.get(SupportsUnicode) << 28);
 		if (clientFeatures.containsKey(UDPVersion))
-			misc_optins1 |= (int)(clientFeatures.get(UDPVersion) << 24);
+			misc_optins1 |= (int) (clientFeatures.get(UDPVersion) << 24);
 		if (clientFeatures.containsKey(DataCompressionVersion))
-			misc_optins1 |= (int)(clientFeatures.get(DataCompressionVersion) << 20);
+			misc_optins1 |= (int) (clientFeatures.get(DataCompressionVersion) << 20);
 		if (clientFeatures.containsKey(SupportsSecureIdentification))
-			misc_optins1 |= (int)(clientFeatures.get(SupportsSecureIdentification) << 16);
+			misc_optins1 |= (int) (clientFeatures.get(SupportsSecureIdentification) << 16);
 		if (clientFeatures.containsKey(SourceExchange1Version))
-			misc_optins1 |= (int)(clientFeatures.get(SourceExchange1Version) << 12);
+			misc_optins1 |= (int) (clientFeatures.get(SourceExchange1Version) << 12);
 		if (clientFeatures.containsKey(ExtendedRequestsVersion))
-			misc_optins1 |= (int)(clientFeatures.get(ExtendedRequestsVersion) << 8);
+			misc_optins1 |= (int) (clientFeatures.get(ExtendedRequestsVersion) << 8);
 		if (clientFeatures.containsKey(AcceptCommentVersion))
-			misc_optins1 |= (int)(clientFeatures.get(AcceptCommentVersion) << 4);
+			misc_optins1 |= (int) (clientFeatures.get(AcceptCommentVersion) << 4);
 		if (clientFeatures.containsKey(PeerCache))
-			misc_optins1 |= (byte)(clientFeatures.get(PeerCache) << 3);
+			misc_optins1 |= (byte) (clientFeatures.get(PeerCache) << 3);
 		if (clientFeatures.containsKey(NoViewSharedFiles))
-			misc_optins1 |= (byte)(clientFeatures.get(NoViewSharedFiles) << 2);
+			misc_optins1 |= (byte) (clientFeatures.get(NoViewSharedFiles) << 2);
 		if (clientFeatures.containsKey(MultiPacket))
-			misc_optins1 |= (byte)(clientFeatures.get(MultiPacket) << 1);
+			misc_optins1 |= (byte) (clientFeatures.get(MultiPacket) << 1);
 		if (clientFeatures.containsKey(SupportsPreview))
-			misc_optins1 |= (byte)(clientFeatures.get(SupportsPreview) << 0);
-		
+			misc_optins1 |= (byte) (clientFeatures.get(SupportsPreview) << 0);
+
 		return misc_optins1;
 	}
-	
+
 	public static int peerFeatures2ToInt(Map<PeerFeatures, Integer> clientFeatures) {
 		int misc_optins2 = 0;
 		if (clientFeatures.containsKey(SupportsFileIdent))
@@ -140,31 +141,31 @@ public class Utils {
 			misc_optins2 |= (clientFeatures.get(SupportsLargeFiles) << 4);
 		if (clientFeatures.containsKey(KadVersion))
 			misc_optins2 |= (clientFeatures.get(KadVersion) << 0);
-		
+
 		return misc_optins2;
 	}
-	
-	public static Map<PeerFeatures,Integer> scanTCPPeerFeatures1(int rawData) {
-		Map<PeerFeatures,Integer> result = new Hashtable<PeerFeatures,Integer>();
-		
+
+	public static Map<PeerFeatures, Integer> scanTCPPeerFeatures1(int rawData) {
+		Map<PeerFeatures, Integer> result = new Hashtable<PeerFeatures, Integer>();
+
 		result.put(SupportsAICH, (rawData >> 29) & 0x07);
 		result.put(SupportsUnicode, (rawData >> 28) & 0x01);
 		result.put(UDPVersion, (rawData >> 24) & 0x0f);
 		result.put(DataCompressionVersion, (rawData >> 20) & 0x0f);
 		result.put(SupportsSecureIdentification, (rawData >> 16) & 0x0f);
 		result.put(SourceExchange1Version, (rawData >> 12) & 0x0f);
-		result.put(ExtendedRequestsVersion,(rawData >>  8) & 0x0f);
-		result.put(AcceptCommentVersion, (rawData >>  4) & 0x0f);
-		result.put(PeerCache, (rawData >>  3) & 0x01);
-		result.put(NoViewSharedFiles, (rawData >>  2) & 0x01);
-		result.put(MultiPacket, (rawData >>  1) & 0x01);
-		result.put(SupportsPreview, (rawData >>  0) & 0x01);
-		
+		result.put(ExtendedRequestsVersion, (rawData >> 8) & 0x0f);
+		result.put(AcceptCommentVersion, (rawData >> 4) & 0x0f);
+		result.put(PeerCache, (rawData >> 3) & 0x01);
+		result.put(NoViewSharedFiles, (rawData >> 2) & 0x01);
+		result.put(MultiPacket, (rawData >> 1) & 0x01);
+		result.put(SupportsPreview, (rawData >> 0) & 0x01);
+
 		return result;
 	}
-	
-	public static Map<PeerFeatures,Integer> scanTCPPeerFeatures2(int rawData) {
-		Map<PeerFeatures,Integer> result = new Hashtable<PeerFeatures,Integer>();
+
+	public static Map<PeerFeatures, Integer> scanTCPPeerFeatures2(int rawData) {
+		Map<PeerFeatures, Integer> result = new Hashtable<PeerFeatures, Integer>();
 		result.put(SupportsFileIdent, (rawData >> 13) & 0x01);
 		result.put(DirectUDPCallback, (rawData >> 12) & 0x01);
 		result.put(SupportsCaptcha, (rawData >> 11) & 0x01);
@@ -176,44 +177,44 @@ public class Utils {
 		result.put(ExtMultiPacket, (rawData >> 5) & 0x01);
 		result.put(SupportsLargeFiles, (rawData >> 4) & 0x01);
 		result.put(KadVersion, (rawData >> 0) & 0x01);
-		
+
 		return result;
 	}
-	
+
 	public static Map<PeerFeatures, Integer> scanTagListPeerFeatures(TagList tagList) {
-		Map<PeerFeatures,Integer> result = new Hashtable<PeerFeatures,Integer>();
+		Map<PeerFeatures, Integer> result = new Hashtable<PeerFeatures, Integer>();
 		Tag tag;
-		
+
 		tag = tagList.getTag(ET_COMPRESSION);
 		if (tag != null)
-			result.put(DataCompressionVersion, (Integer)tag.getValue());
-		
+			result.put(DataCompressionVersion, (Integer) tag.getValue());
+
 		tag = tagList.getTag(ET_UDPVER);
 		if (tag != null)
-			result.put(UDPVersion, (Integer)tag.getValue());
-		
+			result.put(UDPVersion, (Integer) tag.getValue());
+
 		tag = tagList.getTag(ET_SOURCEEXCHANGE);
 		if (tag != null)
-			result.put(SourceExchange1Version, (Integer)tag.getValue());
-		
+			result.put(SourceExchange1Version, (Integer) tag.getValue());
+
 		tag = tagList.getTag(ET_COMMENTS);
 		if (tag != null)
-			result.put(AcceptCommentVersion, (Integer)tag.getValue());
-		
+			result.put(AcceptCommentVersion, (Integer) tag.getValue());
+
 		tag = tagList.getTag(ET_EXTENDEDREQUEST);
 		if (tag != null)
-			result.put(ExtendedRequestsVersion, (Integer)tag.getValue());
-		
+			result.put(ExtendedRequestsVersion, (Integer) tag.getValue());
+
 		tag = tagList.getTag(ET_FEATURES);
 		if (tag != null)
-			result.put(SupportsPreview, (Integer)tag.getValue());
-		
+			result.put(SupportsPreview, (Integer) tag.getValue());
+
 		return result;
 	}
-	
+
 	public static int serverFeaturesToInt(Set<ServerFeatures> features) {
 		int result = 0;
-		//TCP
+		// TCP
 		if (features.contains(ServerFeatures.Compression))
 			result |= SRV_TCPFLG_COMPRESSION;
 		if (features.contains(ServerFeatures.NewTags))
@@ -228,7 +229,7 @@ public class Utils {
 			result |= SRV_TCPFLG_LARGEFILES;
 		if (features.contains(ServerFeatures.TCPObfusication))
 			result |= SRV_TCPFLG_TCPOBFUSCATION;
-		//UDP
+		// UDP
 		if (features.contains(ServerFeatures.GetSources))
 			result |= SRV_UDPFLG_EXT_GETSOURCES;
 		if (features.contains(ServerFeatures.GetFiles))
@@ -247,62 +248,62 @@ public class Utils {
 			result |= SRV_UDPFLG_TCPOBFUSCATION;
 		return result;
 	}
-	
+
 	public static Set<ServerFeatures> scanTCPServerFeatures(int serverFeatures) {
 		Set<ServerFeatures> result = new HashSet<ServerFeatures>();
-		
-		if ((serverFeatures & SRV_TCPFLG_COMPRESSION) != 0) 
+
+		if ((serverFeatures & SRV_TCPFLG_COMPRESSION) != 0)
 			result.add(ServerFeatures.Compression);
 
-		if ((serverFeatures & SRV_TCPFLG_NEWTAGS) != 0) 
+		if ((serverFeatures & SRV_TCPFLG_NEWTAGS) != 0)
 			result.add(ServerFeatures.NewTags);
-		
-		if ((serverFeatures & SRV_TCPFLG_UNICODE) != 0) 
+
+		if ((serverFeatures & SRV_TCPFLG_UNICODE) != 0)
 			result.add(ServerFeatures.Unicode);
-		
-		if ((serverFeatures & SRV_TCPFLG_RELATEDSEARCH) != 0) 
+
+		if ((serverFeatures & SRV_TCPFLG_RELATEDSEARCH) != 0)
 			result.add(ServerFeatures.RelatedSearch);
-		
-		if ((serverFeatures & SRV_TCPFLG_TYPETAGINTEGER) != 0) 
+
+		if ((serverFeatures & SRV_TCPFLG_TYPETAGINTEGER) != 0)
 			result.add(ServerFeatures.TypeTagInteger);
-		
-		if ((serverFeatures & SRV_TCPFLG_LARGEFILES) != 0) 
+
+		if ((serverFeatures & SRV_TCPFLG_LARGEFILES) != 0)
 			result.add(ServerFeatures.LargeFiles);
-		
-		if ((serverFeatures & SRV_TCPFLG_TCPOBFUSCATION) != 0) 
+
+		if ((serverFeatures & SRV_TCPFLG_TCPOBFUSCATION) != 0)
 			result.add(ServerFeatures.TCPObfusication);
-		
+
 		return result;
 	}
-	
+
 	public static Set<ServerFeatures> scanUDPServerFeatures(int serverUDPFeatures) {
 		Set<ServerFeatures> result = new HashSet<ServerFeatures>();
-		
-		if ((serverUDPFeatures & SRV_UDPFLG_EXT_GETSOURCES) != 0) 
+
+		if ((serverUDPFeatures & SRV_UDPFLG_EXT_GETSOURCES) != 0)
 			result.add(ServerFeatures.GetSources);
-		
-		if ((serverUDPFeatures & SRV_UDPFLG_EXT_GETFILES) != 0) 
+
+		if ((serverUDPFeatures & SRV_UDPFLG_EXT_GETFILES) != 0)
 			result.add(ServerFeatures.GetFiles);
-		
-		if ((serverUDPFeatures & SRV_UDPFLG_NEWTAGS) != 0) 
+
+		if ((serverUDPFeatures & SRV_UDPFLG_NEWTAGS) != 0)
 			result.add(ServerFeatures.NewTags);
-		
-		if ((serverUDPFeatures & SRV_UDPFLG_UNICODE) != 0) 
+
+		if ((serverUDPFeatures & SRV_UDPFLG_UNICODE) != 0)
 			result.add(ServerFeatures.Unicode);
-		
-		if ((serverUDPFeatures & SRV_UDPFLG_EXT_GETSOURCES2) != 0) 
+
+		if ((serverUDPFeatures & SRV_UDPFLG_EXT_GETSOURCES2) != 0)
 			result.add(ServerFeatures.GetSources2);
-		
-		if ((serverUDPFeatures & SRV_UDPFLG_LARGEFILES) != 0) 
+
+		if ((serverUDPFeatures & SRV_UDPFLG_LARGEFILES) != 0)
 			result.add(ServerFeatures.LargeFiles);
-		
-		if ((serverUDPFeatures & SRV_UDPFLG_UDPOBFUSCATION) != 0) 
+
+		if ((serverUDPFeatures & SRV_UDPFLG_UDPOBFUSCATION) != 0)
 			result.add(ServerFeatures.UDPObfusication);
-		
-		if ((serverUDPFeatures & SRV_UDPFLG_TCPOBFUSCATION) != 0) 
+
+		if ((serverUDPFeatures & SRV_UDPFLG_TCPOBFUSCATION) != 0)
 			result.add(ServerFeatures.TCPObfusication);
-		
+
 		return result;
 	}
-	
+
 }

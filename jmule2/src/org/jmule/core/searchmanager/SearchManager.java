@@ -26,27 +26,32 @@ import org.jmule.core.JMuleManager;
 
 /**
  * Created on 2007-Nov-07
+ * 
  * @author javajox
- * @version $$Revision: 1.4 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/09/17 18:17:43 $$
+ * @version $$Revision: 1.4 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/09/17 18:17:43 $$
  */
 public interface SearchManager extends JMuleManager {
 
 	/**
 	 * Starts a new search process based on the given search string
-	 * @param searchString the given search string
+	 * 
+	 * @param searchString
+	 *            the given search string
 	 */
 	public void search(String searchString);
-	
+
 	/**
 	 * Starts a new search process based on the given search request
-	 * @param searchRequest the given search request
+	 * 
+	 * @param searchRequest
+	 *            the given search request
 	 */
 	public void search(SearchQuery searchQuery);
-	
+
 	public void removeSearch(SearchQuery searchQuery);
-	
+
 	public void addSeachResultListener(SearchResultListener searchResultListener);
-	
+
 	public void removeSearchResultListener(SearchResultListener searchResultListener);
 }

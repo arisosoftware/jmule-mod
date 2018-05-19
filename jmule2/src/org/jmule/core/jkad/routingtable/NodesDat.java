@@ -43,9 +43,10 @@ import org.jmule.core.utils.Misc;
 
 /**
  * Created on Dec 29, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.7 $
- * Last changed by $Author: binary255 $ on $Date: 2010/08/22 14:29:28 $
+ * @version $Revision: 1.7 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/08/22 14:29:28 $
  */
 public class NodesDat {
 
@@ -56,56 +57,58 @@ public class NodesDat {
 	 */
 	public static List<KadContact> load(String fileName) {
 		List<KadContact> result = new ArrayList<KadContact>();
-		
+
 		try {
-						
+
 			FileChannel channel = new FileInputStream(fileName).getChannel();
 			ByteBuffer file_content = Misc.getByteBuffer(channel.size());
 			channel.read(file_content);
 			file_content.position(0);
 			channel.close();
-			
+
 			file_content.position(4 + 4); // skip 'old' contacts count field, skip nodes.dat version
-			
+
 			int contact_count = file_content.getInt();
-			
-			for(int i = 1 ; i <= contact_count ; i++) {
+
+			for (int i = 1; i <= contact_count; i++) {
 				byte[] byte_contact_id = new byte[16];
 				file_content.get(byte_contact_id);
 				ClientID contact_id = new ClientID(byte_contact_id);
 				byte[] byte_ip = new byte[4];
 				file_content.get(byte_ip);
 				IPAddress address = new IPAddress(byte_ip);
-				
+
 				short udp_port = file_content.getShort();
 				short tcp_port = file_content.getShort();
-				
-				byte contact_version = file_content.get(); 
-				
+
+				byte contact_version = file_content.get();
+
 				byte[] data = new byte[4];
 				file_content.get(data);
-				
+
 				byte[] data2 = new byte[4];
 				file_content.get(data2);
-				
+
 				JKadUDPKey udp_key = new JKadUDPKey(data, data2);
-				
+
 				byte verified = file_content.get();
 				if (Utils.isGoodAddress(address)) {
-					KadContact contact = new KadContact(contact_id, new ContactAddress(address, Convert.shortToInt(udp_port)), Convert.shortToInt(tcp_port), contact_version, udp_key, verified==1 ? true : false);
-					
+					KadContact contact = new KadContact(contact_id,
+							new ContactAddress(address, Convert.shortToInt(udp_port)), Convert.shortToInt(tcp_port),
+							contact_version, udp_key, verified == 1 ? true : false);
+
 					result.add(contact);
 				}
 			}
 			file_content.clear();
 			file_content = null;
-		}catch(Throwable t) {
+		} catch (Throwable t) {
 			t.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * 
 	 * @param fileName
@@ -113,46 +116,47 @@ public class NodesDat {
 	 */
 	public static void store(String fileName, List<KadContact> contactList) {
 		try {
-			
-			ByteBuffer file_content = Misc.getByteBuffer(4 + 4 + 4 + contactList.size() * ( 16 + 4 + 2 + 2 + 1 + 4 + 4 + 1) );
-			
+
+			ByteBuffer file_content = Misc
+					.getByteBuffer(4 + 4 + 4 + contactList.size() * (16 + 4 + 2 + 2 + 1 + 4 + 4 + 1));
+
 			file_content.position(4);
 			file_content.putInt(NODES_DAT_VERSION);
 			file_content.putInt(contactList.size());
-			for(KadContact contact : contactList) {
+			for (KadContact contact : contactList) {
 				file_content.put(contact.getContactID().toByteArray());
 				file_content.put(contact.getIPAddress().getAddress());
 				file_content.putShort(intToShort(contact.getUDPPort()));
 				file_content.putShort(intToShort(contact.getTCPPort()));
 				file_content.put(contact.getVersion());
-				
+
 				// write key
 				JKadUDPKey key = contact.getKadUDPKey();
 				if (key == null) {
-					ByteBuffer data  = getByteBuffer(4 + 4);
+					ByteBuffer data = getByteBuffer(4 + 4);
 					data.position(0);
 					file_content.put(data);
 				} else {
-					ByteBuffer data  = getByteBuffer(4 + 4);
+					ByteBuffer data = getByteBuffer(4 + 4);
 					data.put(key.getKey());
 					data.put(key.getAddress().getAddress());
 					data.position(0);
 					file_content.put(data);
 				}
-				
-				file_content.put((byte)(contact.isIPVerified() ? 1 : 0));
+
+				file_content.put((byte) (contact.isIPVerified() ? 1 : 0));
 			}
-			
+
 			FileChannel channel = new FileOutputStream(fileName).getChannel();
 			file_content.position(0);
 			channel.write(file_content);
 			channel.close();
-			
+
 			file_content.clear();
 			file_content = null;
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}
 	}
-	
+
 }

@@ -19,11 +19,11 @@ public class NoSuchPointcutException extends Exception {
 
 	private static final long serialVersionUID = 3256444698657634352L;
 	private String name;
-	
+
 	public NoSuchPointcutException(String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * The name of the pointcut that could not be found.
 	 */

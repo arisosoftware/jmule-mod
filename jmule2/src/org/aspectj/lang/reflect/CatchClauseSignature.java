@@ -11,12 +11,12 @@
  *     Xerox/PARC     initial implementation 
  * ******************************************************************/
 
-
 package org.aspectj.lang.reflect;
 
 import org.aspectj.lang.Signature;
 
 public interface CatchClauseSignature extends Signature {
-    Class getParameterType();     
-    String getParameterName();
+	Class getParameterType();
+
+	String getParameterName();
 }

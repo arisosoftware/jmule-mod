@@ -11,24 +11,25 @@
  *     Xerox/PARC     initial implementation 
  * ******************************************************************/
 
-
 package org.aspectj.lang;
 
-/** 
- * Thrown by the <code>aspectOf</code> special method on aspect types
- *  when there is no aspect of that type currently bound.
+/**
+ * Thrown by the <code>aspectOf</code> special method on aspect types when there
+ * is no aspect of that type currently bound.
  */
 public class NoAspectBoundException extends RuntimeException {
 	Throwable cause;
+
 	public NoAspectBoundException(String aspectName, Throwable inner) {
-		super(inner == null ? aspectName :
-			"Exception while initializing " +aspectName + ": " +inner);
+		super(inner == null ? aspectName : "Exception while initializing " + aspectName + ": " + inner);
 		this.cause = inner;
 	}
-	
+
 	public NoAspectBoundException() {
 	}
-	
-	public Throwable getCause() { return cause; }
-	
+
+	public Throwable getCause() {
+		return cause;
+	}
+
 }

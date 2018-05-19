@@ -24,13 +24,15 @@ package org.jmule.core.edonkey.packet.tag;
 
 /**
  * Created on Aug 27, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/08/28 10:08:31 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/08/28 10:08:31 $
  */
 public interface NumberTag {
 
 	public void setNumber(long value);
+
 	public long getNumber();
-	
+
 }

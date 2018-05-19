@@ -22,15 +22,15 @@
  */
 package org.jmule.core.bccrypto;
 
-
 /**
  * Created on Jan 27, 2010
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2010/01/28 12:46:38 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/01/28 12:46:38 $
  */
 public class SHA1WithRSAEncryption extends JDKDigestSignature {
-    public SHA1WithRSAEncryption() {
-        super("SHA1withRSA", new SHA1Digest(), new PKCS1Encoding(new RSAEngine()));
+	public SHA1WithRSAEncryption() {
+		super("SHA1withRSA", new SHA1Digest(), new PKCS1Encoding(new RSAEngine()));
 	}
 }

@@ -36,10 +36,11 @@ import org.jmule.core.uploadmanager.UploadManager;
 
 /**
  * Created on 2008-Apr-27
+ * 
  * @author javajox
  * @author binary256
- * @version $$Revision: 1.10 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2010/01/10 14:21:55 $$
+ * @version $$Revision: 1.10 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2010/01/10 14:21:55 $$
  */
 public interface JMuleCore {
 
@@ -47,59 +48,64 @@ public interface JMuleCore {
 	 * Start the system
 	 */
 	public void start() throws JMuleCoreException;
-	
+
 	/**
 	 * Stop the system
 	 */
 	public void stop() throws JMuleCoreException;
-	
+
 	/**
 	 * Tells if the system is started
+	 * 
 	 * @return true if the system is started, false otherwise
 	 */
 	public boolean isStarted();
-	
+
 	public boolean isStarting();
-	
+
 	public boolean isSopping();
-	
+
 	public NetworkManager getNetworkManager();
-	
+
 	public DownloadManager getDownloadManager();
-	
+
 	public UploadManager getUploadManager();
-	
+
 	public PeerManager getPeerManager();
-	
+
 	public ServerManager getServerManager();
-	
+
 	public SharingManager getSharingManager();
-	
+
 	public SpeedManager getSpeedManager();
-	
+
 	public ConfigurationManager getConfigurationManager();
-	
+
 	public SearchManager getSearchManager();
-	
+
 	public JKadManager getJKadManager();
-	
+
 	public IPFilter getIPFilterManager();
-	
+
 	public boolean isFirstRun();
-	
+
 	/**
 	 * Adds a new life cycle listener to the core
-	 * @param lifeCycleListener the given life cycle listener
+	 * 
+	 * @param lifeCycleListener
+	 *            the given life cycle listener
 	 */
 	public void addLifecycleListener(JMuleCoreLifecycleListener lifeCycleListener);
-	
+
 	/**
 	 * Removes the given life cycle listener from the core
-	 * @param lifeCycleListener the given life cycle listener
+	 * 
+	 * @param lifeCycleListener
+	 *            the given life cycle listener
 	 */
 	public void removeLifecycleListener(JMuleCoreLifecycleListener lifeCycleListener);
-	
+
 	public void addEventListener(JMuleCoreEventListener eventListener);
-	
+
 	public void removeEventListener(JMuleCoreEventListener eventListener);
 }

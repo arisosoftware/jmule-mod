@@ -26,21 +26,22 @@ import org.jmule.core.JMException;
 
 /**
  * Created on Aug 10, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/08/11 13:02:57 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/08/11 13:02:57 $
  */
 public class ConfigurationManagerException extends JMException {
 
 	public ConfigurationManagerException(String cause) {
 		super(cause);
 	}
-	
+
 	public ConfigurationManagerException() {
 	}
-	
+
 	public ConfigurationManagerException(Throwable cause) {
 		super(cause);
 	}
-	
+
 }

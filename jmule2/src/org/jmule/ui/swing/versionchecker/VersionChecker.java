@@ -56,9 +56,10 @@ import org.jmule.updater.JMUpdater;
 /**
  *
  * Created on Oct 11, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.3 $
- * Last changed by $Author: javajox $ on $Date: 2010/01/13 16:05:51 $
+ * @version $Revision: 1.3 $ Last changed by $Author: javajox $ on $Date:
+ *          2010/01/13 16:05:51 $
  */
 public class VersionChecker extends JDialog {
 
@@ -74,23 +75,23 @@ public class VersionChecker extends JDialog {
 	private JEditorPane changelog_editor_panel = new JEditorPane();
 	private JLabel download_new_version_label = new JLabel();
 	private JFrame parent;
-	
+
 	private JMUpdater jmule_updater = JMUpdater.getInstance();
 	private SwingPreferences _pref = SwingPreferences.getSingleton();
-	
+
 	private Font dialog_font = new java.awt.Font("Dialog", 1, 13);
-	
+
 	public VersionChecker(JFrame parent) {
 		super(parent, "Version checker", true);
 		try {
 			jmule_updater.checkForUpdates();
-		}catch(Throwable t) {
-			JOptionPane.showMessageDialog(this, "An error occured", "Error",JOptionPane.ERROR_MESSAGE);
+		} catch (Throwable t) {
+			JOptionPane.showMessageDialog(this, "An error occured", "Error", JOptionPane.ERROR_MESSAGE);
 			this.setVisible(false);
 		}
 		this.parent = parent;
 		init();
-		if(jmule_updater.isNewVersionAvailable()) {
+		if (jmule_updater.isNewVersionAvailable()) {
 			available_version_value.setForeground(new Color(0x24bb00));
 			jmule_version_value.setForeground(Color.RED);
 			available_version_value.setText(jmule_updater.getVersion());
@@ -98,21 +99,23 @@ public class VersionChecker extends JDialog {
 			changelog_editor_panel.setEnabled(true);
 			changelog_editor_panel.setFont(new Font("Courir", Font.PLAIN, 12));
 			changelog_editor_panel.setText(jmule_updater.getChangeLog());
-			
+
 			download_new_version_label.addMouseListener(new MouseAdapter() {
-				 public void mouseClicked(MouseEvent event) {
-					 BrowserLauncher.openURL(JMConstants.JMULE_DOWNLOAD_PAGE);
-				 }
-				 public void mouseEntered(MouseEvent event) {
-					 download_new_version_label.setForeground(Color.BLUE);
-					 setCursor( Cursor.getPredefinedCursor( Cursor.HAND_CURSOR ) );
-				 }
-				 public void mouseExited(MouseEvent event) {
-					 download_new_version_label.setForeground(Color.BLACK);
-					 setCursor( Cursor.getPredefinedCursor( Cursor.DEFAULT_CURSOR ) );
-				 }
+				public void mouseClicked(MouseEvent event) {
+					BrowserLauncher.openURL(JMConstants.JMULE_DOWNLOAD_PAGE);
+				}
+
+				public void mouseEntered(MouseEvent event) {
+					download_new_version_label.setForeground(Color.BLUE);
+					setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				}
+
+				public void mouseExited(MouseEvent event) {
+					download_new_version_label.setForeground(Color.BLACK);
+					setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				}
 			});
-			
+
 		} else {
 			download_new_version_label.setText("No new version available");
 		}
@@ -120,32 +123,44 @@ public class VersionChecker extends JDialog {
 		if (check_time != 0) {
 			Calendar calendar = new GregorianCalendar();
 			calendar.setTimeInMillis(check_time);
-			String upate_date = format(calendar.get(Calendar.DAY_OF_MONTH)) + "." +format(calendar.get(Calendar.MONTH) + 1) +"."+ format(calendar.get(Calendar.YEAR));
-			upate_date += "  "+format(calendar.get(Calendar.HOUR_OF_DAY)) + ":"+format(calendar.get(Calendar.MINUTE))+":"+format(calendar.get(Calendar.SECOND));
+			String upate_date = format(calendar.get(Calendar.DAY_OF_MONTH)) + "."
+					+ format(calendar.get(Calendar.MONTH) + 1) + "." + format(calendar.get(Calendar.YEAR));
+			upate_date += "  " + format(calendar.get(Calendar.HOUR_OF_DAY)) + ":"
+					+ format(calendar.get(Calendar.MINUTE)) + ":" + format(calendar.get(Calendar.SECOND));
 			last_update_value.setText(upate_date);
 		}
 	}
-	
+
 	private void init() {
 		check_for_update_checkbox.setSelected(_pref.isCheckForUpdatesAtStartup());
 		GridBagLayout thisLayout = new GridBagLayout();
-		thisLayout.rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1};
-		thisLayout.rowHeights = new int[] {17, 20, 20, 20, 29, 175, 7};
-		thisLayout.columnWeights = new double[] {0.0, 0.0, 0.0, 0.1, 0.0};
-		thisLayout.columnWidths = new int[] {7, 158, 18, 7, 7};
+		thisLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1 };
+		thisLayout.rowHeights = new int[] { 17, 20, 20, 20, 29, 175, 7 };
+		thisLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.1, 0.0 };
+		thisLayout.columnWidths = new int[] { 7, 158, 18, 7, 7 };
 		getContentPane().setLayout(thisLayout);
-		getContentPane().add(jmule_version_label, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-        getContentPane().add(available_version_label, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		getContentPane().add(last_update_label, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		getContentPane().add(download_new_version_label, new GridBagConstraints(1, 4, 3, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-        getContentPane().add(changelog_scroll_panel, new GridBagConstraints(1, 5, 3, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(6, 0, 0, 0), 0, 0));
+		getContentPane().add(jmule_version_label, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		getContentPane().add(available_version_label, new GridBagConstraints(1, 2, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		getContentPane().add(last_update_label, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		getContentPane().add(download_new_version_label, new GridBagConstraints(1, 4, 3, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		getContentPane().add(changelog_scroll_panel, new GridBagConstraints(1, 5, 3, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(6, 0, 0, 0), 0, 0));
 		changelog_scroll_panel.setBorder(BorderFactory.createTitledBorder("Changelog"));
 		changelog_scroll_panel.setViewportView(changelog_editor_panel);
-        getContentPane().add(jmule_version_value, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-	    getContentPane().add(available_version_value, new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		getContentPane().add(last_update_value, new GridBagConstraints(3, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		getContentPane().add(check_for_update_checkbox, new GridBagConstraints(1, 6, 2, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-		getContentPane().add(ok_button, new GridBagConstraints(3, 6, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 50, 0, 0), 0, 0));
+		getContentPane().add(jmule_version_value, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		getContentPane().add(available_version_value, new GridBagConstraints(3, 2, 1, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		getContentPane().add(last_update_value, new GridBagConstraints(3, 3, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+		getContentPane().add(check_for_update_checkbox, new GridBagConstraints(1, 6, 2, 1, 0.0, 0.0,
+				GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+		getContentPane().add(ok_button, new GridBagConstraints(3, 6, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER,
+				GridBagConstraints.HORIZONTAL, new Insets(0, 50, 0, 0), 0, 0));
 		changelog_editor_panel.setEditable(false);
 		changelog_editor_panel.setEnabled(false);
 		download_new_version_label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -156,15 +171,15 @@ public class VersionChecker extends JDialog {
 		last_update_value.setFont(dialog_font);
 		last_update_value.setHorizontalAlignment(SwingConstants.LEFT);
 		ok_button.addActionListener(new ActionListener() {
-		   public void actionPerformed(ActionEvent event) {	
-		      _pref.setCheckForUpdatesAtStartup(check_for_update_checkbox.isSelected());
-	          setVisible(false);		
-		   }
+			public void actionPerformed(ActionEvent event) {
+				_pref.setCheckForUpdatesAtStartup(check_for_update_checkbox.isSelected());
+				setVisible(false);
+			}
 		});
 		this.setSize(380, 357);
 	}
-	
+
 	private String format(int value) {
-		return value<10 ? "0"+value : value+"";
-	}	
+		return value < 10 ? "0" + value : value + "";
+	}
 }

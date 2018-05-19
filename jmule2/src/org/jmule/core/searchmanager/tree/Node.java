@@ -24,41 +24,42 @@ package org.jmule.core.searchmanager.tree;
 
 /**
  * Created on Oct 26, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary256_ $ on $Date: 2008/10/28 21:06:40 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary256_ $ on $Date:
+ *          2008/10/28 21:06:40 $
  */
 public class Node {
-	
+
 	private Node left = null, right = null;
 	private NodeValue key;
-	
-	
+
 	public Node(NodeValue value) {
 		this.key = value;
 	}
-	
+
 	public NodeValue getKey() {
 		return key;
 	}
-	
-	public void setKey(NodeValue value) { 
+
+	public void setKey(NodeValue value) {
 		this.key = value;
 	}
-		
+
 	public Node getLeftChild() {
 		return left;
 	}
-	public Node getRightChild(){
+
+	public Node getRightChild() {
 		return right;
 	}
-	
+
 	public void setLeftChild(Node child) {
 		left = child;
 	}
-	
+
 	public void setRightChild(Node child) {
 		right = child;
 	}
-	
+
 }

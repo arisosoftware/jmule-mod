@@ -27,21 +27,22 @@ import java.nio.ByteBuffer;
 import org.jmule.core.utils.Misc;
 
 import static org.jmule.core.edonkey.ED2KConstants.*;
+
 /**
  * Created on Jul 18, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 16:00:42 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 16:00:42 $
  */
 public class FloatTag extends StandartTag {
 
 	private float tagValue = 0;
-	
+
 	public FloatTag(byte[] tagName, float value) {
 		super(TAGTYPE_FLOAT32, tagName);
 		this.tagValue = value;
 	}
-
 
 	ByteBuffer getValueAsByteBuffer() {
 		ByteBuffer result = Misc.getByteBuffer(4);
@@ -50,12 +51,10 @@ public class FloatTag extends StandartTag {
 		return result;
 	}
 
-
 	int getValueLength() {
 
 		return 4;
 	}
-
 
 	public Object getValue() {
 
@@ -63,7 +62,7 @@ public class FloatTag extends StandartTag {
 	}
 
 	public void setValue(Object object) {
-		tagValue = (Float)object;
+		tagValue = (Float) object;
 	}
 
 }

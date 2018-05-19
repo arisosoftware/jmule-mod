@@ -22,7 +22,6 @@
  */
 package org.jmule.core.peermanager;
 
-
 import java.util.List;
 
 import org.jmule.core.JMuleManager;
@@ -32,33 +31,35 @@ import org.jmule.core.peermanager.Peer.PeerSource;
  * 
  * @author javajox
  * @author binary256
- * @version $$Revision: 1.5 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/01/28 13:14:23 $$
+ * @version $$Revision: 1.5 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/01/28 13:14:23 $$
  */
 public interface PeerManager extends JMuleManager {
 
 	/**
 	 * Adds a new peer to peer manager
-	 * @param peer the given peer
+	 * 
+	 * @param peer
+	 *            the given peer
 	 */
 	public Peer newPeer(String ip, int port, PeerSource source) throws PeerManagerException;
-	
+
 	public void removePeer(Peer peer) throws PeerManagerException;
-	
+
 	public Peer getPeer(String ip, int port) throws PeerManagerException;
-	
+
 	public boolean hasPeer(String ip, int port);
-	
+
 	public void connect(Peer peer) throws PeerManagerException;
-	
+
 	public void disconnect(Peer peer) throws PeerManagerException;
 
 	public List<Peer> getPeers();
-	
+
 	public void sendMessage(Peer peer, String message) throws PeerManagerException;
-	
+
 	public float getCredit(Peer peer);
-	
+
 	public void addPeerManagerListener(PeerManagerListener listener);
 
 	public void removePeerManagerListener(PeerManagerListener listener);

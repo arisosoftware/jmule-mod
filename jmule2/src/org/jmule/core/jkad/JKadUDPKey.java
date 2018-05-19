@@ -24,24 +24,25 @@ package org.jmule.core.jkad;
 
 /**
  * Created on Dec 28, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary255 $ on $Date: 2009/08/02 08:10:19 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/08/02 08:10:19 $
  */
 public class JKadUDPKey {
-	
+
 	private byte key[];
 	private IPAddress address;
 
 	public JKadUDPKey() {
-		key = new byte[]{0,0,0,0};
-		address = new IPAddress(new byte[] {0,0,0,0});
+		key = new byte[] { 0, 0, 0, 0 };
+		address = new IPAddress(new byte[] { 0, 0, 0, 0 });
 	}
-	
+
 	public JKadUDPKey(byte key[], byte address[]) {
 		this.key = key;
 		this.address = new IPAddress(address);
-		
+
 	}
 
 	public byte[] getKey() {
@@ -59,5 +60,5 @@ public class JKadUDPKey {
 	public void setAddress(IPAddress address) {
 		this.address = address;
 	}
-	
+
 }

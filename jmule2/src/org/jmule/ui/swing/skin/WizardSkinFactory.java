@@ -22,27 +22,26 @@
  */
 package org.jmule.ui.swing.skin;
 
-
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:44:21 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:44:21 $$
  */
 public class WizardSkinFactory {
 
 	private static WizardSkin instance;
-	
+
 	public static WizardSkin getInstance() {
-		
-		if( instance == null ) {
-			
-			 instance = new WizardSkin();
-			
+
+		if (instance == null) {
+
+			instance = new WizardSkin();
+
 		}
-		
+
 		return instance;
-		
+
 	}
-	
+
 }

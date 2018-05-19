@@ -53,113 +53,115 @@ import org.jmule.core.utils.Misc;
 
 /**
  * Created on 2008-Aug-09
+ * 
  * @author javajox
- * @version $$Revision: 1.9 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/08/15 12:19:34 $$
+ * @version $$Revision: 1.9 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/08/15 12:19:34 $$
  */
 public class SearchResultItem extends TagList {
 
 	private SearchQueryType resultType = SearchQueryType.SERVER;
-	
+
 	private FileHash fileHash;
 	private ClientID clientID;
 	private short clientPort;
-	
+
 	public SearchResultItem(FileHash fileHash, ClientID clientID, short clientPort) {
 		super();
 		this.fileHash = fileHash;
 		this.clientID = clientID;
 		this.clientPort = clientPort;
 	}
-	
-	public SearchResultItem(FileHash fileHash, ClientID clientID, short clientPort,SearchQueryType resultType) {
-		this(fileHash, clientID,clientPort);
+
+	public SearchResultItem(FileHash fileHash, ClientID clientID, short clientPort, SearchQueryType resultType) {
+		this(fileHash, clientID, clientPort);
 		this.resultType = resultType;
 	}
-	
+
 	public ED2KFileLink getAsED2KLink() {
-		return new ED2KFileLink(getFileName(),getFileSize(),getFileHash());
+		return new ED2KFileLink(getFileName(), getFileSize(), getFileHash());
 	}
-	
+
 	public String toString() {
-		String result="";
-		result+="Name : " + this.getFileName()+" Size : "+this.getFileSize();
+		String result = "";
+		result += "Name : " + this.getFileName() + " Size : " + this.getFileSize();
 		return result;
 	}
-	
+
 	public SearchQueryType getResultType() {
 		return resultType;
 	}
-	
-	public String getFileName(){
+
+	public String getFileName() {
 		try {
-			return (String)super.getTag(TAG_NAME_NAME).getValue();
+			return (String) super.getTag(TAG_NAME_NAME).getValue();
 		} catch (Throwable e) {
 			return null;
 		}
 	}
-	
+
 	public long getFileSize() {
 		try {
-			return Convert.intToLong((Integer)super.getTag(TAG_NAME_SIZE).getValue());
+			return Convert.intToLong((Integer) super.getTag(TAG_NAME_SIZE).getValue());
 		} catch (Throwable e) {
 			e.printStackTrace();
 			return 0;
 		}
 	}
-	
+
 	public int getFileAviability() {
 		try {
-			return (Integer)super.getTag(TAG_NAME_AVIABILITY).getValue();
+			return (Integer) super.getTag(TAG_NAME_AVIABILITY).getValue();
 		} catch (Throwable e) {
 			return 0;
 		}
 	}
-	
+
 	public int getFileCompleteSrc() {
 		try {
-			return (Integer)super.getTag(TAG_NAME_COMPLETESRC).getValue();
+			return (Integer) super.getTag(TAG_NAME_COMPLETESRC).getValue();
 		} catch (Throwable e) {
 			return 0;
 		}
 	}
-	
+
 	public FileQuality getFileQuality() {
-		if (!hasTag(FT_FILERATING)) return FileQuality.NOTRATED;
+		if (!hasTag(FT_FILERATING))
+			return FileQuality.NOTRATED;
 		try {
-			int quality = (Integer)super.getTag(FT_FILERATING).getValue();
+			int quality = (Integer) super.getTag(FT_FILERATING).getValue();
 			return FileQuality.getAsFileQuality(quality);
 		} catch (Throwable e) {
 			return FileQuality.NOTRATED;
 		}
 	}
-	
+
 	public byte[] getMimeType() {
 		String file_name = getFileName();
-		
+
 		String extension = Misc.getFileExtension(file_name);
 		extension = extension.toLowerCase();
 		if (audio_extensions.contains(extension))
 			return TAG_FILE_TYPE_AUDIO;
-		
+
 		if (video_extensions.contains(extension))
 			return TAG_FILE_TYPE_VIDEO;
-		
+
 		if (image_extensions.contains(extension))
 			return TAG_FILE_TYPE_IMAGE;
-		
+
 		if (doc_extensions.contains(extension))
 			return TAG_FILE_TYPE_DOC;
-		
+
 		if (program_extensions.contains(extension))
 			return TAG_FILE_TYPE_PROGRAM;
-		
+
 		if (archive_extensions.contains(extension))
 			return TAG_FILE_TYPE_ARC;
-		
+
 		if (iso_extensions.contains(extension))
 			return TAG_FILE_TYPE_ISO;
-		
+
 		return TAG_FILE_TYPE_UNKNOWN;
 	}
 
@@ -186,5 +188,5 @@ public class SearchResultItem extends TagList {
 	public void setClientPort(short clientPort) {
 		this.clientPort = clientPort;
 	}
-	
+
 }

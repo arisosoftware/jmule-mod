@@ -26,57 +26,60 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.3 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2010/01/05 14:39:15 $$
+ * @version $$Revision: 1.3 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2010/01/05 14:39:15 $$
  */
 public class CommonUIPreferences extends UIPreferences {
 
 	private static CommonUIPreferences singleton = null;
 	public static String UI_TYPE = ".ui_type";
-	
+
 	public static CommonUIPreferences getSingleton() {
-		if( singleton == null ) singleton = new CommonUIPreferences();
+		if (singleton == null)
+			singleton = new CommonUIPreferences();
 		return singleton;
 	}
-	
+
 	private CommonUIPreferences() {
 		try {
-			  if( new File(UI_SETTINGS_FILE).exists() ) {
-				 config_store = new Properties();
-				 config_store.load(new FileInputStream(UI_SETTINGS_FILE));
-			  } else {
-				  load();
-			  }
-		}catch(Throwable cause) {
-				cause.printStackTrace();
+			if (new File(UI_SETTINGS_FILE).exists()) {
+				config_store = new Properties();
+				config_store.load(new FileInputStream(UI_SETTINGS_FILE));
+			} else {
+				load();
+			}
+		} catch (Throwable cause) {
+			cause.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Gets the user interface stored in repository
+	 * 
 	 * @return the jmule user interface
 	 */
 	public String getUIType() {
-		 
-		 return config_store.getProperty(UI_ROOT + UI_TYPE, JMuleUIManager.DEFAULT_UI);
+
+		return config_store.getProperty(UI_ROOT + UI_TYPE, JMuleUIManager.DEFAULT_UI);
 	}
-	
+
 	/**
 	 * Sets the user interface
-	 * @param type the jmule user interface
+	 * 
+	 * @param type
+	 *            the jmule user interface
 	 */
 	public void setUIType(String type) {
-		
-		 config_store.setProperty(UI_ROOT + UI_TYPE, type);
-		 save();
+
+		config_store.setProperty(UI_ROOT + UI_TYPE, type);
+		save();
 	}
-	
+
 	public void save() {
-		
+
 		super.save();
 	}
 }

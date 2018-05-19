@@ -29,43 +29,44 @@ import org.jmule.core.utils.Convert;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.3 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/06/09 15:14:56 $$
+ * @version $$Revision: 1.3 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/06/09 15:14:56 $$
  */
 public class ClientID {
-	
+
 	private byte[] data = new byte[4];
 	private int hashCode = 0;
-	
-	public ClientID(byte[] clientID){
-		for(int i = 0;i<clientID.length;i++)
+
+	public ClientID(byte[] clientID) {
+		for (int i = 0; i < clientID.length; i++)
 			this.data[i] = clientID[i];
 		hashCode = toString().hashCode();
 	}
-	
-	public ClientID(String clientID){
+
+	public ClientID(String clientID) {
 		data = (Convert.stringIPToArray(clientID));
 		hashCode = toString().hashCode();
 	}
-	
+
 	public byte[] getClientID() {
 		return data.clone();
 	}
-	
+
 	public boolean isHighID() {
-		return !(data[3]==0);
-		//if (data[3] != 0) return true;
-		//return getAsLong()>=16777216;
+		return !(data[3] == 0);
+		// if (data[3] != 0) return true;
+		// return getAsLong()>=16777216;
 	}
 
 	public String getAsString() {
-		return Convert.byteToInt(data[0])+"."+Convert.byteToInt(data[1])+"."+Convert.byteToInt(data[2])+"."+Convert.byteToInt(data[3]);
+		return Convert.byteToInt(data[0]) + "." + Convert.byteToInt(data[1]) + "." + Convert.byteToInt(data[2]) + "."
+				+ Convert.byteToInt(data[3]);
 	}
-	
+
 	public String toString() {
 		return getAsString();
 	}
-	
+
 	public long getAsLong() {
 		long num = data[0];
 		num += Math.pow(2, 8) * data[1];
@@ -73,16 +74,18 @@ public class ClientID {
 		num += Math.pow(2, 24) * data[3];
 		return num;
 	}
-	
+
 	public int hashCode() {
 		return hashCode;
 	}
-	
-	public boolean equals(Object object){
-		if (object==null) return false;
-		if (!(object instanceof ClientID)) return false;
+
+	public boolean equals(Object object) {
+		if (object == null)
+			return false;
+		if (!(object instanceof ClientID))
+			return false;
 		ClientID oClientID = (ClientID) object;
 		return Arrays.equals(data, oClientID.data);
-		
-	}		
+
+	}
 }

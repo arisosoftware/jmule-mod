@@ -31,34 +31,36 @@ import org.jmule.core.peermanager.Peer;
  * Created on Aug 29, 2009
  * 
  * @author binary256
- * @version $Revision: 1.5 $ Last changed by $Author: binary255 $ on $Date: 2010/05/29 11:40:35 $
+ * @version $Revision: 1.5 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/05/29 11:40:35 $
  */
 public interface InternalUploadManager extends UploadManager {
-	
-	public void receivedFileRequestFromPeer(Peer sender,FileHash fileHash);
 
-	public void receivedFileStatusRequestFromPeer(Peer sender,FileHash fileHash);
+	public void receivedFileRequestFromPeer(Peer sender, FileHash fileHash);
 
-	public void receivedHashSetRequestFromPeer(Peer sender,FileHash fileHash);
+	public void receivedFileStatusRequestFromPeer(Peer sender, FileHash fileHash);
 
-	public void receivedSlotRequestFromPeer(Peer sender,FileHash fileHash);
+	public void receivedHashSetRequestFromPeer(Peer sender, FileHash fileHash);
+
+	public void receivedSlotRequestFromPeer(Peer sender, FileHash fileHash);
 
 	public void receivedSlotReleaseFromPeer(Peer sender);
-	
-	public void receivedFileChunkRequestFromPeer(Peer sender,FileHash fileHash, List<FileChunkRequest> requestedChunks);
-	
+
+	public void receivedFileChunkRequestFromPeer(Peer sender, FileHash fileHash,
+			List<FileChunkRequest> requestedChunks);
+
 	public void endOfDownload(Peer sender);
-	
+
 	public void removeUpload(FileHash fileHash);
 
 	public boolean hasPeer(Peer peer);
-	
+
 	public void peerConnected(Peer peer);
 
 	public void peerConnectingFailed(Peer peer, Throwable cause);
 
 	public void peerDisconnected(Peer peer);
-	
+
 	public void peerRemoved(Peer peer);
-	
+
 }

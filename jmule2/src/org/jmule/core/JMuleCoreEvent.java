@@ -24,9 +24,10 @@ package org.jmule.core;
 
 /**
  * Created on Jan 5, 2010
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2010/01/05 14:29:06 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2010/01/05 14:29:06 $
  */
 public enum JMuleCoreEvent {
 

@@ -31,39 +31,40 @@ import javax.swing.text.NumberFormatter;
 /**
  *
  * Created on Sep 14, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/09/14 17:31:10 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/09/14 17:31:10 $
  */
 public class PortTextField extends JFormattedTextField {
 
 	private static DecimalFormat decimal_formater = new DecimalFormat("#####");
-    private static NumberFormatter number_formatter = new NumberFormatter(decimal_formater) {
-        public String valueToString(Object iv) throws ParseException {
-            if ((iv == null) || (((Integer)iv).intValue() == -1)) {
-                return "";
-            }
-            else {
-                return super.valueToString(iv);
-            }
-        }
-        public Object stringToValue(String text) throws ParseException {
-            if ("".equals(text)) {
-                return null;
-            }
-            return super.stringToValue(text);
-        }
-    };
-	
-    static {
-	    number_formatter.setMinimum(1);
-	    number_formatter.setMaximum(65535);
-	    number_formatter.setValueClass(Integer.class);
-    }
-	
+	private static NumberFormatter number_formatter = new NumberFormatter(decimal_formater) {
+		public String valueToString(Object iv) throws ParseException {
+			if ((iv == null) || (((Integer) iv).intValue() == -1)) {
+				return "";
+			} else {
+				return super.valueToString(iv);
+			}
+		}
+
+		public Object stringToValue(String text) throws ParseException {
+			if ("".equals(text)) {
+				return null;
+			}
+			return super.stringToValue(text);
+		}
+	};
+
+	static {
+		number_formatter.setMinimum(1);
+		number_formatter.setMaximum(65535);
+		number_formatter.setValueClass(Integer.class);
+	}
+
 	public PortTextField() {
 		super(number_formatter);
-	    this.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-	    this.setColumns(5);
+		this.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+		this.setColumns(5);
 	}
 }

@@ -35,40 +35,45 @@ import org.jmule.ui.utils.TimeFormatter;
 /**
  *
  * Created on Oct 11, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
 public class LogTab extends AbstractTab implements JMLogger {
 
 	private JScrollPane scroll_panel = new JScrollPane();
 	private JTextArea text_area = new JTextArea();
-	
+
 	private static JMLogger log_instance = null;
-	
+
 	public LogTab(JFrame parent) {
 		super(parent);
-        log_instance = (JMLogger)this;
+		log_instance = (JMLogger) this;
 		init();
 	}
-	
+
 	public static JMLogger getLogInstance() {
-		
-        return log_instance;
+
+		return log_instance;
 	}
-	
+
 	private void init() {
-		this.setLayout(new GridLayout(1,1));
+		this.setLayout(new GridLayout(1, 1));
 		text_area.setEditable(false);
 		scroll_panel.setViewportView(text_area);
 		this.add(scroll_panel);
 	}
-	
+
 	public void addMessage(String str) {
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTimeInMillis(System.currentTimeMillis());
-		String date = TimeFormatter.twoDigits(calendar.get(Calendar.DAY_OF_MONTH)) + "." + TimeFormatter.twoDigits(calendar.get(Calendar.MONTH)) + "." + TimeFormatter.twoDigits(calendar.get(Calendar.YEAR));
-		date += " "+TimeFormatter.twoDigits(calendar.get(Calendar.HOUR_OF_DAY)) + ":" + TimeFormatter.twoDigits(calendar.get(Calendar.MINUTE))+":"+TimeFormatter.twoDigits(calendar.get(Calendar.SECOND));
+		String date = TimeFormatter.twoDigits(calendar.get(Calendar.DAY_OF_MONTH)) + "."
+				+ TimeFormatter.twoDigits(calendar.get(Calendar.MONTH)) + "."
+				+ TimeFormatter.twoDigits(calendar.get(Calendar.YEAR));
+		date += " " + TimeFormatter.twoDigits(calendar.get(Calendar.HOUR_OF_DAY)) + ":"
+				+ TimeFormatter.twoDigits(calendar.get(Calendar.MINUTE)) + ":"
+				+ TimeFormatter.twoDigits(calendar.get(Calendar.SECOND));
 		date = "[" + date + "]";
 		text_area.append(" " + date + " " + str + "\n");
 	}

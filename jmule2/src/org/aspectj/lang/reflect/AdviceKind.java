@@ -15,9 +15,5 @@ package org.aspectj.lang.reflect;
  * The different kinds of advice in AspectJ
  */
 public enum AdviceKind {
-	BEFORE,
-	AFTER,
-	AFTER_RETURNING,
-	AFTER_THROWING,
-	AROUND;
+	BEFORE, AFTER, AFTER_RETURNING, AFTER_THROWING, AROUND;
 }

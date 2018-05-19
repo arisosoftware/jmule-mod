@@ -24,25 +24,27 @@ package org.jmule.core.edonkey.packet.tag;
 
 import java.nio.ByteBuffer;
 
-
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.4 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/06/15 16:47:06 $$
+ * @version $$Revision: 1.4 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/06/15 16:47:06 $$
  */
 public interface Tag {
-	
+
 	public ByteBuffer getTagHeader();
+
 	public int getHeaderSize();
-	
+
 	public byte getType();
-	
+
 	public byte[] getTagName();
-	
+
 	public ByteBuffer getAsByteBuffer();
+
 	public Object getValue();
+
 	public void setValue(Object object);
-	
+
 	public int getSize();
 }

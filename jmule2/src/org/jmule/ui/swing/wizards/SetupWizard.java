@@ -41,175 +41,177 @@ import org.jmule.ui.Splash;
 import org.jmule.ui.swing.SwingConstants;
 import org.jmule.ui.swing.SwingPreferences;
 import org.jmule.ui.swing.SwingUtils;
- 
+
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.5 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2009/09/22 19:08:43 $$
+ * @version $$Revision: 1.5 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2009/09/22 19:08:43 $$
  */
 public class SetupWizard extends JDialog {
-	
+
 	private BorderLayout border_layout;
 	private LeftLogo left_logo;
 	private NavigationBar navigation_bar;
 	private TopPanel top_panel;
 	// for shutdown process we must have the core here
 	private JMuleCore _core;
-	
+
 	// welcome message
 	private JPanel stage1 = new WelcomeMessage();
-	
+
 	// shared folders set up
 	private JPanel stage2 = new SharedFoldersChooser(this);
-	
+
 	// user name and ports
 	private JPanel stage3 = new GeneralSettings();
-	
+
 	// network bandwidth selection
 	private JPanel stage4 = new NetworkBandwidthSelection();
-	
+
 	// ui chooser
 	private JPanel stage5 = new UIChooser();
-	
+
 	// finish !!! (congratulations you have been successfully configured JMule)
 	private JPanel stage6 = new FinishPanel();
-	
+
 	private int current_stage = 1;
-	
+
 	Splash splash;
-	
+
 	public SetupWizard(Splash splash) {
-		
+
 		this.splash = splash;
-		
+
 		initComponents();
-		
+
 	}
-	
+
 	public SetupWizard() {
-		
-        initComponents();
-        
+
+		initComponents();
+
 	}
-	
+
 	private void initComponents() {
-		
+
 		try {
-			
-			 _core = JMuleCoreFactory.getSingleton();
-			 
-		}catch(Throwable t) {
-				
+
+			_core = JMuleCoreFactory.getSingleton();
+
+		} catch (Throwable t) {
+
 		}
-		
+
 		top_panel = new TopPanel();
 		border_layout = new BorderLayout();
 		left_logo = new LeftLogo();
-		navigation_bar = new NavigationBar( this );
+		navigation_bar = new NavigationBar(this);
 		final SetupWizard _this = this;
-		navigation_bar.getCancelButton().addActionListener( new ActionListener() {
-        	
-        	public void actionPerformed(ActionEvent event) {
-        		 
-        		 // we must stop the core if this is the first run (so we must shutdown the entire system)
-        		 if( _core.isFirstRun() ) {
-        			 
-        			  try {
-        				  
-        				  _this.setVisible(false);
-        				  
-        				  _core.stop();
-        				  
-        				  
-        			  }catch(Throwable t) {
-        				  t.printStackTrace();
-        			  }
-        		 // close the wizard only if we have a fully functional appl.	 
-        		 } else _this.setVisible(false);
-        		
-        	}
-        });
-		
-		navigation_bar.getFinishButton().addActionListener(new ActionListener() {
-			
-			 public void actionPerformed(ActionEvent event) {
-				
-				_this.setVisible(false);
-					
-			   (new JMThread( new JMRunnable() {	 
-				
-				public void JMRun() {   
-				 
-					ConfigurationManager _config = _core.getConfigurationManager();
-					GeneralSettings gs = null;
-				    try {
-						_config.setSharedFolders(((SharedFoldersChooser)stage2).getChosenFolders().getFoldersList());	 
-					
-						gs = (GeneralSettings)stage3;
-					 
-						_config.setNickName( gs.getNickName() );
-					 	
-						_config.setTCP( gs.getTCP() );
-					 
-						_config.setUDP( gs.getUDP() );
-					 
-						_config.setUDPEnabled( gs.isUDPEnabled() );
-					 
-						NetworkBandwidthSelection nbs = (NetworkBandwidthSelection)stage4;
-					 
-						_config.setDownloadBandwidth( nbs.getDownloadBandwidth() );
-					 
-						_config.setUploadBandwidth( nbs.getUploadBandwidth() );
-						
-						_config.save();
-				    }catch( Throwable cause ) {
-				    	cause.printStackTrace();
-				    }
-					CommonUIPreferences.getSingleton().setUIType( ((UIChooser)stage5).getChosenUI() );
-				 
-					//TODO modify this
-					String our_ui = ((UIChooser)stage5).getChosenUI();
-					
-					 if(our_ui.equals("SWING"))
-						SwingPreferences.getSingleton().setConnectAtStartup(gs.isConnectAtStartup());
-					
-					CommonUIPreferences.getSingleton().save();
-					
-					 //splash.increaseProgress(5, "Starting JMule UI manager");
+		navigation_bar.getCancelButton().addActionListener(new ActionListener() {
 
-					if (_core.isFirstRun())
-					
+			public void actionPerformed(ActionEvent event) {
+
+				// we must stop the core if this is the first run (so we must shutdown the
+				// entire system)
+				if (_core.isFirstRun()) {
+
 					try {
-					 
-						JMuleUIManager.create();
-				    
-					}catch(Throwable t) {
-					 
+
+						_this.setVisible(false);
+
+						_core.stop();
+
+					} catch (Throwable t) {
 						t.printStackTrace();
 					}
-				
-					 //splash.splashOff();
-				 
-				}	
-				 
-			   })).start();	 
-		    }
-				 
+					// close the wizard only if we have a fully functional appl.
+				} else
+					_this.setVisible(false);
+
+			}
 		});
-		
-		this.setTitle( JMConstants.JMULE_FULL_NAME + " setup wizard" );
-		this.setPreferredSize( SwingConstants.SETUP_WIZARD_DIMENSION );
-		this.setSize( SwingConstants.SETUP_WIZARD_DIMENSION );
-		this.setResizable( false );
-		this.setLayout( border_layout );
-		this.add( left_logo, BorderLayout.WEST );
-		this.add( navigation_bar, BorderLayout.SOUTH );
-		this.add( top_panel, BorderLayout.NORTH );
-		SwingUtils.centerOnScreen( this );
-        // so after the initialization we go to stage 1
+
+		navigation_bar.getFinishButton().addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent event) {
+
+				_this.setVisible(false);
+
+				(new JMThread(new JMRunnable() {
+
+					public void JMRun() {
+
+						ConfigurationManager _config = _core.getConfigurationManager();
+						GeneralSettings gs = null;
+						try {
+							_config.setSharedFolders(
+									((SharedFoldersChooser) stage2).getChosenFolders().getFoldersList());
+
+							gs = (GeneralSettings) stage3;
+
+							_config.setNickName(gs.getNickName());
+
+							_config.setTCP(gs.getTCP());
+
+							_config.setUDP(gs.getUDP());
+
+							_config.setUDPEnabled(gs.isUDPEnabled());
+
+							NetworkBandwidthSelection nbs = (NetworkBandwidthSelection) stage4;
+
+							_config.setDownloadBandwidth(nbs.getDownloadBandwidth());
+
+							_config.setUploadBandwidth(nbs.getUploadBandwidth());
+
+							_config.save();
+						} catch (Throwable cause) {
+							cause.printStackTrace();
+						}
+						CommonUIPreferences.getSingleton().setUIType(((UIChooser) stage5).getChosenUI());
+
+						// TODO modify this
+						String our_ui = ((UIChooser) stage5).getChosenUI();
+
+						if (our_ui.equals("SWING"))
+							SwingPreferences.getSingleton().setConnectAtStartup(gs.isConnectAtStartup());
+
+						CommonUIPreferences.getSingleton().save();
+
+						// splash.increaseProgress(5, "Starting JMule UI manager");
+
+						if (_core.isFirstRun())
+
+							try {
+
+								JMuleUIManager.create();
+
+							} catch (Throwable t) {
+
+								t.printStackTrace();
+							}
+
+						// splash.splashOff();
+
+					}
+
+				})).start();
+			}
+
+		});
+
+		this.setTitle(JMConstants.JMULE_FULL_NAME + " setup wizard");
+		this.setPreferredSize(SwingConstants.SETUP_WIZARD_DIMENSION);
+		this.setSize(SwingConstants.SETUP_WIZARD_DIMENSION);
+		this.setResizable(false);
+		this.setLayout(border_layout);
+		this.add(left_logo, BorderLayout.WEST);
+		this.add(navigation_bar, BorderLayout.SOUTH);
+		this.add(top_panel, BorderLayout.NORTH);
+		SwingUtils.centerOnScreen(this);
+		// so after the initialization we go to stage 1
 		this.stage1();
-		
+
 		navigation_bar.getBackButton().addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -217,42 +219,54 @@ public class SetupWizard extends JDialog {
 				execute_stage(current_stage);
 			}
 		});
-		
+
 		navigation_bar.getNextButton().addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
 				++current_stage;
 				execute_stage(current_stage);
 			}
 		});
 	}
-	
+
 	private void execute_stage(int stage) {
-		switch(stage) {
-		  case 1 : stage1(); break;
-		  case 2 : stage2(); break;
-		  case 3 : stage3(); break;
-		  case 4 : stage4(); break;
-		  case 5 : stage5(); break;
-		  case 6 : stage6(); break;
+		switch (stage) {
+		case 1:
+			stage1();
+			break;
+		case 2:
+			stage2();
+			break;
+		case 3:
+			stage3();
+			break;
+		case 4:
+			stage4();
+			break;
+		case 5:
+			stage5();
+			break;
+		case 6:
+			stage6();
+			break;
 		}
 	}
-	
+
 	private void stage1() {
 		navigation_bar.getBackButton().setEnabled(false);
 		navigation_bar.getNextButton().setEnabled(true);
 		// must be enabled all the time
-		//navigation_bar.getCancelButton().setEnabled(true);
+		// navigation_bar.getCancelButton().setEnabled(true);
 		navigation_bar.getFinishButton().setEnabled(false);
 		left_logo.setVisible(true);
 		top_panel.setVisible(false);
-		//top_panel.setCaptionIcon(null);
+		// top_panel.setCaptionIcon(null);
 		this.remove(stage2);
 		this.add(stage1, BorderLayout.CENTER);
 		stage1.updateUI();
 		this.repaint();
 	}
-	
+
 	private void stage2() {
 		left_logo.setVisible(false);
 		this.remove(stage1);
@@ -261,24 +275,25 @@ public class SetupWizard extends JDialog {
 		stage2.updateUI();
 		top_panel.setVisible(true);
 		top_panel.setCaption("Shared folders");
-		//top_panel.setCaptionIcon(new javax.swing.ImageIcon("/home/javajox/work/workspace/JMule_local2/src/org/jmule/ui/resources/shared_files2.png"));
+		// top_panel.setCaptionIcon(new
+		// javax.swing.ImageIcon("/home/javajox/work/workspace/JMule_local2/src/org/jmule/ui/resources/shared_files2.png"));
 		this.navigation_bar.getBackButton().setEnabled(true);
 		this.repaint();
 	}
-	
-     private void stage3() {
+
+	private void stage3() {
 		this.remove(stage2);
 		this.remove(stage4);
 		this.add(stage3, BorderLayout.CENTER);
 		stage3.updateUI();
 		top_panel.setVisible(true);
 		top_panel.setCaption("User name and ports");
-		//top_panel.setCaptionIcon(null);
+		// top_panel.setCaptionIcon(null);
 		this.navigation_bar.getBackButton().setEnabled(true);
 		this.navigation_bar.getNextButton().setEnabled(true);
 		this.repaint();
 	}
-	
+
 	private void stage4() {
 		this.remove(stage3);
 		this.remove(stage5);
@@ -290,7 +305,7 @@ public class SetupWizard extends JDialog {
 		this.navigation_bar.getFinishButton().setEnabled(false);
 		this.repaint();
 	}
-	
+
 	private void stage5() {
 		this.top_panel.setVisible(true);
 		this.remove(stage4);
@@ -302,13 +317,13 @@ public class SetupWizard extends JDialog {
 		this.navigation_bar.getNextButton().setEnabled(true);
 		this.repaint();
 	}
-	
+
 	public void stage6() {
 		this.top_panel.setVisible(false);
 		this.remove(stage5);
 		this.add(stage6, BorderLayout.CENTER);
 		stage6.updateUI();
-		//top_panel.setCaption("Finish");
+		// top_panel.setCaption("Finish");
 		this.navigation_bar.getNextButton().setEnabled(false);
 		this.navigation_bar.getFinishButton().setEnabled(true);
 		this.repaint();

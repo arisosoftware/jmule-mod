@@ -47,27 +47,27 @@ import org.jmule.core.uploadmanager.FileChunkRequest;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.6 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/08/24 17:32:26 $$
+ * @version $$Revision: 1.6 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/08/24 17:32:26 $$
  */
 public class DefaultDownloadStrategy implements DownloadStrategy {
 
 	private DownloadSession session;
-	
+
 	public DefaultDownloadStrategy(DownloadSession session) {
 		this.session = session;
 	}
-	
+
 	@Override
-	public FileChunkRequest fileChunkRequest(Peer sender, long blockSize,long fileSize, GapList gapList, FilePartStatus filePartStatus, FileRequestList fileRequestList) {
+	public FileChunkRequest fileChunkRequest(Peer sender, long blockSize, long fileSize, GapList gapList,
+			FilePartStatus filePartStatus, FileRequestList fileRequestList) {
 		int availibility[] = filePartStatus.getPartAvailibility();
 		int countSet = 0;// Total count of downloaded parts
 		JMuleBitSet bit_set_availability = filePartStatus.get(sender);
 		for (int i = 0; i < filePartStatus.getPartAvailibility().length; i++) {
 			if (availibility[i] != 0)
 				if (bit_set_availability.get(i)) {
-					if (gapList.getIntersectedGaps(PARTSIZE * i,
-							PARTSIZE * (i + 1) - 1).size() == 0) {
+					if (gapList.getIntersectedGaps(PARTSIZE * i, PARTSIZE * (i + 1) - 1).size() == 0) {
 						availibility[i] = 0;// This part is downloaded
 						countSet++;
 					}
@@ -85,8 +85,7 @@ public class DefaultDownloadStrategy implements DownloadStrategy {
 				if (availibility[i] != 0) {
 					if (minPos == -1)
 						minPos = i;
-					else
-					if (availibility[i] < availibility[minPos])
+					else if (availibility[i] < availibility[minPos])
 						minPos = i;
 				}
 			if (minPos == -1)
@@ -97,7 +96,7 @@ public class DefaultDownloadStrategy implements DownloadStrategy {
 				end = fileSize;
 			long startPos = 0;
 			long endPos = 0;
-			Collection<Gap> fg = intersectGapListFileRequstList(gapList,fileRequestList, begin, end);
+			Collection<Gap> fg = intersectGapListFileRequstList(gapList, fileRequestList, begin, end);
 			if (fg.size() == 0) {
 				// Don't have fragments, try another part
 				availibility[minPos] = 0;
@@ -113,14 +112,16 @@ public class DefaultDownloadStrategy implements DownloadStrategy {
 	}
 
 	@Override
-	public FileChunkRequest[] fileChunk3Request(Peer sender, long blockSize, long fileSize, GapList gapList, FilePartStatus filePartStatus, FileRequestList fileRequestList) {
+	public FileChunkRequest[] fileChunk3Request(Peer sender, long blockSize, long fileSize, GapList gapList,
+			FilePartStatus filePartStatus, FileRequestList fileRequestList) {
 		FileChunkRequest[] fileChunks = new FileChunkRequest[3];
 		for (int i = 0; i < fileChunks.length; i++) {
-			FileChunkRequest fileChunk = this.fileChunkRequest(sender,blockSize, fileSize, gapList, filePartStatus,fileRequestList);
+			FileChunkRequest fileChunk = this.fileChunkRequest(sender, blockSize, fileSize, gapList, filePartStatus,
+					fileRequestList);
 			if (fileChunk == null)
 				fileChunk = new FileChunkRequest(0, 0);
 			else
-				fileRequestList.addFragment(sender, fileChunk.getChunkBegin(),fileChunk.getChunkEnd());
+				fileRequestList.addFragment(sender, fileChunk.getChunkBegin(), fileChunk.getChunkEnd());
 			fileChunks[i] = fileChunk;
 		}
 		return fileChunks;
@@ -131,7 +132,8 @@ public class DefaultDownloadStrategy implements DownloadStrategy {
 	 * 
 	 * @return
 	 */
-	private Collection<Gap> intersectGapListFileRequstList(GapList gapList, FileRequestList fileRequestList, long begin, long end) {
+	private Collection<Gap> intersectGapListFileRequstList(GapList gapList, FileRequestList fileRequestList, long begin,
+			long end) {
 		// Obtain Gaps from [begin:end] segment
 		Collection<Gap> gaps;
 		gaps = gapList.getGapsFromSegment(begin, end);
@@ -187,7 +189,7 @@ public class DefaultDownloadStrategy implements DownloadStrategy {
 	@Override
 	public void processPartCheckResult(List<Integer> partsID) {
 		PartialFile file = (PartialFile) session.getSharedFile();
-		for(Integer id : partsID) {
+		for (Integer id : partsID) {
 			long begin = PARTSIZE * id;
 			long end = PARTSIZE * (id + 1) - 1;
 			file.getGapList().addGap(begin, end);
@@ -203,114 +205,116 @@ public class DefaultDownloadStrategy implements DownloadStrategy {
 			file_is_broken = true;
 			file.getGapList().addGap(0, file.length());
 		}
-		
-		for(Integer id : processResult) {
-			if (id < 0) continue;
+
+		for (Integer id : processResult) {
+			if (id < 0)
+				continue;
 			file_is_broken = true;
 			long begin = PARTSIZE * id;
 			long end = PARTSIZE * (id + 1) - 1;
 			file.getGapList().addGap(begin, end);
 		}
-		
+
 		if (file_is_broken) {
-			List<Peer> peer_list = session.getDownloadStatusList().getPeersByStatus(PeerDownloadStatus.HASHSET_REQUEST, PeerDownloadStatus.ACTIVE_UNUSED);
+			List<Peer> peer_list = session.getDownloadStatusList().getPeersByStatus(PeerDownloadStatus.HASHSET_REQUEST,
+					PeerDownloadStatus.ACTIVE_UNUSED);
 			InternalNetworkManager _network_manager = (InternalNetworkManager) NetworkManagerSingleton.getInstance();
 			for (Peer peer : peer_list) {
 				_network_manager.sendUploadRequest(peer.getIP(), peer.getPort(), file.getFileHash());
-				session.getDownloadStatusList().setPeerStatus(peer,PeerDownloadStatus.UPLOAD_REQUEST);
+				session.getDownloadStatusList().setPeerStatus(peer, PeerDownloadStatus.UPLOAD_REQUEST);
 			}
 		}
-			
+
 	}
 
 	@Override
 	public void downloadStarted() {
-		
+
 	}
 
 	@Override
 	public void downloadStopped() {
-		
+
 	}
 
 	@Override
 	public void downloadCancelled() {
-		
+
 	}
 
 	@Override
 	public void peerAdded(Peer peer) {
-		
+
 	}
 
 	@Override
 	public void peerConnected(Peer peer) {
-		
+
 	}
 
 	@Override
 	public void peerDisconnected(Peer peer) {
-		
+
 	}
 
 	@Override
 	public void peerConnectingFailed(Peer peer, Throwable cause) {
-		
+
 	}
 
 	@Override
 	public void receivedFileNotFoundFromPeer(Peer peer) {
-		
+
 	}
 
 	@Override
 	public void receivedFileRequestAnswerFromPeer(Peer sender, String fileName) {
-		
+
 	}
 
 	@Override
-	public void receivedFileStatusResponseFromPeer(Peer sender,FileHash fileHash, JMuleBitSet bitSetpartStatus) {
-		
+	public void receivedFileStatusResponseFromPeer(Peer sender, FileHash fileHash, JMuleBitSet bitSetpartStatus) {
+
 	}
 
 	@Override
-	public void receivedHashSetResponseFromPeer(Peer sender,PartHashSet partHashSet) {
-		
+	public void receivedHashSetResponseFromPeer(Peer sender, PartHashSet partHashSet) {
+
 	}
 
 	@Override
 	public void receivedQueueRankFromPeer(Peer sender, int queueRank) {
-		
+
 	}
 
 	@Override
 	public void receivedSlotGivenFromPeer(Peer sender) {
-		
+
 	}
 
 	@Override
 	public void receivedSlotTakenFromPeer(Peer sender) {
-		
+
 	}
 
 	@Override
-	public void receivedRequestedFileChunkFromPeer(Peer sender,FileHash fileHash, FileChunk chunk) {
-		
+	public void receivedRequestedFileChunkFromPeer(Peer sender, FileHash fileHash, FileChunk chunk) {
+
 	}
 
 	@Override
-	public void receivedCompressedFileChunk(Peer sender,FileChunk compressedFileChunk) {
-		
+	public void receivedCompressedFileChunk(Peer sender, FileChunk compressedFileChunk) {
+
 	}
 
 	@Override
 	public void receivedSourcesAnswerFromPeer(Peer peer, List<Peer> peerList) {
-		
+
 	}
 
 	@Override
 	public void peerRemoved(Peer peer) {
-		
+
 	}
 
 }

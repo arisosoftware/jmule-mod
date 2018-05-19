@@ -26,32 +26,33 @@ import java.io.File;
 
 /**
  * Created on Aug 31, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.2 $
- * Last changed by $Author: javajox $ on $Date: 2009/10/25 08:36:11 $
+ * @version $Revision: 1.2 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/10/25 08:36:11 $
  */
 public abstract class UnixPlatformManager extends AbstractPlatformManager {
 
 	private void copyOrMoveFile(String command, File source, File destination) throws PlatformManagerException {
 		int exit_status;
 		try {
-			 ProcessBuilder mv_or_cp_cmd = new ProcessBuilder(new String[] { command, source.getAbsolutePath(), destination.getAbsolutePath() });
-			 Process mv_or_cp_cmd_running = mv_or_cp_cmd.start();
-			 exit_status = mv_or_cp_cmd_running.waitFor();
-		}catch( Throwable cause ) {
-			throw new PlatformManagerException( cause );
+			ProcessBuilder mv_or_cp_cmd = new ProcessBuilder(
+					new String[] { command, source.getAbsolutePath(), destination.getAbsolutePath() });
+			Process mv_or_cp_cmd_running = mv_or_cp_cmd.start();
+			exit_status = mv_or_cp_cmd_running.waitFor();
+		} catch (Throwable cause) {
+			throw new PlatformManagerException(cause);
 		}
-		if( exit_status != 0 ) 
-			  throw new PlatformManagerException(PROCESS_ERROR + exit_status);
+		if (exit_status != 0)
+			throw new PlatformManagerException(PROCESS_ERROR + exit_status);
 	}
-	
+
 	public void copyFile(File source, File destination) throws PlatformManagerException {
-		copyOrMoveFile( "cp", source, destination );
+		copyOrMoveFile("cp", source, destination);
 	}
-	
+
 	public void moveFile(File source, File destination) throws PlatformManagerException {
-        copyOrMoveFile( "mv", source, destination );
-	}	
-	
+		copyOrMoveFile("mv", source, destination);
+	}
 
 }

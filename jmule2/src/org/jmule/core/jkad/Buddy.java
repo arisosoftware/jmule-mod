@@ -22,13 +22,12 @@
  */
 package org.jmule.core.jkad;
 
-
 /**
- * Maintain Kad buddy (jkad buddy or jkad is buddy)
- * Created on Jul 30, 2009
+ * Maintain Kad buddy (jkad buddy or jkad is buddy) Created on Jul 30, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary255 $ on $Date: 2009/08/02 08:10:19 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/08/02 08:10:19 $
  */
 public class Buddy {
 
@@ -36,40 +35,43 @@ public class Buddy {
 	private short udp_port;
 	private short tcp_port;
 	private Int128 clientID;
-	
+
 	private boolean kadBuddy = false; // kad is firewalled and buddy is used
 	private boolean kadIsBuddy = false; // kad is used by another contact as buddy
-	
+
 	private static Buddy instance = null;
-	
+
 	public static Buddy getInstance() {
 		if (instance == null)
 			instance = new Buddy();
 		return instance;
 	}
-	
-	private Buddy() { }
-	
+
+	private Buddy() {
+	}
+
 	/**
 	 * kad is firewalled and buddy is used
+	 * 
 	 * @return
 	 */
 	public boolean jkadHasBuddy() {
 		return kadBuddy;
 	}
-	
+
 	/**
 	 * kad is used by another contact as buddy
+	 * 
 	 * @return
 	 */
 	public boolean isJKadUsedAsBuddy() {
 		return kadIsBuddy;
 	}
-	
+
 	public boolean hasAnyTypeBuddy() {
-		return address!=null;
+		return address != null;
 	}
-	
+
 	/**
 	 * Drop buddy status of JKad
 	 */
@@ -110,24 +112,22 @@ public class Buddy {
 		this.clientID = clientID;
 	}
 
-	
 	/**
 	 * kad is firewalled and buddy is used
+	 * 
 	 * @return
-	 */	
+	 */
 	void setKadHasBuddy(boolean kadBuddy) {
 		this.kadBuddy = kadBuddy;
 	}
 
 	/**
 	 * kad is used by another contact as buddy
+	 * 
 	 * @return
 	 */
 	void setKadIsUsedAsBuddy(boolean kadIsBuddy) {
 		this.kadIsBuddy = kadIsBuddy;
 	}
-	
-	
-	
 
 }

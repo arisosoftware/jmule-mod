@@ -4,92 +4,73 @@ import java.io.EOFException;
 import java.io.InputStream;
 import java.io.IOException;
 
-class DefiniteLengthInputStream
-        extends LimitedInputStream
-{
-    private int               _length;
+class DefiniteLengthInputStream extends LimitedInputStream {
+	private int _length;
 
-    DefiniteLengthInputStream(
-        InputStream in,
-        int         length)
-    {
-        super(in);
+	DefiniteLengthInputStream(InputStream in, int length) {
+		super(in);
 
-        if (length < 0)
-        {
-            throw new IllegalArgumentException("negative lengths not allowed");
-        }
+		if (length < 0) {
+			throw new IllegalArgumentException("negative lengths not allowed");
+		}
 
-        this._length = length;
-    }
+		this._length = length;
+	}
 
-    public int read()
-        throws IOException
-    {
-        if (_length > 0)
-        {
-            int b = _in.read();
+	public int read() throws IOException {
+		if (_length > 0) {
+			int b = _in.read();
 
-            if (b < 0)
-            {
-                throw new EOFException();
-            }
+			if (b < 0) {
+				throw new EOFException();
+			}
 
-            --_length;
-            return b;
-        }
+			--_length;
+			return b;
+		}
 
-        setParentEofDetect(true);
+		setParentEofDetect(true);
 
-        return -1;
-    }
+		return -1;
+	}
 
-    public int read(byte[] buf, int off, int len)
-        throws IOException
-    {
-        if (_length > 0)
-        {
-            int toRead = Math.min(len, _length);
-            int numRead = _in.read(buf, off, toRead);
+	public int read(byte[] buf, int off, int len) throws IOException {
+		if (_length > 0) {
+			int toRead = Math.min(len, _length);
+			int numRead = _in.read(buf, off, toRead);
 
-            if (numRead < 0)
-                throw new EOFException();
+			if (numRead < 0)
+				throw new EOFException();
 
-            _length -= numRead;
-            return numRead;
-        }
+			_length -= numRead;
+			return numRead;
+		}
 
-        setParentEofDetect(true);
+		setParentEofDetect(true);
 
-        return -1;
-    }
+		return -1;
+	}
 
-    byte[] toByteArray()
-        throws IOException
-    {
-        byte[] bytes = new byte[_length];
+	byte[] toByteArray() throws IOException {
+		byte[] bytes = new byte[_length];
 
-        if (_length > 0)
-        {
-            int pos = 0;
-            do
-            {
-                int read = _in.read(bytes, pos, _length - pos);
+		if (_length > 0) {
+			int pos = 0;
+			do {
+				int read = _in.read(bytes, pos, _length - pos);
 
-                if (read < 0)
-                {
-                    throw new EOFException();
-                }
+				if (read < 0) {
+					throw new EOFException();
+				}
 
-                pos += read;
-            }
-            while (pos < _length);
+				pos += read;
+			} while (pos < _length);
 
-            _length = 0;
-        }
+			_length = 0;
+		}
 
-        setParentEofDetect(true);
+		setParentEofDetect(true);
 
-        return bytes;
-    }
+		return bytes;
+	}
 }

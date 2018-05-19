@@ -19,31 +19,30 @@ import java.util.StringTokenizer;
 import org.aspectj.lang.reflect.AjTypeSystem;
 
 /**
- * @author colyer
- * Helper class for converting type representations in Strings into java.lang.reflect.Types.
+ * @author colyer Helper class for converting type representations in Strings
+ *         into java.lang.reflect.Types.
  */
 public class StringToType {
 
-	public static Type[] commaSeparatedListToTypeArray(String typeNames, Class classScope) 
-	throws ClassNotFoundException {
-		StringTokenizer strTok = new StringTokenizer(typeNames,",");
+	public static Type[] commaSeparatedListToTypeArray(String typeNames, Class classScope)
+			throws ClassNotFoundException {
+		StringTokenizer strTok = new StringTokenizer(typeNames, ",");
 		Type[] ret = new Type[strTok.countTokens()];
 		int index = 0;
-		//outer: 
-			while (strTok.hasMoreTokens()) {
+		// outer:
+		while (strTok.hasMoreTokens()) {
 			String typeName = strTok.nextToken().trim();
 			ret[index++] = stringToType(typeName, classScope);
 		}
 		return ret;
 	}
-	
-	public static Type stringToType(String typeName, Class classScope) 
-	throws ClassNotFoundException {
+
+	public static Type stringToType(String typeName, Class classScope) throws ClassNotFoundException {
 		try {
 			if (typeName.indexOf("<") == -1) {
-				return AjTypeSystem.getAjType(Class.forName(typeName,false,classScope.getClassLoader()));
+				return AjTypeSystem.getAjType(Class.forName(typeName, false, classScope.getClassLoader()));
 			} else {
-				return makeParameterizedType(typeName,classScope);
+				return makeParameterizedType(typeName, classScope);
 			}
 		} catch (ClassNotFoundException e) {
 			// could be a type variable
@@ -56,15 +55,14 @@ public class StringToType {
 			throw new ClassNotFoundException(typeName);
 		}
 	}
-	
-	private static Type makeParameterizedType(String typeName, Class classScope) 
-	throws ClassNotFoundException {
+
+	private static Type makeParameterizedType(String typeName, Class classScope) throws ClassNotFoundException {
 		int paramStart = typeName.indexOf('<');
 		String baseName = typeName.substring(0, paramStart);
-		final Class baseClass = Class.forName(baseName,false,classScope.getClassLoader());
+		final Class baseClass = Class.forName(baseName, false, classScope.getClassLoader());
 		int paramEnd = typeName.lastIndexOf('>');
-		String params = typeName.substring(paramStart+1,paramEnd);
-		final Type[] typeParams = commaSeparatedListToTypeArray(params,classScope);
+		String params = typeName.substring(paramStart + 1, paramEnd);
+		final Type[] typeParams = commaSeparatedListToTypeArray(params, classScope);
 		return new ParameterizedType() {
 
 			public Type[] getActualTypeArguments() {
@@ -77,7 +75,7 @@ public class StringToType {
 
 			public Type getOwnerType() {
 				return baseClass.getEnclosingClass();
-			}			
+			}
 		};
 	}
 }

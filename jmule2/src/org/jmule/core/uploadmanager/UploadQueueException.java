@@ -26,22 +26,23 @@ import org.jmule.core.JMException;
 
 /**
  * Created on Sep 13, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/09/17 18:30:12 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/09/17 18:30:12 $
  */
 public class UploadQueueException extends JMException {
 
 	public UploadQueueException() {
 		super();
 	}
-	
+
 	public UploadQueueException(String cause) {
 		super(cause);
 	}
-	
+
 	public UploadQueueException(Throwable cause) {
 		super(cause);
 	}
-	
+
 }

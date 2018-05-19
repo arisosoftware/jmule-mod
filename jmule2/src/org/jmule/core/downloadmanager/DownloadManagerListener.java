@@ -26,35 +26,40 @@ import org.jmule.core.edonkey.FileHash;
 
 /**
  * Created on 07-10-2008
+ * 
  * @author javajox
  * @author binary256
- * @version $$Revision: 1.5 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/09/17 17:42:41 $$
+ * @version $$Revision: 1.5 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/09/17 17:42:41 $$
  */
 public interface DownloadManagerListener {
 
 	/**
 	 * A new download added to the list.
+	 * 
 	 * @param fileHash
 	 */
 	public void downloadAdded(FileHash fileHash);
-	
+
 	/**
 	 * Download removed
+	 * 
 	 * @param fileHash
 	 */
 	public void downloadRemoved(FileHash fileHash);
-	
+
 	/**
 	 * Download started
+	 * 
 	 * @param fileHash
 	 */
 	public void downloadStarted(FileHash fileHash);
-	
-	/** 
+
+	/**
 	 * Download stopped
+	 * 
 	 * @param fileHash
 	 */
 	public void downloadStopped(FileHash fileHash);
-	
+
 }

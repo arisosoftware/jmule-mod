@@ -25,12 +25,13 @@ package org.jmule.ui.swing;
 /**
  *
  * Created on Aug 28, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/09/09 17:17:07 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/09/09 17:17:07 $
  */
 public interface Refreshable {
 
 	public void refresh();
-	
+
 }

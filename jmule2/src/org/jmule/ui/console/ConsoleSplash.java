@@ -38,9 +38,10 @@ import org.jmule.core.JMRunnable;
 import org.jmule.ui.Splash;
 
 /**
- * This is dummy splash(text)screen for console execution; Perhaps this is useless and 
- * may be removed later or improved.
+ * This is dummy splash(text)screen for console execution; Perhaps this is
+ * useless and may be removed later or improved.
  * <p>
+ * 
  * @author ftarlao
  * 
  */
@@ -49,32 +50,32 @@ public final class ConsoleSplash extends JWindow implements Splash {
 	@Override
 	public void splashOn() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void splashOff() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void increaseProgress(int value) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void increaseProgress(int value, String message) {
 		// TODO Auto-generated method stub
 		System.out.println(message);
-		
+
 	}
 
 	@Override
 	public void resetProgress() {
 		// TODO Auto-generated method stub
-		
-	} 
-    
+
+	}
+
 }

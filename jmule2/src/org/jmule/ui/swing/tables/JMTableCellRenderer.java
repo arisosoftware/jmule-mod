@@ -33,33 +33,34 @@ import javax.swing.table.TableCellRenderer;
 /**
  *
  * Created on Sep 1, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
-public class JMTableCellRenderer extends JLabel implements TableCellRenderer { //extends DefaultTableCellRenderer {
+public class JMTableCellRenderer extends JLabel implements TableCellRenderer { // extends DefaultTableCellRenderer {
 
-	public Component getTableCellRendererComponent(JTable table, Object value,
-			boolean isSelected, boolean hasFocus, int row, int column) {
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
 		this.setOpaque(true);
-		this.setFont(new Font("Dialog",0,12));
-		//this.setBorder(new EmptyBorder(0, 0, 0, 0));
-		//this.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-		if(isSelected) {
-			  this.setForeground(table.getSelectionForeground());
-			  this.setBackground(table.getSelectionBackground());
+		this.setFont(new Font("Dialog", 0, 12));
+		// this.setBorder(new EmptyBorder(0, 0, 0, 0));
+		// this.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+		if (isSelected) {
+			this.setForeground(table.getSelectionForeground());
+			this.setBackground(table.getSelectionBackground());
 		} else {
-			  //this.setForeground(table.getForeground());
-			  //this.setBackground(table.getBackground());
-			 if ( (row % 2) == 0 ) {
-			       this.setBackground(new Color(255,255,255));
-                 //  this.setBorder(new LineBorder(new java.awt.Color(255,255,255), 1, false));
-			 } else {
-			       this.setBackground(new Color(240,240,240));
-			     //  this.setBorder(new LineBorder(new java.awt.Color(240,240,240), 1, false));
-			 }
+			// this.setForeground(table.getForeground());
+			// this.setBackground(table.getBackground());
+			if ((row % 2) == 0) {
+				this.setBackground(new Color(255, 255, 255));
+				// this.setBorder(new LineBorder(new java.awt.Color(255,255,255), 1, false));
+			} else {
+				this.setBackground(new Color(240, 240, 240));
+				// this.setBorder(new LineBorder(new java.awt.Color(240,240,240), 1, false));
+			}
 		}
-	    return this;
+		return this;
 	}
 
 }

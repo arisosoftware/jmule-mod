@@ -24,9 +24,10 @@ package org.jmule.core.platform;
 
 /**
  * Created on Sep 1, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2009/10/25 08:36:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/10/25 08:36:11 $
  */
 public class PingResult {
 
@@ -34,34 +35,41 @@ public class PingResult {
 	private int receivedPackets;
 	private int packetLoss;
 	private int time;
-	
+
 	PingResult() {
-		
+
 	}
-	
+
 	public int getTransmittedPackets() {
 		return transmittedPackets;
 	}
+
 	void setTransmittedPackets(int transmittedPackets) {
 		this.transmittedPackets = transmittedPackets;
 	}
+
 	public int getReceivedPackets() {
 		return receivedPackets;
 	}
+
 	void setReceivedPackets(int receivedPackets) {
 		this.receivedPackets = receivedPackets;
 	}
+
 	public int getPacketLoss() {
 		return packetLoss;
 	}
+
 	void setPacketLoss(int packetLoss) {
 		this.packetLoss = packetLoss;
 	}
+
 	public int getTime() {
 		return time;
 	}
+
 	void setTime(int time) {
 		this.time = time;
 	}
-		
+
 }

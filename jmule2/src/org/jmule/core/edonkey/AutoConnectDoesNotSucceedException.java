@@ -27,9 +27,10 @@ import org.jmule.core.servermanager.ServerManagerException;
 /**
  *
  * Created on Aug 12, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary255 $ on $Date: 2009/09/17 17:45:43 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/09/17 17:45:43 $
  */
 public class AutoConnectDoesNotSucceedException extends ServerManagerException {
 

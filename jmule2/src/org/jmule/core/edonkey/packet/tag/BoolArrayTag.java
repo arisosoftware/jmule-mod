@@ -29,17 +29,19 @@ import java.nio.ByteBuffer;
 import org.jmule.core.sharingmanager.JMuleBitSet;
 import org.jmule.core.utils.Convert;
 import org.jmule.core.utils.Misc;
+
 /**
  * Created on Jul 18, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 16:00:42 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 16:00:42 $
  */
 public class BoolArrayTag extends StandartTag {
 
 	private JMuleBitSet boolArray;
-	
-	public BoolArrayTag(byte[] tagName,byte[] boolArray) {
+
+	public BoolArrayTag(byte[] tagName, byte[] boolArray) {
 		super(TAGTYPE_BOOLARRAY, tagName);
 		this.boolArray = Convert.byteToBitset(boolArray);
 	}
@@ -54,7 +56,7 @@ public class BoolArrayTag extends StandartTag {
 	}
 
 	int getValueLength() {
-		return 2+ Convert.bitSetToBytes(boolArray).length;
+		return 2 + Convert.bitSetToBytes(boolArray).length;
 	}
 
 	public Object getValue() {

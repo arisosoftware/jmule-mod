@@ -27,19 +27,19 @@ import org.jmule.core.JMException;
 /**
  *
  * Created on Aug 9, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/08/12 07:20:15 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/08/12 07:20:15 $
  */
 public class SearchManagerException extends JMException {
 
 	public SearchManagerException(String cause) {
 		super(cause);
 	}
-	
+
 	public SearchManagerException(Throwable cause) {
 		super(cause);
 	}
-	
-	
+
 }

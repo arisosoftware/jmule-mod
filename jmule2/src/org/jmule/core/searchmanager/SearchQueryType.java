@@ -24,8 +24,11 @@ package org.jmule.core.searchmanager;
 
 /**
  * Created on Jul 3, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/15 13:26:31 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/15 13:26:31 $
  */
-public enum SearchQueryType { SERVER, KAD, SERVER_KAD, GLOBAL }
+public enum SearchQueryType {
+	SERVER, KAD, SERVER_KAD, GLOBAL
+}

@@ -27,15 +27,16 @@ import org.jmule.core.edonkey.packet.tag.TagList;
 
 /**
  * Created on Jul 25, 2010
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/28 13:11:53 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/28 13:11:53 $
  */
 public class PublishItem {
 
 	private FileHash fileHash;
 	private TagList tagList;
-	
+
 	public PublishItem(FileHash fileHash, TagList tagList) {
 		super();
 		this.fileHash = fileHash;
@@ -49,5 +50,5 @@ public class PublishItem {
 	public TagList getTagList() {
 		return tagList;
 	}
-	
+
 }

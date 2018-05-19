@@ -32,62 +32,70 @@ import org.jmule.core.sharingmanager.SharedFile;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.5 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/09/17 18:19:34 $$
+ * @version $$Revision: 1.5 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/09/17 18:19:34 $$
  */
 public interface JMTransferSession {
 
 	/**
 	 * Get shared file which session is assigned
+	 * 
 	 * @return shared file
 	 */
 	public SharedFile getSharedFile();
-	
+
 	/**
 	 * Get transfer speed
+	 * 
 	 * @return transfer speed
 	 */
 	public float getSpeed();
-	   
+
 	/**
 	 * Get total bytes transfered in this session
+	 * 
 	 * @return transfered bytes
 	 */
 	public long getTransferredBytes();
-	   
-	/** 
+
+	/**
 	 * Get File hash of file used by this session
+	 * 
 	 * @return file hash
 	 */
 	public FileHash getFileHash();
-	   
+
 	/**
 	 * Get sharing name of file used by this session
+	 * 
 	 * @return sharing name
 	 */
 	public String getSharingName();
-	   
+
 	/**
 	 * Get file size of file used by this session
+	 * 
 	 * @return
 	 */
 	public long getFileSize();
-	   
+
 	/**
 	 * Get all peers used by this session
 	 */
 	public List<Peer> getPeers();
-	
+
 	public int getPeerCount();
-	   
+
 	/**
-	 * Get ED2K link of processed file 
+	 * Get ED2K link of processed file
+	 * 
 	 * @return ED2K link of file
 	 */
 	public ED2KFileLink getED2KLink();
-	   
+
 	/**
 	 * Get ETA : Estimated Time of Arrival
+	 * 
 	 * @return return ETA in seconds or infinity(31536000)
 	 */
 	public long getETA();

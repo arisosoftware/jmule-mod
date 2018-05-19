@@ -26,35 +26,41 @@ public class DeclareSoftImpl implements DeclareSoft {
 	private PointcutExpression pointcut;
 	private AjType<?> exceptionType;
 	private String missingTypeName;
-	
-	
+
 	public DeclareSoftImpl(AjType<?> declaringType, String pcut, String exceptionTypeName) {
 		this.declaringType = declaringType;
 		this.pointcut = new PointcutExpressionImpl(pcut);
 		try {
 			ClassLoader cl = declaringType.getJavaClass().getClassLoader();
-			this.exceptionType = AjTypeSystem.getAjType(Class.forName(exceptionTypeName,false,cl));
+			this.exceptionType = AjTypeSystem.getAjType(Class.forName(exceptionTypeName, false, cl));
 		} catch (ClassNotFoundException ex) {
 			this.missingTypeName = exceptionTypeName;
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.DeclareSoft#getDeclaringType()
 	 */
 	public AjType getDeclaringType() {
 		return this.declaringType;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.DeclareSoft#getSoftenedExceptionType()
 	 */
 	public AjType getSoftenedExceptionType() throws ClassNotFoundException {
-		if (this.missingTypeName != null) throw new ClassNotFoundException(this.missingTypeName);
+		if (this.missingTypeName != null)
+			throw new ClassNotFoundException(this.missingTypeName);
 		return this.exceptionType;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.DeclareSoft#getPointcutExpression()
 	 */
 	public PointcutExpression getPointcutExpression() {

@@ -28,30 +28,73 @@ import java.util.Arrays;
 
 /**
  * Created on Oct 28, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 13:08:35 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 13:08:35 $
  */
 public enum FileType {
-	ANY     { public byte[] getBytes() { return null; } },
-	ARHIVE  { public byte[] getBytes() { return TAG_FILE_TYPE_PROGRAM; } },
-	AUDIO   { public byte[] getBytes() { return TAG_FILE_TYPE_AUDIO; } },
-	CDIMAGE { public byte[] getBytes() { return TAG_FILE_TYPE_PROGRAM; } },
-	DOCUMENT{ public byte[] getBytes() { return TAG_FILE_TYPE_DOC; } },
-	PICTURE { public byte[] getBytes() { return TAG_FILE_TYPE_IMAGE; } },
-	PROGRAM { public byte[] getBytes() { return TAG_FILE_TYPE_PROGRAM; } },
-	VIDEO   { public byte[] getBytes() { return TAG_FILE_TYPE_VIDEO; } },
-	COLLECTION { public byte[] getBytes() { return TAG_FILE_TYPE_COLLECTION; } };
-	
+	ANY {
+		public byte[] getBytes() {
+			return null;
+		}
+	},
+	ARHIVE {
+		public byte[] getBytes() {
+			return TAG_FILE_TYPE_PROGRAM;
+		}
+	},
+	AUDIO {
+		public byte[] getBytes() {
+			return TAG_FILE_TYPE_AUDIO;
+		}
+	},
+	CDIMAGE {
+		public byte[] getBytes() {
+			return TAG_FILE_TYPE_PROGRAM;
+		}
+	},
+	DOCUMENT {
+		public byte[] getBytes() {
+			return TAG_FILE_TYPE_DOC;
+		}
+	},
+	PICTURE {
+		public byte[] getBytes() {
+			return TAG_FILE_TYPE_IMAGE;
+		}
+	},
+	PROGRAM {
+		public byte[] getBytes() {
+			return TAG_FILE_TYPE_PROGRAM;
+		}
+	},
+	VIDEO {
+		public byte[] getBytes() {
+			return TAG_FILE_TYPE_VIDEO;
+		}
+	},
+	COLLECTION {
+		public byte[] getBytes() {
+			return TAG_FILE_TYPE_COLLECTION;
+		}
+	};
+
 	public static FileType getAsFileType(byte[] data) {
-		if (Arrays.equals(TAG_FILE_TYPE_AUDIO, data)) return AUDIO;
-		if (Arrays.equals(TAG_FILE_TYPE_DOC, data)) return DOCUMENT;
-		if (Arrays.equals(TAG_FILE_TYPE_IMAGE, data)) return PICTURE;
-		if (Arrays.equals(TAG_FILE_TYPE_PROGRAM, data)) return PROGRAM;
-		if (Arrays.equals(TAG_FILE_TYPE_VIDEO, data)) return VIDEO;
-		if (Arrays.equals(TAG_FILE_TYPE_COLLECTION, data)) return COLLECTION;
+		if (Arrays.equals(TAG_FILE_TYPE_AUDIO, data))
+			return AUDIO;
+		if (Arrays.equals(TAG_FILE_TYPE_DOC, data))
+			return DOCUMENT;
+		if (Arrays.equals(TAG_FILE_TYPE_IMAGE, data))
+			return PICTURE;
+		if (Arrays.equals(TAG_FILE_TYPE_PROGRAM, data))
+			return PROGRAM;
+		if (Arrays.equals(TAG_FILE_TYPE_VIDEO, data))
+			return VIDEO;
+		if (Arrays.equals(TAG_FILE_TYPE_COLLECTION, data))
+			return COLLECTION;
 		return ANY;
 	}
-	
+
 	public abstract byte[] getBytes();
 }

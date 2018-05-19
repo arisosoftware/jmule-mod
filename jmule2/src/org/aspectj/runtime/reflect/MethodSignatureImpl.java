@@ -23,8 +23,8 @@ class MethodSignatureImpl extends CodeSignatureImpl implements MethodSignature {
 	private Method method;
 	Class returnType;
 
-	MethodSignatureImpl(int modifiers, String name, Class declaringType, Class[] parameterTypes, String[] parameterNames,
-			Class[] exceptionTypes, Class returnType) {
+	MethodSignatureImpl(int modifiers, String name, Class declaringType, Class[] parameterTypes,
+			String[] parameterNames, Class[] exceptionTypes, Class returnType) {
 		super(modifiers, name, declaringType, parameterTypes, parameterNames, exceptionTypes);
 		this.returnType = returnType;
 	}
@@ -78,10 +78,14 @@ class MethodSignatureImpl extends CodeSignatureImpl implements MethodSignature {
 	/**
 	 * Hunt for a method up the hierarchy for a specified type.
 	 * 
-	 * @param type the type on which to look for the method
-	 * @param name the name of the method
-	 * @param params the parameters of the method
-	 * @param searched a set of types already searched to avoid looking at anything twice
+	 * @param type
+	 *            the type on which to look for the method
+	 * @param name
+	 *            the name of the method
+	 * @param params
+	 *            the parameters of the method
+	 * @param searched
+	 *            a set of types already searched to avoid looking at anything twice
 	 * @return the method if found, or null if not found
 	 */
 	private Method search(Class type, String name, Class[] params, Set searched) {

@@ -32,49 +32,53 @@ import org.jmule.core.utils.Misc;
 
 import static org.jmule.core.edonkey.ED2KConstants.*;
 import static org.jmule.core.searchmanager.tree.NodeValue.NodeType.*;
+
 /**
- * Tree node value.
- * Created on Oct 26, 2008
+ * Tree node value. Created on Oct 26, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.5 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 13:08:35 $
+ * @version $Revision: 1.5 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 13:08:35 $
  */
 
 public class NodeValue {
 	public enum NodeType {
 		NOT, OR, AND, FILE_NAME, FILETYPE, MINSIZE, MAXSIZE, MINAVAILABILITY, MAXAVAILABILITY, MINCOMPLETESRC, MAXCOMPLETESRC, EXTENSION
 	}
-	
-	private Map<String,Object> data = new Hashtable<String,Object>();
-	
+
+	private Map<String, Object> data = new Hashtable<String, Object>();
+
 	private NodeType type;
-	
+
 	public NodeValue(NodeType type) {
 		this.type = type;
 	}
-	
+
 	public NodeType getType() {
 		return type;
 	}
-	
+
 	public Object getValue(String key) {
 		return data.get(key);
 	}
-	
-	public void setValue(String key,Object value) {
+
+	public void setValue(String key, Object value) {
 		data.put(key, value);
 	}
-	
+
 	public void setValue(Object value) {
 		setValue(Tree.DATA_KEY, value);
 	}
-	
+
 	public byte[] getBytes() {
-		if (type == NOT) return SEARCH_NOT; 
-		if (type == OR)  return SEARCH_OR;
-		if (type == AND) return SEARCH_AND;
+		if (type == NOT)
+			return SEARCH_NOT;
+		if (type == OR)
+			return SEARCH_OR;
+		if (type == AND)
+			return SEARCH_AND;
 		if (type == FILE_NAME) {
-			String str = (String)getValue(Tree.DATA_KEY);
+			String str = (String) getValue(Tree.DATA_KEY);
 			byte[] str_content = str.getBytes();
 			ByteBuffer data = Misc.getByteBuffer(1 + 2 + str_content.length);
 			data.position(0);
@@ -84,7 +88,7 @@ public class NodeValue {
 			return data.array();
 		}
 		if (type == FILETYPE) {
-			FileType type = (FileType)getValue(Tree.DATA_KEY);
+			FileType type = (FileType) getValue(Tree.DATA_KEY);
 			ByteBuffer data = Misc.getByteBuffer(1 + 2 + type.getBytes().length + 2 + TAG_NAME_FILE_TYPE.length);
 			data.position(0);
 			data.put(SEARCH_BY_META);
@@ -94,36 +98,36 @@ public class NodeValue {
 			data.put(TAG_NAME_FILE_TYPE);
 			return data.array();
 		}
-		
+
 		if (type == MINSIZE) {
 			ByteBuffer data = Misc.getByteBuffer(1 + 4 + 1 + 2 + TAG_NAME_SIZE.length);
 			data.position(0);
 			data.put(SEARCH_BY_LIMIT);
-			long v = (Long)getValue(Tree.DATA_KEY);
+			long v = (Long) getValue(Tree.DATA_KEY);
 			data.putInt(Convert.longToInt(v));
 			data.put(LIMIT_MIN);
 			data.putShort(Convert.intToShort(TAG_NAME_SIZE.length));
 			data.put(TAG_NAME_SIZE);
 			return data.array();
 		}
-		
+
 		if (type == MAXSIZE) {
 			ByteBuffer data = Misc.getByteBuffer(1 + 4 + 1 + 2 + TAG_NAME_SIZE.length);
 			data.position(0);
 			data.put(SEARCH_BY_LIMIT);
-			long v = (Long)getValue(Tree.DATA_KEY);
+			long v = (Long) getValue(Tree.DATA_KEY);
 			data.putInt(Convert.longToInt(v));
 			data.put(LIMIT_MAX);
 			data.putShort(Convert.intToShort(TAG_NAME_SIZE.length));
 			data.put(TAG_NAME_SIZE);
 			return data.array();
 		}
-		
+
 		if (type == MINAVAILABILITY) {
 			ByteBuffer data = Misc.getByteBuffer(1 + 4 + 1 + 2 + TAG_NAME_AVIABILITY.length);
 			data.position(0);
 			data.put(SEARCH_BY_LIMIT);
-			long v = (Long)getValue(Tree.DATA_KEY);
+			long v = (Long) getValue(Tree.DATA_KEY);
 			data.putInt(Convert.longToInt(v));
 			data.put(LIMIT_MIN);
 			data.putShort(Convert.intToShort(TAG_NAME_AVIABILITY.length));
@@ -134,7 +138,7 @@ public class NodeValue {
 			ByteBuffer data = Misc.getByteBuffer(1 + 4 + 1 + 2 + TAG_NAME_AVIABILITY.length);
 			data.position(0);
 			data.put(SEARCH_BY_LIMIT);
-			long v = (Long)getValue(Tree.DATA_KEY);
+			long v = (Long) getValue(Tree.DATA_KEY);
 			data.putInt(Convert.longToInt(v));
 			data.put(LIMIT_MAX);
 			data.putShort(Convert.intToShort(TAG_NAME_AVIABILITY.length));
@@ -145,7 +149,7 @@ public class NodeValue {
 			ByteBuffer data = Misc.getByteBuffer(1 + 4 + 1 + 2 + TAG_NAME_COMPLETESRC.length);
 			data.position(0);
 			data.put(SEARCH_BY_LIMIT);
-			long v = (Long)getValue(Tree.DATA_KEY);
+			long v = (Long) getValue(Tree.DATA_KEY);
 			data.putInt(Convert.longToInt(v));
 			data.put(LIMIT_MIN);
 			data.putShort(Convert.intToShort(TAG_NAME_COMPLETESRC.length));
@@ -156,7 +160,7 @@ public class NodeValue {
 			ByteBuffer data = Misc.getByteBuffer(1 + 4 + 1 + 2 + TAG_NAME_COMPLETESRC.length);
 			data.position(0);
 			data.put(SEARCH_BY_LIMIT);
-			long v = (Long)getValue(Tree.DATA_KEY);
+			long v = (Long) getValue(Tree.DATA_KEY);
 			data.putInt(Convert.longToInt(v));
 			data.put(LIMIT_MAX);
 			data.putShort(Convert.intToShort(TAG_NAME_COMPLETESRC.length));
@@ -164,7 +168,7 @@ public class NodeValue {
 			return data.array();
 		}
 		if (type == EXTENSION) {
-			String str = (String)getValue(Tree.DATA_KEY);
+			String str = (String) getValue(Tree.DATA_KEY);
 			ByteBuffer data = Misc.getByteBuffer(1 + 2 + str.length() + 2 + TAG_NAME_FORMAT.length);
 			data.position(0);
 			data.put(SEARCH_BY_LIMIT);

@@ -19,8 +19,7 @@ import org.aspectj.lang.reflect.TypePatternBasedPerClause;
  * @author colyer
  *
  */
-public class TypePatternBasedPerClauseImpl extends PerClauseImpl implements
-		TypePatternBasedPerClause {
+public class TypePatternBasedPerClauseImpl extends PerClauseImpl implements TypePatternBasedPerClause {
 
 	private TypePattern typePattern;
 
@@ -29,13 +28,15 @@ public class TypePatternBasedPerClauseImpl extends PerClauseImpl implements
 		this.typePattern = new TypePatternImpl(pattern);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.TypePatternBasedPerClause#getTypePattern()
 	 */
 	public TypePattern getTypePattern() {
 		return this.typePattern;
 	}
-	
+
 	public String toString() {
 		return "pertypewithin(" + typePattern.asString() + ")";
 	}

@@ -32,50 +32,51 @@ import org.jmule.core.JMException;
 
 /**
  * Created on Aug 12, 2009
+ * 
  * @author javajox
- * @version $$Revision: 1.2 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/08/13 06:37:01 $$
+ * @version $$Revision: 1.2 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/08/13 06:37:01 $$
  */
 public class NetworkUtils {
 
-	
 	public static List<NetworkInterface> getAllNetworkInterfaces() throws JMException {
-		
+
 		List<NetworkInterface> all_network_interfaces = new ArrayList<NetworkInterface>();
 		try {
 			Enumeration<NetworkInterface> network_interfaces_enum = NetworkInterface.getNetworkInterfaces();
-			while(network_interfaces_enum.hasMoreElements()) {
-				all_network_interfaces.add( network_interfaces_enum.nextElement() );
+			while (network_interfaces_enum.hasMoreElements()) {
+				all_network_interfaces.add(network_interfaces_enum.nextElement());
 			}
 		} catch (SocketException cause) {
 			cause.printStackTrace();
-			throw new JMException( cause );
+			throw new JMException(cause);
 		}
 		return all_network_interfaces;
 	}
-	
+
 	public static boolean hasNicName(String nicName) throws JMException {
 		List<NetworkInterface> network_interfaces = getAllNetworkInterfaces();
-		for(NetworkInterface network_interface : network_interfaces) {
-			if (network_interface.getName().equals(nicName)) return true;
+		for (NetworkInterface network_interface : network_interfaces) {
+			if (network_interface.getName().equals(nicName))
+				return true;
 		}
 		return false;
 	}
-	
-	
+
 	// for testing purpose only
 	public static void main(String[] args) throws Throwable {
-		
+
 		List<NetworkInterface> ni = getAllNetworkInterfaces();
-		
-		for( NetworkInterface n : ni ) {
-			System.out.println( "Name : " + n.getName() );
-			System.out.println( "Display name : " + n.getDisplayName() );
-			System.out.println( "Hardware address : " + ( n.getHardwareAddress() != null ? Convert.byteToHexString(n.getHardwareAddress(), ":" ) : ""));
-			System.out.println( "MTU : " + n.getMTU() );
-			
+
+		for (NetworkInterface n : ni) {
+			System.out.println("Name : " + n.getName());
+			System.out.println("Display name : " + n.getDisplayName());
+			System.out.println("Hardware address : "
+					+ (n.getHardwareAddress() != null ? Convert.byteToHexString(n.getHardwareAddress(), ":") : ""));
+			System.out.println("MTU : " + n.getMTU());
+
 		}
-		
+
 	}
-	
+
 }

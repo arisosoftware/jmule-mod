@@ -54,85 +54,85 @@ import org.jmule.ui.utils.TimeFormatter;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.5 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/11/17 14:53:43 $$
+ * @version $$Revision: 1.5 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/11/17 14:53:43 $$
  */
 public class UploadsTable extends JMTable {
 
 	// =========================== Table cell renderers ======================
-	
+
 	class FileNameTableCellRenderer extends UploadTableCellRenderer {
-		public Component getTableCellRendererComponent(JTable table, Object value,
-				boolean isSelected, boolean hasFocus, int row, int column) {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			String fn = session.getSharingName();
-            this.setText(fn);
-            this.setIcon(new ImageIcon(UIConstants.getMimeURLByExtension(Misc.getFileExtension(fn))));
+			this.setText(fn);
+			this.setIcon(new ImageIcon(UIConstants.getMimeURLByExtension(Misc.getFileExtension(fn))));
 			return this;
 		}
 	}
-	
+
 	class FileSizeTableCellRenderer extends UploadTableCellRenderer {
-		public Component getTableCellRendererComponent(JTable table, Object value,
-				boolean isSelected, boolean hasFocus, int row, int column) {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            this.setText(FileFormatter.formatFileSize(session.getFileSize()));
-            this.setHorizontalAlignment(SwingConstants.RIGHT);
+			this.setText(FileFormatter.formatFileSize(session.getFileSize()));
+			this.setHorizontalAlignment(SwingConstants.RIGHT);
 			return this;
 		}
 	}
-	
+
 	class UploadSpeedTableCellRenderer extends UploadTableCellRenderer {
-		public Component getTableCellRendererComponent(JTable table, Object value,
-				boolean isSelected, boolean hasFocus, int row, int column) {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            this.setText(SpeedFormatter.formatSpeed(session.getSpeed()));
-            this.setHorizontalAlignment(SwingConstants.RIGHT);
+			this.setText(SpeedFormatter.formatSpeed(session.getSpeed()));
+			this.setHorizontalAlignment(SwingConstants.RIGHT);
 			return this;
 		}
 	}
-	
+
 	class PeersTableCellRenderer extends UploadTableCellRenderer {
-		public Component getTableCellRendererComponent(JTable table, Object value,
-				boolean isSelected, boolean hasFocus, int row, int column) {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			this.setText(session.getPeerCount() + "");
-            this.setHorizontalAlignment(SwingConstants.CENTER);
+			this.setHorizontalAlignment(SwingConstants.CENTER);
 			return this;
 		}
 	}
-	
+
 	class ETATableCellRenderer extends UploadTableCellRenderer {
-		public Component getTableCellRendererComponent(JTable table, Object value,
-				boolean isSelected, boolean hasFocus, int row, int column) {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            this.setText(TimeFormatter.format(session.getETA()));
-            this.setHorizontalAlignment(SwingConstants.RIGHT);
+			this.setText(TimeFormatter.format(session.getETA()));
+			this.setHorizontalAlignment(SwingConstants.RIGHT);
 			return this;
 		}
 	}
-	
+
 	class UploadedTableCellRenderer extends UploadTableCellRenderer {
-		public Component getTableCellRendererComponent(JTable table, Object value,
-				boolean isSelected, boolean hasFocus, int row, int column) {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            this.setText(FileFormatter.formatFileSize(session.getTransferredBytes()));
-            this.setHorizontalAlignment(SwingConstants.RIGHT);
+			this.setText(FileFormatter.formatFileSize(session.getTransferredBytes()));
+			this.setHorizontalAlignment(SwingConstants.RIGHT);
 			return this;
 		}
 	}
-	
+
 	JMuleCore _core = JMuleCoreFactory.getSingleton();
 	DownloadManager _download_manager = _core.getDownloadManager();
 	UploadManager _upload_manager = _core.getUploadManager();
-	
+
 	public UploadsTable(JFrame parent) {
 		super(parent);
 		init();
 	}
-	
+
 	private void init() {
-		
+
 		JMTableColumn file_name = new JMTableColumn();
 		file_name.setIdentifier(UIConstants.UPLOAD_LIST_FILE_NAME_COLUMN_ID);
 		file_name.setModelIndex(UploadTableModel.FILE_NAME);
@@ -140,9 +140,9 @@ public class UploadsTable extends JMTable {
 		file_name.setHeaderValue("File name");
 		file_name.setCellRenderer(new FileNameTableCellRenderer());
 		file_name.setComparator(new GeneralComparator("getSharingName"));
-		
+
 		table_columns.add(file_name);
-		
+
 		JMTableColumn file_size = new JMTableColumn();
 		file_size.setIdentifier(UIConstants.UPLOAD_LIST_FILE_SIZE_COLUMN_ID);
 		file_size.setModelIndex(UploadTableModel.FILE_SIZE);
@@ -150,9 +150,9 @@ public class UploadsTable extends JMTable {
 		file_size.setHeaderValue("File size");
 		file_size.setCellRenderer(new FileSizeTableCellRenderer());
 		file_size.setComparator(new GeneralComparator("getFileSize"));
-		
+
 		table_columns.add(file_size);
-		
+
 		JMTableColumn upload_speed = new JMTableColumn();
 		upload_speed.setIdentifier(UIConstants.UPLOAD_LIST_UPLOAD_SPEED_COLUMN_ID);
 		upload_speed.setModelIndex(UploadTableModel.UPLOAD_SPEED);
@@ -160,9 +160,9 @@ public class UploadsTable extends JMTable {
 		upload_speed.setHeaderValue("Upload speed");
 		upload_speed.setCellRenderer(new UploadSpeedTableCellRenderer());
 		upload_speed.setComparator(new GeneralComparator("getSpeed"));
-		
+
 		table_columns.add(upload_speed);
-		
+
 		JMTableColumn peers = new JMTableColumn();
 		peers.setIdentifier(UIConstants.UPLOAD_LIST_PEERS_COLUMN_ID);
 		peers.setModelIndex(UploadTableModel.PEERS);
@@ -170,9 +170,9 @@ public class UploadsTable extends JMTable {
 		peers.setHeaderValue("Peers");
 		peers.setCellRenderer(new PeersTableCellRenderer());
 		peers.setComparator(new GeneralComparator("getPeersCount"));
-		
+
 		table_columns.add(peers);
-		
+
 		JMTableColumn eta = new JMTableColumn();
 		eta.setIdentifier(UIConstants.UPLOAD_LIST_ETA_COLUMN_ID);
 		eta.setModelIndex(UploadTableModel.ETA);
@@ -180,9 +180,9 @@ public class UploadsTable extends JMTable {
 		eta.setHeaderValue("ETA");
 		eta.setCellRenderer(new ETATableCellRenderer());
 		eta.setComparator(new GeneralComparator("getETA"));
-		
+
 		table_columns.add(eta);
-		
+
 		JMTableColumn uploaded = new JMTableColumn();
 		uploaded.setIdentifier(UIConstants.UPLOAD_LIST_UPLOADED_COLUMN_ID);
 		uploaded.setModelIndex(UploadTableModel.UPLOADED);
@@ -190,85 +190,86 @@ public class UploadsTable extends JMTable {
 		uploaded.setHeaderValue("Uploaded");
 		uploaded.setCellRenderer(new UploadedTableCellRenderer());
 		uploaded.setComparator(new GeneralComparator("getTransferredBytes"));
-		
+
 		table_columns.add(uploaded);
-		
+
 		this.buildColumns(new UploadTableModel());
-		
+
 		class PopupListener extends MouseAdapter {
-			
+
 			JMenuItem column_setup, properties;
-			
+
 			public PopupListener() {
-				 
-				 column_setup = new JMenuItem("Column setup");
-				 column_setup.setIcon(ImgRep.getIcon("columns_setup.png"));
-				 column_setup.addActionListener(new ActionListener() {
-					 public void actionPerformed(ActionEvent e) {
-						 
-					 }
-				 });
-				 
-				 properties = new JMenuItem("Properties");
-				 properties.setIcon(ImgRep.getIcon("info.png"));
-				 properties.addActionListener(new ActionListener() {
-					 public void actionPerformed(ActionEvent e) {
-						 UploadSession sessions[] = getSelectedUploadSessions();
-						 UploadDetailsDialog udd = new UploadDetailsDialog(parent, sessions[0]);
-						 SwingUtils.setWindowLocationRelativeTo(udd, parent);
-						 udd.setVisible(true);
-					 }
-				 });
+
+				column_setup = new JMenuItem("Column setup");
+				column_setup.setIcon(ImgRep.getIcon("columns_setup.png"));
+				column_setup.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+					}
+				});
+
+				properties = new JMenuItem("Properties");
+				properties.setIcon(ImgRep.getIcon("info.png"));
+				properties.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						UploadSession sessions[] = getSelectedUploadSessions();
+						UploadDetailsDialog udd = new UploadDetailsDialog(parent, sessions[0]);
+						SwingUtils.setWindowLocationRelativeTo(udd, parent);
+						udd.setVisible(true);
+					}
+				});
 			}
-			
+
 			public void mousePressed(MouseEvent e) {
 				showPopup(e);
 			}
-			
+
 			public void mouseReleased(MouseEvent e) {
 				showPopup(e);
 			}
-			
+
 			private void showPopup(MouseEvent e) {
-				 
-				 if (e.isPopupTrigger()) {
-					 
-					 JPopupMenu popup_menu = null;
-					
-					 switch( whichCondition() ) {
-					   
-					    case  A  :  popup_menu = new JPopupMenu();
-					                //popup_menu.add(column_setup);
-					                //popup_menu.addSeparator();
-					                popup_menu.add(properties);
-					                break;
-					                
-					    case B   :  //popup_menu = new JPopupMenu();
-					                //popup_menu.add(column_setup);
-					                break;
-					                
-					    case C   : // popup_menu = new JPopupMenu();
-		                           // popup_menu.add(column_setup);
-		                            break;
-					 }
-					 
-					 popup_menu.show(e.getComponent(), e.getX(), e.getY());
-				 }
-			}	
-			
+
+				if (e.isPopupTrigger()) {
+
+					JPopupMenu popup_menu = null;
+
+					switch (whichCondition()) {
+
+					case A:
+						popup_menu = new JPopupMenu();
+						// popup_menu.add(column_setup);
+						// popup_menu.addSeparator();
+						popup_menu.add(properties);
+						break;
+
+					case B: // popup_menu = new JPopupMenu();
+							// popup_menu.add(column_setup);
+						break;
+
+					case C: // popup_menu = new JPopupMenu();
+							// popup_menu.add(column_setup);
+						break;
+					}
+
+					popup_menu.show(e.getComponent(), e.getX(), e.getY());
+				}
+			}
+
 		}
-		
+
 		this.addMouseListener(new PopupListener());
 	}
-	
+
 	private UploadSession[] getUploadSessionsByIndexes(int[] indexes) {
 
 		UploadSession[] result = new UploadSession[indexes.length];
 		int k = 0;
-		for(int i : indexes) {
+		for (int i : indexes) {
 			int j = 0;
-			for(UploadSession session : _upload_manager.getUploads()) {
-				if( j == this.convertRowIndexToModel(i) ) {
+			for (UploadSession session : _upload_manager.getUploads()) {
+				if (j == this.convertRowIndexToModel(i)) {
 					result[k++] = session;
 					break;
 				}
@@ -278,49 +279,41 @@ public class UploadsTable extends JMTable {
 
 		return result;
 	}
-	
+
 	private UploadSession[] getSelectedUploadSessions() {
-		
-		return getUploadSessionsByIndexes(  this.getSelectedRows() );
+
+		return getUploadSessionsByIndexes(this.getSelectedRows());
 	}
-	
-	/*  -----------------------------------------------------------------
-	 *  |                        |  STARTED
-	 *  -----------------------------------------------------------------
-	 *  |  ONE_SELECTED          |   A
-	 *  |                        | 
-	 *  |  MULTIPLE_SELECTED     |   B
-	 *  |                        |
-	 *  |  VOID_LIST             |   *
-	 *  
-	 *       C - void list
-	 *       
-	 *    Ac1 | Properties
-	 *    Ac2 | Column setup
-	 *    
-	 *    ---------------------------------------------------
-	 *         |    Ac1     |   Ac2    | 
-	 *    ---------------------------------------------------
-	 *         |            |          |
-	 *      A  |   Yes      |   Yes    |
-	 *         |            |          |
-	 *      B  |   No       |   Yes    |
-	 *         |            |          |
-	 *      C  |   No       |   Yes    |
+
+	/*
+	 * ----------------------------------------------------------------- | | STARTED
+	 * ----------------------------------------------------------------- |
+	 * ONE_SELECTED | A | | | MULTIPLE_SELECTED | B | | | VOID_LIST | *
+	 * 
+	 * C - void list
+	 * 
+	 * Ac1 | Properties Ac2 | Column setup
+	 * 
+	 * --------------------------------------------------- | Ac1 | Ac2 |
+	 * --------------------------------------------------- | | | A | Yes | Yes | | |
+	 * | B | No | Yes | | | | C | No | Yes |
 	 */
-	
+
 	public ConditionType whichCondition() {
-		
-		if(getSelectedUploadSessions().length == 1) return ConditionType.A;
-		
-		if(getSelectedUploadSessions().length > 1 ) return ConditionType.B;
-		
-		if(getSelectedUploadSessions().length == 0 ) return ConditionType.C;
-		
+
+		if (getSelectedUploadSessions().length == 1)
+			return ConditionType.A;
+
+		if (getSelectedUploadSessions().length > 1)
+			return ConditionType.B;
+
+		if (getSelectedUploadSessions().length == 0)
+			return ConditionType.C;
+
 		return null;
 	}
-	
+
 	private enum ConditionType {
-		A,B,C
+		A, B, C
 	}
 }

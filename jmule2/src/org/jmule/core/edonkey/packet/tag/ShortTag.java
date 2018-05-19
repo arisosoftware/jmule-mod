@@ -27,16 +27,18 @@ import java.nio.ByteBuffer;
 import org.jmule.core.utils.Convert;
 import org.jmule.core.utils.Misc;
 import static org.jmule.core.edonkey.ED2KConstants.*;
+
 /**
  * Created on Jul 15, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 16:00:42 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 16:00:42 $
  */
 public class ShortTag extends StandartTag implements NumberTag {
 
 	private short tagValue;
-	
+
 	public ShortTag(byte[] tagName, short tagValue) {
 		super(TAGTYPE_UINT16, tagName);
 		this.tagValue = tagValue;
@@ -49,7 +51,6 @@ public class ShortTag extends StandartTag implements NumberTag {
 		return result;
 	}
 
-
 	int getValueLength() {
 		return 2;
 	}
@@ -61,7 +62,7 @@ public class ShortTag extends StandartTag implements NumberTag {
 	public void setValue(Object object) {
 		tagValue = (Short) object;
 	}
-	
+
 	public long getNumber() {
 		return Convert.shortToLong(tagValue);
 	}

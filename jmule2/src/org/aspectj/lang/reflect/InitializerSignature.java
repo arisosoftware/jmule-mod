@@ -12,20 +12,19 @@
  *     Xerox/PARC     initial implementation 
  * ******************************************************************/
 
-
 package org.aspectj.lang.reflect;
+
 import java.lang.reflect.Constructor;
 
 /**
- * Signature for static and instance initializers.
- * Static initializers have no parameters or exceptions, 
- * so empty arrays are returned from the CodeSignature methods.
+ * Signature for static and instance initializers. Static initializers have no
+ * parameters or exceptions, so empty arrays are returned from the CodeSignature
+ * methods.
  */
-public interface InitializerSignature extends CodeSignature { 
-    /**
-     * @return Constructor associated with this initializer,
-     * or null in the case of interface initializers and
-     * static initializers.
-     */
-    Constructor getInitializer();
+public interface InitializerSignature extends CodeSignature {
+	/**
+	 * @return Constructor associated with this initializer, or null in the case of
+	 *         interface initializers and static initializers.
+	 */
+	Constructor getInitializer();
 }

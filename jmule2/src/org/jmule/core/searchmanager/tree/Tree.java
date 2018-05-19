@@ -30,21 +30,23 @@ import java.util.Map;
 import org.jmule.core.searchmanager.tree.NodeValue.NodeType;
 
 import static org.jmule.core.searchmanager.tree.NodeValue.NodeType.*;
+
 /**
  * Created on Oct 26, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary255 $ on $Date: 2009/07/11 18:00:32 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/07/11 18:00:32 $
  */
-public class Tree implements Cloneable{
+public class Tree implements Cloneable {
 
 	public static final String DATA_KEY = "Data1";
 
 	private Node root = null;
 	private Node last_node = null;
-	
-	private Map<NodeType, Node> nodes = new HashMap<NodeType,Node>();
-	
+
+	private Map<NodeType, Node> nodes = new HashMap<NodeType, Node>();
+
 	public Tree(String searchString) {
 		NodeValue value = new NodeValue(FILE_NAME);
 		value.setValue(DATA_KEY, searchString);
@@ -52,30 +54,32 @@ public class Tree implements Cloneable{
 		last_node = root;
 		nodes.put(root.getKey().getType(), root);
 	}
+
 	/**
 	 * Add node to tree only if node not exist or update node key if node exist
+	 * 
 	 * @param value
 	 */
 	public void addNodeIfNeed(NodeValue value) {
 		Node n = getNode(value.getType());
 		if (n != null)
 			n.setKey(value);
-		else 
+		else
 			add(value);
 	}
-	
+
 	private void add(NodeValue value) {
 		Node r_node = new Node(last_node.getKey());
-		
+
 		nodes.remove(r_node.getKey());
 		nodes.put(r_node.getKey().getType(), r_node);
-		
+
 		last_node.setLeftChild(r_node);
 		last_node.setKey(new NodeValue(AND));
 		Node new_node = new Node(value);
-		
+
 		nodes.put(new_node.getKey().getType(), new_node);
-		
+
 		last_node.setRightChild(new_node);
 		last_node = new_node;
 	}
@@ -83,32 +87,38 @@ public class Tree implements Cloneable{
 	public Node getNode(NodeType value) {
 		return nodes.get(value);
 	}
-	
+
 	public List<NodeValue> traverse() {
 		List<NodeValue> list = new LinkedList<NodeValue>();
 		List<NodeValue> result = traverse(root);
-		if (result == null) return null;
+		if (result == null)
+			return null;
 		list.addAll(result);
 		return list;
 	}
-	
+
 	private List<NodeValue> traverse(Node node) {
-		if (node == null) return null;
+		if (node == null)
+			return null;
 		List<NodeValue> list = new LinkedList<NodeValue>();
 		List<NodeValue> result;
-		
+
 		list.add(node.getKey());
 		result = traverse(node.getLeftChild());
-		if (result != null) { list.addAll(result); result.clear(); }
-		
+		if (result != null) {
+			list.addAll(result);
+			result.clear();
+		}
+
 		result = traverse(node.getRightChild());
-		if (result != null) list.addAll(result);
-		
+		if (result != null)
+			list.addAll(result);
+
 		return list;
 	}
-	
+
 	public Object clone() {
 		return null;
 	}
-	
+
 }

@@ -22,23 +22,13 @@
  */
 package org.jmule.core.downloadmanager;
 
-
 /**
  * Created on 04-27-2008
+ * 
  * @author binary256
- * @version $$Revision: 1.6 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/07/09 17:21:58 $$
+ * @version $$Revision: 1.6 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/07/09 17:21:58 $$
  */
 public enum PeerDownloadStatus {
-	DISCONNECTED,
-	CONNECTED,
-	FILENAME_REQUEST,
-	FILE_STATUS_REQUEST,
-	SLOTREQUEST,
-	ACTIVE,
-	ACTIVE_UNUSED,
-	IN_QUEUE,
-	INACTIVE,
-	UPLOAD_REQUEST,
-	HASHSET_REQUEST
+	DISCONNECTED, CONNECTED, FILENAME_REQUEST, FILE_STATUS_REQUEST, SLOTREQUEST, ACTIVE, ACTIVE_UNUSED, IN_QUEUE, INACTIVE, UPLOAD_REQUEST, HASHSET_REQUEST
 }

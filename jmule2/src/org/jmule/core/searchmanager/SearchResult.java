@@ -27,28 +27,29 @@ import org.jmule.core.servermanager.Server;
 /**
  *
  * Created on Aug 9, 2008
+ * 
  * @author javajox
  * @author binary256
- * @version $Revision: 1.5 $
- * Last changed by $Author: binary255 $ on $Date: 2009/09/17 18:17:43 $
+ * @version $Revision: 1.5 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/09/17 18:17:43 $
  */
 public class SearchResult {
 	SearchResultItemList searchResultItemList;
 	SearchQuery searchQuery;
 	Server server;
-	
+
 	public SearchResult(SearchResultItemList searchResultItemList, SearchQuery searchRequest, Server server) {
-	     
-		 this.searchResultItemList = searchResultItemList;
-		 this.searchQuery = searchRequest;
-		 this.server = server;
-		
+
+		this.searchResultItemList = searchResultItemList;
+		this.searchQuery = searchRequest;
+		this.server = server;
+
 	}
-	
+
 	public SearchResult(SearchResultItemList searchResultItemList, SearchQuery searchRequest) {
-	     this(searchResultItemList, searchRequest,null);
+		this(searchResultItemList, searchRequest, null);
 	}
-	
+
 	public SearchResultItemList getSearchResultItemList() {
 		return searchResultItemList;
 	}
@@ -56,7 +57,6 @@ public class SearchResult {
 	public void setSearchResultItemList(SearchResultItemList searchResultItemList) {
 		this.searchResultItemList = searchResultItemList;
 	}
-
 
 	public SearchQuery getSearchQuery() {
 		return searchQuery;
@@ -73,5 +73,5 @@ public class SearchResult {
 	public void setServer(Server server) {
 		this.server = server;
 	}
-	
+
 }

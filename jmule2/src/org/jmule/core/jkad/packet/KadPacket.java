@@ -35,34 +35,36 @@ import org.jmule.core.utils.JMuleZLib;
 
 /**
  * Created on Dec 29, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.4 $
- * Last changed by $Author: binary255 $ on $Date: 2010/09/04 16:14:24 $
+ * @version $Revision: 1.4 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/09/04 16:14:24 $
  */
 public class KadPacket extends UDPPacket {
-		
+
 	public KadPacket(byte packetOPCode, int length) {
 		super(length + 1 + 1, PROTO_KAD_UDP);
 		setCommand(packetOPCode);
 	}
-	
+
 	public KadPacket(byte packetOPCode) {
-		super(1+1, PROTO_KAD_UDP);
+		super(1 + 1, PROTO_KAD_UDP);
 		setCommand(packetOPCode);
 	}
-	
+
 	public KadPacket(ByteBuffer packetContent, InetSocketAddress sender) {
 		packet_data = packetContent;
 		this.sender = sender;
 	}
-	
-	
+
 	public void compress() {
-		if (isCompressed()) return;
+		if (isCompressed())
+			return;
 	}
-	
+
 	public void decompress() {
-		if (!isCompressed()) return;
+		if (!isCompressed())
+			return;
 		ByteBuffer compressedData = getByteBuffer(packet_data.limit() - 2);
 		packet_data.position(2);
 		packet_data.get(compressedData.array());
@@ -70,25 +72,28 @@ public class KadPacket extends UDPPacket {
 		try {
 			ByteBuffer decompressedData = JMuleZLib.decompressData(compressedData);
 			decompressedData.position(0);
-			
+
 			byte packetOPCode = packet_data.get(1);
-			packet_data = getByteBuffer(decompressedData.capacity()+2);
+			packet_data = getByteBuffer(decompressedData.capacity() + 2);
 
 			packet_data.put(PROTO_KAD_UDP);
 			packet_data.put(packetOPCode);
 			packet_data.put(decompressedData);
-			
+
 		} catch (DataFormatException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
-	
+
 	public boolean isCompressed() {
 		try {
 			return packet_data.get(0) == PROTO_KAD_COMPRESSED_UDP;
-		}catch(Throwable t) { t.printStackTrace(); return false; }
+		} catch (Throwable t) {
+			t.printStackTrace();
+			return false;
+		}
 	}
-	
+
 	protected void finalize() {
 		if (packet_data != null) {
 			packet_data.clear();
@@ -96,8 +101,4 @@ public class KadPacket extends UDPPacket {
 		}
 	}
 
-	
-	
-	
-	
 }

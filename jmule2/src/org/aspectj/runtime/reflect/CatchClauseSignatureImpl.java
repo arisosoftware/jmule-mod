@@ -11,37 +11,37 @@
  *     Xerox/PARC     initial implementation 
  * ******************************************************************/
 
-
 package org.aspectj.runtime.reflect;
 
 import org.aspectj.lang.reflect.CatchClauseSignature;
 
 class CatchClauseSignatureImpl extends SignatureImpl implements CatchClauseSignature {
-    Class parameterType;
-    String parameterName;
-    
-    CatchClauseSignatureImpl(Class declaringType, 
-        Class parameterType, String parameterName)
-    {
-        super(0, "catch", declaringType);
-        this.parameterType = parameterType;
-        this.parameterName = parameterName;
-    }
-    
-    CatchClauseSignatureImpl(String stringRep) {
-        super(stringRep);
-    }
-    
-    public Class getParameterType() {
-        if (parameterType == null) parameterType = extractType(3);
-        return parameterType;
-    }
-    public String getParameterName() {
-        if (parameterName == null) parameterName = extractString(4);
-        return parameterName;
-    }
-    
-    protected String createToString(StringMaker sm) {
-        return "catch(" + sm.makeTypeName(getParameterType()) + ")";
-    }    
+	Class parameterType;
+	String parameterName;
+
+	CatchClauseSignatureImpl(Class declaringType, Class parameterType, String parameterName) {
+		super(0, "catch", declaringType);
+		this.parameterType = parameterType;
+		this.parameterName = parameterName;
+	}
+
+	CatchClauseSignatureImpl(String stringRep) {
+		super(stringRep);
+	}
+
+	public Class getParameterType() {
+		if (parameterType == null)
+			parameterType = extractType(3);
+		return parameterType;
+	}
+
+	public String getParameterName() {
+		if (parameterName == null)
+			parameterName = extractString(4);
+		return parameterName;
+	}
+
+	protected String createToString(StringMaker sm) {
+		return "catch(" + sm.makeTypeName(getParameterType()) + ")";
+	}
 }

@@ -26,23 +26,24 @@ import org.jmule.core.JMException;
 
 /**
  * Created on Aug 14, 2009
+ * 
  * @author binary256
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/08/31 17:24:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/08/31 17:24:11 $
  */
 public class NetworkManagerException extends JMException {
 
 	public NetworkManagerException() {
 		super();
 	}
-	
+
 	public NetworkManagerException(String cause) {
 		super(cause);
 	}
-	
+
 	public NetworkManagerException(Throwable cause) {
 		super(cause);
 	}
-	
+
 }

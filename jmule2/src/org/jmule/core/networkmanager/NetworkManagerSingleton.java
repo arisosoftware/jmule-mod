@@ -22,19 +22,19 @@
  */
 package org.jmule.core.networkmanager;
 
-
 /**
  * Created on Aug 19, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.4 $
- * Last changed by $Author: javajox $ on $Date: 2010/09/09 06:23:29 $
+ * @version $Revision: 1.4 $ Last changed by $Author: javajox $ on $Date:
+ *          2010/09/09 06:23:29 $
  */
 public class NetworkManagerSingleton {
 
 	private NetworkManagerSingleton() {
-		
+
 	}
-	
+
 	private static class NetworkManagerSingletonHolder {
 		private static final NetworkManager INSTANCE = new NetworkManagerImpl();
 	}

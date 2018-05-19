@@ -49,10 +49,11 @@ import org.jmule.core.utils.Convert;
 
 /**
  * Created on 2007-Nov-07
+ * 
  * @author binary256
  * @author javajox
- * @version $$Revision: 1.7 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/08/31 10:20:29 $$
+ * @version $$Revision: 1.7 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/08/31 10:20:29 $$
  */
 public class Server {
 	public static enum ServerStatus {
@@ -75,7 +76,7 @@ public class Server {
 	private long last_udp_response = System.currentTimeMillis();
 
 	private int sended_challenge = 0;
-	
+
 	Server(String IPAddress, int port) {
 		this.serverIP = IPAddress;
 		this.serverPort = port;
@@ -118,11 +119,11 @@ public class Server {
 		this.tagList = tagList;
 		Tag tag = this.tagList.getTag(ED2KConstants.SL_UDPFLAGS);
 		if (tag != null) {
-			int value = ((IntTag)tag).getValue();
+			int value = ((IntTag) tag).getValue();
 			serverFeatures.addAll(Utils.scanTCPServerFeatures(value));
 			serverFeatures.addAll(Utils.scanUDPServerFeatures(value));
 		}
-			
+
 	}
 
 	public byte[] getAddressAsByte() {
@@ -136,7 +137,7 @@ public class Server {
 	public int getUDPPort() {
 		return serverPort + 4;
 	}
-	
+
 	public ED2KServerLink getServerLink() {
 		return new ED2KServerLink(getAddress(), getPort());
 
@@ -146,11 +147,11 @@ public class Server {
 		this.sended_challenge = challenge;
 		this.last_udp_request = System.currentTimeMillis();
 	}
-	
+
 	public int getChallenge() {
 		return sended_challenge;
 	}
-	
+
 	void setStatus(ServerStatus status) {
 		this.status = status;
 	}
@@ -234,8 +235,8 @@ public class Server {
 			return 0;
 		}
 	}
-	
-	void setPing(int receivedChallenge)  {
+
+	void setPing(int receivedChallenge) {
 		last_udp_response = System.currentTimeMillis();
 		long ping = last_udp_response - last_udp_request;
 		Tag tag = new IntTag(SL_PING, Convert.longToInt(ping));
@@ -245,8 +246,7 @@ public class Server {
 
 	public long getPing() {
 		try {
-			return Convert.longToInt((Integer) tagList.getTag(SL_PING)
-					.getValue());
+			return Convert.longToInt((Integer) tagList.getTag(SL_PING).getValue());
 		} catch (Throwable e) {
 			return 0;
 		}
@@ -265,8 +265,7 @@ public class Server {
 
 	public long getNumFiles() {
 		try {
-			return Convert.intToLong((Integer) tagList.getTag(SL_FILES)
-					.getValue());
+			return Convert.intToLong((Integer) tagList.getTag(SL_FILES).getValue());
 		} catch (Throwable e) {
 			return 0;
 		}
@@ -274,8 +273,7 @@ public class Server {
 
 	public long getMaxUsers() {
 		try {
-			return Convert.intToLong((Integer) tagList.getTag(SL_SRVMAXUSERS)
-					.getValue());
+			return Convert.intToLong((Integer) tagList.getTag(SL_SRVMAXUSERS).getValue());
 		} catch (Throwable e) {
 			return 0;
 		}
@@ -283,8 +281,7 @@ public class Server {
 
 	public long getNumUsers() {
 		try {
-			return Convert.intToLong((Integer) tagList.getTag(SL_USERS)
-					.getValue());
+			return Convert.intToLong((Integer) tagList.getTag(SL_USERS).getValue());
 		} catch (Throwable e) {
 			return 0;
 		}

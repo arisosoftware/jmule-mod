@@ -34,39 +34,38 @@ import org.jmule.ui.swing.skin.WizardSkinFactory;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:43:11 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:43:11 $$
  */
 public class WizardPanel extends JPanel implements JMuleUIComponent {
 
 	protected WizardSkin skin = WizardSkinFactory.getInstance();
 	protected JMuleCore _core;
 	protected ConfigurationManager _config;
-	
+
 	public WizardPanel() {
-		
+
 		getCoreComponents();
-		
+
 		initUIComponents();
-		
+
 	}
 
 	public void getCoreComponents() {
-		
-	   try {
-		   
-		   _core = JMuleCoreFactory.getSingleton();
-		 
-	   } catch(Throwable t) {
-		   
-	   }
-	   
-	   _config = _core.getConfigurationManager();
+
+		try {
+
+			_core = JMuleCoreFactory.getSingleton();
+
+		} catch (Throwable t) {
+
+		}
+
+		_config = _core.getConfigurationManager();
 	}
 
 	public void initUIComponents() {
-		
+
 	}
 
-	
 }

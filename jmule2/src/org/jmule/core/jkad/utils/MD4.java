@@ -29,12 +29,13 @@ import org.jmule.core.utils.Misc;
 
 /**
  * Created on Jan 8, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/07/06 14:13:25 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/07/06 14:13:25 $
  */
 public class MD4 {
-	
+
 	public static Int128 MD4Digest(byte[] inputData) {
 		org.jmule.core.utils.MD4 md4 = new org.jmule.core.utils.MD4();
 		ByteBuffer input = Misc.getByteBuffer(inputData.length);

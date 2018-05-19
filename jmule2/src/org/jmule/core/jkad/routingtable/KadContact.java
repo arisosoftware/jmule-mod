@@ -39,9 +39,10 @@ import org.jmule.core.jkad.utils.Utils;
 
 /**
  * Created on Dec 28, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.8 $
- * Last changed by $Author: binary255 $ on $Date: 2010/08/15 12:13:48 $
+ * @version $Revision: 1.8 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/08/15 12:13:48 $
  */
 
 public class KadContact {
@@ -55,117 +56,134 @@ public class KadContact {
 	private long expiration;
 	private byte version;
 	private JKadUDPKey kadUDPKey;
-	
+
 	private long UDPFirewallQueries = 0;
 	private long UDPFirewallResponses = 0;
 	private long LastUDPFirewallResponse = 0;
-	
+
 	private long lastResponse = System.currentTimeMillis();
-	
+
 	private boolean connected = false;
-	
+
 	private boolean ipVerified = false;
-	
+
 	public KadContact() {
 	}
-	
-	public KadContact(ClientID contactID, ContactAddress address, int tcpPort, byte version, JKadUDPKey kadUDPKey, boolean isIPVerified) {
+
+	public KadContact(ClientID contactID, ContactAddress address, int tcpPort, byte version, JKadUDPKey kadUDPKey,
+			boolean isIPVerified) {
 		super();
 		this.contactID = contactID;
 		this.contactAddress = address;
 		this.tcp_port = tcpPort;
 		this.version = version;
 		this.kadUDPKey = kadUDPKey;
-		
+
 		creation = System.currentTimeMillis();
 		expiration = 0;
-		
+
 		this.contactType = ContactType.JustAdded;
 		this.ipVerified = isIPVerified;
 	}
-	
+
 	public String toString() {
 		String result = "";
-		
-		result += "Contact ID : " + contactID +"\n";
-		result += "Address : " + getIPAddress()+"\n";
-		result += "Type : " + getContactType()+"\n";
-	//	result += "Contact distance : " + contactDistance;
-	//	result += " " + contactDistance.toLong();
+
+		result += "Contact ID : " + contactID + "\n";
+		result += "Address : " + getIPAddress() + "\n";
+		result += "Type : " + getContactType() + "\n";
+		// result += "Contact distance : " + contactDistance;
+		// result += " " + contactDistance.toLong();
 		return result;
 	}
-	
+
 	public ClientID getContactID() {
 		return contactID;
 	}
+
 	public void setContactID(ClientID contactID) {
 		this.contactID = contactID;
 	}
+
 	public Int128 getContactDistance() {
 		if (contactDistance == null)
 			contactDistance = Utils.XOR(contactID, JKadManagerSingleton.getInstance().getClientID());
 		return contactDistance;
 	}
+
 	public void setContactDistance(Int128 contactDistance) {
 		this.contactDistance = contactDistance;
 	}
-	
+
 	public int getTCPPort() {
 		return tcp_port;
 	}
+
 	public void setTCPPort(int tcpPort) {
 		this.tcp_port = tcpPort;
 	}
-		
+
 	public void setUDPPort(int udpPort) {
 		contactAddress.setUdpPort(udpPort);
 	}
-	
+
 	public ContactType getContactType() {
 		return contactType;
 	}
+
 	public void setContactType(ContactType contactType) {
 		this.contactType = contactType;
 	}
+
 	public long getCreation() {
 		return creation;
 	}
+
 	public void setCreation(long creation) {
 		this.creation = creation;
 	}
+
 	public long getExpiration() {
 		return expiration;
 	}
+
 	public void setExpiration(long expiration) {
 		this.expiration = expiration;
 	}
+
 	public byte getVersion() {
 		return version;
 	}
+
 	public void setVersion(byte version) {
 		this.version = version;
 	}
-	
+
 	public boolean supportKad2() {
 		return version > 0x05;
 	}
-	
+
 	public JKadUDPKey getKadUDPKey() {
 		return kadUDPKey;
 	}
+
 	public void setKadUDPKey(JKadUDPKey kadUDPKey) {
 		this.kadUDPKey = kadUDPKey;
 	}
-	
+
 	public boolean equals(Object object) {
-		if (object == null) return false;
-		if (object == this) return true;
-		if (!(object instanceof KadContact)) return false;
-		return hashCode()==object.hashCode();
+		if (object == null)
+			return false;
+		if (object == this)
+			return true;
+		if (!(object instanceof KadContact))
+			return false;
+		return hashCode() == object.hashCode();
 	}
-	
+
 	private boolean genHashCode = false;
 	int hashCode = -1;
+
 	public int hashCode() {
 		if (!genHashCode) {
 			hashCode = contactID.toHexString().hashCode();
@@ -213,11 +231,11 @@ public class KadContact {
 	public void setContactAddress(ContactAddress contactAddress) {
 		this.contactAddress = contactAddress;
 	}
-	
+
 	public IPAddress getIPAddress() {
 		return contactAddress.getAddress();
 	}
-	
+
 	public int getUDPPort() {
 		return contactAddress.getUDPPort();
 	}
@@ -229,34 +247,51 @@ public class KadContact {
 	public void setLastResponse(long lastResponse) {
 		this.lastResponse = lastResponse;
 	}
-	
+
 	void downgrateType() {
-		if (contactType == ScheduledForRemoval ) return ;
+		if (contactType == ScheduledForRemoval)
+			return;
 		switch (contactType) {
-			case Active2MoreHours : contactType = Active1Hour; return;
-			case Active1Hour : contactType = Active; return ;
-			case Active : contactType = JustAdded; return ;
-			case JustAdded : contactType = ScheduledForRemoval; return ;
+		case Active2MoreHours:
+			contactType = Active1Hour;
+			return;
+		case Active1Hour:
+			contactType = Active;
+			return;
+		case Active:
+			contactType = JustAdded;
+			return;
+		case JustAdded:
+			contactType = ScheduledForRemoval;
+			return;
 		}
 	}
-	
+
 	void updateType() {
-		if (contactType == Active2MoreHours) return ;
-		switch(contactType) {
-			case Active1Hour : contactType = Active2MoreHours; return ;
-			case Active : contactType = Active1Hour; return ;
-			case JustAdded : contactType = Active; return ;
-			case ScheduledForRemoval : contactType = JustAdded; return ;
+		if (contactType == Active2MoreHours)
+			return;
+		switch (contactType) {
+		case Active1Hour:
+			contactType = Active2MoreHours;
+			return;
+		case Active:
+			contactType = Active1Hour;
+			return;
+		case JustAdded:
+			contactType = Active;
+			return;
+		case ScheduledForRemoval:
+			contactType = JustAdded;
+			return;
 		}
 	}
-	
+
 	public boolean isIPVerified() {
 		return ipVerified;
 	}
-	
+
 	public void setIPVerified(boolean ipVerified) {
 		this.ipVerified = ipVerified;
 	}
-	
-		
+
 }

@@ -25,9 +25,9 @@ import java.lang.annotation.RetentionPolicy;
 @Target(ElementType.TYPE)
 public @interface DeclarePrecedence {
 
-    /**
-     * The precedence pattern list
-     */
-    String value();
+	/**
+	 * The precedence pattern list
+	 */
+	String value();
 
 }

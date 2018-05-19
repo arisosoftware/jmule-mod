@@ -27,73 +27,74 @@ import org.jmule.core.utils.Average;
 
 /**
  * Created on Nov 2, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/11/03 07:20:47 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/11/03 07:20:47 $
  */
 class JMConnectionTransferStats {
 
-	  private long totalReceived = 0;
-	  private long totalSent = 0;
-	  private Average<Float> downloadSpeed = new Average<Float>(ConfigurationManager.CONNECTION_TRAFIC_AVERAGE_CHECKS);
-	  private Average<Float> uploadSpeed   = new Average<Float>(ConfigurationManager.CONNECTION_TRAFIC_AVERAGE_CHECKS);
-	  
-	  JMConnectionTransferStats() {
-	  }
-	  
-	  void addReceivedBytes(long bytes) {
-		  this.totalReceived += bytes;
-	  }
-	  
-	  void addSendBytes(long bytes) {
-		  this.totalSent+=bytes;
-	  }
+	private long totalReceived = 0;
+	private long totalSent = 0;
+	private Average<Float> downloadSpeed = new Average<Float>(ConfigurationManager.CONNECTION_TRAFIC_AVERAGE_CHECKS);
+	private Average<Float> uploadSpeed = new Average<Float>(ConfigurationManager.CONNECTION_TRAFIC_AVERAGE_CHECKS);
 
-	  long getTotalReceived() {
+	JMConnectionTransferStats() {
+	}
+
+	void addReceivedBytes(long bytes) {
+		this.totalReceived += bytes;
+	}
+
+	void addSendBytes(long bytes) {
+		this.totalSent += bytes;
+	}
+
+	long getTotalReceived() {
 		return totalReceived;
-	  }
+	}
 
-	  long getTotalSent() {
+	long getTotalSent() {
 		return totalSent;
-	  }
-	
-	  float getDownloadSpeed() {
-		  return Math.round(this.downloadSpeed.getAverage());
-	  }
-	
-	  float getUploadSpeed() {
-		  return this.uploadSpeed.getAverage();
-	  }
-	
-	  void resetByteCount() {
-		  this.totalReceived = 0;
-		  this.totalSent = 0;
-	  }
-	
-	  long lastDownloadBytes = 0;
-	  long lastDownloadTime  = System.currentTimeMillis();
+	}
 
-	  long lastUploadBytes = 0;
-	  long lastUploadTime = System.currentTimeMillis();
-	
-	  void syncSpeed() {
-		  /** Update download speed**/
-		  long nowBytes = totalReceived;
-		  long transfered = nowBytes - lastDownloadBytes;
-		  lastDownloadBytes = nowBytes;
-				
-		  long nowTime =  System.currentTimeMillis();
-		  long dTime = nowTime - lastDownloadTime;
-		  lastDownloadTime = nowTime;
-		  downloadSpeed.add(((float)transfered/dTime)*1000);
-				
-		  /** Update upload speed **/
-		  nowBytes = totalSent;
-		  transfered = nowBytes - lastUploadBytes;
-		  lastUploadBytes = nowBytes;
-		  nowTime =  System.currentTimeMillis();
-		  dTime = nowTime - lastUploadTime;
-		  lastUploadTime = nowTime;
-		  uploadSpeed.add(((float)transfered/dTime)*1000);
+	float getDownloadSpeed() {
+		return Math.round(this.downloadSpeed.getAverage());
+	}
+
+	float getUploadSpeed() {
+		return this.uploadSpeed.getAverage();
+	}
+
+	void resetByteCount() {
+		this.totalReceived = 0;
+		this.totalSent = 0;
+	}
+
+	long lastDownloadBytes = 0;
+	long lastDownloadTime = System.currentTimeMillis();
+
+	long lastUploadBytes = 0;
+	long lastUploadTime = System.currentTimeMillis();
+
+	void syncSpeed() {
+		/** Update download speed **/
+		long nowBytes = totalReceived;
+		long transfered = nowBytes - lastDownloadBytes;
+		lastDownloadBytes = nowBytes;
+
+		long nowTime = System.currentTimeMillis();
+		long dTime = nowTime - lastDownloadTime;
+		lastDownloadTime = nowTime;
+		downloadSpeed.add(((float) transfered / dTime) * 1000);
+
+		/** Update upload speed **/
+		nowBytes = totalSent;
+		transfered = nowBytes - lastUploadBytes;
+		lastUploadBytes = nowBytes;
+		nowTime = System.currentTimeMillis();
+		dTime = nowTime - lastUploadTime;
+		lastUploadTime = nowTime;
+		uploadSpeed.add(((float) transfered / dTime) * 1000);
 	}
 }

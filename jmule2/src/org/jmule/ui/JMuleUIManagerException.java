@@ -27,13 +27,13 @@ import org.jmule.core.JMException;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:44:55 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:44:55 $$
  */
 public class JMuleUIManagerException extends JMException {
 
 	public JMuleUIManagerException(String str) {
-		 super(str);
+		super(str);
 	}
-	
+
 }

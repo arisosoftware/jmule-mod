@@ -76,16 +76,17 @@ import org.jmule.core.utils.Misc;
 
 /**
  * Created on 2008-Apr-20
+ * 
  * @author binary256
- * @version $$Revision: 1.59 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/09/04 16:08:38 $$
+ * @version $$Revision: 1.59 $$ Last changed by $$Author: binary255 $$ on
+ *          $$Date: 2010/09/04 16:08:38 $$
  */
 public class DownloadSession implements JMTransferSession {
-	
+
 	public enum DownloadStatus {
 		STARTED, STOPPED
 	}
-	
+
 	PartialFile sharedFile;
 	FilePartStatus partStatus;
 	DownloadStatus sessionStatus = DownloadStatus.STOPPED;
@@ -93,7 +94,7 @@ public class DownloadSession implements JMTransferSession {
 	FileRequestList file_request_list = new FileRequestList();
 	Collection<Peer> session_peers = new ConcurrentLinkedQueue<Peer>();
 	DownloadStatusList download_status_list = new DownloadStatusList(); // store main information about download process
-	
+
 	Map<Peer, Collection<CompressedChunkContainer>> compressedFileChunks = new ConcurrentHashMap<Peer, Collection<CompressedChunkContainer>>();
 
 	InternalNetworkManager _network_manager = (InternalNetworkManager) NetworkManagerSingleton.getInstance();
@@ -102,12 +103,11 @@ public class DownloadSession implements JMTransferSession {
 	InternalUploadManager _upload_manager = (InternalUploadManager) UploadManagerSingleton.getInstance();
 
 	private Collection<String> file_names = new ConcurrentLinkedQueue<String>();
-		
+
 	public DownloadStatusList getDownloadStatusList() {
 		return download_status_list;
 	}
-	
-	
+
 	private DownloadSession() {
 		download_strategy = DownloadStrategyFactory.getStrategy(STRATEGY.DEFAULT, this);
 	}
@@ -144,9 +144,8 @@ public class DownloadSession implements JMTransferSession {
 	DownloadSession(SearchResultItem searchResult) {
 		this();
 		try {
-			createDownloadFiles(searchResult.getFileName(), searchResult
-					.getFileSize(), searchResult.getFileHash(), null,
-					(TagList) searchResult);
+			createDownloadFiles(searchResult.getFileName(), searchResult.getFileSize(), searchResult.getFileHash(),
+					null, (TagList) searchResult);
 			int partCount = (int) ((sharedFile.length() / PARTSIZE));
 			if (sharedFile.length() % PARTSIZE != 0)
 				partCount++;
@@ -155,8 +154,9 @@ public class DownloadSession implements JMTransferSession {
 			e.printStackTrace();
 		}
 	}
-	
-	private void createDownloadFiles(String fileName, long fileSize, FileHash fileHash, PartHashSet hashSet, TagList tagList) throws SharedFileException {
+
+	private void createDownloadFiles(String fileName, long fileSize, FileHash fileHash, PartHashSet hashSet,
+			TagList tagList) throws SharedFileException {
 		sharedFile = new PartialFile(fileName, fileSize, fileHash, hashSet, tagList);
 		SharingManagerSingleton.getInstance().addPartialFile(sharedFile);
 	}
@@ -166,17 +166,18 @@ public class DownloadSession implements JMTransferSession {
 		sharedFile.markDownloadStarted();
 		download_strategy.downloadStarted();
 	}
-	
+
 	void stopDownload() {
 		stopDownload(true);
 	}
 
 	void stopDownload(boolean saveDownloadStatus) {
 		compressedFileChunks.clear();
-		
-		for (Peer peer : download_status_list.getPeersByStatus(PeerDownloadStatus.ACTIVE, PeerDownloadStatus.ACTIVE_UNUSED))
+
+		for (Peer peer : download_status_list.getPeersByStatus(PeerDownloadStatus.ACTIVE,
+				PeerDownloadStatus.ACTIVE_UNUSED))
 			_network_manager.sendSlotRelease(peer.getIP(), peer.getPort());
-		
+
 		session_peers.clear();
 		download_status_list.clear();
 		partStatus.clear();
@@ -185,18 +186,18 @@ public class DownloadSession implements JMTransferSession {
 		setStatus(DownloadStatus.STOPPED);
 		if (saveDownloadStatus)
 			sharedFile.markDownloadStopped();
-		
+
 		download_strategy.downloadStopped();
 	}
-	
+
 	void cancelDownload() {
 		if (isStarted())
 			stopDownload(false);
 		SharingManagerSingleton.getInstance().removeSharedFile(sharedFile.getFileHash());
-		
+
 		download_strategy.downloadCancelled();
 	}
-	
+
 	void addDownloadPeers(List<Peer> peerList) {
 		for (Peer peer : peerList) {
 			if (_download_manager.hasPeer(peer))
@@ -223,7 +224,7 @@ public class DownloadSession implements JMTransferSession {
 	void peerConnected(Peer peer) {
 		if (this.getStatus() == DownloadStatus.STOPPED)
 			return;
-		if (download_status_list.getPeerDownloadStatus(peer)==PeerDownloadStatus.IN_QUEUE) {
+		if (download_status_list.getPeerDownloadStatus(peer) == PeerDownloadStatus.IN_QUEUE) {
 			requestStatusFileName(peer);
 		} else {
 			download_status_list.addPeer(peer);
@@ -238,7 +239,7 @@ public class DownloadSession implements JMTransferSession {
 	}
 
 	void peerDisconnected(Peer peer) {
-		//TODO : mark in status list as disconnected, update download_status_list
+		// TODO : mark in status list as disconnected, update download_status_list
 		compressedFileChunks.remove(peer);
 		PeerDownloadStatus status = download_status_list.getPeerDownloadStatus(peer);
 		if ((status == null) || (status != PeerDownloadStatus.IN_QUEUE)) {
@@ -250,7 +251,7 @@ public class DownloadSession implements JMTransferSession {
 		download_strategy.peerDisconnected(peer);
 
 	}
-	
+
 	void requestStatusFileName(Peer peer) {
 		Integer supportMultipacket = peer.getFeature(PeerFeatures.MultiPacket);
 		if (supportMultipacket == 1) {
@@ -258,28 +259,29 @@ public class DownloadSession implements JMTransferSession {
 			entries.add(OP_FILENAMEREQUEST);
 			entries.add(OP_FILESTATREQ);
 			Integer supportExtMultipacket = peer.getFeature(PeerFeatures.ExtMultiPacket);
-			if (supportExtMultipacket==1) {
-				_network_manager.sendMultiPacketExtRequest(peer.getIP(), peer.getPort(), getFileHash(), getFileSize(), entries);
-			}
-			else {
-				_network_manager.sendMultiPacketRequest(peer.getIP(), peer.getPort(), getFileHash(),entries);
+			if (supportExtMultipacket == 1) {
+				_network_manager.sendMultiPacketExtRequest(peer.getIP(), peer.getPort(), getFileHash(), getFileSize(),
+						entries);
+			} else {
+				_network_manager.sendMultiPacketRequest(peer.getIP(), peer.getPort(), getFileHash(), entries);
 			}
 			download_status_list.setPeerStatus(peer, PeerDownloadStatus.FILENAME_REQUEST);
 			download_status_list.setPeerStatus(peer, PeerDownloadStatus.FILE_STATUS_REQUEST);
 		} else {
 			if (peer.getFeature(PeerFeatures.ExtendedRequestsVersion) > 1)
-				_network_manager.sendFileNameRequest(peer.getIP(), peer.getPort(),getFileHash(), sharedFile.getGapList(), sharedFile.length(),  getCompletedSources());
+				_network_manager.sendFileNameRequest(peer.getIP(), peer.getPort(), getFileHash(),
+						sharedFile.getGapList(), sharedFile.length(), getCompletedSources());
 			else
-				_network_manager.sendFileNameRequest(peer.getIP(), peer.getPort(),getFileHash());
+				_network_manager.sendFileNameRequest(peer.getIP(), peer.getPort(), getFileHash());
 			download_status_list.setPeerStatus(peer, PeerDownloadStatus.FILENAME_REQUEST);
 			_network_manager.sendFileStatusRequest(peer.getIP(), peer.getPort(), getFileHash());
 			download_status_list.setPeerStatus(peer, PeerDownloadStatus.FILE_STATUS_REQUEST);
 		}
 	}
-	
+
 	void receivedFileNotFoundFromPeer(Peer sender) {
 		download_status_list.addPeerHistoryRecord(sender, "File not found");
-		download_status_list.setPeerStatus(sender,PeerDownloadStatus.DISCONNECTED);
+		download_status_list.setPeerStatus(sender, PeerDownloadStatus.DISCONNECTED);
 		download_strategy.receivedFileNotFoundFromPeer(sender);
 		try {
 			_peer_manager.disconnect(sender);
@@ -288,17 +290,17 @@ public class DownloadSession implements JMTransferSession {
 		}
 	}
 
-	void receivedFileRequestAnswerFromPeer(Peer sender,String fileName) {
+	void receivedFileRequestAnswerFromPeer(Peer sender, String fileName) {
 		if (!file_names.contains(fileName))
 			file_names.add(fileName);
 		download_status_list.updatePeerTime(sender);
 		download_status_list.addPeerHistoryRecord(sender, "File request answer");
-		download_status_list.setPeerStatus(sender,PeerDownloadStatus.UPLOAD_REQUEST);
+		download_status_list.setPeerStatus(sender, PeerDownloadStatus.UPLOAD_REQUEST);
 		download_strategy.receivedFileRequestAnswerFromPeer(sender, fileName);
 		_network_manager.sendUploadRequest(sender.getIP(), sender.getPort(), sharedFile.getFileHash());
 	}
-	
-	void receivedFileStatusResponseFromPeer(Peer sender,FileHash fileHash, JMuleBitSet bitSetpartStatus) {
+
+	void receivedFileStatusResponseFromPeer(Peer sender, FileHash fileHash, JMuleBitSet bitSetpartStatus) {
 		JMuleBitSet bitSet = bitSetpartStatus;
 		if (bitSet.getBitCount() == 0) {
 			int partCount = (int) ((this.sharedFile.length() / PARTSIZE));
@@ -313,11 +315,11 @@ public class DownloadSession implements JMTransferSession {
 		download_strategy.receivedFileStatusResponseFromPeer(sender, fileHash, bitSetpartStatus);
 		if (!this.sharedFile.hasHashSet()) {
 			download_status_list.setPeerStatus(sender, PeerDownloadStatus.HASHSET_REQUEST);
-			_network_manager.sendPartHashSetRequest(sender.getIP() , sender.getPort(),getFileHash());
+			_network_manager.sendPartHashSetRequest(sender.getIP(), sender.getPort(), getFileHash());
 		}
 	}
-	
-	void receivedHashSetResponseFromPeer(Peer sender,PartHashSet partHashSet) {
+
+	void receivedHashSetResponseFromPeer(Peer sender, PartHashSet partHashSet) {
 		download_status_list.addPeerHistoryRecord(sender, "Hash set answer");
 		if (!sharedFile.hasHashSet()) {
 			try {
@@ -327,22 +329,20 @@ public class DownloadSession implements JMTransferSession {
 				return;
 			}
 		}
-		
+
 		download_strategy.receivedHashSetResponseFromPeer(sender, partHashSet);
-		
+
 		if (this.sharedFile.getGapList().size() == 0) {
-			/*if (sharedFile.checkFullFileIntegrity()) {
-				completeDownload();
-				return;
-			} else {
-				// file is broken
-			}*/
-			
+			/*
+			 * if (sharedFile.checkFullFileIntegrity()) { completeDownload(); return; } else
+			 * { // file is broken }
+			 */
+
 			_download_manager.scheduleToComplete(this);
 		}
 		return;
 	}
-	
+
 	void receivedQueueRankFromPeer(Peer sender, int queueRank) {
 		download_status_list.setPeerQueuePosition(sender, queueRank);
 		download_strategy.receivedQueueRankFromPeer(sender, queueRank);
@@ -357,30 +357,29 @@ public class DownloadSession implements JMTransferSession {
 			_download_manager.scheduleToComplete(this);
 			return;
 		}
-			/*if (sharedFile.checkFullFileIntegrity()) {
-				completeDownload();
-				return ;
-			} else {
-				// file is broken
-			}*/
+		/*
+		 * if (sharedFile.checkFullFileIntegrity()) { completeDownload(); return ; }
+		 * else { // file is broken }
+		 */
 		fileChunkRequest(sender);
 		return;
 
 	}
-	
+
 	void receivedSlotTakenFromPeer(Peer sender) {
 		download_status_list.addPeerHistoryRecord(sender, "Slot taken");
-		download_status_list.setPeerStatus(sender,PeerDownloadStatus.SLOTREQUEST);
+		download_status_list.setPeerStatus(sender, PeerDownloadStatus.SLOTREQUEST);
 		download_strategy.receivedSlotTakenFromPeer(sender);
 	}
-	
+
 	/**
 	 * Request file chunk from peer
+	 * 
 	 * @param peer
 	 */
 	void fileChunkRequest(Peer peer) {
 		if (peer == null) {
-			return ;
+			return;
 		}
 		if (!peer.isConnected())
 			return;
@@ -393,41 +392,40 @@ public class DownloadSession implements JMTransferSession {
 
 		if (blockSize > BLOCKSIZE)
 			blockSize = BLOCKSIZE;
-		
-		FileChunkRequest fragments[] = download_strategy.fileChunk3Request(peer,blockSize, this.sharedFile.length(), sharedFile.getGapList(),partStatus, file_request_list);
+
+		FileChunkRequest fragments[] = download_strategy.fileChunk3Request(peer, blockSize, this.sharedFile.length(),
+				sharedFile.getGapList(), partStatus, file_request_list);
 
 		int unused = 0;
 		for (int i = 0; i < fragments.length; i++)
 			if (((fragments[i].getChunkBegin() == fragments[i].getChunkEnd()) && (fragments[i].getChunkBegin() == 0)))
 				unused++;
-		
+
 		if (unused == 3) {
-			download_status_list.setPeerStatus(peer,
-					PeerDownloadStatus.ACTIVE_UNUSED);
+			download_status_list.setPeerStatus(peer, PeerDownloadStatus.ACTIVE_UNUSED);
 			download_status_list.setPeerChunkRequests(peer, null);
 			return;
 		}
 		download_status_list.setPeerChunkRequests(peer, fragments);
 		download_status_list.setPeerStatus(peer, PeerDownloadStatus.ACTIVE);
-		
-		_network_manager.sendFilePartsRequest(peer.getIP(), peer.getPort(),
-				getFileHash(), fragments);
+
+		_network_manager.sendFilePartsRequest(peer.getIP(), peer.getPort(), getFileHash(), fragments);
 	}
 
-	void receivedRequestedFileChunkFromPeer(Peer sender,FileHash fileHash, FileChunk chunk) {
+	void receivedRequestedFileChunkFromPeer(Peer sender, FileHash fileHash, FileChunk chunk) {
 		processFileChunk(sender, chunk);
 		download_strategy.receivedRequestedFileChunkFromPeer(sender, fileHash, chunk);
 	}
-	
+
 	void receivedCompressedFileChunk(Peer sender, FileChunk compressedFileChunk) {
-		//if (sender == null) return ; // or maybe write chunk!
+		// if (sender == null) return ; // or maybe write chunk!
 		download_status_list.updatePeerTime(sender);
 		if (!compressedFileChunks.containsKey(sender)) {
 			Collection<CompressedChunkContainer> list = new ConcurrentLinkedQueue<CompressedChunkContainer>();
 			compressedFileChunks.put(sender, list);
 		}
 		Collection<CompressedChunkContainer> chunk_list = compressedFileChunks.get(sender);
-		
+
 		boolean found = false;
 		for (CompressedChunkContainer container : chunk_list) {
 			if (container.offset == compressedFileChunk.getChunkStart()) {
@@ -440,7 +438,7 @@ public class DownloadSession implements JMTransferSession {
 					try {
 						buffer = JMuleZLib.decompressData(container.compressedData);
 						buffer.position(0);
-						FileChunk chunk = new FileChunk(container.offset,container.offset + buffer.capacity(), buffer);
+						FileChunk chunk = new FileChunk(container.offset, container.offset + buffer.capacity(), buffer);
 						processFileChunk(sender, chunk);
 						chunk_list.remove(container);
 					} catch (DataFormatException e) {
@@ -474,24 +472,23 @@ public class DownloadSession implements JMTransferSession {
 		}
 		download_strategy.receivedCompressedFileChunk(sender, compressedFileChunk);
 	}
-	
+
 	void receivedSourcesAnswerFromPeer(Peer peer, List<Peer> peerList) {
 		addDownloadPeers(peerList);
 		download_strategy.receivedSourcesAnswerFromPeer(peer, peerList);
 	}
-	
-	
+
 	private void processFileChunk(Peer sender, FileChunk fileChunk) {
 		download_status_list.updatePeerTime(sender);
-		
+
 		if (fileChunk.getChunkStart() < 0) {
 			return;
 		}
-		
+
 		if (fileChunk.getChunkEnd() > sharedFile.length()) {
 			return;
 		}
-		
+
 		download_status_list.setPeerStatus(sender, PeerDownloadStatus.ACTIVE);
 		download_status_list.setPeerResendCount(sender, 0);
 		try {
@@ -499,16 +496,17 @@ public class DownloadSession implements JMTransferSession {
 		} catch (SharedFileException e2) {
 			e2.printStackTrace();
 		}
-		
-		file_request_list.splitFragment(sender, fileChunk.getChunkStart(),fileChunk.getChunkEnd());
+
+		file_request_list.splitFragment(sender, fileChunk.getChunkStart(), fileChunk.getChunkEnd());
 
 		_download_manager.scheduleForPartCheck(this);
-		
+
 		if (this.sharedFile.getGapList().size() == 0)
 
 			if (!sharedFile.hasHashSet()) {
 				// Request hash set
-				List<Peer> peer_list = download_status_list.getPeersByStatus(PeerDownloadStatus.ACTIVE, PeerDownloadStatus.ACTIVE_UNUSED);
+				List<Peer> peer_list = download_status_list.getPeersByStatus(PeerDownloadStatus.ACTIVE,
+						PeerDownloadStatus.ACTIVE_UNUSED);
 				for (Peer peer : peer_list) {
 					_network_manager.sendPartHashSetRequest(peer.getIP(), peer.getPort(), getFileHash());
 				}
@@ -516,19 +514,19 @@ public class DownloadSession implements JMTransferSession {
 			} else {
 
 				_download_manager.scheduleToComplete(this);
-				
-				/*if (sharedFile.checkFullFileIntegrity()) {
-					completeDownload();
-					return;
-				}
-				// file is broken
-				_network_manager.sendUploadRequest(sender.getIP(), sender.getPort(), getFileHash());
-				download_status_list.setPeerStatus(sender,PeerDownloadStatus.UPLOAD_REQUEST);
-				List<Peer> peer_list = download_status_list.getPeersByStatus(PeerDownloadStatus.HASHSET_REQUEST, PeerDownloadStatus.ACTIVE_UNUSED);
-				for (Peer peer : peer_list) {
-					_network_manager.sendUploadRequest(peer.getIP(), peer.getPort(), getFileHash());
-					download_status_list.setPeerStatus(peer,PeerDownloadStatus.UPLOAD_REQUEST);
-				}*/
+
+				/*
+				 * if (sharedFile.checkFullFileIntegrity()) { completeDownload(); return; } //
+				 * file is broken _network_manager.sendUploadRequest(sender.getIP(),
+				 * sender.getPort(), getFileHash());
+				 * download_status_list.setPeerStatus(sender,PeerDownloadStatus.UPLOAD_REQUEST);
+				 * List<Peer> peer_list =
+				 * download_status_list.getPeersByStatus(PeerDownloadStatus.HASHSET_REQUEST,
+				 * PeerDownloadStatus.ACTIVE_UNUSED); for (Peer peer : peer_list) {
+				 * _network_manager.sendUploadRequest(peer.getIP(), peer.getPort(),
+				 * getFileHash());
+				 * download_status_list.setPeerStatus(peer,PeerDownloadStatus.UPLOAD_REQUEST); }
+				 */
 			}
 		FragmentList list = file_request_list.get(sender);
 		if (list != null)
@@ -543,17 +541,17 @@ public class DownloadSession implements JMTransferSession {
 	void removePeer(Peer peer) {
 		if (!hasPeer(peer))
 			return;
-		
+
 		if (peer.isConnected())
 			_network_manager.sendSlotRelease(peer.getIP(), peer.getPort());
-		
+
 		session_peers.remove(peer);
 		compressedFileChunks.remove(peer);
 		download_status_list.removePeer(peer);
-		
+
 		download_strategy.peerRemoved(peer);
 	}
-	
+
 	void completeDownload() {
 		stopDownload();
 		try {
@@ -568,7 +566,7 @@ public class DownloadSession implements JMTransferSession {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void setStatus(DownloadStatus status) {
 		this.sessionStatus = status;
 	}
@@ -626,7 +624,7 @@ public class DownloadSession implements JMTransferSession {
 		for (Peer peer : session_peers) {
 			downloadSpeed += peer.getDownloadSpeed();
 		}
-		return downloadSpeed; 
+		return downloadSpeed;
 	}
 
 	public DownloadStatus getStatus() {
@@ -652,18 +650,19 @@ public class DownloadSession implements JMTransferSession {
 	public boolean hasPeer(Peer peer) {
 		return session_peers.contains(peer) || download_status_list.hasPeer(peer);
 	}
-	
+
 	boolean hasPeer(String ip, int port) {
-		for(Peer peer : session_peers) 
+		for (Peer peer : session_peers)
 			if (peer.getIP().equals(ip))
-				if (peer.getPort() == port) return true;
+				if (peer.getPort() == port)
+					return true;
 		return false;
 	}
 
 	public boolean isStarted() {
 		return sessionStatus == DownloadStatus.STARTED;
 	}
-	
+
 	public long getAvailablePartCount() {
 		return sharedFile.getAvailablePartCount();
 	}
@@ -686,7 +685,7 @@ public class DownloadSession implements JMTransferSession {
 
 		return time;
 	}
-	
+
 	public boolean equals(Object object) {
 		if (object == null)
 			return false;
@@ -694,30 +693,29 @@ public class DownloadSession implements JMTransferSession {
 			return false;
 		return this.hashCode() == object.hashCode();
 	}
-	
+
 	public JMuleBitSet getPartAvailability(Peer peer) {
 		return partStatus.get(peer);
 	}
-	
+
 	public String toString() {
 		String str = "[ ";
-		str += sharedFile.getSharingName() + " " + sharedFile.getGapList()
-				+ " " + sharedFile.getFileHash() + "\n";
+		str += sharedFile.getSharingName() + " " + sharedFile.getGapList() + " " + sharedFile.getFileHash() + "\n";
 		str += "Peer used by session : \n";
 		for (Peer peer : session_peers)
 			str += peer + "\n";
-//		str += "\nDownload status list :\n" + download_status_list + "\n";
-//		String c_chunks = " [ ";
-//		for(Peer peer : compressedFileChunks.keySet()) {
-//			c_chunks += peer + " : " + compressedFileChunks.get(peer)+"\n";
-//		}
-//		c_chunks += " ]";
-//		str += "\nCompressed chunks : " + c_chunks + "\n"; 
-//		str += fileRequestList + "\n";
+		// str += "\nDownload status list :\n" + download_status_list + "\n";
+		// String c_chunks = " [ ";
+		// for(Peer peer : compressedFileChunks.keySet()) {
+		// c_chunks += peer + " : " + compressedFileChunks.get(peer)+"\n";
+		// }
+		// c_chunks += " ]";
+		// str += "\nCompressed chunks : " + c_chunks + "\n";
+		// str += fileRequestList + "\n";
 		str += "]";
 		return str;
 	}
-	
+
 	public FilePartStatus getPartStatus() {
 		return partStatus;
 	}
@@ -725,12 +723,11 @@ public class DownloadSession implements JMTransferSession {
 	public Collection<String> getFileNames() {
 		return file_names;
 	}
-	
+
 	public FileRequestList getFileRequestList() {
 		return file_request_list;
 	}
-	
-	
+
 	class CompressedChunkContainer {
 		public ByteBuffer compressedData;
 		public long offset;
@@ -741,5 +738,5 @@ public class DownloadSession implements JMTransferSession {
 		}
 
 	}
-	
+
 }

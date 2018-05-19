@@ -23,8 +23,7 @@ import org.aspectj.lang.reflect.InterTypeMethodDeclaration;
  * @author colyer
  *
  */
-public class InterTypeMethodDeclarationImpl extends InterTypeDeclarationImpl
-		implements InterTypeMethodDeclaration {
+public class InterTypeMethodDeclarationImpl extends InterTypeDeclarationImpl implements InterTypeMethodDeclaration {
 
 	private String name;
 	private Method baseMethod;
@@ -34,80 +33,94 @@ public class InterTypeMethodDeclarationImpl extends InterTypeDeclarationImpl
 	private AjType<?> returnType;
 	private Type genericReturnType;
 	private AjType<?>[] exceptionTypes;
-	
+
 	/**
 	 * @param decType
 	 * @param target
 	 * @param mods
 	 */
-	public InterTypeMethodDeclarationImpl(AjType<?> decType, String target,
-			int mods, String name, Method itdInterMethod) {
+	public InterTypeMethodDeclarationImpl(AjType<?> decType, String target, int mods, String name,
+			Method itdInterMethod) {
 		super(decType, target, mods);
 		this.name = name;
 		this.baseMethod = itdInterMethod;
 	}
 
 	public InterTypeMethodDeclarationImpl(AjType<?> decType, AjType<?> targetType, Method base, int modifiers) {
-		super(decType,targetType,modifiers);
+		super(decType, targetType, modifiers);
 		this.parameterAdjustmentFactor = 0;
 		this.name = base.getName();
 		this.baseMethod = base;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.InterTypeMethodDeclaration#getName()
 	 */
 	public String getName() {
 		return this.name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.InterTypeMethodDeclaration#getReturnType()
 	 */
 	public AjType<?> getReturnType() {
 		return AjTypeSystem.getAjType(baseMethod.getReturnType());
 	}
 
-	/* (non-Javadoc)
-	 * @see org.aspectj.lang.reflect.InterTypeMethodDeclaration#getGenericReturnType()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.aspectj.lang.reflect.InterTypeMethodDeclaration#getGenericReturnType()
 	 */
 	public Type getGenericReturnType() {
 		Type gRet = baseMethod.getGenericReturnType();
 		if (gRet instanceof Class) {
-			return AjTypeSystem.getAjType((Class<?>)gRet);
+			return AjTypeSystem.getAjType((Class<?>) gRet);
 		}
 		return gRet;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.InterTypeMethodDeclaration#getParameters()
 	 */
 	public AjType<?>[] getParameterTypes() {
 		Class<?>[] baseTypes = baseMethod.getParameterTypes();
-		AjType<?>[] ret = new AjType<?>[baseTypes.length -parameterAdjustmentFactor];
+		AjType<?>[] ret = new AjType<?>[baseTypes.length - parameterAdjustmentFactor];
 		for (int i = parameterAdjustmentFactor; i < baseTypes.length; i++) {
-			ret[i-parameterAdjustmentFactor] = AjTypeSystem.getAjType(baseTypes[i]);
+			ret[i - parameterAdjustmentFactor] = AjTypeSystem.getAjType(baseTypes[i]);
 		}
 		return ret;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.aspectj.lang.reflect.InterTypeMethodDeclaration#getGenericParameters()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.aspectj.lang.reflect.InterTypeMethodDeclaration#getGenericParameters()
 	 */
 	public Type[] getGenericParameterTypes() {
 		Type[] baseTypes = baseMethod.getGenericParameterTypes();
-		Type[] ret = new AjType<?>[baseTypes.length-parameterAdjustmentFactor];
+		Type[] ret = new AjType<?>[baseTypes.length - parameterAdjustmentFactor];
 		for (int i = parameterAdjustmentFactor; i < baseTypes.length; i++) {
 			if (baseTypes[i] instanceof Class) {
-				ret[i-parameterAdjustmentFactor] = AjTypeSystem.getAjType((Class<?>)baseTypes[i]);
+				ret[i - parameterAdjustmentFactor] = AjTypeSystem.getAjType((Class<?>) baseTypes[i]);
 			} else {
-				ret[i-parameterAdjustmentFactor] = baseTypes[i];
+				ret[i - parameterAdjustmentFactor] = baseTypes[i];
 			}
 		}
 		return ret;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.InterTypeMethodDeclaration#getTypeParameters()
 	 */
 	public TypeVariable<Method>[] getTypeParameters() {
@@ -122,7 +135,7 @@ public class InterTypeMethodDeclarationImpl extends InterTypeDeclarationImpl
 		}
 		return ret;
 	}
-	
+
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(java.lang.reflect.Modifier.toString(getModifiers()));
@@ -134,12 +147,12 @@ public class InterTypeMethodDeclarationImpl extends InterTypeDeclarationImpl
 		sb.append(getName());
 		sb.append("(");
 		AjType<?>[] pTypes = getParameterTypes();
-		for(int i = 0; i < (pTypes.length - 1); i++) {
+		for (int i = 0; i < (pTypes.length - 1); i++) {
 			sb.append(pTypes[i].toString());
 			sb.append(", ");
 		}
 		if (pTypes.length > 0) {
-			sb.append(pTypes[pTypes.length -1].toString());
+			sb.append(pTypes[pTypes.length - 1].toString());
 		}
 		sb.append(")");
 		return sb.toString();

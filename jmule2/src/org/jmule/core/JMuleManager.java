@@ -24,25 +24,26 @@ package org.jmule.core;
 
 /**
  * Created on 04-27-2008
+ * 
  * @author javajox
- * @version $$Revision: 1.2 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/08/02 14:09:26 $$
+ * @version $$Revision: 1.2 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/08/02 14:09:26 $$
  */
 public interface JMuleManager extends JMuleCoreComponent {
-	  
-	  /**
-	   * Initializes the JMule manager
-	   */
-	  public void initialize();
-	  
-	  /**
-	   * Starts the JMule manager
-	   */
-	  public void start();
-  	  
-	  /**
-	   * Stops the JMule manager
-	   */
-	  public void shutdown();
-	  
+
+	/**
+	 * Initializes the JMule manager
+	 */
+	public void initialize();
+
+	/**
+	 * Starts the JMule manager
+	 */
+	public void start();
+
+	/**
+	 * Stops the JMule manager
+	 */
+	public void shutdown();
+
 }

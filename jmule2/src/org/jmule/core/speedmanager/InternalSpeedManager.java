@@ -24,9 +24,10 @@ package org.jmule.core.speedmanager;
 
 /**
  * Created on Aug 29, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/09/17 18:23:17 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/09/17 18:23:17 $
  */
 public interface InternalSpeedManager extends SpeedManager {
 

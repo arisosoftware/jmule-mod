@@ -11,12 +11,12 @@
  *     Xerox/PARC     initial implementation 
  * ******************************************************************/
 
-
 package org.aspectj.lang.reflect;
 
 import org.aspectj.lang.Signature;
 
 public interface MemberSignature extends Signature {
-	// AccessibleObject is a 1.2 API, we run on 1.1... (thanks Wes for catching this)
-	//AccessibleObject getAccessibleObject(); 
+	// AccessibleObject is a 1.2 API, we run on 1.1... (thanks Wes for catching
+	// this)
+	// AccessibleObject getAccessibleObject();
 }

@@ -31,9 +31,10 @@ import org.jmule.core.sharingmanager.SharedFile;
 /**
  *
  * Created on Oct 14, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
 public class SharedFilesTableModel extends AbstractTableModel {
 
@@ -42,22 +43,16 @@ public class SharedFilesTableModel extends AbstractTableModel {
 	public static final int TYPE = 2;
 	public static final int HASH = 3;
 	public static final int COMPLETED = 4;
-	
-	private static final String column_names[] = {
-		                           "File name",
-		                           "Size",
-		                           "Type",
-		                           "Hash",
-		                           "Completed"
-	                            };
-	
+
+	private static final String column_names[] = { "File name", "Size", "Type", "Hash", "Completed" };
+
 	private List<SharedFile> sharedFiles;
-	
+
 	public SharedFilesTableModel(List<SharedFile> sharedFiles) {
-		
-	    this.sharedFiles = sharedFiles;	
+
+		this.sharedFiles = sharedFiles;
 	}
-	
+
 	public int getColumnCount() {
 
 		return column_names.length;

@@ -38,27 +38,28 @@ import org.jmule.core.jkad.packet.PacketFactory;
 import org.jmule.core.jkad.publisher.Publisher.PublishTaskListener;
 import org.jmule.core.jkad.routingtable.KadContact;
 
-
 /**
  * Created on Jan 14, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.12 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/28 13:13:43 $
+ * @version $Revision: 1.12 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/28 13:13:43 $
  */
 public class PublishKeywordTask extends PublishTask {
 
 	private LookupTask lookup_task;
 	private Collection<Collection<PublishItem>> publish_items;
 	private String keyword;
-	
-	public PublishKeywordTask(PublishTaskListener listener,Int128 keywordID, Collection<PublishItem> publishItems, String keyword) {
-		super(keywordID,listener);
+
+	public PublishKeywordTask(PublishTaskListener listener, Int128 keywordID, Collection<PublishItem> publishItems,
+			String keyword) {
+		super(keywordID, listener);
 		publish_items = new ArrayList<Collection<PublishItem>>();
 		this.keyword = keyword;
 		Collection<PublishItem> list = new ArrayList<PublishItem>();
 		int i = 0;
-		for(PublishItem p : publishItems) {
-			if (i!=0)
+		for (PublishItem p : publishItems) {
+			if (i != 0)
 				if (i % JKadConstants.PUBLISH_KEYWORD_IN_PACKET == 0) {
 					publish_items.add(list);
 					list = new ArrayList<PublishItem>();
@@ -69,17 +70,18 @@ public class PublishKeywordTask extends PublishTask {
 		if (list.size() != 0)
 			publish_items.add(list);
 	}
-	
+
 	public String getKeyword() {
 		return keyword;
 	}
-		
+
 	public void start() throws JKadException {
-		if (lookup_task!=null)
-			if (lookup_task.isLookupStarted()) return;
+		if (lookup_task != null)
+			if (lookup_task.isLookupStarted())
+				return;
 		isStarted = true;
 		lookup_task = new LookupTask(RequestType.STORE, publishID, JKadConstants.LOOKUP_STORE_KEYWORD_TIMEOUT) {
-			
+
 			public void lookupTimeout() {
 				isStarted = false;
 				updatePublishTime();
@@ -87,27 +89,27 @@ public class PublishKeywordTask extends PublishTask {
 			}
 
 			public void processToleranceContacts(ContactAddress sender, List<KadContact> results) {
-				for(KadContact contact : results) {
+				for (KadContact contact : results) {
 					KadPacket packet = null;
 					if (!contact.supportKad2())
-						for(Collection<PublishItem> items : publish_items) {
+						for (Collection<PublishItem> items : publish_items) {
 							packet = PacketFactory.getPublish1ReqPacket(targetID, items);
 							_network_manager.sendKadPacket(packet, contact.getIPAddress(), contact.getUDPPort());
 						}
 					else
-						for(Collection<PublishItem> items : publish_items) {
+						for (Collection<PublishItem> items : publish_items) {
 							packet = PacketFactory.getPublishKeyReq2Packet(targetID, items);
 							_network_manager.sendKadPacket(packet, contact.getIPAddress(), contact.getUDPPort());
-						}					
+						}
 				}
 			}
-			
+
 			public void lookupTerminated() {
 				isStarted = false;
 				updatePublishTime();
 				task_listener.taskStopped(task_instance);
 			}
-			
+
 		};
 
 		Lookup.getSingleton().addLookupTask(lookup_task);
@@ -115,8 +117,9 @@ public class PublishKeywordTask extends PublishTask {
 	}
 
 	public void stop() {
-		if (!isStarted) return;
-		isStarted = false; 
+		if (!isStarted)
+			return;
+		isStarted = false;
 		Lookup.getSingleton().removeLookupTask(publishID);
 	}
 

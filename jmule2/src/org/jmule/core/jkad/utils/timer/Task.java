@@ -24,22 +24,21 @@ package org.jmule.core.jkad.utils.timer;
 
 /**
  * Created on Jan 8, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/07/06 14:13:25 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/07/06 14:13:25 $
  */
 public abstract class Task implements Runnable {
-	
+
 	private boolean stop = false;
-	
+
 	public void stopTask() {
 		stop = true;
 	}
 
-	public boolean mustStopTask () {
+	public boolean mustStopTask() {
 		return stop;
 	}
-	
-	
 
 }

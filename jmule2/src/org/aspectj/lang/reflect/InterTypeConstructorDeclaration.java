@@ -23,12 +23,12 @@ public interface InterTypeConstructorDeclaration extends InterTypeDeclaration {
 	 * The constructor parameters
 	 */
 	AjType<?>[] getParameterTypes();
-	
+
 	/**
 	 * The generic constructor parameters
 	 */
 	Type[] getGenericParameterTypes();
-	
+
 	/**
 	 * The declared exceptions thrown by this constructor
 	 */

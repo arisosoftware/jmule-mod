@@ -27,29 +27,29 @@ import java.util.Map;
 
 /**
  * Created on 07-19-2008
+ * 
  * @author javajox
- * @version $$Revision: 1.2 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/08/02 14:09:27 $$
+ * @version $$Revision: 1.2 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/08/02 14:09:27 $$
  */
 public class JMRawData {
 
-	public static final int       UDP_PORT                =        100;
-	public static final int       TCP_PORT                =        200;
-	public static final int       NICK_NAME               =        300;
-	public static final int       DOWNLOAD_LIMIT          =        400;
-	public static final int       UPLOAD_LIMIT            =        500;
-	public static final int       SHARED_FOLDERS          =        600;
-	
-	
-	Map<Integer,Object> raw_data = new HashMap<Integer,Object>();
-	
+	public static final int UDP_PORT = 100;
+	public static final int TCP_PORT = 200;
+	public static final int NICK_NAME = 300;
+	public static final int DOWNLOAD_LIMIT = 400;
+	public static final int UPLOAD_LIMIT = 500;
+	public static final int SHARED_FOLDERS = 600;
+
+	Map<Integer, Object> raw_data = new HashMap<Integer, Object>();
+
 	public Object getValue(int key) {
-		
+
 		return raw_data.get(key);
 	}
-	
+
 	public void setValue(int key, Object value) {
-		
+
 		raw_data.put(key, value);
 	}
 

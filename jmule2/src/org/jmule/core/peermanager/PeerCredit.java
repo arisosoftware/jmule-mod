@@ -28,8 +28,8 @@ import org.jmule.core.utils.Convert;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/01/28 13:14:23 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/01/28 13:14:23 $$
  */
 public class PeerCredit {
 	private UserHash userHash;
@@ -39,18 +39,17 @@ public class PeerCredit {
 	private long nLastSeen = 0;
 	private int nUploadedHi = 0;
 	private int nDownloadedHi = 0;
-	private int nReserved3 = 0; 
+	private int nReserved3 = 0;
 	private byte abySecureIdent[] = new byte[0];
-	
+
 	private boolean verified = false;
-	
+
 	public PeerCredit(UserHash userHash) {
 		this.userHash = userHash;
 	}
-	
-	public PeerCredit(byte[] abyKey, int uploadedLo, int downloadedLo,
-			long lastSeen, int uploadedHi, int downloadedHi, int reserved3,
-			byte[] abySecureIdent) {
+
+	public PeerCredit(byte[] abyKey, int uploadedLo, int downloadedLo, long lastSeen, int uploadedHi, int downloadedHi,
+			int reserved3, byte[] abySecureIdent) {
 		super();
 		userHash = new UserHash(abyKey);
 		nUploadedLo = uploadedLo;
@@ -71,38 +70,37 @@ public class PeerCredit {
 		result += "nUploadedHi : " + nUploadedHi + "\n";
 		result += "nDownloadedHi : " + nDownloadedHi + "\n";
 		result += "nReserved3 : " + nReserved3 + "\n";
-		result += "abySecureIdent : "
-				+ Convert.byteToHexString(abySecureIdent, " ") + "\n";
-		
+		result += "abySecureIdent : " + Convert.byteToHexString(abySecureIdent, " ") + "\n";
+
 		result += "Download : " + getDownload() + "\n";
 		result += "Upload   : " + getUpload() + "\n";
 		return result;
 	}
-	
+
 	public boolean isVerified() {
 		return verified;
 	}
-	
+
 	public void setVerified(boolean verified) {
 		this.verified = verified;
 	}
-	
+
 	public void addUpload(long bytes) {
 		long total = getUpload() + bytes;
 		setNUploadedLo(Convert.longToInt(total));
 		setNUploadedHi(Convert.longToInt(total >> 32));
 	}
-	
+
 	public void addDownload(long bytes) {
 		long total = getDownload() + bytes;
 		setNDownloadedLo(Convert.longToInt(total));
 		setNDownloadedHi(Convert.longToInt(total >> 32));
 	}
-	
+
 	public long getUpload() {
 		return getNUploadedHi() << 32 | getNUploadedLo();
 	}
-	
+
 	public long getDownload() {
 		return Convert.intToLong(getNDownloadedHi() << 32 | getNDownloadedLo());
 	}
@@ -126,7 +124,6 @@ public class PeerCredit {
 	public long getLastSeen() {
 		return nLastSeen;
 	}
-
 
 	public void setLastSeen(long lastSeen) {
 		nLastSeen = lastSeen;

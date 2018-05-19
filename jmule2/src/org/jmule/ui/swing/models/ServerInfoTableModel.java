@@ -33,9 +33,10 @@ import org.jmule.ui.utils.NumberFormatter;
 /**
  *
  * Created on Oct 2, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.2 $
- * Last changed by $Author: javajox $ on $Date: 2009/09/22 19:08:43 $
+ * @version $Revision: 1.2 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/09/22 19:08:43 $
  */
 public class ServerInfoTableModel extends AbstractTableModel {
 
@@ -48,66 +49,66 @@ public class ServerInfoTableModel extends AbstractTableModel {
 	public final static int SOFT_LIMIT = 6;
 	public final static int HARD_LIMIT = 7;
 	public final static int VERSION = 8;
-	
-	private final static String row_names[] = {
-		                        "  Name",
-		                        "  IP",
-		                        "  Description",
-		                        "  Ping",
-		                        "  Files",
-		                        "  Users",
-		                        "  Soft limit",
-		                        "  Hard limit",
-		                        "  Version"
-	};
-	
+
+	private final static String row_names[] = { "  Name", "  IP", "  Description", "  Ping", "  Files", "  Users",
+			"  Soft limit", "  Hard limit", "  Version" };
+
 	JMuleCore _core = JMuleCoreFactory.getSingleton();
 	ServerManager _server_manager = _core.getServerManager();
-	
+
 	public int getColumnCount() {
-		
+
 		return 2;
 	}
 
 	public int getRowCount() {
-		
+
 		return row_names.length;
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		
+
 		Server c_server = _server_manager.getConnectedServer();
-		
-		if( columnIndex == 0 ) {
-            return row_names[rowIndex];
+
+		if (columnIndex == 0) {
+			return row_names[rowIndex];
 		}
-		
-		if( c_server != null ) {
-		   if( columnIndex == 1 ) {
-		      switch(rowIndex) {
-		         case NAME        :    return " " + c_server.getName();
-		         case IP          :    return " " + c_server.getAddress();
-		         case DESCRIPTION :    return " " + c_server.getDesc();
-		         case PING        :    return " " + c_server.getPing();
-		         case FILES       :    return " " + NumberFormatter.formatSizeHumanReadable(c_server.getNumFiles());
-		         case USERS       :    return " " + NumberFormatter.formatSizeHumanReadable(c_server.getNumUsers());
-		         case SOFT_LIMIT  :    return " " + NumberFormatter.formatSizeHumanReadable(c_server.getSoftLimit());
-		         case HARD_LIMIT  :    return " " + NumberFormatter.formatSizeHumanReadable(c_server.getHardLimit());
-		         case VERSION     :    return " " + c_server.getVersion();
-		      }
-		  }
+
+		if (c_server != null) {
+			if (columnIndex == 1) {
+				switch (rowIndex) {
+				case NAME:
+					return " " + c_server.getName();
+				case IP:
+					return " " + c_server.getAddress();
+				case DESCRIPTION:
+					return " " + c_server.getDesc();
+				case PING:
+					return " " + c_server.getPing();
+				case FILES:
+					return " " + NumberFormatter.formatSizeHumanReadable(c_server.getNumFiles());
+				case USERS:
+					return " " + NumberFormatter.formatSizeHumanReadable(c_server.getNumUsers());
+				case SOFT_LIMIT:
+					return " " + NumberFormatter.formatSizeHumanReadable(c_server.getSoftLimit());
+				case HARD_LIMIT:
+					return " " + NumberFormatter.formatSizeHumanReadable(c_server.getHardLimit());
+				case VERSION:
+					return " " + c_server.getVersion();
+				}
+			}
 		}
-		
+
 		return "";
 	}
-	
+
 	public String getColumnName(int col) {
-		
+
 		return " ";
 	}
-	
+
 	public Class getColumnClass(int col) {
-		
+
 		return Object.class;
 	}
 

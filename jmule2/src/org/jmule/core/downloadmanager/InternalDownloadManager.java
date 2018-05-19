@@ -34,37 +34,37 @@ import org.jmule.core.sharingmanager.JMuleBitSet;
  * Created on Aug 29, 2009
  * 
  * @author binary256
- * @version $Revision: 1.10 $ Last changed by $Author: binary255 $ on $Date: 2010/08/15 12:29:52 $
+ * @version $Revision: 1.10 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/08/15 12:29:52 $
  */
 public interface InternalDownloadManager extends DownloadManager {
 
 	public void scheduleForPartCheck(DownloadSession session);
-	
+
 	public void scheduleToComplete(DownloadSession session);
-	
-	public void receivedCompressedFileChunk(Peer sender,FileHash fileHash, FileChunk compressedFileChunk);
 
-	public void receivedFileNotFoundFromPeer(Peer sender,FileHash fileHash);
+	public void receivedCompressedFileChunk(Peer sender, FileHash fileHash, FileChunk compressedFileChunk);
 
-	public void receivedFileRequestAnswerFromPeer(Peer sender,FileHash fileHash, String fileName);
+	public void receivedFileNotFoundFromPeer(Peer sender, FileHash fileHash);
 
-	public void receivedFileStatusResponseFromPeer(Peer sender,FileHash fileHash, JMuleBitSet partStatus);
+	public void receivedFileRequestAnswerFromPeer(Peer sender, FileHash fileHash, String fileName);
 
-	public void receivedHashSetResponseFromPeer(Peer sender,FileHash fileHash, PartHashSet partHashSet);
+	public void receivedFileStatusResponseFromPeer(Peer sender, FileHash fileHash, JMuleBitSet partStatus);
 
-	public void receivedQueueRankFromPeer(Peer sender,int queueRank);
+	public void receivedHashSetResponseFromPeer(Peer sender, FileHash fileHash, PartHashSet partHashSet);
 
-	public void receivedRequestedFileChunkFromPeer(Peer sender,FileHash fileHash, FileChunk chunk);
+	public void receivedQueueRankFromPeer(Peer sender, int queueRank);
+
+	public void receivedRequestedFileChunkFromPeer(Peer sender, FileHash fileHash, FileChunk chunk);
 
 	public void receivedSlotGivenFromPeer(Peer sender);
 
 	public void receivedSlotTakenFromPeer(Peer sender);
-	
+
 	public void receivedSourcesAnswerFromPeer(Peer peer, FileHash fileHash, List<Peer> peerList);
-	
+
 	/**
-	 * Add peers which have fileHash to the download session identified by
-	 * fileHash
+	 * Add peers which have fileHash to the download session identified by fileHash
 	 * 
 	 * @param fileHash
 	 * @param peerList
@@ -74,20 +74,19 @@ public interface InternalDownloadManager extends DownloadManager {
 	public boolean hasPeer(Peer peer);
 
 	public void peerRemoved(Peer peer);
-	
+
 	public void peerDisconnected(Peer peer);
-	
+
 	public void peerConnected(Peer peer);
-	
+
 	public void peerConnectingFailed(Peer peer, Throwable cause);
-	
+
 	public void connectedToServer(Server server);
-	
+
 	public void disconnectedFromServer(Server server);
 
-	
 	public void jKadConnected();
-	
+
 	public void jKadDisconnected();
-	
+
 }

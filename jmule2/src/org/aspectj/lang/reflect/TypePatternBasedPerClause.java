@@ -22,5 +22,5 @@ public interface TypePatternBasedPerClause {
 	 * Get the associated type pattern
 	 */
 	TypePattern getTypePattern();
-	
+
 }

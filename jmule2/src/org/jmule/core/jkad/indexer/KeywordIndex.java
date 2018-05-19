@@ -26,106 +26,67 @@ import org.jmule.core.jkad.Int128;
 
 /**
  * Created on Jan 27, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/07/06 14:13:25 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/07/06 14:13:25 $
  */
-public class KeywordIndex extends Index{
+public class KeywordIndex extends Index {
 
 	public KeywordIndex(Int128 id) {
 		super(id);
 	}
-	
-	/*private Int128 keywordID;
-	private Map<Int128, SourceRecord> keywordSources = new Hashtable<Int128, SourceRecord>();
-			
-	public KeywordIndex(Int128 keywordID) {
-		this.keywordID = keywordID;
-	}
-	
-	public Int128 getKeywordID() {
-		return keywordID;
-	}
-	
-	public void addName(Int128 sourceID, String name) {
-		SourceRecord record = null;
-		if (!keywordSources.containsKey(sourceID)) {
-			keywordSources.put(sourceID, new SourceRecord(sourceID));
-		}
-		record = keywordSources.get(sourceID);
-		record.addName(name);
-	}
-	
-	public void addPublisher(Int128 sourceID, IPAddress address) {
-		SourceRecord record = null;
-		if (!keywordSources.containsKey(sourceID)) {
-			keywordSources.put(sourceID, new SourceRecord(sourceID));
-		}
-		record = keywordSources.get(sourceID);
-		record.addPublisherIP(address);
-	}
-	
-	void addTagList(Int128 sourceID, TagList tagList) {
-		SourceRecord record = null;
-		if (!keywordSources.containsKey(sourceID)) {
-			keywordSources.put(sourceID, new SourceRecord(sourceID));
-		}
-		record = keywordSources.get(sourceID);
-		record.setTagList(tagList);
-	}
-	
-	public List<Source> getKeywordSources() {
-		List<Source> result = new LinkedList<Source>();
-		
-		return result;
-	}
-	
-	private class SourceRecord {
-		private List<String> nameList = new LinkedList<String>();
-		private List<IPAddress> publisherIPs = new LinkedList<IPAddress>();
-		private long lifeTime;
-		private Int128 sourceID;
-		private TagList tagList;
-		
-		public SourceRecord(Int128 sourceID) {
-			this.sourceID = sourceID;
-		}
-		
-		public List<String> getNameList() {
-			return nameList;
-		}
-		public void addName(String name) {
-			nameList.add(name);
-		}
-		public long getLifeTime() {
-			return lifeTime;
-		}
-		public void setLifeTime(long lifeTime) {
-			this.lifeTime = lifeTime;
-		}
-		public Int128 getSourceID() {
-			return sourceID;
-		}
-		public void setSourceID(Int128 sourceID) {
-			this.sourceID = sourceID;
-		}
 
-		public TagList getTagList() {
-			return tagList;
-		}
-
-		public void setTagList(TagList tagList) {
-			this.tagList = tagList;
-		}
-
-		public List<IPAddress> getPublishers() {
-			return publisherIPs;
-		}
-
-		public void addPublisherIP(IPAddress address) {
-			if (publisherIPs.contains(address)) return ;
-			publisherIPs.add(address);
-		}
-		
-	}*/
+	/*
+	 * private Int128 keywordID; private Map<Int128, SourceRecord> keywordSources =
+	 * new Hashtable<Int128, SourceRecord>();
+	 * 
+	 * public KeywordIndex(Int128 keywordID) { this.keywordID = keywordID; }
+	 * 
+	 * public Int128 getKeywordID() { return keywordID; }
+	 * 
+	 * public void addName(Int128 sourceID, String name) { SourceRecord record =
+	 * null; if (!keywordSources.containsKey(sourceID)) {
+	 * keywordSources.put(sourceID, new SourceRecord(sourceID)); } record =
+	 * keywordSources.get(sourceID); record.addName(name); }
+	 * 
+	 * public void addPublisher(Int128 sourceID, IPAddress address) { SourceRecord
+	 * record = null; if (!keywordSources.containsKey(sourceID)) {
+	 * keywordSources.put(sourceID, new SourceRecord(sourceID)); } record =
+	 * keywordSources.get(sourceID); record.addPublisherIP(address); }
+	 * 
+	 * void addTagList(Int128 sourceID, TagList tagList) { SourceRecord record =
+	 * null; if (!keywordSources.containsKey(sourceID)) {
+	 * keywordSources.put(sourceID, new SourceRecord(sourceID)); } record =
+	 * keywordSources.get(sourceID); record.setTagList(tagList); }
+	 * 
+	 * public List<Source> getKeywordSources() { List<Source> result = new
+	 * LinkedList<Source>();
+	 * 
+	 * return result; }
+	 * 
+	 * private class SourceRecord { private List<String> nameList = new
+	 * LinkedList<String>(); private List<IPAddress> publisherIPs = new
+	 * LinkedList<IPAddress>(); private long lifeTime; private Int128 sourceID;
+	 * private TagList tagList;
+	 * 
+	 * public SourceRecord(Int128 sourceID) { this.sourceID = sourceID; }
+	 * 
+	 * public List<String> getNameList() { return nameList; } public void
+	 * addName(String name) { nameList.add(name); } public long getLifeTime() {
+	 * return lifeTime; } public void setLifeTime(long lifeTime) { this.lifeTime =
+	 * lifeTime; } public Int128 getSourceID() { return sourceID; } public void
+	 * setSourceID(Int128 sourceID) { this.sourceID = sourceID; }
+	 * 
+	 * public TagList getTagList() { return tagList; }
+	 * 
+	 * public void setTagList(TagList tagList) { this.tagList = tagList; }
+	 * 
+	 * public List<IPAddress> getPublishers() { return publisherIPs; }
+	 * 
+	 * public void addPublisherIP(IPAddress address) { if
+	 * (publisherIPs.contains(address)) return ; publisherIPs.add(address); }
+	 * 
+	 * }
+	 */
 }

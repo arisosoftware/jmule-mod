@@ -41,95 +41,89 @@ import org.jmule.ui.swing.SwingPreferences;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.3 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/10/18 17:42:46 $$
+ * @version $$Revision: 1.3 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/10/18 17:42:46 $$
  */
 public class JMTable extends JXTable implements Refreshable {
 
 	protected List<TableColumnExt> table_columns = new LinkedList<TableColumnExt>();
 	protected SwingPreferences _pref = SwingPreferences.getSingleton();
-    protected JFrame parent;
-	
+	protected JFrame parent;
+
 	public JMTable() {
 		init();
 	}
-	
+
 	public JMTable(JFrame parent) {
 		this.parent = parent;
 		init();
 	}
-	
+
 	private void init() {
 		this.setRowHeight(20);
-		this.setShowGrid(false); 
-		//this.setIntercellSpacing(new Dimension(0,0));
-		//this.setColumnMargin(0);
-		//this.setDoubleBuffered(true);
-		//this.setShowVerticalLines(false);
-		//this.setHorizontalScrollEnabled(false);
-		//this.setRowMargin(0);
+		this.setShowGrid(false);
+		// this.setIntercellSpacing(new Dimension(0,0));
+		// this.setColumnMargin(0);
+		// this.setDoubleBuffered(true);
+		// this.setShowVerticalLines(false);
+		// this.setHorizontalScrollEnabled(false);
+		// this.setRowMargin(0);
 		this.setHorizontalScrollEnabled(true);
-		//this.setFillsViewportHeight(true);
-		//this.setRowMargin(0);
-		//this.setShowVerticalLines(false);
-		//this.set
-        //this.setIntercellSpacing(new java.awt.Dimension(0, 0));
-       // this.setRowMargin(0);
-       // this.setShowHorizontalLines(false);
-       // this.setShowVerticalLines(false);
-        //setRowMargin(0);
-       // getColumnModel().setColumnMargin(0);
+		// this.setFillsViewportHeight(true);
+		// this.setRowMargin(0);
+		// this.setShowVerticalLines(false);
+		// this.set
+		// this.setIntercellSpacing(new java.awt.Dimension(0, 0));
+		// this.setRowMargin(0);
+		// this.setShowHorizontalLines(false);
+		// this.setShowVerticalLines(false);
+		// setRowMargin(0);
+		// getColumnModel().setColumnMargin(0);
 
-       // resizeAndRepaint();
+		// resizeAndRepaint();
 	}
-	
+
 	protected void buildColumns(AbstractTableModel tableModel) {
 		// set the table columns like user prefer
 		Collections.sort(table_columns, new Comparator<TableColumnExt>() {
-          	public int compare(TableColumnExt o1, TableColumnExt o2) {
-          		  int o1_order = _pref.getColumnOrder(Integer.parseInt(o1.getIdentifier().toString()));
-          		  int o2_order = _pref.getColumnOrder(Integer.parseInt(o2.getIdentifier().toString()));
-                  if( o1_order < o2_order ) return -1; 
-                  if( o1_order > o2_order ) return 1;
-              return 0;
+			public int compare(TableColumnExt o1, TableColumnExt o2) {
+				int o1_order = _pref.getColumnOrder(Integer.parseInt(o1.getIdentifier().toString()));
+				int o2_order = _pref.getColumnOrder(Integer.parseInt(o2.getIdentifier().toString()));
+				if (o1_order < o2_order)
+					return -1;
+				if (o1_order > o2_order)
+					return 1;
+				return 0;
 			}
-		});		
-		TableColumnModel column_model = new DefaultTableColumnModel();		
-		for(TableColumnExt column : table_columns) {
+		});
+		TableColumnModel column_model = new DefaultTableColumnModel();
+		for (TableColumnExt column : table_columns) {
 			column_model.addColumn(column);
-		}		
+		}
 		column_model.setColumnMargin(0);
 		this.setModel(tableModel);
 		this.setColumnModel(column_model);
 	}
-	
+
 	public void updateUI() {
 		super.updateUI();
-		
-		setIntercellSpacing( new Dimension( 0, 0 ) );
+
+		setIntercellSpacing(new Dimension(0, 0));
 	}
-	 //private DefaultTableCellRenderer whiteRenderer;
-	 //private DefaultTableCellRenderer grayRenderer;
+	// private DefaultTableCellRenderer whiteRenderer;
+	// private DefaultTableCellRenderer grayRenderer;
 
 	public void refresh() {
-		
+
 		repaint();
 	}
-	 
-     /*public TableCellRenderer getCellRenderer(int row, int column) {
-	      if (whiteRenderer == null)
-	      {
-	         whiteRenderer = new DefaultTableCellRenderer();
-	      }
-	      if (grayRenderer == null)
-	      {
-	         grayRenderer = new DefaultTableCellRenderer();
-	         grayRenderer.setBackground(new Color(240,240,240));
-	      }
-	 
-	      if ( (row % 2) == 0 )
-	            return whiteRenderer;
-	      else
-	            return grayRenderer;
-	 }*/
+
+	/*
+	 * public TableCellRenderer getCellRenderer(int row, int column) { if
+	 * (whiteRenderer == null) { whiteRenderer = new DefaultTableCellRenderer(); }
+	 * if (grayRenderer == null) { grayRenderer = new DefaultTableCellRenderer();
+	 * grayRenderer.setBackground(new Color(240,240,240)); }
+	 * 
+	 * if ( (row % 2) == 0 ) return whiteRenderer; else return grayRenderer; }
+	 */
 }

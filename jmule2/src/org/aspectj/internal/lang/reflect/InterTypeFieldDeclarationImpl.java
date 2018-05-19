@@ -22,59 +22,64 @@ import org.aspectj.lang.reflect.InterTypeFieldDeclaration;
  * @author colyer
  *
  */
-public class InterTypeFieldDeclarationImpl extends InterTypeDeclarationImpl
-		implements InterTypeFieldDeclaration {
+public class InterTypeFieldDeclarationImpl extends InterTypeDeclarationImpl implements InterTypeFieldDeclaration {
 
 	private String name;
 	private AjType<?> type;
 	private Type genericType;
-	
+
 	/**
 	 * @param decType
 	 * @param target
 	 * @param mods
 	 */
-	public InterTypeFieldDeclarationImpl(AjType<?> decType, String target,
-			int mods, String name, AjType<?> type, Type genericType) {
+	public InterTypeFieldDeclarationImpl(AjType<?> decType, String target, int mods, String name, AjType<?> type,
+			Type genericType) {
 		super(decType, target, mods);
 		this.name = name;
 		this.type = type;
 		this.genericType = genericType;
 	}
-	
+
 	public InterTypeFieldDeclarationImpl(AjType<?> decType, AjType<?> targetType, Field base) {
-		super(decType,targetType,base.getModifiers());
+		super(decType, targetType, base.getModifiers());
 		this.name = base.getName();
 		this.type = AjTypeSystem.getAjType(base.getType());
 		Type gt = base.getGenericType();
 		if (gt instanceof Class) {
-			this.genericType = AjTypeSystem.getAjType((Class<?>)gt);
+			this.genericType = AjTypeSystem.getAjType((Class<?>) gt);
 		} else {
 			this.genericType = gt;
 		}
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.InterTypeFieldDeclaration#getName()
 	 */
 	public String getName() {
 		return this.name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.InterTypeFieldDeclaration#getType()
 	 */
 	public AjType<?> getType() {
 		return this.type;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.aspectj.lang.reflect.InterTypeFieldDeclaration#getGenericType()
 	 */
 	public Type getGenericType() {
 		return this.genericType;
 	}
-	
+
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(java.lang.reflect.Modifier.toString(getModifiers()));

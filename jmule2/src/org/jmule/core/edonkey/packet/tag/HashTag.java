@@ -27,16 +27,18 @@ import java.nio.ByteBuffer;
 import org.jmule.core.edonkey.FileHash;
 import org.jmule.core.utils.Misc;
 import static org.jmule.core.edonkey.ED2KConstants.*;
+
 /**
  * Created on Jul 15, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 16:00:42 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 16:00:42 $
  */
 public class HashTag extends StandartTag {
 
 	private FileHash hash;
-	
+
 	public HashTag(byte[] tagName, FileHash hash) {
 		super(TAGTYPE_HASH, tagName);
 		this.hash = hash;
@@ -49,11 +51,9 @@ public class HashTag extends StandartTag {
 		return result;
 	}
 
-
 	int getValueLength() {
 		return hash.length();
 	}
-
 
 	public Object getValue() {
 
@@ -62,7 +62,7 @@ public class HashTag extends StandartTag {
 
 	public void setValue(Object object) {
 		hash = (FileHash) object;
-		
+
 	}
 
 }

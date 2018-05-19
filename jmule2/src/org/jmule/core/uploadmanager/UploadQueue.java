@@ -45,46 +45,49 @@ import org.jmule.core.peermanager.PeerManagerSingleton;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.19 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/07/31 13:11:45 $$
+ * @version $$Revision: 1.19 $$ Last changed by $$Author: binary255 $$ on
+ *          $$Date: 2010/07/31 13:11:45 $$
  */
 public class UploadQueue {
 	private static UploadQueue instance = null;
-	
+
 	static UploadQueue getInstance() {
 		if (instance == null)
-				instance = new UploadQueue();
+			instance = new UploadQueue();
 		return instance;
 	}
-	
+
 	Map<UserHash, UploadQueueContainer> upload_queue = new ConcurrentHashMap<UserHash, UploadQueueContainer>();
-	Collection<UploadQueueContainer>    slot_clients = new ConcurrentLinkedQueue<UploadQueueContainer>();
-	enum PeerQueueStatus { SLOTGIVEN, SLOTTAKEN }
-	
+	Collection<UploadQueueContainer> slot_clients = new ConcurrentLinkedQueue<UploadQueueContainer>();
+
+	enum PeerQueueStatus {
+		SLOTGIVEN, SLOTTAKEN
+	}
+
 	private InternalPeerManager _peer_manager;
-	
+
 	private UploadQueue() {
 		_peer_manager = (InternalPeerManager) PeerManagerSingleton.getInstance();
 	}
-	
+
 	boolean hasPeer(Peer peer) {
-		if (peer.getUserHash() == null) return false;
+		if (peer.getUserHash() == null)
+			return false;
 		return upload_queue.containsKey(peer.getUserHash());
 	}
-	
+
 	boolean hasPeer(UserHash userHash) {
 		if (userHash == null)
 			return false;
 		return upload_queue.containsKey(userHash);
 	}
-	
+
 	void addPeer(Peer peer, FileHash fileHash) throws UploadQueueException {
 		if (!(size() < ConfigurationManager.UPLOAD_QUEUE_SIZE))
 			throw new UploadQueueException("Queue full");
-		upload_queue.put(peer.getUserHash(), 
-				new UploadQueueContainer(peer,fileHash, ED2KConstants.INITIAL_RATING));
+		upload_queue.put(peer.getUserHash(), new UploadQueueContainer(peer, fileHash, ED2KConstants.INITIAL_RATING));
 	}
-	
+
 	public int getPeerPosition(Peer peer) throws UploadQueueException {
 		UploadQueueContainer peer_container = upload_queue.get(peer.getUserHash());
 		if (peer_container == null)
@@ -98,7 +101,7 @@ public class UploadQueue {
 		}
 		return position;
 	}
-	
+
 	float getPeerScore(UploadQueueContainer container) {
 		float rating = container.rating;
 		rating *= _peer_manager.getCredit(container.peer);
@@ -106,11 +109,11 @@ public class UploadQueue {
 		float score = rating * time_in_queue / 100f;
 		return score;
 	}
-	
+
 	UploadQueueContainer getContainerByUserHash(UserHash hash) {
 		return upload_queue.get(hash);
 	}
-	
+
 	void removePeer(Peer peer) {
 		if (!hasPeer(peer))
 			return;
@@ -120,34 +123,34 @@ public class UploadQueue {
 		if (slot_clients.contains(container))
 			slot_clients.remove(container);
 	}
-	
+
 	public int size() {
 		return upload_queue.size();
 	}
-	
+
 	void clear() {
 		upload_queue.clear();
 		slot_clients.clear();
 	}
-	
+
 	boolean isFull() {
 		return (!(size() < ConfigurationManager.UPLOAD_QUEUE_SIZE));
 	}
-	
+
 	public boolean hasSlotPeer(Peer peer) {
-		for(UploadQueueContainer container : slot_clients)
+		for (UploadQueueContainer container : slot_clients)
 			if (container.peer.equals(peer))
 				return true;
 		return false;
 	}
-	
+
 	public JMIterable<Peer> getPeers() {
 		List<Peer> list = new LinkedList<Peer>();
 		for (UploadQueueContainer element : upload_queue.values())
 			list.add(element.peer);
 		return new JMIterable<Peer>(new JMIterator<Peer>(list.iterator()));
 	}
-	
+
 	public Collection<Peer> getPeers(FileHash fileHash) {
 		List<Peer> result = new LinkedList<Peer>();
 		for (UploadQueueContainer element : upload_queue.values())
@@ -155,35 +158,31 @@ public class UploadQueue {
 				result.add(element.peer);
 		return result;
 	}
-	
+
 	public String toString() {
 		String result = "Upload Queue : size : " + upload_queue.size() + "\n";
-		/*for (UserHash hash : upload_queue.keySet()) {
-			try {
-				UploadQueueContainer container = upload_queue.get(hash);
-				result += "[ \n { "+hash.toString()+" } \n" + container
-						+ "\n Peer position :" + getPeerPosition(container.peer) + "\n]\n";
-			} catch (UploadQueueException e) {
-				e.printStackTrace();
-			}
-		}*/
-		
+		/*
+		 * for (UserHash hash : upload_queue.keySet()) { try { UploadQueueContainer
+		 * container = upload_queue.get(hash); result +=
+		 * "[ \n { "+hash.toString()+" } \n" + container + "\n Peer position :" +
+		 * getPeerPosition(container.peer) + "\n]\n"; } catch (UploadQueueException e) {
+		 * e.printStackTrace(); } }
+		 */
+
 		result += "   \nSlot peers : " + slot_clients.size() + "\n";
-		/*for (UploadQueueContainer container : slot_clients) {
-			try {
-				result += "[\n" + container
-						+ "\n Peer position :" + getPeerPosition(container.peer) + "\n]\n";
-			} catch (UploadQueueException e) {
-				e.printStackTrace();
-			}
-		}*/
-		
+		/*
+		 * for (UploadQueueContainer container : slot_clients) { try { result += "[\n" +
+		 * container + "\n Peer position :" + getPeerPosition(container.peer) + "\n]\n";
+		 * } catch (UploadQueueException e) { e.printStackTrace(); } }
+		 */
+
 		return result;
 	}
-	
-	public void recalcSlotPeers(List<UploadQueueContainer> lostSlotPeers, List<UploadQueueContainer> obtainedSlotPeers) {
+
+	public void recalcSlotPeers(List<UploadQueueContainer> lostSlotPeers,
+			List<UploadQueueContainer> obtainedSlotPeers) {
 		List<UploadQueueContainer> max_score_peers = new ArrayList<UploadQueueContainer>();
-		for(UploadQueueContainer container : upload_queue.values()) {
+		for (UploadQueueContainer container : upload_queue.values()) {
 			if (container.getLastResponseTime() >= ConfigurationManager.UPLOADQUEUE_REMOVE_TIMEOUT) {
 				removePeer(container.peer);
 				continue;
@@ -194,7 +193,7 @@ public class UploadQueue {
 				float current_peer_score = getPeerScore(container);
 				UploadQueueContainer slot_container = null;
 				boolean found = false;
-				
+
 				for (int i = 0; i < max_score_peers.size(); i++) {
 					slot_container = max_score_peers.get(i);
 					float c_score = getPeerScore(slot_container);
@@ -203,36 +202,37 @@ public class UploadQueue {
 						break;
 					}
 				}
-				
+
 				if (found) {
 					max_score_peers.remove(slot_container);
 					max_score_peers.add(container);
 				}
 			}
 		}
-		
-		//extract lost slot peers
-		for(UploadQueueContainer container : slot_clients) {
-			if (!max_score_peers.contains(container)) 
+
+		// extract lost slot peers
+		for (UploadQueueContainer container : slot_clients) {
+			if (!max_score_peers.contains(container))
 				lostSlotPeers.add(container);
-			
+
 		}
 		slot_clients.removeAll(lostSlotPeers);
-		
+
 		// create list with peers which obtain slot
-		for(UploadQueueContainer container : max_score_peers) {
+		for (UploadQueueContainer container : max_score_peers) {
 			if (!slot_clients.contains(container)) {
 				slot_clients.add(container);
 				obtainedSlotPeers.add(container);
 			}
 		}
-		
-		
+
 	}
 
 	public void updateLastRequestTime(Peer peer, long time) {
 		UploadQueueContainer container = upload_queue.get(peer.getUserHash());
-		if (container == null) { return ; }
+		if (container == null) {
+			return;
+		}
 		container.lastRequestTime = time;
 	}
 
@@ -243,29 +243,23 @@ public class UploadQueue {
 		long lastRequestTime;
 		FileHash fileHash;
 		Set<PeerQueueStatus> peer_status = new HashSet<PeerQueueStatus>();
-		
+
 		public UploadQueueContainer(Peer uploadPeer, FileHash fileHash, float initialRating) {
 			peer = uploadPeer;
 			this.fileHash = fileHash;
 			lastRequestTime = addTime = System.currentTimeMillis();
 			rating = initialRating;
 		}
-		
+
 		public long getLastResponseTime() {
 			return System.currentTimeMillis() - lastRequestTime;
 		}
-		
+
 		public String toString() {
-			return " "+peer+
-			"\n Rating   : "+ rating+
-			"\n Score    : "+ getPeerScore(this)+
-			"\n Addtime  : " + addTime +
-			"\n Last request  : " + lastRequestTime +
-			"\n FileHash : " + fileHash
-			;
+			return " " + peer + "\n Rating   : " + rating + "\n Score    : " + getPeerScore(this) + "\n Addtime  : "
+					+ addTime + "\n Last request  : " + lastRequestTime + "\n FileHash : " + fileHash;
 		}
 
 	}
-	
-}
 
+}

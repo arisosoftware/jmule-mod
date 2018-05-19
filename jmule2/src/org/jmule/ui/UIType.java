@@ -25,16 +25,17 @@ package org.jmule.ui;
 /**
  *
  * Created on Sep 9, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/09/14 13:08:18 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/09/14 13:08:18 $
  */
 public enum UIType {
 
 	SWING,
-	
+
 	SWT,
-	
+
 	CONSOLE
-	
+
 }

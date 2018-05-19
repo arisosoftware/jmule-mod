@@ -27,18 +27,19 @@ import java.util.Comparator;
 /**
  *
  * Created on Oct 8, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/07/06 14:32:31 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/07/06 14:32:31 $
  */
 public class GeneralComparator implements Comparator<Object> {
 
 	private String methodName;
-	
+
 	public GeneralComparator(String methodName) {
 		this.methodName = methodName;
 	}
-	
+
 	public int compare(Object o1, Object o2) {
 
 		return Misc.compareAllObjects(o1, o2, methodName, true);

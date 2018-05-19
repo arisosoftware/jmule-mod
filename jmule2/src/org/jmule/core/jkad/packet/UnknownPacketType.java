@@ -26,12 +26,14 @@ import org.jmule.core.jkad.JKadException;
 
 /**
  * Created on Jun 16, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/09/17 18:07:32 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/09/17 18:07:32 $
  */
 public class UnknownPacketType extends JKadException {
 
-	public UnknownPacketType() { }
-	
+	public UnknownPacketType() {
+	}
+
 }

@@ -28,78 +28,76 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 
 import org.jmule.ui.localizer.Lang;
+
 /**
  * Created on Aug 16, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.5 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 13:08:35 $
+ * @version $Revision: 1.5 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 13:08:35 $
  */
 public class FileFormatter {
 
-	 public static String formatFileSize(long fileSzie) {
-		 long n = fileSzie;
-		    if (n < 1024)
-		      return n + " B";
-		    if (n < 1024 * 1024)
-		      return (n / 1024) + "." + ((n % 1024) / 103) + " KB";
-		    if (n < 1024 * 1024 * 1024)
-		      return (n / (1024 * 1024))
-		        + "."
-		        + ((n % (1024 * 1024)) / (103 * 1024))
-		        + " MB";
-		    if (n <= 1024l * 1024l * 1024l * 1024l)
-		      return (n / (1024l * 1024l * 1024l))
-		        + "."
-		        + ((n % (1024l * 1024l * 1024l)) / (103l * 1024l * 1024l))
-		        + " GB";
-		    return "A lot !!!";
+	public static String formatFileSize(long fileSzie) {
+		long n = fileSzie;
+		if (n < 1024)
+			return n + " B";
+		if (n < 1024 * 1024)
+			return (n / 1024) + "." + ((n % 1024) / 103) + " KB";
+		if (n < 1024 * 1024 * 1024)
+			return (n / (1024 * 1024)) + "." + ((n % (1024 * 1024)) / (103 * 1024)) + " MB";
+		if (n <= 1024l * 1024l * 1024l * 1024l)
+			return (n / (1024l * 1024l * 1024l)) + "." + ((n % (1024l * 1024l * 1024l)) / (103l * 1024l * 1024l))
+					+ " GB";
+		return "A lot !!!";
 	}
-	
-	 private static DecimalFormat formatter = new DecimalFormat("0.00");
-	 
-	 public static String formatProgress(double progress) {
-		 return formatter.format(progress)+"%";
-	 }
-	 
+
+	private static DecimalFormat formatter = new DecimalFormat("0.00");
+
+	public static String formatProgress(double progress) {
+		return formatter.format(progress) + "%";
+	}
+
 	public static final String NO_EXTENSION = "no extension";
-	
+
 	public static String getFileExtension(String fileName) {
-		int id = fileName.length()-1;
-		while(id>0) { 
-			if (fileName.charAt(id)=='.') break;
+		int id = fileName.length() - 1;
+		while (id > 0) {
+			if (fileName.charAt(id) == '.')
+				break;
 			id--;
 		}
 		String extension = NO_EXTENSION;
-		if (id!=0)
-			extension = fileName.substring(id+1, fileName.length());
-	
+		if (id != 0)
+			extension = fileName.substring(id + 1, fileName.length());
+
 		return extension;
 	}
-	
+
 	public static String formatMimeType(byte[] fileType) {
-		
-		if (Arrays.equals(TAG_FILE_TYPE_AUDIO,fileType)) 
+
+		if (Arrays.equals(TAG_FILE_TYPE_AUDIO, fileType))
 			return Lang.getString("mainwindow.searchtab.column.filetype.audio");
-		
-		if (Arrays.equals(TAG_FILE_TYPE_VIDEO,fileType)) 
+
+		if (Arrays.equals(TAG_FILE_TYPE_VIDEO, fileType))
 			return Lang.getString("mainwindow.searchtab.column.filetype.video");
-		
-		if (Arrays.equals(TAG_FILE_TYPE_IMAGE,fileType)) 
+
+		if (Arrays.equals(TAG_FILE_TYPE_IMAGE, fileType))
 			return Lang.getString("mainwindow.searchtab.column.filetype.image");
-		
-		if (Arrays.equals(TAG_FILE_TYPE_DOC,fileType)) 
+
+		if (Arrays.equals(TAG_FILE_TYPE_DOC, fileType))
 			return Lang.getString("mainwindow.searchtab.column.filetype.doc");
 
-		if (Arrays.equals(TAG_FILE_TYPE_PROGRAM,fileType)) 
+		if (Arrays.equals(TAG_FILE_TYPE_PROGRAM, fileType))
 			return Lang.getString("mainwindow.searchtab.column.filetype.program");
-		
-		if (Arrays.equals(TAG_FILE_TYPE_ARC,fileType)) 
+
+		if (Arrays.equals(TAG_FILE_TYPE_ARC, fileType))
 			return Lang.getString("mainwindow.searchtab.column.filetype.archive");
-		
-		if (Arrays.equals(TAG_FILE_TYPE_ISO,fileType)) 
+
+		if (Arrays.equals(TAG_FILE_TYPE_ISO, fileType))
 			return Lang.getString("mainwindow.searchtab.column.filetype.iso");
-		
+
 		return Lang.getString("mainwindow.searchtab.column.filetype.unknown");
 	}
-	
+
 }

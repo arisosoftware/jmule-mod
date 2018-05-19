@@ -30,122 +30,122 @@ import org.jmule.core.sharingmanager.JMuleBitSet;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.7 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/04/12 16:35:51 $$
+ * @version $$Revision: 1.7 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/04/12 16:35:51 $$
  */
 public class Convert {
-	
+
 	public static int byteToInt(byte bvalue) {
 		ByteBuffer data = Misc.getByteBuffer(4);
 		data.put(bvalue);
 		return data.getInt(0);
 	}
-	
-	public static int byteToShort(byte[] bvalue){
+
+	public static int byteToShort(byte[] bvalue) {
 		ByteBuffer data = Misc.getByteBuffer(2);
-		for(int i=0;i<bvalue.length;i++)
+		for (int i = 0; i < bvalue.length; i++)
 			data.put(bvalue[i]);
 		return data.getShort(0);
 	}
-	
-	public static int byteToInt(byte[] bvalue){
+
+	public static int byteToInt(byte[] bvalue) {
 		ByteBuffer data = Misc.getByteBuffer(4);
-		for(int i=0;i<bvalue.length;i++)
+		for (int i = 0; i < bvalue.length; i++)
 			data.put(bvalue[i]);
 		return data.getInt(0);
 	}
-	
-	public static int shortToInt(short value){
-		ByteBuffer data = Misc.getByteBuffer(4);		
+
+	public static int shortToInt(short value) {
+		ByteBuffer data = Misc.getByteBuffer(4);
 		data.putShort(value);
 		return data.getInt(0);
 	}
-	
+
 	public static long shortToLong(short value) {
 		ByteBuffer data = Misc.getByteBuffer(8);
 		data.putShort(value);
 		return data.getLong(0);
 	}
-	
-	public static byte intToByte(int value){
+
+	public static byte intToByte(int value) {
 		ByteBuffer data = Misc.getByteBuffer(4);
 		data.putInt(value);
 		return data.get(0);
 	}
-	
+
 	public static byte[] intToByteArray(int value) {
 		ByteBuffer data = Misc.getByteBuffer(4);
 		data.putInt(value);
 		return data.array();
 	}
-	
+
 	public static byte[] shortToByte(short value) {
 		ByteBuffer data = Misc.getByteBuffer(2);
 		data.putShort(value);
 		return data.array();
 	}
-	
-	public static short intToShort(int value){
+
+	public static short intToShort(int value) {
 		ByteBuffer data = Misc.getByteBuffer(4);
 		data.putInt(value);
 		return data.getShort(0);
 	}
-	
-	public static String intToHex(int value){
-		String hexValue=Integer.toHexString(value).toUpperCase();
+
+	public static String intToHex(int value) {
+		String hexValue = Integer.toHexString(value).toUpperCase();
 		if (hexValue.length() == 1)
 			hexValue = "0" + hexValue;
 		return hexValue;
 	}
-	
-	public static int arrayToInt(byte[] array){
+
+	public static int arrayToInt(byte[] array) {
 		ByteBuffer data = Misc.getByteBuffer(4);
 		for (int i = 0; i < 4; i++)
 			data.put(array[i]);
 		return data.getInt(0);
 	}
-	
-	public static String byteToHex(byte value){
+
+	public static String byteToHex(byte value) {
 		return intToHex(byteToInt(value));
 	}
-	
-	public static long intToLong(int value){
+
+	public static long intToLong(int value) {
 		ByteBuffer data = Misc.getByteBuffer(8);
 		data.putInt(value);
 		return data.getLong(0);
 	}
-	
+
 	public static int longToInt(long value) {
 		ByteBuffer data = Misc.getByteBuffer(8);
 		data.putLong(value);
 		return data.getInt(0);
 	}
-	
-	public static byte longToByte(long value){
+
+	public static byte longToByte(long value) {
 		ByteBuffer data = Misc.getByteBuffer(8);
 		data.putLong(value);
 		return data.get(0);
 	}
-	
+
 	public static short longToShort(long value) {
 		ByteBuffer data = Misc.getByteBuffer(8);
 		data.putLong(value);
 		return data.getShort(0);
 	}
-	
-	public static long byteToLong(byte value){
+
+	public static long byteToLong(byte value) {
 		ByteBuffer data = Misc.getByteBuffer(8);
 		data.put(value);
 		return data.getLong(0);
 	}
-	
+
 	/**
-	 * Convert IPv4 address to byte array 
-	 * A.B.C.D = [A,B,C,D]
+	 * Convert IPv4 address to byte array A.B.C.D = [A,B,C,D]
+	 * 
 	 * @param IPAddress
 	 * @return
 	 */
-	public static byte[] stringIPToArray(String IPAddress){
+	public static byte[] stringIPToArray(String IPAddress) {
 		int j = 0;
 		byte[] data = new byte[4];
 		for (int i = 0; i < 3; i++) {
@@ -163,16 +163,15 @@ public class Convert {
 
 		return (data);
 	}
-	
-	
-	public static String IPtoString(byte[] array){
+
+	public static String IPtoString(byte[] array) {
 		String IPAddress = "";
 		for (int i = 0; i < array.length - 1; i++)
 			IPAddress = IPAddress + "" + Convert.byteToInt(array[i]) + ".";
 		IPAddress = IPAddress + "" + Convert.byteToInt(array[array.length - 1]);
 		return IPAddress;
 	}
-	
+
 	public static int IPtoInt(byte[] ip) {
 		long num = ip[0];
 		num += Math.pow(2, 8) * ip[1];
@@ -180,17 +179,17 @@ public class Convert {
 		num += Math.pow(2, 24) * ip[3];
 		return Convert.longToInt(num);
 	}
-	
+
 	/**
 	 * @author javajox
 	 * @param inetSocketAddress
 	 * @return the IP address as int
 	 */
 	public static int InetSocketAddressToInt(InetSocketAddress inetSocketAddress) {
-		
-		return IPtoInt( inetSocketAddress.getAddress().getAddress() );
+
+		return IPtoInt(inetSocketAddress.getAddress().getAddress());
 	}
-	
+
 	public static String byteToHexString(byte[] bytes) {
 		return byteToHexString(bytes, "");
 	}
@@ -201,14 +200,14 @@ public class Convert {
 			value = value + byteSeparator + Convert.byteToHex(bytes[i]);
 		return value;
 	}
-	
-	public static String byteToHexString(byte[] bytes, int begin,int end) {
+
+	public static String byteToHexString(byte[] bytes, int begin, int end) {
 		String value = "";
 		for (int i = begin; i < end; i++)
 			value = value + " " + Convert.byteToHex(bytes[i]);
 		return value;
 	}
-	
+
 	public static byte[] hexStringToByte(String string, String byteSeparator) {
 		String bytes[] = string.split(byteSeparator);
 		byte result[] = new byte[bytes.length - 1];
@@ -218,31 +217,30 @@ public class Convert {
 
 		return result;
 	}
-	
+
 	/**
-	 * For each byte is allocated 2 chars from string.
-	 * 01762E = byte[] {0x01, 0x76, 0x2E} 
+	 * For each byte is allocated 2 chars from string. 01762E = byte[] {0x01, 0x76,
+	 * 0x2E}
 	 */
 	public static byte[] hexStringToByte(String string) {
 		byte result[] = new byte[string.length() / 2];
 
 		for (int i = 0, j = 0; i < string.length(); i += 2, j++) {
-			result[j] = (byte) Integer.parseInt(string.charAt(i) + ""
-					+ string.charAt(i + 1), 16);
+			result[j] = (byte) Integer.parseInt(string.charAt(i) + "" + string.charAt(i + 1), 16);
 		}
 
 		return result;
 	}
-	
+
 	/** Convert 0xAA Hex value to int value */
 	public static int hexToInt(String value) {
 		return Integer.parseInt(value.charAt(0) + "" + value.charAt(1), 16);
 	}
-	
-	public static byte hexToByte(String value){
+
+	public static byte hexToByte(String value) {
 		return Convert.intToByte(Convert.hexToInt(value));
 	}
-	
+
 	public static byte[] reverseArray(byte[] inputArray) {
 		byte outArray[] = new byte[inputArray.length];
 
@@ -251,15 +249,15 @@ public class Convert {
 		return outArray;
 	}
 
-	/**Work with BitSet class */
-		
+	/** Work with BitSet class */
+
 	public static int bitSetToBytes(JMuleBitSet bitSet, byte[] bytes, int pos) {
 		for (int i = 0; i < bitSet.size(); i++)
 			if (bitSet.get(i))
 				bytes[(i / 8) + pos] |= 1 << (i % 8);
 		return bitSet.length() / 8 + 1;
 	}
-	
+
 	public static byte[] bitSetToBytes(JMuleBitSet bitSet) {
 		byte[] bytes = new byte[((bitSet.size() - 1) / 8) + 1];
 		bitSetToBytes(bitSet, bytes, 0);
@@ -283,9 +281,9 @@ public class Convert {
 		}
 		return (result);
 	}
-	
+
 	public static JMuleBitSet byteToBitset(byte[] buffer) {
 		return Convert.byteToBitset(buffer, 0, buffer.length);
 	}
-	
+
 }

@@ -29,11 +29,11 @@ import java.awt.Image;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:44:21 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:44:21 $$
  */
 public class WizardSkin implements SwingSkin {
-	
+
 	// general
 	private Font button_font = new Font("Dialog", 1, 12);
 	private Font default_font = new Font("Dialog", 1, 12);
@@ -42,70 +42,68 @@ public class WizardSkin implements SwingSkin {
 	private Font label_font_caption = new Font("Bitstream Vera Serif", 1, 14);
 	// for WelcomeMessage
 	private Font label_welcome_message_font = new java.awt.Font("Serif", 1, 16);
-	private Font lable_welcome_message_desc_font = new Font("Dialog", 0, 14); 
-	
+	private Font lable_welcome_message_desc_font = new Font("Dialog", 0, 14);
+
 	private Color highlighted_ui_chooser_item = new Color(0xdadada);
-	
-	
-	
+
 	public Font getButtonFont() {
-		
+
 		return button_font;
 	}
 
 	public Image getButtonImage(int imageID) {
-		
+
 		return null;
 	}
 
 	public Color getDefaultColor() {
-		
+
 		return null;
 	}
 
 	public Font getDefaultFont() {
-		
+
 		return default_font;
 	}
 
 	public Font getLabelFont() {
-		
+
 		return label_font;
 	}
 
-	public Font getMenuBarFont()  {
-		
+	public Font getMenuBarFont() {
+
 		return null;
 	}
 
 	public Font getMenuFont() {
-		
+
 		return null;
 	}
 
 	public Font getPopupMenuFont() {
-		
+
 		return null;
 	}
-	
+
 	public Font getLabelCaptionFont() {
-		
+
 		return label_font_caption;
 	}
-	
+
 	public Font getWelcomeMessageFont() {
-		
+
 		return label_welcome_message_font;
 	}
 
 	public Font getWelcomeMessageDescFont() {
-		
+
 		return lable_welcome_message_desc_font;
 	}
-	
+
 	public Color getHighlightedUIChooserItem() {
-		
+
 		return highlighted_ui_chooser_item;
 	}
-	
+
 }

@@ -29,11 +29,11 @@ import java.util.List;
 
 /**
  * Created on Oct 25, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2009/10/25 08:57:58 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/10/25 08:57:58 $
  */
 public abstract class WindowsPlatformManager extends AbstractPlatformManager {
-
 
 }

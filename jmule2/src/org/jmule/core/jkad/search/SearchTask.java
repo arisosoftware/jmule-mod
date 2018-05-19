@@ -33,9 +33,10 @@ import org.jmule.core.jkad.indexer.Source;
 
 /**
  * Created on Jan 8, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.7 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/06 08:55:52 $
+ * @version $Revision: 1.7 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/06 08:55:52 $
  */
 public abstract class SearchTask {
 
@@ -43,23 +44,24 @@ public abstract class SearchTask {
 
 	protected Collection<Source> searchResults = new ConcurrentLinkedQueue<Source>();
 	protected boolean isStarted = false;
-	
+
 	protected SearchResultListener listener = null;
-	
+
 	public SearchTask(Int128 searchID) {
 		super();
 		this.searchID = searchID;
 	}
 
 	public abstract void start() throws JKadException;
+
 	public abstract void stop();
-	
+
 	public abstract void stopSearchRequest();
-	
+
 	public void setSearchResultListener(SearchResultListener listener) {
 		this.listener = listener;
 	}
-	
+
 	public Int128 getSearchID() {
 		return searchID;
 	}
@@ -67,7 +69,7 @@ public abstract class SearchTask {
 	public Collection<Source> getSearchResults() {
 		return searchResults;
 	}
-	
+
 	public int getResultCount() {
 		return searchResults.size();
 	}
@@ -75,14 +77,14 @@ public abstract class SearchTask {
 	public boolean isStarted() {
 		return isStarted;
 	}
-	
+
 	void addSearchResult(Source result) {
 		searchResults.add(result);
 	}
-	
+
 	void addSearchResult(List<Source> result) {
 		List<Source> unicalList = new ArrayList<Source>();
-		for(Source s : result)
+		for (Source s : result)
 			if (!searchResults.contains(s))
 				unicalList.add(s);
 		searchResults.addAll(unicalList);

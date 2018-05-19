@@ -26,74 +26,74 @@ import org.jmule.core.utils.AddressUtils;
 
 /**
  * Created on Nov 4, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.3 $
- * Last changed by $Author: javajox $ on $Date: 2010/01/12 12:00:01 $
+ * @version $Revision: 1.3 $ Last changed by $Author: javajox $ on $Date:
+ *          2010/01/12 12:00:01 $
  */
 public class BannedIP implements BannedObject, Comparable<BannedIP> {
 
 	private int banned_ip_as_int;
 	private IPFilter.BannedReason banned_reason = IPFilter.BannedReason.DEFAULT;
 	private String who_banned;
-	
-	BannedIP(int bannedIPAsInt, 
-			 IPFilter.BannedReason bannedReason,
-			 String whoBanned) {
-		
+
+	BannedIP(int bannedIPAsInt, IPFilter.BannedReason bannedReason, String whoBanned) {
+
 		banned_ip_as_int = bannedIPAsInt;
 		banned_reason = bannedReason;
 		who_banned = whoBanned;
 	}
-	
-	BannedIP(int bannedIPAsInt,
-			 String whoBanned) {
+
+	BannedIP(int bannedIPAsInt, String whoBanned) {
 		banned_ip_as_int = bannedIPAsInt;
 		banned_reason = IPFilter.BannedReason.DEFAULT;
 		who_banned = whoBanned;
 	}
-	
+
 	BannedIP(int bannedIPAsInt) {
 		banned_ip_as_int = bannedIPAsInt;
 	}
-	
+
 	int getIPAsInt() {
-		
+
 		return banned_ip_as_int;
 	}
-	
+
 	public IPFilter.BannedReason getReason() {
-	
+
 		return banned_reason;
 	}
-	
+
 	public String getWhoBanned() {
-		
+
 		return who_banned;
 	}
-	
+
 	public String getIPAsString() {
-		
-		return AddressUtils.ip2string( banned_ip_as_int );
+
+		return AddressUtils.ip2string(banned_ip_as_int);
 	}
-	
+
 	public boolean equals(Object obj) {
-				
-		if( obj instanceof BannedIP )
-			return ((BannedIP)obj).getIPAsInt() == banned_ip_as_int;
-			
+
+		if (obj instanceof BannedIP)
+			return ((BannedIP) obj).getIPAsInt() == banned_ip_as_int;
+
 		return false;
 	}
-	
+
 	public int hashCode() {
-		
+
 		return banned_ip_as_int;
 	}
 
 	@Override
-	public int compareTo(BannedIP obj) {	
-			int int_value = ((BannedIP)obj).getIPAsInt();
-			if( int_value < banned_ip_as_int ) return -1;
-			if( int_value > banned_ip_as_int ) return 1;
+	public int compareTo(BannedIP obj) {
+		int int_value = ((BannedIP) obj).getIPAsInt();
+		if (int_value < banned_ip_as_int)
+			return -1;
+		if (int_value > banned_ip_as_int)
+			return 1;
 		return 0;
 	}
 }

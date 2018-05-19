@@ -36,63 +36,65 @@ import org.jmule.core.jkad.ClientID;
 import org.jmule.core.jkad.Int128;
 import org.jmule.core.jkad.utils.Utils;
 
-
-
 /**
  * Created on Dec 28, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.5 $
- * Last changed by $Author: binary255 $ on $Date: 2010/06/28 17:46:03 $
+ * @version $Revision: 1.5 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/06/28 17:46:03 $
  */
 public class KBucket {
-	
+
 	private Collection<KadContact> contact_list = new ConcurrentLinkedQueue<KadContact>();
-	
+
 	public KBucket() {
-		
+
 	}
-	
-	public void add(KadContact contact) { 
+
+	public void add(KadContact contact) {
 		contact_list.add(contact);
 	}
-	
+
 	public void remove(KadContact contact) {
 		contact_list.remove(contact);
 	}
-	
+
 	public boolean hasContact(KadContact k) {
-		for(KadContact c : contact_list)
-			if (c.equals(k)) return true;
+		for (KadContact c : contact_list)
+			if (c.equals(k))
+				return true;
 		return false;
 	}
-	
+
 	public KadContact getContact(Int128 contactID) {
-		for(KadContact contact : contact_list)
-			if (contact.getContactID().equals(contactID)) return contact;
-		
+		for (KadContact contact : contact_list)
+			if (contact.getContactID().equals(contactID))
+				return contact;
+
 		return null;
 	}
-	
-	
-	public List<KadContact> getRandomContacts(int contactCount){
+
+	public List<KadContact> getRandomContacts(int contactCount) {
 		List<KadContact> list = new ArrayList<KadContact>();
-		
-		if (contact_list.size()<=contactCount) {
+
+		if (contact_list.size() <= contactCount) {
 			list.addAll(contact_list);
 			return list;
 		}
-		
+
 		Collection<Integer> add_id = Utils.getRandomValues(contact_list.size(), contactCount, true);
 		KadContact[] array = contact_list.toArray(new KadContact[0]);
-		for(Integer id : add_id) 
+		for (Integer id : add_id)
 			list.add(array[id]);
-		
+
 		return list;
 	}
-	
+
 	/**
 	 * Get nearest contacts to target
-	 * @param targetID XOR distance
+	 * 
+	 * @param targetID
+	 *            XOR distance
 	 * @param contactCount
 	 * @return
 	 */
@@ -100,37 +102,38 @@ public class KBucket {
 		List<KadContact> list = new ArrayList<KadContact>();
 		Set<ClientID> id_set = new HashSet<ClientID>();
 
-		do {		
+		do {
 			KadContact contact = getNearestContact(targetID, contact_list, id_set);
-			if (contact == null) break;
+			if (contact == null)
+				break;
 			id_set.add(contact.getContactID());
 			list.add(contact);
 		} while (list.size() < contactCount);
 
 		return list;
 	}
-	
+
 	public void clear() {
 		contact_list.clear();
 	}
-	
+
 	public String toString() {
-		String result = " [ " + contact_list.size()+" :    ";
-		
-		for(KadContact contact : contact_list)
+		String result = " [ " + contact_list.size() + " :    ";
+
+		for (KadContact contact : contact_list)
 			result += contact.getContactAddress() + "  ";
-		
+
 		return result + " ]";
 	}
-	
+
 	public boolean isFull() {
 		return contact_list.size() == K;
 	}
-	
+
 	public int size() {
 		return contact_list.size();
 	}
-	
+
 	public Collection<KadContact> getContacts() {
 		return contact_list;
 	}

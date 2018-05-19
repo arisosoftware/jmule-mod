@@ -24,13 +24,14 @@ package org.jmule.core;
 
 /**
  * Created on Aug 13, 2009
+ * 
  * @author binary256
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: binary255 $ on $Date: 2009/08/13 18:24:07 $
+ * @version $Revision: 1.1 $ Last changed by $Author: binary255 $ on $Date:
+ *          2009/08/13 18:24:07 $
  */
 public interface JMuleStoppableManager extends JMuleManager {
 
 	public boolean isStarted();
-	
+
 }

@@ -30,23 +30,23 @@ import org.jmule.core.edonkey.FileHash;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.5 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2009/09/20 09:02:37 $$
+ * @version $$Revision: 1.5 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2009/09/20 09:02:37 $$
  */
 public interface UploadManager extends JMuleManager {
-	
+
 	public UploadQueue getUploadQueue();
-	
+
 	public boolean hasUpload(FileHash fileHash);
 
 	public UploadSession getUpload(FileHash fileHash) throws UploadManagerException;
-		
+
 	public List<UploadSession> getUploads();
-	
+
 	public int getUploadCount();
-	
+
 	public void addUploadManagerListener(UploadManagerListener listener);
-	
+
 	public void removeUploadMaanagerListener(UploadManagerListener listener);
-	
+
 }

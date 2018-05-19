@@ -29,9 +29,10 @@ import org.jmule.core.utils.Misc;
 
 /**
  * Created on Mar 4, 2010
+ * 
  * @author binary256
- * @version $Revision: 1.4 $
- * Last changed by $Author: binary255 $ on $Date: 2010/06/16 18:21:19 $
+ * @version $Revision: 1.4 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/06/16 18:21:19 $
  */
 public class PacketFragment {
 
@@ -40,20 +41,21 @@ public class PacketFragment {
 	private int packetLimit;
 	private long lastUpdate;
 	private int length = 0;
-	
+
 	public String toString() {
-		return "packetLimit : " + packetLimit + " " + " lastUpdate : " + lastUpdate + " content:: capacity :: " + content.capacity();
+		return "packetLimit : " + packetLimit + " " + " lastUpdate : " + lastUpdate + " content:: capacity :: "
+				+ content.capacity();
 	}
-	
+
 	public PacketFragment(JMConnection connection, long size) {
 		this.connection = connection;
 		content = Misc.getByteBuffer(size);
-		
+
 		upadateLength();
-		
+
 		lastUpdate = System.currentTimeMillis();
 	}
-	
+
 	public void upadateLength() {
 		content.position(1);
 		ByteBuffer len = Misc.getByteBuffer(4);
@@ -62,64 +64,64 @@ public class PacketFragment {
 		content.position(0);
 		length = Convert.byteToInt(len.array());
 	}
-	
+
 	public long getLastUpdate() {
 		return lastUpdate;
 	}
-	
+
 	public boolean isFullUsed() {
 		boolean value = content.position() >= getPacketLimit();
-		if (content.capacity()==0)
+		if (content.capacity() == 0)
 			value = false;
 		return value;
 	}
-	
+
 	public JMConnection getConnection() {
 		return connection;
 	}
-	
+
 	public ByteBuffer getContent() {
 		return content;
 	}
-	
+
 	public void concat(PacketFragment fragment) {
 		long size = getPacketLimit() + fragment.getPacketLimit();
 		ByteBuffer result = Misc.getByteBuffer(size);
-		
+
 		int l;
 		l = getPacketLimit();
 		result.put(content.array(), 0, l);
-		
+
 		l = fragment.getPacketLimit();
-		result.put(fragment.getContent().array(),0, l);
-		
+		result.put(fragment.getContent().array(), 0, l);
+
 		setPacketLimit(result.position());
 		content = result;
 		content.position(0);
-		
+
 		upadateLength();
-		
+
 		lastUpdate = System.currentTimeMillis();
-		
+
 		fragment.clear();
 	}
-	
+
 	public byte getHead() {
 		content.position(0);
 		byte result = content.get();
 		content.position(0);
 		return result;
 	}
-	
+
 	public int getLength() {
 		return length;
 	}
-	
+
 	public void moveUnusedBytes(int beginPos) {
 		if (beginPos > getPacketLimit()) {
 			return;
 		}
-		int moveFragmentSize = (getPacketLimit()- beginPos);
+		int moveFragmentSize = (getPacketLimit() - beginPos);
 		if (moveFragmentSize <= 0) {
 			return;
 		}
@@ -127,23 +129,23 @@ public class PacketFragment {
 			return;
 		}
 		content.position(beginPos);
-		ByteBuffer temp = Misc.getByteBuffer(moveFragmentSize );
+		ByteBuffer temp = Misc.getByteBuffer(moveFragmentSize);
 		content.get(temp.array());
-		
+
 		content.clear();
 		content.position(0);
-		
+
 		temp.position(0);
-		
+
 		content.put(temp);
 		setPacketLimit(content.position());
 		content.position(0);
-		
+
 		upadateLength();
-		
+
 		lastUpdate = System.currentTimeMillis();
 	}
-	
+
 	public void clear() {
 		content.clear();
 		content.compact();

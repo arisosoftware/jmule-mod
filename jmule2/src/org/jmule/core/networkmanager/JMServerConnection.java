@@ -27,53 +27,54 @@ import java.net.InetSocketAddress;
 
 /**
  * Created on Aug 20, 2009
+ * 
  * @author binary256
  * @author javajox
- * @version $Revision: 1.10 $
- * Last changed by $Author: binary255 $ on $Date: 2010/06/30 18:04:26 $
+ * @version $Revision: 1.10 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/06/30 18:04:26 $
  */
 public class JMServerConnection extends JMConnection {
 
 	private JMuleSocketChannel jm_socket_channel;
 	private InetSocketAddress remote_inet_socket_address;
-	private ConnectionStatus connection_status = ConnectionStatus.DISCONNECTED;	
-	
+	private ConnectionStatus connection_status = ConnectionStatus.DISCONNECTED;
+
 	JMServerConnection(String ipAddress, int port) {
 		remote_inet_socket_address = new InetSocketAddress(ipAddress, port);
 	}
-	
+
 	JMServerConnection(InetSocketAddress remoteInetSocketAddress) {
 		remote_inet_socket_address = remoteInetSocketAddress;
 	}
-	
+
 	public InetSocketAddress getRemoteInetSocketAddress() {
 		return remote_inet_socket_address;
 	}
-	
+
 	String getIPAddress() {
 		return remote_inet_socket_address.getAddress().getHostAddress();
 	}
-	
+
 	int getPort() {
 		return remote_inet_socket_address.getPort();
 	}
-	
+
 	ConnectionStatus getStatus() {
 		return connection_status;
 	}
-	
+
 	void setStatus(ConnectionStatus newStatus) {
 		this.connection_status = newStatus;
 	}
-	
+
 	JMuleSocketChannel getJMChannel() {
 		return jm_socket_channel;
 	}
-	
+
 	void setJMConnection(JMuleSocketChannel newChannel) {
 		this.jm_socket_channel = newChannel;
 	}
-	
+
 	void disconnect() throws NetworkManagerException {
 		if ((connection_status == ConnectionStatus.CONNECTED) || (connection_status == ConnectionStatus.CONNECTING)) {
 			try {
@@ -84,5 +85,5 @@ public class JMServerConnection extends JMConnection {
 			}
 		}
 	}
-	
+
 }

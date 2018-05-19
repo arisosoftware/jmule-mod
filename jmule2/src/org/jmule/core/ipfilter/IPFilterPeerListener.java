@@ -22,17 +22,17 @@
  */
 package org.jmule.core.ipfilter;
 
-
 /**
  * Created on Jan 9, 2010
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2010/01/10 14:17:22 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2010/01/10 14:17:22 $
  */
 public interface IPFilterPeerListener {
 
 	public void peerBanned(String address);
-	
+
 	public void peerUnbanned(String address);
-	
+
 }

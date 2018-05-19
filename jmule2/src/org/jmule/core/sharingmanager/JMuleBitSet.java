@@ -29,12 +29,12 @@ import org.jmule.core.utils.Convert;
 /**
  * 
  * @author binary256
- * @version $$Revision: 1.5 $$
- * Last changed by $$Author: binary255 $$ on $$Date: 2010/07/09 17:29:43 $$
+ * @version $$Revision: 1.5 $$ Last changed by $$Author: binary255 $$ on $$Date:
+ *          2010/07/09 17:29:43 $$
  */
 public class JMuleBitSet extends BitSet {
 	private int bitCount;
-	
+
 	public int getBitCount() {
 		return bitCount;
 	}
@@ -42,45 +42,46 @@ public class JMuleBitSet extends BitSet {
 	public void setBitCount(int bitCount) {
 		this.bitCount = bitCount;
 	}
-	
+
 	public JMuleBitSet(int bitCount) {
 		super(bitCount);
 		this.bitCount = bitCount;
 	}
-	
+
 	public int size() {
 		return bitCount;
 	}
-	
+
 	public byte[] getAsByteArray() {
 		byte[] rawData = Convert.bitSetToBytes(this);
 		return rawData;
 	}
-	
+
 	public int getBitCount(boolean value) {
 		int count = 0;
-		for(int i = 0;i<size();i++)
+		for (int i = 0; i < size(); i++)
 			if (get(i) == value)
 				count++;
 		return count;
 	}
-	
+
 	public boolean hasAtLeastOne(boolean value) {
 		for (int i = 0; i < size(); i++)
 			if (get(i) == value)
 				return true;
 		return false;
 	}
-	
+
 	public String toString() {
-		String value="";
-		
-		for(int i=0;i<this.bitCount;i++)
-			if (this.get(i)) value+=" 1 ";
-			else 
-				value+=" 0 ";
-		
+		String value = "";
+
+		for (int i = 0; i < this.bitCount; i++)
+			if (this.get(i))
+				value += " 1 ";
+			else
+				value += " 0 ";
+
 		return value;
 	}
-	
+
 }

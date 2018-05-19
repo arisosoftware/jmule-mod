@@ -28,16 +28,18 @@ import org.jmule.core.utils.Convert;
 
 /**
  * Created on Aug 21, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/08/31 10:15:45 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/08/31 10:15:45 $
  */
 public class UnknownPacketException extends JMException {
-	
-	public UnknownPacketException(String ip, int port, byte header,byte opCode, byte[] packetContent) {
-		super("Sender : " + ip + " : " + port + "\nUnknown packet exception " + "\nHeader : " + Convert.byteToHex(header) + "\nOpCode : " + Convert.byteToHex(opCode) +"\n"  );
+
+	public UnknownPacketException(String ip, int port, byte header, byte opCode, byte[] packetContent) {
+		super("Sender : " + ip + " : " + port + "\nUnknown packet exception " + "\nHeader : "
+				+ Convert.byteToHex(header) + "\nOpCode : " + Convert.byteToHex(opCode) + "\n");
 	}
-	
+
 	public UnknownPacketException(String cause) {
 		super(cause);
 	}

@@ -24,9 +24,10 @@ package org.jmule.core.platform;
 
 /**
  * Created on Aug 30, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2009/08/31 17:26:28 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2009/08/31 17:26:28 $
  */
 public class CPUCapabilities {
 
@@ -55,167 +56,218 @@ public class CPUCapabilities {
 	private String[] flags;
 	private String bogomips;
 	private String clflushSize;
-    private String powerManagerment;
-    
-    CPUCapabilities() {
-    	
-    }
-    
+	private String powerManagerment;
+
+	CPUCapabilities() {
+
+	}
+
 	public String getNumber() {
 		return number;
 	}
+
 	void setNumber(String number) {
 		this.number = number;
 	}
+
 	public String getVendorId() {
 		return vendorId;
 	}
+
 	void setVendorId(String vendorId) {
 		this.vendorId = vendorId;
 	}
+
 	public String getFamily() {
 		return family;
 	}
+
 	void setFamily(String family) {
 		this.family = family;
 	}
+
 	public String getModel() {
 		return model;
 	}
+
 	void setModel(String model) {
 		this.model = model;
 	}
+
 	public String getModelName() {
 		return modelName;
 	}
+
 	void setModelName(String modelName) {
 		this.modelName = modelName;
 	}
+
 	public String getStepping() {
 		return stepping;
 	}
+
 	void setStepping(String stepping) {
 		this.stepping = stepping;
 	}
+
 	public String getMHz() {
 		return MHz;
 	}
+
 	void setMHz(String mHz) {
 		MHz = mHz;
 	}
+
 	public String getCacheSize() {
 		return cacheSize;
 	}
+
 	void setCacheSize(String cacheSize) {
 		this.cacheSize = cacheSize;
 	}
+
 	public String getPhysicalId() {
 		return physicalId;
 	}
+
 	void setPhysicalId(String physicalId) {
 		this.physicalId = physicalId;
 	}
+
 	public String getSiblings() {
 		return siblings;
 	}
+
 	void setSiblings(String siblings) {
 		this.siblings = siblings;
 	}
+
 	public String getCoreId() {
 		return coreId;
 	}
+
 	void setCoreId(String coreId) {
 		this.coreId = coreId;
 	}
+
 	public String getNrOfCores() {
 		return nrOfCores;
 	}
+
 	void setNrOfCores(String nrOfCores) {
 		this.nrOfCores = nrOfCores;
 	}
+
 	public String getApicid() {
 		return apicid;
 	}
+
 	void setApicid(String apicid) {
 		this.apicid = apicid;
 	}
+
 	public String getInitialApicid() {
 		return initialApicid;
 	}
+
 	void setInitialApicid(String initialApicid) {
 		this.initialApicid = initialApicid;
 	}
+
 	public boolean isFdivBug() {
 		return fdivBug;
 	}
+
 	void setFdivBug(boolean fdivBug) {
 		this.fdivBug = fdivBug;
 	}
+
 	public boolean isHltBug() {
 		return hltBug;
 	}
+
 	void setHltBug(boolean hltBug) {
 		this.hltBug = hltBug;
 	}
+
 	public boolean isF00fBug() {
 		return f00fBug;
 	}
+
 	void setF00fBug(boolean f00fBug) {
 		this.f00fBug = f00fBug;
 	}
+
 	public boolean isComaBug() {
 		return comaBug;
 	}
+
 	void setComaBug(boolean comaBug) {
 		this.comaBug = comaBug;
 	}
+
 	public boolean isFpu() {
 		return fpu;
 	}
+
 	void setFpu(boolean fpu) {
 		this.fpu = fpu;
 	}
+
 	public boolean isFpuException() {
 		return fpuException;
 	}
+
 	void setFpuException(boolean fpuException) {
 		this.fpuException = fpuException;
 	}
+
 	public String getCpuidLevel() {
 		return cpuidLevel;
 	}
+
 	void setCpuidLevel(String cpuidLevel) {
 		this.cpuidLevel = cpuidLevel;
 	}
+
 	public boolean isWp() {
 		return wp;
 	}
+
 	void setWp(boolean wp) {
 		this.wp = wp;
 	}
+
 	public String[] getFlags() {
 		return flags;
 	}
+
 	void setFlags(String[] flags) {
 		this.flags = flags;
 	}
+
 	public String getBogomips() {
 		return bogomips;
 	}
+
 	void setBogomips(String bogomips) {
 		this.bogomips = bogomips;
 	}
+
 	public String getClflushSize() {
 		return clflushSize;
 	}
+
 	void setClflushSize(String clflushSize) {
 		this.clflushSize = clflushSize;
 	}
+
 	public String getPowerManagerment() {
 		return powerManagerment;
 	}
+
 	void setPowerManagerment(String powerManagerment) {
 		this.powerManagerment = powerManagerment;
-	}   
-	
+	}
+
 }

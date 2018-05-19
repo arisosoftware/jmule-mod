@@ -28,16 +28,18 @@ import java.nio.ByteBuffer;
 
 import org.jmule.core.utils.Convert;
 import org.jmule.core.utils.Misc;
+
 /**
  * Created on Jul 15, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 16:00:42 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 16:00:42 $
  */
 public class IntTag extends StandartTag implements NumberTag {
 
 	private int tagValue;
-	
+
 	public IntTag(byte[] tagName, int tagValue) {
 		super(TAGTYPE_UINT32, tagName);
 		this.tagValue = tagValue;
@@ -50,16 +52,13 @@ public class IntTag extends StandartTag implements NumberTag {
 		return result;
 	}
 
-
 	int getValueLength() {
 		return 4;
 	}
 
-
 	public Integer getValue() {
 		return tagValue;
 	}
-
 
 	public void setValue(Object object) {
 		tagValue = (Integer) object;
@@ -72,7 +71,5 @@ public class IntTag extends StandartTag implements NumberTag {
 	public void setNumber(long value) {
 		tagValue = Convert.longToInt(value);
 	}
-	
-	
 
 }

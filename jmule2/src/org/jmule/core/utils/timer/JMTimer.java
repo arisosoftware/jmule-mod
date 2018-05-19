@@ -27,62 +27,62 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Created on Aug 28, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.6 $
- * Last changed by $Author: binary255 $ on $Date: 2010/09/04 16:17:38 $
+ * @version $Revision: 1.6 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/09/04 16:17:38 $
  */
 public class JMTimer {
 	private Queue<TaskExecutor> taskList = new ConcurrentLinkedQueue<TaskExecutor>();
-	
+
 	public JMTimer() {
 	}
-	
+
 	public void addTask(JMTimerTask task, long waitTime, boolean repeat) {
 		TaskExecutor executor = new TaskExecutor(waitTime, task, repeat);
 		taskList.add(executor);
-		executor.start();	
+		executor.start();
 	}
-	
+
 	public void addTask(JMTimerTask task, long waitTime) {
 		task.resetStopTask();
-		addTask(task, waitTime ,false);
+		addTask(task, waitTime, false);
 	}
-	
+
 	private void removeTask(TaskExecutor executor) {
 		taskList.remove(executor);
 	}
-	
+
 	public void removeTask(JMTimerTask removeTask) {
-		for(TaskExecutor task_executor : taskList) 
+		for (TaskExecutor task_executor : taskList)
 			if (task_executor.getTask().equals(removeTask)) {
 				task_executor.stopTask();
 				taskList.remove(task_executor);
-				return ;
+				return;
 			}
 	}
-	
+
 	public void cancelAllTasks() {
-		for(TaskExecutor task_executor : taskList) {
+		for (TaskExecutor task_executor : taskList) {
 			task_executor.stopTask();
 		}
 		taskList.clear();
 	}
-	
-	
+
 	private class TaskExecutor extends Thread {
 		private boolean stop = false;
 		private long waitTime;
 		private boolean repeatTask = false;
-		
+
 		private JMTimerTask task;
-		
+
 		public TaskExecutor(long waitTime, JMTimerTask task, boolean repeatTask) {
-			super("Task executor " +task);
+			super("Task executor " + task);
 			this.waitTime = waitTime;
 			this.task = task;
 			this.repeatTask = repeatTask;
 		}
-		
+
 		public void run() {
 			task.setRunning(true);
 			do {
@@ -98,7 +98,7 @@ public class JMTimer {
 					}
 				}
 
-				if (task.mustStopTask() || stop) 
+				if (task.mustStopTask() || stop)
 					break;
 
 				try {
@@ -115,7 +115,7 @@ public class JMTimer {
 		public JMTimerTask getTask() {
 			return task;
 		}
-		
+
 		public void stopTask() {
 			stop = true;
 			synchronized (this) {

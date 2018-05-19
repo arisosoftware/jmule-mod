@@ -33,32 +33,33 @@ import org.jmule.core.utils.Convert;
 
 /**
  * Created on Dec 28, 2008
+ * 
  * @author binary256
- * @version $Revision: 1.3 $
- * Last changed by $Author: binary255 $ on $Date: 2010/06/09 15:13:39 $
+ * @version $Revision: 1.3 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/06/09 15:13:39 $
  */
 public class IPAddress {
-	
+
 	private byte address[] = null;
-	
+
 	public IPAddress(InetSocketAddress address) {
 		this.address = address.getAddress().getAddress();
-		
+
 		this.address = reverseArray(this.address);
 	}
-	
+
 	public IPAddress() {
-		address = new byte[]{0,0,0,0};
+		address = new byte[] { 0, 0, 0, 0 };
 	}
-	
+
 	public IPAddress(byte[] address) {
 		this.address = address;
 	}
-	
+
 	public IPAddress(String address) {
 		this.address = Convert.reverseArray(Convert.stringIPToArray(address));
 	}
-	
+
 	public byte[] getAddress() {
 		return address;
 	}
@@ -66,23 +67,23 @@ public class IPAddress {
 	public boolean equals(IPAddress address) {
 		return Arrays.equals(this.address, address.getAddress());
 	}
-	
+
 	public boolean equals(InetSocketAddress address) {
-		return Arrays.equals(this.address,Convert.reverseArray(address.getAddress().getAddress()));
+		return Arrays.equals(this.address, Convert.reverseArray(address.getAddress().getAddress()));
 	}
-	
+
 	public int hashCode() {
 		return IPtoString(address).hashCode();
 	}
-	
+
 	public String toString() {
 		String result = "";
-		
+
 		result += byteToInt(address[3]) + ".";
 		result += byteToInt(address[2]) + ".";
 		result += byteToInt(address[1]) + ".";
-		result += byteToInt(address[0]) ;
+		result += byteToInt(address[0]);
 		return result;
 	}
-	
+
 }

@@ -11,15 +11,13 @@
  *   Andy Clement       fleshed out to match SuppressWarnings
  * ******************************************************************/
 
-
 package org.aspectj.lang.annotation;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Annotate members to avoid AspectJ error messages.
- * Currently supported:
+ * Annotate members to avoid AspectJ error messages. Currently supported:
  * <ul>
  * <li>advice that might not run (-Xlint TODO message id)</li>
  * </ul>
@@ -27,5 +25,5 @@ import java.lang.annotation.RetentionPolicy;
  */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SuppressAjWarnings {
-  String[] value() default "";
+	String[] value() default "";
 }

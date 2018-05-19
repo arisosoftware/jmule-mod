@@ -25,27 +25,26 @@ package org.jmule.ui.skin;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:44:31 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:44:31 $$
  */
-public interface Skin<ButtonFont,LabelFont,MenuBarFont,DefaultFont,
-                      DefaultColor,MenuFont,PopupMenuFont,ButtonImage> extends SkinConstants {
+public interface Skin<ButtonFont, LabelFont, MenuBarFont, DefaultFont, DefaultColor, MenuFont, PopupMenuFont, ButtonImage>
+		extends SkinConstants {
 
 	public ButtonFont getButtonFont();
-	
-    public LabelFont getLabelFont();
-    
-    public MenuBarFont getMenuBarFont();
-    
-    public DefaultFont getDefaultFont();
-    
-    public DefaultColor getDefaultColor();
-    
-    public MenuFont getMenuFont();
-    
-    public PopupMenuFont getPopupMenuFont();
-    
-    public ButtonImage getButtonImage(int imageID);
-	
-	
+
+	public LabelFont getLabelFont();
+
+	public MenuBarFont getMenuBarFont();
+
+	public DefaultFont getDefaultFont();
+
+	public DefaultColor getDefaultColor();
+
+	public MenuFont getMenuFont();
+
+	public PopupMenuFont getPopupMenuFont();
+
+	public ButtonImage getButtonImage(int imageID);
+
 }

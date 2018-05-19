@@ -24,22 +24,23 @@ package org.jmule.core.ipfilter;
 
 /**
  * Created on Nov 4, 2009
+ * 
  * @author javajox
- * @version $Revision: 1.3 $
- * Last changed by $Author: javajox $ on $Date: 2010/09/09 06:13:30 $
+ * @version $Revision: 1.3 $ Last changed by $Author: javajox $ on $Date:
+ *          2010/09/09 06:13:30 $
  */
 public class IPFilterSingleton {
 
 	private IPFilterSingleton() {
-		
+
 	}
-	
+
 	private static class IPFilterSingletonHolder {
 		private static final IPFilter INSTANCE = new IPFilterImpl();
 	}
-	
+
 	public static IPFilter getInstance() {
 		return IPFilterSingletonHolder.INSTANCE;
 	}
-	
+
 }

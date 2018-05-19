@@ -12,14 +12,8 @@
 package org.aspectj.lang.reflect;
 
 /**
- * The different per-clauses (aspect instantiation models)
- * supported by AspectJ
+ * The different per-clauses (aspect instantiation models) supported by AspectJ
  */
 public enum PerClauseKind {
-	SINGLETON,
-	PERTHIS,
-	PERTARGET,
-	PERCFLOW,
-	PERCFLOWBELOW,
-	PERTYPEWITHIN;
+	SINGLETON, PERTHIS, PERTARGET, PERCFLOW, PERCFLOWBELOW, PERTYPEWITHIN;
 }

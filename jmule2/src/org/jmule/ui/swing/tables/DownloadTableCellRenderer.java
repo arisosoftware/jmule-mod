@@ -31,23 +31,24 @@ import org.jmule.core.downloadmanager.DownloadSession;
 /**
  *
  * Created on Sep 28, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
 public class DownloadTableCellRenderer extends JMTableCellRenderer {
 
 	protected DownloadSession session;
-	
-	public Component getTableCellRendererComponent(JTable table, Object value,
-			boolean isSelected, boolean hasFocus, int row, int column) {
-		
+
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
+
 		super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		
-		if(value instanceof DownloadSession)
-		       session = (DownloadSession)value;
-		
+
+		if (value instanceof DownloadSession)
+			session = (DownloadSession) value;
+
 		return this;
 	}
-	
+
 }

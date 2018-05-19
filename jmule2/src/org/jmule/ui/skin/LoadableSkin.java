@@ -25,29 +25,28 @@ package org.jmule.ui.skin;
 /**
  * 
  * @author javajox
- * @version $$Revision: 1.1 $$
- * Last changed by $$Author: javajox $$ on $$Date: 2008/07/31 16:44:33 $$
+ * @version $$Revision: 1.1 $$ Last changed by $$Author: javajox $$ on $$Date:
+ *          2008/07/31 16:44:33 $$
  */
-public interface LoadableSkin<ButtonFont, LabelFont, MenuBarFont, 
-                              DefaultFont, DefaultColor, MenuFont, 
-                              PopupMenuFont,ButtonImage> extends SkinConstants {
+public interface LoadableSkin<ButtonFont, LabelFont, MenuBarFont, DefaultFont, DefaultColor, MenuFont, PopupMenuFont, ButtonImage>
+		extends SkinConstants {
 
-	 public void load();
-	 
-	 public void setButtonFont(ButtonFont buttonFont);
-	 
-	 public void setLabelFont(LabelFont labelFont);
-	 
-	 public void setMenuBarFont(MenuBarFont menuBarFont);
-	 
-	 public void setDefaultFont(DefaultFont defaultFont);
-	 
-	 public void setDefaultColor(DefaultColor defaultColor);
-	 
-	 public void setMenuFont(MenuFont menuFont);
-	 
-	 public void setPopupMenuFont(PopupMenuFont popupMenuFont);
-	
-	 public void setButtonImage(int imageID,ButtonImage buttonImage);
-	 
+	public void load();
+
+	public void setButtonFont(ButtonFont buttonFont);
+
+	public void setLabelFont(LabelFont labelFont);
+
+	public void setMenuBarFont(MenuBarFont menuBarFont);
+
+	public void setDefaultFont(DefaultFont defaultFont);
+
+	public void setDefaultColor(DefaultColor defaultColor);
+
+	public void setMenuFont(MenuFont menuFont);
+
+	public void setPopupMenuFont(PopupMenuFont popupMenuFont);
+
+	public void setButtonImage(int imageID, ButtonImage buttonImage);
+
 }

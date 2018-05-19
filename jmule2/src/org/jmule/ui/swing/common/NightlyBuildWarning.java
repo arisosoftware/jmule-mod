@@ -33,21 +33,23 @@ import org.jmule.ui.swing.ImgRep;
 /**
  *
  * Created on Sep 25, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.1 $
- * Last changed by $Author: javajox $ on $Date: 2008/10/16 17:35:11 $
+ * @version $Revision: 1.1 $ Last changed by $Author: javajox $ on $Date:
+ *          2008/10/16 17:35:11 $
  */
 public class NightlyBuildWarning extends JLabel {
-	
+
 	public NightlyBuildWarning() {
-		
+
 		this.setForeground(Color.RED);
-        this.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        this.setIcon(ImgRep.getIcon("bomb.png"));
-        this.setText("<html><center>Attention !!! This is highly unstable nightly build of JMule,<br> your feedback on our forums FORUM.JMULE.ORG<br> will be greatly appreciated</center></html>");
-        this.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        this.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-		
+		this.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		this.setIcon(ImgRep.getIcon("bomb.png"));
+		this.setText(
+				"<html><center>Attention !!! This is highly unstable nightly build of JMule,<br> your feedback on our forums FORUM.JMULE.ORG<br> will be greatly appreciated</center></html>");
+		this.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		this.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
 	}
-	
+
 }

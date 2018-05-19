@@ -27,28 +27,30 @@ import java.nio.ByteBuffer;
 import org.jmule.core.utils.Convert;
 import org.jmule.core.utils.Misc;
 import static org.jmule.core.edonkey.ED2KConstants.*;
+
 /**
  * Created on Jul 15, 2009
+ * 
  * @author binary256
- * @version $Revision: 1.4 $
- * Last changed by $Author: binary255 $ on $Date: 2010/07/31 16:00:42 $
+ * @version $Revision: 1.4 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/07/31 16:00:42 $
  */
 public class StringTag extends StandartTag {
 	private String tagValue;
 	private ByteBuffer byteBuffer;
-	
+
 	public StringTag(byte[] tagName, String tagValue) {
 		super(TAGTYPE_STRING, tagName);
 		this.tagValue = tagValue;
 		updateByteBuffer();
 	}
-	
+
 	private void updateByteBuffer() {
 		byteBuffer = Misc.getByteBuffer(2 + tagValue.getBytes().length);
 		byteBuffer.putShort(Convert.intToShort(tagValue.getBytes().length));
 		byteBuffer.put(tagValue.getBytes());
 	}
-	
+
 	ByteBuffer getValueAsByteBuffer() {
 		byteBuffer.position(0);
 		return byteBuffer;
@@ -62,9 +64,8 @@ public class StringTag extends StandartTag {
 		return tagValue;
 	}
 
-
 	public void setValue(Object object) {
-		tagValue = (String)object;
+		tagValue = (String) object;
 		updateByteBuffer();
 	}
 

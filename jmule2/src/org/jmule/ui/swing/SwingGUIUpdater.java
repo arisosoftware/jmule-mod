@@ -30,31 +30,31 @@ import javax.swing.SwingUtilities;
 import org.jmule.core.JMRunnable;
 import org.jmule.core.JMThread;
 
-
 /**
  *
  * Created on Aug 28, 2008
+ * 
  * @author javajox
- * @version $Revision: 1.2 $
- * Last changed by $Author: binary255 $ on $Date: 2010/05/15 18:22:31 $
+ * @version $Revision: 1.2 $ Last changed by $Author: binary255 $ on $Date:
+ *          2010/05/15 18:22:31 $
  */
 public class SwingGUIUpdater extends JMThread {
 
 	private static SwingGUIUpdater instance = null;
-	
+
 	public static SwingGUIUpdater getInstance() {
-		
-		if (instance==null) 
+
+		if (instance == null)
 			instance = new SwingGUIUpdater();
-		
+
 		return instance;
-		
+
 	}
-	
+
 	private boolean stop = false;
-	
+
 	private List<Refreshable> refreshable_list = new CopyOnWriteArrayList<Refreshable>();
-	
+
 	private SwingGUIUpdater() {
 		super("SWING GUI updater thread");
 	}
@@ -63,9 +63,9 @@ public class SwingGUIUpdater extends JMThread {
 		stop = true;
 		refreshable_list.clear();
 		interrupt();
-		
+
 	}
-	
+
 	public void addRefreshable(Refreshable refreshable) {
 		refreshable_list.add(refreshable);
 	}
@@ -74,33 +74,36 @@ public class SwingGUIUpdater extends JMThread {
 		refreshable_list.remove(refreshable);
 	}
 
-	protected boolean process_refreshables = false; 
-	
+	protected boolean process_refreshables = false;
+
 	public void run() {
-		process_refreshables = false; 
-		while(!stop) {
-			
+		process_refreshables = false;
+		while (!stop) {
+
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				if (stop) return ;
+				if (stop)
+					return;
 			}
 			if (!process_refreshables) {
-			SwingUtilities.invokeLater(new JMRunnable() {
-				public void JMRun() {
-					process_refreshables = true;
-					for(Refreshable refreshable : refreshable_list) {
-						try {
-							refreshable.refresh();
-						}catch(Throwable t) { t.printStackTrace(); }
+				SwingUtilities.invokeLater(new JMRunnable() {
+					public void JMRun() {
+						process_refreshables = true;
+						for (Refreshable refreshable : refreshable_list) {
+							try {
+								refreshable.refresh();
+							} catch (Throwable t) {
+								t.printStackTrace();
+							}
+						}
+						process_refreshables = false;
 					}
-					process_refreshables = false;
-				}
-			}); }
-			
-		}
-		
-	}
-	
-}
+				});
+			}
 
+		}
+
+	}
+
+}
