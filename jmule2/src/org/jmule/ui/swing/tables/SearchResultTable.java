@@ -59,7 +59,7 @@ import org.jmule.core.sharingmanager.SharingManager;
 import org.jmule.core.utils.GeneralComparator;
 import org.jmule.core.utils.Misc;
 import org.jmule.ui.UIConstants;
-import org.jmule.ui.localizer._;
+import org.jmule.ui.localizer.Lang;
 import org.jmule.ui.swing.ImgRep;
 import org.jmule.ui.swing.SwingPreferences;
 import org.jmule.ui.swing.maintabs.search.SearchResultPanel;
@@ -170,7 +170,7 @@ public class SearchResultTable extends JMTable {
 		file_name.setIdentifier(UIConstants.SEARCH_FILENAME_COLUMN_ID);
 		file_name.setModelIndex(SearchResultTableModel.FILE_NAME);
 		file_name.setVisible(_pref.isColumnVisible(UIConstants.SEARCH_FILENAME_COLUMN_ID));
-		file_name.setHeaderValue(_._("mainwindow.searchtab.column.filename"));
+		file_name.setHeaderValue(Lang.getString("mainwindow.searchtab.column.filename"));
 		file_name.setCellRenderer(new FileNameTableCellRenderer());
 		file_name.setComparator(new GeneralComparator("getFileName"));
 		
@@ -180,7 +180,7 @@ public class SearchResultTable extends JMTable {
 		file_size.setIdentifier(UIConstants.SEARCH_FILESIZE_COLUMN_ID);
 		file_size.setModelIndex(SearchResultTableModel.FILE_SIZE);
 		file_size.setVisible(_pref.isColumnVisible(UIConstants.SEARCH_FILESIZE_COLUMN_ID));
-		file_size.setHeaderValue(_._("mainwindow.searchtab.column.filesize"));
+		file_size.setHeaderValue(Lang.getString("mainwindow.searchtab.column.filesize"));
 		file_size.setCellRenderer(new FileSizeTableCellRenderer());
 		file_size.setComparator(new GeneralComparator("getFileSize"));
 		
@@ -190,7 +190,7 @@ public class SearchResultTable extends JMTable {
 		availability.setIdentifier(UIConstants.SEARCH_AVAILABILITY_COLUMN_ID);
 		availability.setModelIndex(SearchResultTableModel.AVAILABILITY);
 		availability.setVisible(_pref.isColumnVisible(UIConstants.SEARCH_AVAILABILITY_COLUMN_ID));
-		availability.setHeaderValue(_._("mainwindow.searchtab.column.availability"));
+		availability.setHeaderValue(Lang.getString("mainwindow.searchtab.column.availability"));
 		availability.setCellRenderer(new AvailabilityTableCellRenderer());
 		availability.setComparator(new GeneralComparator("getFileAviability"));
 		
@@ -200,7 +200,7 @@ public class SearchResultTable extends JMTable {
 		complete_sources.setIdentifier(UIConstants.SEARCH_COMPLETESRC_COLUMN_ID);
 		complete_sources.setModelIndex(SearchResultTableModel.COMPLETE_SOURCES);
 		complete_sources.setVisible(_pref.isColumnVisible(UIConstants.SEARCH_COMPLETESRC_COLUMN_ID));
-		complete_sources.setHeaderValue(_._("mainwindow.searchtab.column.completesrcs"));
+		complete_sources.setHeaderValue(Lang.getString("mainwindow.searchtab.column.completesrcs"));
 		complete_sources.setCellRenderer(new CompleteSourcesTableCellRenderer());
 		complete_sources.setComparator(new GeneralComparator("getFileCompleteSrc"));
 		
@@ -210,7 +210,7 @@ public class SearchResultTable extends JMTable {
 		type.setIdentifier(UIConstants.SEARCH_FILE_TYPE_COLUMN_ID);
 		type.setModelIndex(SearchResultTableModel.TYPE);
 		type.setVisible(_pref.isColumnVisible(UIConstants.SEARCH_FILE_TYPE_COLUMN_ID));
-		type.setHeaderValue(_._("mainwindow.searchtab.column.filetype"));
+		type.setHeaderValue(Lang.getString("mainwindow.searchtab.column.filetype"));
 		type.setCellRenderer(new TypeTableCellRenderer());
 		type.setComparator(new Comparator() {
 			public int compare(Object o1, Object o2) {
@@ -226,7 +226,7 @@ public class SearchResultTable extends JMTable {
 		file_id.setIdentifier(UIConstants.SEARCH_FILE_ID_COLUMN_ID);
 		file_id.setModelIndex(SearchResultTableModel.FILE_ID);
 		file_id.setVisible(_pref.isColumnVisible(UIConstants.SEARCH_FILE_ID_COLUMN_ID));
-		file_id.setHeaderValue(_._("mainwindow.searchtab.column.fileid"));
+		file_id.setHeaderValue(Lang.getString("mainwindow.searchtab.column.fileid"));
 		file_id.setCellRenderer(new FileIDTableCellRenderer());
 		file_id.setComparator(new GeneralComparator("getFileHash"));
 		

@@ -41,8 +41,7 @@ import org.jmule.ui.Splash;
 import org.jmule.ui.swing.SwingConstants;
 import org.jmule.ui.swing.SwingPreferences;
 import org.jmule.ui.swing.SwingUtils;
-import org.jmule.ui.swt.SWTPreferences;
-
+ 
 /**
  * 
  * @author javajox
@@ -172,9 +171,7 @@ public class SetupWizard extends JDialog {
 					//TODO modify this
 					String our_ui = ((UIChooser)stage5).getChosenUI();
 					
-					if(our_ui.equals("SWT"))
-						SWTPreferences.getInstance().setConnectAtStartup(gs.isConnectAtStartup());
-					else if(our_ui.equals("SWING"))
+					 if(our_ui.equals("SWING"))
 						SwingPreferences.getSingleton().setConnectAtStartup(gs.isConnectAtStartup());
 					
 					CommonUIPreferences.getSingleton().save();

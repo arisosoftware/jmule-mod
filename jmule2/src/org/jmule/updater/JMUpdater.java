@@ -28,7 +28,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.jmule.core.JMConstants;
-import org.jmule.ui.localizer._;
+import org.jmule.ui.localizer.Lang;
 
 /**
  * Created on Aug 20, 2008
@@ -55,14 +55,14 @@ public class JMUpdater {
 	private static Map<Integer,String> error_codes = new Hashtable<Integer,String>();
 	
 	static {
-		error_codes.put(301, _._("updaterwindow.error301"));
-		error_codes.put(400, _._("updaterwindow.error400"));
-		error_codes.put(401, _._("updaterwindow.error401"));
-		error_codes.put(403, _._("updaterwindow.error403"));
-		error_codes.put(404, _._("updaterwindow.error404"));
-		error_codes.put(408, _._("updaterwindow.error408"));
-		error_codes.put(500, _._("updaterwindow.error500"));
-		error_codes.put(503, _._("updaterwindow.error503"));
+		error_codes.put(301, Lang.getString("updaterwindow.error301"));
+		error_codes.put(400, Lang.getString("updaterwindow.error400"));
+		error_codes.put(401, Lang.getString("updaterwindow.error401"));
+		error_codes.put(403, Lang.getString("updaterwindow.error403"));
+		error_codes.put(404, Lang.getString("updaterwindow.error404"));
+		error_codes.put(408, Lang.getString("updaterwindow.error408"));
+		error_codes.put(500, Lang.getString("updaterwindow.error500"));
+		error_codes.put(503, Lang.getString("updaterwindow.error503"));
 	}
 	
 	private static JMUpdater updater = null;

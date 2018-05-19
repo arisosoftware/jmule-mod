@@ -27,7 +27,7 @@ import static org.jmule.core.edonkey.ED2KConstants.*;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
-import org.jmule.ui.localizer._;
+import org.jmule.ui.localizer.Lang;
 /**
  * Created on Aug 16, 2008
  * @author binary256
@@ -79,27 +79,27 @@ public class FileFormatter {
 	public static String formatMimeType(byte[] fileType) {
 		
 		if (Arrays.equals(TAG_FILE_TYPE_AUDIO,fileType)) 
-			return _._("mainwindow.searchtab.column.filetype.audio");
+			return Lang.getString("mainwindow.searchtab.column.filetype.audio");
 		
 		if (Arrays.equals(TAG_FILE_TYPE_VIDEO,fileType)) 
-			return _._("mainwindow.searchtab.column.filetype.video");
+			return Lang.getString("mainwindow.searchtab.column.filetype.video");
 		
 		if (Arrays.equals(TAG_FILE_TYPE_IMAGE,fileType)) 
-			return _._("mainwindow.searchtab.column.filetype.image");
+			return Lang.getString("mainwindow.searchtab.column.filetype.image");
 		
 		if (Arrays.equals(TAG_FILE_TYPE_DOC,fileType)) 
-			return _._("mainwindow.searchtab.column.filetype.doc");
+			return Lang.getString("mainwindow.searchtab.column.filetype.doc");
 
 		if (Arrays.equals(TAG_FILE_TYPE_PROGRAM,fileType)) 
-			return _._("mainwindow.searchtab.column.filetype.program");
+			return Lang.getString("mainwindow.searchtab.column.filetype.program");
 		
 		if (Arrays.equals(TAG_FILE_TYPE_ARC,fileType)) 
-			return _._("mainwindow.searchtab.column.filetype.archive");
+			return Lang.getString("mainwindow.searchtab.column.filetype.archive");
 		
 		if (Arrays.equals(TAG_FILE_TYPE_ISO,fileType)) 
-			return _._("mainwindow.searchtab.column.filetype.iso");
+			return Lang.getString("mainwindow.searchtab.column.filetype.iso");
 		
-		return _._("mainwindow.searchtab.column.filetype.unknown");
+		return Lang.getString("mainwindow.searchtab.column.filetype.unknown");
 	}
 	
 }

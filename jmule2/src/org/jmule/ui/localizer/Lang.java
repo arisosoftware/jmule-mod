@@ -29,15 +29,15 @@ package org.jmule.ui.localizer;
  * @version $Revision: 1.2 $
  * Last changed by $Author: binary256_ $ on $Date: 2008/10/09 10:12:11 $
  */
-public class _ {
+public class Lang {
 
-	public static String _(String key) {
+	public static String getString(String key) {
 		
 		return Localizer.getString(key);
 		
 	}
 	
-	public static String _(String key, String... params) {
+	public static String getString (String key, String... params) {
 		
 		return Localizer.getString(key, params);
 		

@@ -33,7 +33,7 @@ import org.jmule.core.jkad.routingtable.KadContact;
 import org.jmule.core.peermanager.Peer;
 import org.jmule.core.peermanager.Peer.PeerSource;
 import org.jmule.ui.localizer.Localizer;
-import org.jmule.ui.localizer._;
+import org.jmule.ui.localizer.Lang;
 
 /**
  * Created on Aug 9, 2008
@@ -85,13 +85,13 @@ public class PeerInfoFormatter {
 
 	public static String peerSourceToString(PeerSource source) {
 		switch(source) {
-			case SERVER : return _._("downloadinfowindow.tab.peerlist.column.source.type.server");
-			case GLOBAL : return _._("downloadinfowindow.tab.peerlist.column.source.type.global");
-			case KAD : return _._("downloadinfowindow.tab.peerlist.column.source.type.kad");
-			case PEX : return _._("downloadinfowindow.tab.peerlist.column.source.type.pex");
-			case ED2KLINK : return _._("downloadinfowindow.tab.peerlist.column.source.type.ed2klink");
-			case EXTERNAL : return _._("downloadinfowindow.tab.peerlist.column.source.type.external");
-			case INCOMING : return _._("downloadinfowindow.tab.peerlist.column.source.type.incoming");
+			case SERVER : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.server");
+			case GLOBAL : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.global");
+			case KAD : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.kad");
+			case PEX : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.pex");
+			case ED2KLINK : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.ed2klink");
+			case EXTERNAL : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.external");
+			case INCOMING : return Lang.getString("downloadinfowindow.tab.peerlist.column.source.type.incoming");
 		}
 		return "";
 	}
@@ -119,40 +119,40 @@ public class PeerInfoFormatter {
 
 	public static String formatPeerStatus(PeerDownloadInfo downloadInfo) {
 		if (downloadInfo == null)
-			return _
-					._("downloadinfowindow.tab.peerlist.column.status.connecting");
+			return Lang
+					.getString("downloadinfowindow.tab.peerlist.column.status.connecting");
 		PeerDownloadStatus status = downloadInfo.getStatus();
 		if (status == null)
-			return _
-					._("downloadinfowindow.tab.peerlist.column.status.connecting");
+			return Lang
+					.getString("downloadinfowindow.tab.peerlist.column.status.connecting");
 		switch (status) {
 		case DISCONNECTED:
-			return _
-					._("downloadinfowindow.tab.peerlist.column.status.disconnected");
+			return Lang
+					.getString("downloadinfowindow.tab.peerlist.column.status.disconnected");
 		case CONNECTED:
-			return _
-					._("downloadinfowindow.tab.peerlist.column.status.connected");
+			return Lang
+					.getString("downloadinfowindow.tab.peerlist.column.status.connected");
 		case SLOTREQUEST:
-			return _
-					._("downloadinfowindow.tab.peerlist.column.status.slot_request");
+			return Lang
+					.getString("downloadinfowindow.tab.peerlist.column.status.slot_request");
 		case ACTIVE:
-			return _._("downloadinfowindow.tab.peerlist.column.status.active");
+			return Lang.getString("downloadinfowindow.tab.peerlist.column.status.active");
 		case ACTIVE_UNUSED:
-			return _
-					._("downloadinfowindow.tab.peerlist.column.status.active_unued");
+			return Lang
+					.getString("downloadinfowindow.tab.peerlist.column.status.active_unued");
 		case IN_QUEUE:
 			return Localizer.getString(
 					"downloadinfowindow.tab.peerlist.column.status.in_queue",
 					downloadInfo.getQueueRank() + "");
 		case INACTIVE:
-			return _
-					._("downloadinfowindow.tab.peerlist.column.status.inactive");
+			return Lang
+					.getString("downloadinfowindow.tab.peerlist.column.status.inactive");
 		case UPLOAD_REQUEST:
-			return _
-					._("downloadinfowindow.tab.peerlist.column.status.upload_request");
+			return Lang
+					.getString("downloadinfowindow.tab.peerlist.column.status.upload_request");
 		case HASHSET_REQUEST:
-			return _
-					._("downloadinfowindow.tab.peerlist.column.status.hashset_request");
+			return Lang
+					.getString("downloadinfowindow.tab.peerlist.column.status.hashset_request");
 		}
 
 		return "";

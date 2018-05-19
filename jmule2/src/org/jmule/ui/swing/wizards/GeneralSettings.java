@@ -35,8 +35,7 @@ import org.jmule.core.JMuleCoreFactory;
 import org.jmule.ui.CommonUIPreferences;
 import org.jmule.ui.swing.SwingPreferences;
 import org.jmule.ui.swing.common.PortTextField;
-import org.jmule.ui.swt.SWTPreferences;
-
+ 
 /**
  * Created on 07-19-2008
  * @author javajox
@@ -101,12 +100,7 @@ public class GeneralSettings extends WizardPanel {
         connect_at_start_up.setSelected(false);
 
         CommonUIPreferences _pref = CommonUIPreferences.getSingleton();
-        if(_pref.getUIType().equals("SWT")) {
-        	if(SWTPreferences.getInstance().isConnectAtStartup())
-        		connect_at_start_up.setSelected(true);
-        	else 
-        		connect_at_start_up.setSelected(false);
-        } else if(_pref.getUIType().equals("SWING")) {
+         if(_pref.getUIType().equals("SWING")) {
         	if(SwingPreferences.getSingleton().isConnectAtStartup()) 
         		connect_at_start_up.setSelected(true);
         	else 

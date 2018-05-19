@@ -76,7 +76,7 @@ import org.jmule.core.servermanager.ServerManagerException;
 import org.jmule.core.servermanager.ServerManagerListener;
 import org.jmule.ui.JMuleUIManager;
 import org.jmule.ui.localizer.Localizer;
-import org.jmule.ui.localizer._;
+import org.jmule.ui.localizer.Lang;
 import org.jmule.ui.swing.BrowserLauncher;
 import org.jmule.ui.swing.ImgRep;
 import org.jmule.ui.swing.Refreshable;
@@ -281,11 +281,11 @@ public class MainWindow extends JFrame implements WindowListener  {
 			    	NotEnoughSpaceDownloadingFile nes = (NotEnoughSpaceDownloadingFile)eventDescriptor;
 				    public void run() {
 				         JOptionPane.showMessageDialog(_this, 
-				            _._("mainwindow.not_enough_space_dialog.message", 
+				            Lang.getString("mainwindow.not_enough_space_dialog.message", 
 											nes.getFileName(),
 											FileFormatter.formatFileSize( nes.getTotalSpace() ),
 											FileFormatter.formatFileSize( nes.getFreeSpace() )),
-				            _._("mainwindow.not_enough_space_dialog.title"),JOptionPane.ERROR_MESSAGE);	
+				            Lang.getString("mainwindow.not_enough_space_dialog.title"),JOptionPane.ERROR_MESSAGE);	
 				    }
 			    });
 			  }
@@ -378,14 +378,14 @@ public class MainWindow extends JFrame implements WindowListener  {
         	}
         });
         
-		file.setText(_._("mainwindow.mainmenu.file"));
+		file.setText(Lang.getString("mainwindow.mainmenu.file"));
 		fnew.setText("New");
-		view.setText(_._("mainwindow.mainmenu.view"));
-		tabs.setText(_._("mainwindow.mainmenu.view.tabs"));
-		tools.setText(_._("mainwindow.mainmenu.tools"));
-		help.setText(_._("mainwindow.mainmenu.help"));
+		view.setText(Lang.getString("mainwindow.mainmenu.view"));
+		tabs.setText(Lang.getString("mainwindow.mainmenu.view.tabs"));
+		tools.setText(Lang.getString("mainwindow.mainmenu.tools"));
+		help.setText(Lang.getString("mainwindow.mainmenu.help"));
 		
-		exit.setText(_._("mainwindow.mainmenu.file.exit"));
+		exit.setText(Lang.getString("mainwindow.mainmenu.file.exit"));
 		exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				shutdownTheSystem();
@@ -402,36 +402,36 @@ public class MainWindow extends JFrame implements WindowListener  {
 		exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
 		exit.setMnemonic('x');
 		exit.setIcon(ImgRep.getIcon("menuicons/door_in.png"));
-		import_server_list.setText(_._("mainwindow.mainmenu.file.import"));
+		import_server_list.setText(Lang.getString("mainwindow.mainmenu.file.import"));
 		import_server_list.setIcon(ImgRep.getIcon("import.png"));
-		servers.setText(_._("mainwindow.mainmenu.view.tabs.servers"));
+		servers.setText(Lang.getString("mainwindow.mainmenu.view.tabs.servers"));
 		servers.setIcon(ImgRep.getIcon("menuicons/servers.png"));
 		servers.setMnemonic('s');
 		servers.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
-		transfers.setText(_._("mainwindow.mainmenu.view.tabs.transfers"));
+		transfers.setText(Lang.getString("mainwindow.mainmenu.view.tabs.transfers"));
 		transfers.setIcon(ImgRep.getIcon("menuicons/transfer.png"));
 		transfers.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
-		search.setText(_._("mainwindow.mainmenu.view.tabs.search"));
+		search.setText(Lang.getString("mainwindow.mainmenu.view.tabs.search"));
 		search.setIcon(ImgRep.getIcon("menuicons/search.png"));
 		search.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
-		shared_files.setText(_._("mainwindow.mainmenu.view.tabs.shared"));
+		shared_files.setText(Lang.getString("mainwindow.mainmenu.view.tabs.shared"));
 		shared_files.setIcon(ImgRep.getIcon("menuicons/shared_files.png"));
 		shared_files.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));
-		stats.setText(_._("mainwindow.mainmenu.view.tabs.stats"));
+		stats.setText(Lang.getString("mainwindow.mainmenu.view.tabs.stats"));
 		stats.setIcon(ImgRep.getIcon("menuicons/statistics.png"));
 		stats.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_5, java.awt.event.InputEvent.CTRL_MASK));
-		logs.setText(_._("mainwindow.mainmenu.view.tabs.logs"));
+		logs.setText(Lang.getString("mainwindow.mainmenu.view.tabs.logs"));
 		logs.setIcon(ImgRep.getIcon("menuicons/logs.png"));
 		logs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_6, java.awt.event.InputEvent.CTRL_MASK));
-		ui_chooser.setText(_._("mainwindow.mainmenu.tools.uichooser"));
+		ui_chooser.setText(Lang.getString("mainwindow.mainmenu.tools.uichooser"));
 		ui_chooser.setIcon(ImgRep.getIcon("menuicons/switchui.png"));
 		ui_chooser.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
 		ui_chooser.setMnemonic('u');
-		config_wizard.setText(_._("mainwindow.mainmenu.tools.wizard"));
+		config_wizard.setText(Lang.getString("mainwindow.mainmenu.tools.wizard"));
 		config_wizard.setIcon(ImgRep.getIcon("menuicons/wizard.png"));
 		config_wizard.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
 		config_wizard.setMnemonic('w');
-		options.setText(_._("mainwindow.mainmenu.tools.options"));
+		options.setText(Lang.getString("mainwindow.mainmenu.tools.options"));
 		options.setIcon(ImgRep.getIcon("menuicons/cog_edit.png"));
 		options.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
 		options.setMnemonic('o');
@@ -444,11 +444,11 @@ public class MainWindow extends JFrame implements WindowListener  {
 		bug_tracker.setIcon(ImgRep.getIcon("menuicons/world_link.png"));
 		check_for_updates.setText("Check for updates");
 		check_for_updates.setIcon(ImgRep.getIcon("updater.png"));
-		about.setText(_._("mainwindow.mainmenu.help.about"));
+		about.setText(Lang.getString("mainwindow.mainmenu.help.about"));
 		about.setIcon(ImgRep.getIcon("menuicons/information.png"));
 		
-		tool_bar_visibility.setText(_._("mainwindow.mainmenu.view.toolbar"));
-        status_bar_visibility.setText(_._("mainwindow.mainmenu.view.statusbar"));
+		tool_bar_visibility.setText(Lang.getString("mainwindow.mainmenu.view.toolbar"));
+        status_bar_visibility.setText(Lang.getString("mainwindow.mainmenu.view.statusbar"));
 		
 		main_menu_bar.add( file );
 		main_menu_bar.add( view );
@@ -757,15 +757,15 @@ public class MainWindow extends JFrame implements WindowListener  {
 	}
 
 	public enum ServerStatusTypes {
-		DISCONNECTED { public String toString() { return _._("mainwindow.statusbar.label.disconnected"); } },
-		CONNECTING { public String toString() { return _._("mainwindow.statusbar.label.connecting"); }	},
-		CONNECTED { public String toString() { return _._("mainwindow.statusbar.label.connected"); } };
+		DISCONNECTED { public String toString() { return Lang.getString("mainwindow.statusbar.label.disconnected"); } },
+		CONNECTING { public String toString() { return Lang.getString("mainwindow.statusbar.label.connecting"); }	},
+		CONNECTED { public String toString() { return Lang.getString("mainwindow.statusbar.label.connected"); } };
 		public abstract String toString();
 	}
 	
 	public enum ClientIDTypes {
-		LOW_ID { public String toString() { return _._("mainwindow.statusbar.label.low_id"); } },
-		HIGH_ID { public String toString() { return _._("mainwindow.statusbar.label.high_id"); } },
+		LOW_ID { public String toString() { return Lang.getString("mainwindow.statusbar.label.low_id"); } },
+		HIGH_ID { public String toString() { return Lang.getString("mainwindow.statusbar.label.high_id"); } },
 		// when the system is disconnected
 		NO_ID { public String toString() { return ""; } };
 	    public abstract String toString();	
@@ -773,7 +773,7 @@ public class MainWindow extends JFrame implements WindowListener  {
 	
 	class StatusBar extends JPanel implements Refreshable {
 		
-		private JLabel server_status = new JLabel(_._("mainwindow.statusbar.label.disconnected"));
+		private JLabel server_status = new JLabel(Lang.getString("mainwindow.statusbar.label.disconnected"));
 		private JLabel client_id = new JLabel();
 		private JLabel download_speed = new JLabel();
 		private JLabel upload_speed = new JLabel();

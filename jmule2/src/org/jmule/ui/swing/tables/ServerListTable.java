@@ -73,7 +73,7 @@ import org.jmule.countrylocator.CountryLocator;
 import org.jmule.ui.FlagPack;
 import org.jmule.ui.IDialog;
 import org.jmule.ui.UIConstants;
-import org.jmule.ui.localizer._;
+import org.jmule.ui.localizer.Lang;
 import org.jmule.ui.maintabs.serverlist.INewServerDialog;
 import org.jmule.ui.swing.ImgRep;
 import org.jmule.ui.swing.SwingGUIUpdater;
@@ -524,7 +524,7 @@ public class ServerListTable extends JMTable {
 						}
 					});
 					
-					add_to_static_list = new JMenuItem(_._("mainwindow.serverlisttab.serverlist.popupmenu.add_to_static_list"),
+					add_to_static_list = new JMenuItem(Lang.getString("mainwindow.serverlisttab.serverlist.popupmenu.add_to_static_list"),
 							                 ImgRep.getIcon("list_add.png"));
 					add_to_static_list.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -532,7 +532,7 @@ public class ServerListTable extends JMTable {
 						}
 					});
 					
-					remove_from_static_list = new JMenuItem(_._("mainwindow.serverlisttab.serverlist.popupmenu.remove_from_static_list"),
+					remove_from_static_list = new JMenuItem(Lang.getString("mainwindow.serverlisttab.serverlist.popupmenu.remove_from_static_list"),
 	                                              ImgRep.getIcon("list_remove.png"));
 					remove_from_static_list.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {

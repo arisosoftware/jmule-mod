@@ -38,8 +38,7 @@ import org.jmule.ui.Splash;
 import org.jmule.ui.console.ConsoleSplash;
 import org.jmule.ui.swing.JSplash;
 import org.jmule.ui.swing.wizards.SetupWizard;
-import org.jmule.ui.swt.SWTSplash;
-import org.jmule.ui.swt.SWTThread;
+ 
 
 /**
  * 
@@ -66,12 +65,7 @@ public class Launcher {
 				splash = new ConsoleSplash();
 			}
 			
-			if (_pref.getUIType().equals(JMuleUIManager.SWT_UI)) {
-				// first of all we must start the swt thread
-				SWTThread.getInstance().initialize();
-				SWTThread.getInstance().start();
-				splash = new SWTSplash();
-			}
+			 
 
 			splash.splashOn();
 
