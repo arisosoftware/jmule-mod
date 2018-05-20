@@ -27,7 +27,9 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
- 
+
+import org.jmule.countrylocator.CountryLocator;
+
 /**
  *
  * Created on Oct 6, 2008
@@ -48,39 +50,53 @@ public class FlagPack {
 	}
 
 	public static URL getFlagAsURL(String countryCode, FlagSize flag_size) {
-		//
-		// URL image_url = null;
-		//
-		// try {
-		//
-		// switch (flag_size) {
-		// case S18x25:
-		// image_url = FlagPack.class.getClassLoader()
-		// .getResource(getFolderBySize(flag_size) + countryCode.toLowerCase() +
-		// FLAG_FILE_EXT);
-		// return image_url;
-		//
-		// case S25x15:
-		// image_url = FlagPack.class.getClassLoader()
-		// .getResource(getFolderBySize(flag_size) + countryCode.toLowerCase() +
-		// FLAG_FILE_EXT);
-		// return image_url;
-		// }
-		// } catch (Throwable t) {
-		//
-		// return FlagPack.class.getClassLoader().getResource(getFolderBySize(flag_size)
-		// + UNKNOWN_COUNTRY_FLAG);
-		// }
+		if (countryCode.compareTo(CountryLocator.COUNTRY_CODE_NOT_AVAILABLE) == 0)
+			return FlagPack.class.getClassLoader().getResource(getFolderBySize(flag_size) + UNKNOWN_COUNTRY_FLAG);
+
+		URL image_url = null;
+
+		try {
+
+			switch (flag_size) {
+			case S18x25:
+				image_url = FlagPack.class.getClassLoader()
+						.getResource(getFolderBySize(flag_size) + countryCode.toLowerCase() + FLAG_FILE_EXT);
+				return image_url;
+
+			case S25x15:
+				image_url = FlagPack.class.getClassLoader()
+						.getResource(getFolderBySize(flag_size) + countryCode.toLowerCase() + FLAG_FILE_EXT);
+				return image_url;
+			}
+		} catch (Throwable t) {
+
+			return FlagPack.class.getClassLoader().getResource(getFolderBySize(flag_size) + UNKNOWN_COUNTRY_FLAG);
+		}
 		return FlagPack.class.getClassLoader().getResource(getFolderBySize(flag_size) + UNKNOWN_COUNTRY_FLAG);
 	}
 
 	public static InputStream getFlagAsInputStream(String countryCode, FlagSize flag_size) {
+		if (countryCode.compareTo(CountryLocator.COUNTRY_CODE_NOT_AVAILABLE) == 0)
+			return FlagPack.class.getClassLoader()
+					.getResourceAsStream(getFolderBySize(flag_size) + UNKNOWN_COUNTRY_FLAG);
 
+		try {
+
+			switch (flag_size) {
+			case S18x25:
+				return FlagPack.class.getClassLoader()
+						.getResourceAsStream(getFolderBySize(flag_size) + countryCode.toLowerCase() + FLAG_FILE_EXT);
+
+			case S25x15:
+				return FlagPack.class.getClassLoader()
+						.getResourceAsStream(getFolderBySize(flag_size) + countryCode.toLowerCase() + FLAG_FILE_EXT);
+			}
+		} catch (Throwable t) {
+
+			return FlagPack.class.getClassLoader()
+					.getResourceAsStream(getFolderBySize(flag_size) + UNKNOWN_COUNTRY_FLAG);
+		}
 		return FlagPack.class.getClassLoader().getResourceAsStream(getFolderBySize(flag_size) + UNKNOWN_COUNTRY_FLAG);
-
-		// return
-		// FlagPack.class.getClassLoader().getResourceAsStream(getFolderBySize(flag_size)
-		// + UNKNOWN_COUNTRY_FLAG);
 	}
 
 	public static Icon getFlagAsIcon(String countryCode, FlagSize flag_size) {
@@ -98,18 +114,21 @@ public class FlagPack {
 
 	public static Icon getFlagAsIconByIP(Object inetAddress, FlagSize flagSize) {
 
-		String country_code = "CHN";
+		String country_code = CountryLocator.getInstance().getCountryCode(inetAddress);
 
 		return getFlagAsIcon(country_code, flagSize);
 	}
 
 	public static URL getFlagAsURLByIP(Object inetAddress, FlagSize flagSize) {
-
+		if (!CountryLocator.getInstance().isServiceDown()) {
+			CountryLocator country_locator = CountryLocator.getInstance();
+			return getFlagAsURL(country_locator.getCountryCode(inetAddress), flagSize);
+		}
 		return null;
 	}
 
 	public static InputStream getFlagAsInputStreamByIP(Object inetAddress, FlagSize flagSize) {
-		return null;
+		return getFlagAsInputStream(CountryLocator.getInstance().getCountryCode(inetAddress), flagSize);
 	}
 
 	private static String getFolderBySize(FlagSize flag_size) {

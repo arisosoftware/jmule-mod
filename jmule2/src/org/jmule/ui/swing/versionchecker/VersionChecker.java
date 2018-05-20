@@ -51,8 +51,7 @@ import org.jmule.core.JMConstants;
 import org.jmule.ui.localizer.Localizer;
 import org.jmule.ui.swing.BrowserLauncher;
 import org.jmule.ui.swing.SwingPreferences;
-import org.jmule.updater.JMUpdater;
-
+ 
 /**
  *
  * Created on Oct 11, 2008
@@ -75,63 +74,12 @@ public class VersionChecker extends JDialog {
 	private JEditorPane changelog_editor_panel = new JEditorPane();
 	private JLabel download_new_version_label = new JLabel();
 	private JFrame parent;
-
-	private JMUpdater jmule_updater = JMUpdater.getInstance();
+ 
 	private SwingPreferences _pref = SwingPreferences.getSingleton();
 
 	private Font dialog_font = new java.awt.Font("Dialog", 1, 13);
 
-	public VersionChecker(JFrame parent) {
-		super(parent, "Version checker", true);
-		try {
-			jmule_updater.checkForUpdates();
-		} catch (Throwable t) {
-			JOptionPane.showMessageDialog(this, "An error occured", "Error", JOptionPane.ERROR_MESSAGE);
-			this.setVisible(false);
-		}
-		this.parent = parent;
-		init();
-		if (jmule_updater.isNewVersionAvailable()) {
-			available_version_value.setForeground(new Color(0x24bb00));
-			jmule_version_value.setForeground(Color.RED);
-			available_version_value.setText(jmule_updater.getVersion());
-			download_new_version_label.setText("Download new version");
-			changelog_editor_panel.setEnabled(true);
-			changelog_editor_panel.setFont(new Font("Courir", Font.PLAIN, 12));
-			changelog_editor_panel.setText(jmule_updater.getChangeLog());
-
-			download_new_version_label.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent event) {
-					BrowserLauncher.openURL(JMConstants.JMULE_DOWNLOAD_PAGE);
-				}
-
-				public void mouseEntered(MouseEvent event) {
-					download_new_version_label.setForeground(Color.BLUE);
-					setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				}
-
-				public void mouseExited(MouseEvent event) {
-					download_new_version_label.setForeground(Color.BLACK);
-					setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-				}
-			});
-
-		} else {
-			download_new_version_label.setText("No new version available");
-		}
-		long check_time = jmule_updater.getLastUpdateTime();
-		if (check_time != 0) {
-			Calendar calendar = new GregorianCalendar();
-			calendar.setTimeInMillis(check_time);
-			String upate_date = format(calendar.get(Calendar.DAY_OF_MONTH)) + "."
-					+ format(calendar.get(Calendar.MONTH) + 1) + "." + format(calendar.get(Calendar.YEAR));
-			upate_date += "  " + format(calendar.get(Calendar.HOUR_OF_DAY)) + ":"
-					+ format(calendar.get(Calendar.MINUTE)) + ":" + format(calendar.get(Calendar.SECOND));
-			last_update_value.setText(upate_date);
-		}
-	}
-
-	private void init() {
+ 	private void init() {
 		check_for_update_checkbox.setSelected(_pref.isCheckForUpdatesAtStartup());
 		GridBagLayout thisLayout = new GridBagLayout();
 		thisLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1 };

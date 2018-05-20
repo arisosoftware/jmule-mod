@@ -41,7 +41,7 @@ import org.jmule.core.uploadmanager.UploadQueueException;
 import org.jmule.core.uploadmanager.UploadSession;
 import org.jmule.core.utils.GeneralComparator;
 import org.jmule.core.utils.Misc;
-
+import org.jmule.countrylocator.CountryLocator;
 import org.jmule.ui.FlagPack;
 import org.jmule.ui.UIConstants;
 import org.jmule.ui.swing.models.UploadPeersModel;
@@ -58,6 +58,7 @@ import org.jmule.ui.utils.SpeedFormatter;
  */
 public class UploadPeersTable extends JMTable {
 
+	CountryLocator country_locator = CountryLocator.getInstance();
 	UploadSession session;
 	JMuleCore _core = JMuleCoreFactory.getSingleton();
 	UploadManager _upload_manager = _core.getUploadManager();
@@ -77,8 +78,8 @@ public class UploadPeersTable extends JMTable {
 				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			this.setHorizontalAlignment(SwingConstants.CENTER);
-			this.setText("N/A");
-			this.setToolTipText("N/A");
+			this.setText(country_locator.getCountryCode(peer.getIP()));
+			this.setToolTipText(country_locator.getCountryName(peer.getIP()));
 			return this;
 		}
 	}
@@ -89,7 +90,7 @@ public class UploadPeersTable extends JMTable {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			this.setHorizontalAlignment(SwingConstants.CENTER);
 			this.setIcon(FlagPack.getFlagAsIconByIP(peer.getIP(), FlagPack.FlagSize.S18x25));
-			this.setToolTipText(peer.getIP());
+			this.setToolTipText(country_locator.getCountryName(peer.getIP()));
 			return this;
 		}
 	}
@@ -161,8 +162,9 @@ public class UploadPeersTable extends JMTable {
 		public int compare(Object o1, Object o2) {
 			Peer peer1 = (Peer) o1;
 			Peer peer2 = (Peer) o2;
-
-			return Misc.compareAllObjects(peer1, peer2, "toString", true);
+			String cc1 = country_locator.getCountryCode(peer1.getIP());
+			String cc2 = country_locator.getCountryCode(peer2.getIP());
+			return Misc.compareAllObjects(cc1, cc2, "toString", true);
 		}
 	}
 
