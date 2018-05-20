@@ -28,8 +28,6 @@ import java.net.URL;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import org.jmule.countrylocator.CountryLocator;
-
 /**
  *
  * Created on Oct 6, 2008
@@ -50,8 +48,6 @@ public class FlagPack {
 	}
 
 	public static URL getFlagAsURL(String countryCode, FlagSize flag_size) {
-		if (countryCode.compareTo(CountryLocator.COUNTRY_CODE_NOT_AVAILABLE) == 0)
-			return FlagPack.class.getClassLoader().getResource(getFolderBySize(flag_size) + UNKNOWN_COUNTRY_FLAG);
 
 		URL image_url = null;
 
@@ -76,9 +72,6 @@ public class FlagPack {
 	}
 
 	public static InputStream getFlagAsInputStream(String countryCode, FlagSize flag_size) {
-		if (countryCode.compareTo(CountryLocator.COUNTRY_CODE_NOT_AVAILABLE) == 0)
-			return FlagPack.class.getClassLoader()
-					.getResourceAsStream(getFolderBySize(flag_size) + UNKNOWN_COUNTRY_FLAG);
 
 		try {
 
@@ -114,21 +107,17 @@ public class FlagPack {
 
 	public static Icon getFlagAsIconByIP(Object inetAddress, FlagSize flagSize) {
 
-		String country_code = CountryLocator.getInstance().getCountryCode(inetAddress);
-
-		return getFlagAsIcon(country_code, flagSize);
+		return getFlagAsIcon("CN", flagSize);
 	}
 
 	public static URL getFlagAsURLByIP(Object inetAddress, FlagSize flagSize) {
-		if (!CountryLocator.getInstance().isServiceDown()) {
-			CountryLocator country_locator = CountryLocator.getInstance();
-			return getFlagAsURL(country_locator.getCountryCode(inetAddress), flagSize);
-		}
-		return null;
+
+		return getFlagAsURL("CN", flagSize);
+
 	}
 
 	public static InputStream getFlagAsInputStreamByIP(Object inetAddress, FlagSize flagSize) {
-		return getFlagAsInputStream(CountryLocator.getInstance().getCountryCode(inetAddress), flagSize);
+		return getFlagAsInputStream("US", flagSize);
 	}
 
 	private static String getFolderBySize(FlagSize flag_size) {
