@@ -45,7 +45,7 @@ import org.jmule.core.configmanager.ConfigurationManager;
 import org.jmule.core.configmanager.ConfigurationManagerSingleton;
 import org.jmule.core.configmanager.InternalConfigurationManager;
 import org.jmule.core.downloadmanager.DownloadManagerSingleton;
-import org.jmule.core.downloadmanager.InternalDownloadManager;
+import org.jmule.core.downloadmanager.DownloadManager;
 import org.jmule.core.edonkey.ClientID;
 import org.jmule.core.edonkey.ED2KConstants;
 import org.jmule.core.edonkey.UserHash;
@@ -95,7 +95,7 @@ public class PeerManagerImpl extends JMuleAbstractManager implements InternalPee
 
 	private Random challengeGenerator = new Random();
 
-	private InternalDownloadManager _download_manager = null;
+	private DownloadManager _download_manager = null;
 	private InternalUploadManager _upload_manager = null;
 	private InternalConfigurationManager _config_manager = null;
 
@@ -121,7 +121,7 @@ public class PeerManagerImpl extends JMuleAbstractManager implements InternalPee
 			}
 		});
 		_network_manager = (InternalNetworkManager) NetworkManagerSingleton.getInstance();
-		_download_manager = (InternalDownloadManager) DownloadManagerSingleton.getInstance();
+		_download_manager = (DownloadManager) DownloadManagerSingleton.getInstance();
 		_upload_manager = (InternalUploadManager) UploadManagerSingleton.getInstance();
 		_config_manager = (InternalConfigurationManager) ConfigurationManagerSingleton.getInstance();
 		File checkFile = new File(ConfigurationManager.CLIENTS_FILE);

@@ -36,7 +36,7 @@ import javax.swing.SwingConstants;
 import org.jmule.core.downloadmanager.DownloadSession;
 import org.jmule.core.peermanager.Peer;
 import org.jmule.core.utils.GeneralComparator;
- 
+
 import org.jmule.ui.FlagPack;
 import org.jmule.ui.UIConstants;
 import org.jmule.ui.swing.models.DownloadPeersModel;
@@ -53,7 +53,7 @@ import org.jmule.ui.utils.SpeedFormatter;
  */
 public class DownloadPeersTable extends JMTable {
 
- 
+	
 	class NickNameTableCellRenderer extends DownloadPeersTableCellRenderer {
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
 				int row, int column) {
@@ -69,25 +69,13 @@ public class DownloadPeersTable extends JMTable {
 				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			this.setHorizontalAlignment(SwingConstants.CENTER);
-
-			this.setText("N/A");
-			this.setToolTipText("N/A");
+			this.setText("Unknown");
+	
 			return this;
 		}
 	}
 
-	class FlagTableCellRenderer extends DownloadPeersTableCellRenderer {
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-				int row, int column) {
-			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-			Icon flag_icon = FlagPack.getFlagAsIconByIP(peer.getIP(), FlagPack.FlagSize.S18x25);
-			this.setHorizontalAlignment(SwingConstants.CENTER);
-			if (flag_icon != null)
-				this.setIcon(flag_icon);
-			this.setToolTipText("N/A");
-			return this;
-		}
-	}
+	 
 
 	class AddressTableCellRenderer extends DownloadPeersTableCellRenderer {
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
@@ -176,14 +164,7 @@ public class DownloadPeersTable extends JMTable {
 
 		table_columns.add(cc);
 
-		JMTableColumn flag = new JMTableColumn();
-		flag.setIdentifier(UIConstants.DOWNLOAD_PEER_LIST_FLAG_COLUMN_ID);
-		flag.setModelIndex(DownloadPeersModel.FLAG);
-		flag.setVisible(_pref.isColumnVisible(UIConstants.DOWNLOAD_PEER_LIST_FLAG_COLUMN_ID));
-		flag.setHeaderValue("Flag");
-		flag.setCellRenderer(new FlagTableCellRenderer());
-
-		table_columns.add(flag);
+	 
 
 		JMTableColumn address = new JMTableColumn();
 		address.setIdentifier(UIConstants.DOWNLOAD_PEER_LIST_IP_COLUMN_ID);

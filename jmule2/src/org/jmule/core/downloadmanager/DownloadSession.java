@@ -99,7 +99,7 @@ public class DownloadSession implements JMTransferSession {
 
 	InternalNetworkManager _network_manager = (InternalNetworkManager) NetworkManagerSingleton.getInstance();
 	InternalPeerManager _peer_manager = (InternalPeerManager) PeerManagerSingleton.getInstance();
-	InternalDownloadManager _download_manager = (InternalDownloadManager) DownloadManagerSingleton.getInstance();
+	DownloadManager _download_manager = (DownloadManager) DownloadManagerSingleton.getInstance();
 	InternalUploadManager _upload_manager = (InternalUploadManager) UploadManagerSingleton.getInstance();
 
 	private Collection<String> file_names = new ConcurrentLinkedQueue<String>();

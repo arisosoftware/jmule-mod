@@ -71,30 +71,7 @@ public class NoteSearchTask extends SearchTask {
 					_network_manager.sendKadPacket(responsePacket, contact.getContactAddress().getAddress(),
 							contact.getUDPPort());
 
-					/*
-					 * KadPacket packet = null; if (!contact.supportKad2()) try { packet =
-					 * PacketFactory.getHello1ReqPacket(); } catch (JMException e) {
-					 * e.printStackTrace(); } else try { packet =
-					 * PacketFactory.getHelloReq2Packet(TagList.EMPTY_TAG_LIST); } catch
-					 * (JMException e) { e.printStackTrace(); }
-					 * _network_manager.sendKadPacket(packet, contact.getIPAddress(),
-					 * contact.getUDPPort()); PacketListener listener = null; if
-					 * (contact.supportKad2()) listener = new PacketListener(KADEMLIA2_HELLO_RES,
-					 * contact.getContactAddress().getAsInetSocketAddress()) { public void
-					 * packetReceived(KadPacket packet) { KadPacket responsePacket =
-					 * PacketFactory.getNotes2Req(searchID,fileSize);
-					 * _network_manager.sendKadPacket(responsePacket, new
-					 * IPAddress(packet.getAddress()), packet.getAddress().getPort());
-					 * removePacketListener(this); } }; else listener = new
-					 * PacketListener(KADEMLIA_HELLO_RES,
-					 * contact.getContactAddress().getAsInetSocketAddress()) { public void
-					 * packetReceived(KadPacket packet) { KadPacket responsePacket =
-					 * PacketFactory.getNotes1Req(searchID);
-					 * _network_manager.sendKadPacket(responsePacket, new
-					 * IPAddress(packet.getAddress()), packet.getAddress().getPort());
-					 * removePacketListener(this); } }; registerPacketListener(listener);
-					 * _jkad_manager.addPacketListener(listener);
-					 */
+					 
 				}
 			}
 

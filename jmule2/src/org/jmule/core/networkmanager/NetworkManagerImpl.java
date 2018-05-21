@@ -99,7 +99,7 @@ import org.jmule.core.configmanager.ConfigurationManagerSingleton;
 import org.jmule.core.configmanager.InternalConfigurationManager;
 import org.jmule.core.downloadmanager.DownloadManagerSingleton;
 import org.jmule.core.downloadmanager.FileChunk;
-import org.jmule.core.downloadmanager.InternalDownloadManager;
+import org.jmule.core.downloadmanager.DownloadManager;
 import org.jmule.core.edonkey.ClientID;
 import org.jmule.core.edonkey.ED2KConstants;
 import org.jmule.core.edonkey.ED2KConstants.ServerFeatures;
@@ -183,7 +183,7 @@ public class NetworkManagerImpl extends JMuleAbstractManager implements Internal
 	private InternalPeerManager _peer_manager;
 	private InternalServerManager _server_manager;
 	private InternalConfigurationManager _config_manager;
-	private InternalDownloadManager _download_manager;
+	private DownloadManager _download_manager;
 	private InternalUploadManager _upload_manager;
 	private InternalJKadManager _jkad_manager;
 	private InternalSearchManager _search_manager;
@@ -220,7 +220,7 @@ public class NetworkManagerImpl extends JMuleAbstractManager implements Internal
 		_peer_manager = (InternalPeerManager) PeerManagerSingleton.getInstance();
 		_server_manager = (InternalServerManager) ServerManagerSingleton.getInstance();
 		_config_manager = (InternalConfigurationManager) ConfigurationManagerSingleton.getInstance();
-		_download_manager = (InternalDownloadManager) DownloadManagerSingleton.getInstance();
+		_download_manager = (DownloadManager) DownloadManagerSingleton.getInstance();
 		_upload_manager = (InternalUploadManager) UploadManagerSingleton.getInstance();
 		_jkad_manager = (InternalJKadManager) JKadManagerSingleton.getInstance();
 		_search_manager = (InternalSearchManager) SearchManagerSingleton.getInstance();

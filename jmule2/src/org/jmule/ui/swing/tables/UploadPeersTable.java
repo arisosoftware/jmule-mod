@@ -41,8 +41,6 @@ import org.jmule.core.uploadmanager.UploadQueueException;
 import org.jmule.core.uploadmanager.UploadSession;
 import org.jmule.core.utils.GeneralComparator;
 import org.jmule.core.utils.Misc;
-
-import org.jmule.ui.FlagPack;
 import org.jmule.ui.UIConstants;
 import org.jmule.ui.swing.models.UploadPeersModel;
 import org.jmule.ui.utils.PeerInfoFormatter;
@@ -68,28 +66,6 @@ public class UploadPeersTable extends JMTable {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			this.setHorizontalAlignment(SwingConstants.LEFT);
 			this.setText(" " + peer.getNickName());
-			return this;
-		}
-	}
-
-	class CCTableCellRenderer extends UploadPeersTableCellRenderer {
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-				int row, int column) {
-			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-			this.setHorizontalAlignment(SwingConstants.CENTER);
-			this.setText("N/A");
-			this.setToolTipText("N/A");
-			return this;
-		}
-	}
-
-	class FlagTableCellRenderer extends UploadPeersTableCellRenderer {
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-				int row, int column) {
-			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-			this.setHorizontalAlignment(SwingConstants.CENTER);
-			this.setIcon(FlagPack.getFlagAsIconByIP(peer.getIP(), FlagPack.FlagSize.S18x25));
-			this.setToolTipText(peer.getIP());
 			return this;
 		}
 	}
@@ -157,15 +133,6 @@ public class UploadPeersTable extends JMTable {
 	// -------------------------------- Comparators
 	// -----------------------------------------
 
-	class CCComparator implements Comparator {
-		public int compare(Object o1, Object o2) {
-			Peer peer1 = (Peer) o1;
-			Peer peer2 = (Peer) o2;
-
-			return Misc.compareAllObjects(peer1, peer2, "toString", true);
-		}
-	}
-
 	public UploadPeersTable(JFrame parent, UploadSession session) {
 
 		super(parent);
@@ -181,27 +148,6 @@ public class UploadPeersTable extends JMTable {
 		nick_name.setComparator(new GeneralComparator("getNickName"));
 
 		table_columns.add(nick_name);
-
-		JMTableColumn cc = new JMTableColumn();
-		cc.setIdentifier(UIConstants.UPLOAD_PEER_LIST_CC_COLUMN_ID);
-		cc.setModelIndex(UploadPeersModel.CC);
-		cc.setVisible(_pref.isColumnVisible(UIConstants.UPLOAD_PEER_LIST_CC_COLUMN_ID));
-		cc.setHeaderValue("CC");
-		cc.setCellRenderer(new CCTableCellRenderer());
-		cc.setComparator(new CCComparator());
-
-		table_columns.add(cc);
-
-		JMTableColumn flag = new JMTableColumn();
-		flag.setIdentifier(UIConstants.UPLOAD_PEER_LIST_FLAG_COLUMN_ID);
-		flag.setModelIndex(UploadPeersModel.FLAG);
-		flag.setVisible(_pref.isColumnVisible(UIConstants.UPLOAD_PEER_LIST_FLAG_COLUMN_ID));
-		flag.setHeaderValue("Flag");
-		flag.setCellRenderer(new FlagTableCellRenderer());
-		flag.setComparator(new GeneralComparator("ooops2!"));
-		flag.setComparator(new CCComparator());
-
-		table_columns.add(flag);
 
 		JMTableColumn ip = new JMTableColumn();
 		ip.setIdentifier(UIConstants.UPLOAD_PEER_LIST_IP_COLUMN_ID);

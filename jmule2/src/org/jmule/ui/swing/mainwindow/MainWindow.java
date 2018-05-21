@@ -80,7 +80,7 @@ import org.jmule.ui.localizer.Lang;
 import org.jmule.ui.swing.BrowserLauncher;
 import org.jmule.ui.swing.ImgRep;
 import org.jmule.ui.swing.Refreshable;
-import org.jmule.ui.swing.SwingGUIUpdater;
+
 import org.jmule.ui.swing.SwingPreferences;
 import org.jmule.ui.swing.SwingUtils;
 import org.jmule.ui.swing.UISwingImageRepository;
@@ -94,7 +94,7 @@ import org.jmule.ui.swing.maintabs.shared.SharedTab;
 import org.jmule.ui.swing.maintabs.statistics.StatisticsTabs;
 import org.jmule.ui.swing.maintabs.transfers.TransfersTab;
 import org.jmule.ui.swing.settings.SettingsDialog;
-import org.jmule.ui.swing.versionchecker.VersionChecker;
+
 import org.jmule.ui.swing.wizards.SetupWizard;
 import org.jmule.ui.swing.wizards.UIChooserWizad;
 import org.jmule.ui.utils.FileFormatter;
@@ -129,7 +129,7 @@ public class MainWindow extends JFrame implements WindowListener {
 
 	private JMuleCore _core = JMuleCoreFactory.getSingleton();
 	private ServerManager _server_manager = _core.getServerManager();
-	private SwingGUIUpdater _ui_updater = SwingGUIUpdater.getInstance();
+
 	private PeerManager _peer_manager = _core.getPeerManager();
 	private SwingPreferences _pref = SwingPreferences.getSingleton();
 	private ConfigurationManager _config = _core.getConfigurationManager();
@@ -747,13 +747,6 @@ public class MainWindow extends JFrame implements WindowListener {
 			}
 		});
 
-		check_for_updates.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				VersionChecker version_checker = new VersionChecker(_this);
-				SwingUtils.setWindowLocationRelativeTo(version_checker, _this);
-				version_checker.setVisible(true);
-			}
-		});
 	}
 
 	private void setView(JPanel new_view) {
@@ -935,7 +928,6 @@ public class MainWindow extends JFrame implements WindowListener {
 		status_bar = new StatusBar(this);
 		// status_bar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 		this.getContentPane().add(status_bar, BorderLayout.SOUTH);
-		_ui_updater.addRefreshable(status_bar);
 
 		try {
 			if (_config.getDownloadLimit() != 0)
@@ -1021,7 +1013,6 @@ public class MainWindow extends JFrame implements WindowListener {
 			t.printStackTrace();
 		}
 
-		SwingGUIUpdater.getInstance().start();
 		Localizer.initialize();
 		UIManager.put("ToolTip.foreground", new ColorUIResource(Color.BLACK));
 		UIManager.put("ToolTip.background", new ColorUIResource(0Xfdf7c2));

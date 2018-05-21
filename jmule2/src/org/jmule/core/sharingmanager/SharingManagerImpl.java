@@ -53,7 +53,7 @@ import org.jmule.core.configmanager.ConfigurationManagerSingleton;
 import org.jmule.core.downloadmanager.DownloadManagerException;
 import org.jmule.core.downloadmanager.DownloadManagerSingleton;
 import org.jmule.core.downloadmanager.DownloadSession;
-import org.jmule.core.downloadmanager.InternalDownloadManager;
+import org.jmule.core.downloadmanager.DownloadManager;
 import org.jmule.core.edonkey.FileHash;
 import org.jmule.core.edonkey.metfile.KnownMet;
 import org.jmule.core.edonkey.metfile.KnownMetEntity;
@@ -78,7 +78,7 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 
 	private InternalNetworkManager _network_manager;
 	private InternalServerManager _server_manager;
-	private InternalDownloadManager _download_manager;
+	private  DownloadManager _download_manager;
 	private InternalUploadManager _upload_manager;
 
 	private Map<FileHash, SharedFile> sharedFiles;
@@ -107,7 +107,7 @@ public class SharingManagerImpl extends JMuleAbstractManager implements Internal
 		}
 		_network_manager = (InternalNetworkManager) NetworkManagerSingleton.getInstance();
 		_server_manager = (InternalServerManager) ServerManagerSingleton.getInstance();
-		_download_manager = (InternalDownloadManager) DownloadManagerSingleton.getInstance();
+		_download_manager = (DownloadManager) DownloadManagerSingleton.getInstance();
 		_upload_manager = (InternalUploadManager) UploadManagerSingleton.getInstance();
 
 		sharing_manager_timer = new JMTimer();

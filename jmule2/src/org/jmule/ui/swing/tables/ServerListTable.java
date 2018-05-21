@@ -69,7 +69,6 @@ import org.jmule.core.servermanager.Server;
 import org.jmule.core.servermanager.ServerManager;
 import org.jmule.core.servermanager.ServerManagerSingleton;
 import org.jmule.core.utils.GeneralComparator;
-
 import org.jmule.ui.FlagPack;
 import org.jmule.ui.IDialog;
 import org.jmule.ui.UIConstants;
@@ -148,34 +147,6 @@ public class ServerListTable extends JMTable {
 			// System.out.println(text);
 			this.setToolTipText(text);
 			this.setHorizontalAlignment(SwingConstants.LEFT);
-			return this;
-		}
-	}
-
-	// --------------------------------------------------------------------------
-	class CCTableCellRenderer extends ServerListTableCellRenderer {
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-				int row, int column) {
-			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-			this.setHorizontalAlignment(SwingConstants.CENTER);
-			this.setText("CHN");
-
-			this.setToolTipText(server.getAddress());
-			return this;
-		}
-	}
-
-	// ---------------------------------------------------------------------------
-	class FlagTableCellRenderer extends ServerListTableCellRenderer {
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-				int row, int column) {
-			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-			this.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-			Icon flag_icon = FlagPack.getFlagAsIconByIP(server.getAddress(), FlagPack.FlagSize.S25x15);
-			if (flag_icon != null)
-				this.setIcon(flag_icon);
-			this.setText("CHN");
-			this.setToolTipText(server.getAddress());
 			return this;
 		}
 	}
@@ -341,24 +312,6 @@ public class ServerListTable extends JMTable {
 
 		table_columns.add(name);
 		// server_tab_column_model.addColumn( name );
-
-		TableColumnExt cc = new TableColumnExt();
-		cc.setIdentifier(UIConstants.SERVER_LIST_CC_COLUMN_ID);
-		cc.setModelIndex(ServerListTableModel.CC);
-		cc.setVisible(_pref.isColumnVisible(UIConstants.SERVER_LIST_CC_COLUMN_ID));
-		cc.setHeaderValue("CC");
-		cc.setCellRenderer(new CCTableCellRenderer());
-
-		table_columns.add(cc);
-
-		TableColumnExt flag = new TableColumnExt();
-		flag.setIdentifier(UIConstants.SERVER_LIST_FLAG_COLUMN_ID);
-		flag.setModelIndex(ServerListTableModel.FLAG);
-		flag.setVisible(_pref.isColumnVisible(UIConstants.SERVER_LIST_FLAG_COLUMN_ID));
-		flag.setHeaderValue("Flag");
-		flag.setCellRenderer(new FlagTableCellRenderer());
-
-		table_columns.add(flag);
 
 		TableColumnExt ip = new TableColumnExt();
 		ip.setModelIndex(ServerListTableModel.SERVER_IP);

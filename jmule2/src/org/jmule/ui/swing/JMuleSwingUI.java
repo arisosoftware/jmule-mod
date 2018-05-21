@@ -37,8 +37,6 @@ import org.jmule.ui.swing.mainwindow.MainWindow;
 import org.jmule.ui.swing.skin.DefaultSwingSkinImpl;
 import org.jmule.ui.swing.skin.SwingSkin;
 import org.jmule.ui.swing.versionchecker.VersionChecker;
-import org.jmule.updater.JMUpdater;
-import org.jmule.updater.JMUpdaterException;
 
 /**
  * 
@@ -100,21 +98,7 @@ public class JMuleSwingUI implements JMuleUI<SwingSkin> {
 							nightly_build_dialog.setVisible(true);
 						}
 
-					// check for newer version if the option is enabled
-					if (_pref.isCheckForUpdatesAtStartup()) {
-						JMUpdater update = JMUpdater.getInstance();
-						try {
-							update.checkForUpdates();
-						} catch (JMUpdaterException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						if (update.isNewVersionAvailable()) {
-							VersionChecker version_checker = new VersionChecker(main_window);
-							SwingUtils.setWindowLocationRelativeTo(version_checker, main_window);
-							version_checker.setVisible(true);
-						}
-					}
+				 
 
 				}
 			});

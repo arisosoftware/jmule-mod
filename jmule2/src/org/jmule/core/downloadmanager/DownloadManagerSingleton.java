@@ -36,7 +36,7 @@ public class DownloadManagerSingleton {
 	}
 
 	private static class DownloadManagerSingletonHolder {
-		private static final DownloadManager INSTANCE = new DownloadManagerImpl();
+		private static final DownloadManager INSTANCE = new DownloadManager();
 	}
 
 	public static DownloadManager getInstance() {

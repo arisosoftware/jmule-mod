@@ -23,6 +23,8 @@
  */
 package org.jmule.core;
 
+import org.jmule.core.downloadmanager.DownloadManager;
+
 /**
  * Created on 07-13-2008
  * 
@@ -34,6 +36,6 @@ public interface JMuleCoreLifecycleListener {
 
 	public void componentStarted(JMuleCoreComponent component);
 
-	public void componentStopped(JMuleCoreComponent component);
+	 
 
 }
