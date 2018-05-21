@@ -228,13 +228,7 @@ public class Lookup {
 		listener.processResults(new ContactAddress(sender), contactList);
 	}
 
-	public void addListener(LookupListener listener) {
-		listenerList.add(listener);
-	}
-
-	public void removeListener(LookupListener listener) {
-		listenerList.remove(listener);
-	}
+	 
 
 	private enum LookupStatus {
 		ADDED, STARTED, REMOVED
