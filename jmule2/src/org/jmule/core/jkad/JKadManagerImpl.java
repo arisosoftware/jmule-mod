@@ -76,7 +76,7 @@ import org.jmule.core.configmanager.ConfigurationManagerException;
 import org.jmule.core.configmanager.ConfigurationManagerSingleton;
 import org.jmule.core.configmanager.InternalConfigurationManager;
 import org.jmule.core.downloadmanager.DownloadManagerSingleton;
-import org.jmule.core.downloadmanager.InternalDownloadManager;
+import org.jmule.core.downloadmanager.DownloadManager;
 import org.jmule.core.edonkey.FileHash;
 import org.jmule.core.edonkey.packet.tag.Tag;
 import org.jmule.core.edonkey.packet.tag.TagList;
@@ -135,7 +135,7 @@ class JKadManagerImpl extends JMuleAbstractManager implements InternalJKadManage
 
 	private InternalConfigurationManager _config_manager = null;
 	private InternalNetworkManager _network_manager = null;
-	private InternalDownloadManager _download_manager = null;
+	private DownloadManager _download_manager = null;
 
 	private List<JKadListener> listener_list = new ArrayList<JKadListener>();
 
@@ -154,7 +154,7 @@ class JKadManagerImpl extends JMuleAbstractManager implements InternalJKadManage
 		}
 		_config_manager = (InternalConfigurationManager) ConfigurationManagerSingleton.getInstance();
 		_network_manager = (InternalNetworkManager) NetworkManagerSingleton.getInstance();
-		_download_manager = (InternalDownloadManager) DownloadManagerSingleton.getInstance();
+		_download_manager = (DownloadManager) DownloadManagerSingleton.getInstance();
 
 		routing_table = RoutingTable.getSingleton();
 		indexer = Indexer.getSingleton();

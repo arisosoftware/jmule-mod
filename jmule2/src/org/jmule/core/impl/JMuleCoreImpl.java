@@ -500,10 +500,10 @@ public class JMuleCoreImpl implements InternalJMuleCore {
 		}
 	}
 
-	private void notifyComponentStopped(JMuleCoreComponent manager) {
+	private void notifyComponentStopped(JMuleCoreComponent downloadManager) {
 		for (JMuleCoreLifecycleListener listener : lifecycle_listeners) {
 			try {
-				listener.componentStopped(manager);
+			//	listener.componentStopped(downloadManager);
 			} catch (Throwable cause) {
 				cause.printStackTrace();
 			}

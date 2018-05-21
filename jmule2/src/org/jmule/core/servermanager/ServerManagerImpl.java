@@ -41,7 +41,7 @@ import org.jmule.core.configmanager.ConfigurationManagerException;
 import org.jmule.core.configmanager.ConfigurationManagerSingleton;
 import org.jmule.core.configmanager.InternalConfigurationManager;
 import org.jmule.core.downloadmanager.DownloadManagerSingleton;
-import org.jmule.core.downloadmanager.InternalDownloadManager;
+import org.jmule.core.downloadmanager.DownloadManager;
 import org.jmule.core.edonkey.ClientID;
 import org.jmule.core.edonkey.ED2KConstants;
 import org.jmule.core.edonkey.ED2KServerLink;
@@ -86,7 +86,7 @@ public class ServerManagerImpl extends JMuleAbstractManager implements InternalS
 	private boolean auto_connect_started = false;
 	private List<Server> candidate_servers = new ArrayList<Server>();
 
-	private InternalDownloadManager _download_manager;
+	private DownloadManager _download_manager;
 
 	private boolean reconnect_to_server = false;
 	private int reconnect_count = 0;
@@ -188,7 +188,7 @@ public class ServerManagerImpl extends JMuleAbstractManager implements InternalS
 			}
 		};
 
-		_download_manager = (InternalDownloadManager) DownloadManagerSingleton.getInstance();
+		_download_manager = (DownloadManager) DownloadManagerSingleton.getInstance();
 		_config_manager = (InternalConfigurationManager) ConfigurationManagerSingleton.getInstance();
 	}
 

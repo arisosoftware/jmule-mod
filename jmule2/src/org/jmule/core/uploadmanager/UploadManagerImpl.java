@@ -39,7 +39,7 @@ import org.jmule.core.configmanager.ConfigurationManager;
 import org.jmule.core.downloadmanager.DownloadManagerException;
 import org.jmule.core.downloadmanager.DownloadManagerSingleton;
 import org.jmule.core.downloadmanager.DownloadSession;
-import org.jmule.core.downloadmanager.InternalDownloadManager;
+import org.jmule.core.downloadmanager.DownloadManager;
 import org.jmule.core.edonkey.ED2KConstants;
 import org.jmule.core.edonkey.FileHash;
 import org.jmule.core.edonkey.UserHash;
@@ -74,7 +74,7 @@ public class UploadManagerImpl extends JMuleAbstractManager implements InternalU
 	private InternalSharingManager _sharing_manager;
 	private InternalNetworkManager _network_manager;
 	private InternalPeerManager _peer_manager;
-	private InternalDownloadManager _download_manager;
+	private DownloadManager _download_manager;
 
 	private UploadQueue upload_queue;
 	private PayloadPeerList payload_peers;
@@ -101,7 +101,7 @@ public class UploadManagerImpl extends JMuleAbstractManager implements InternalU
 		_sharing_manager = (InternalSharingManager) SharingManagerSingleton.getInstance();
 		_network_manager = (InternalNetworkManager) NetworkManagerSingleton.getInstance();
 		_peer_manager = (InternalPeerManager) PeerManagerSingleton.getInstance();
-		_download_manager = (InternalDownloadManager) DownloadManagerSingleton.getInstance();
+		_download_manager = (DownloadManager) DownloadManagerSingleton.getInstance();
 
 		Set<String> types = new HashSet<String>();
 		types.add(JMuleCoreStats.ST_NET_SESSION_UPLOAD_BYTES);
